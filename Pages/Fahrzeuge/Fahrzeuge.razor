@@ -1,0 +1,35 @@
+@* ── Fahrzeuge Übersicht ── *@
+@page "/fahrzeuge"
+@inject DataService DS
+
+<PageTitle>Fahrzeuge – FF Rastenfeld</PageTitle>
+<PageHero Title="Fahrzeuge" Subtitle="Unser Fuhrpark im Überblick" ParentLabel="Feuerwehr" ParentHref="/organisation" />
+
+<div class="site-body container">
+    <div class="content-with-sidebar">
+        <main class="main-feed">
+            <div class="fahrzeuge-list">
+                @foreach (var f in DS.GetFahrzeuge())
+                {
+                    <div class="fahrzeug-item">
+                        <a href="/fahrzeuge/@f.Id" class="fz-img-link">
+                            <div class="fz-img">
+                                <img src="@($"img/{f.Kuerzel}.jpeg")" class="hero-bg-img" />
+                            </div>
+                        </a>
+                        <div class="fz-body">
+                            <h3><a href="/fahrzeuge/@f.Id">@f.Name</a></h3>
+                            <div class="fz-meta">
+                                <span>🏭 @f.Hersteller</span>
+                                <span>📅 Bj. @f.Baujahr</span>
+                            </div>
+                            <p>@f.Beschreibung</p>
+                            <a href="/fahrzeuge/@f.Id" class="read-more">Details ansehen →</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </main>
+        <Sidebar />
+    </div>
+</div>

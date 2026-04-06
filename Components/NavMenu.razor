@@ -1,0 +1,106 @@
+@inject NavigationManager Nav
+@implements IDisposable
+
+<header id="site-header" class="@(scrolled ? "scrolled" : "")">
+    <div class="header-top">
+        <div class="container">
+            <span class="header-top-left">📍<a href="https://maps.app.goo.gl/Pgy7qGUUTKshM3H16"> Rastenfeld 178, 3532 Rastenfeld, NÖ</a></span>
+            <span class="header-top-right">
+                <a href="tel:122">🚨 Notruf: <strong>122</strong></a>
+                &nbsp;|&nbsp;
+                <a href="mailto:rastenfeld@feuerwehr.gv.at">📧 rastenfeld&#64;feuerwehr.gv.at</a>
+            </span>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <!-- Brand -->
+            <a href="/" class="nav-brand" @onclick="CloseAll">
+                <div class="brand-logo" >
+                    <img src="img/logo_rastenfeld.jpg" alt="FF Rastenfeld Logo" class="brand-logo-img"/>
+                </div>
+                <div class="brand-name">
+                    <strong>FF Rastenfeld</strong>
+                    <small>Freiwillige Feuerwehr · NÖ</small>
+                </div>
+            </a>
+
+            <!-- Hamburger -->
+            <button class="hamburger @(mobileOpen ? "is-open" : "")" @onclick="ToggleMobile" aria-label="Menü">
+                <span></span><span></span><span></span>
+            </button>
+
+            <!-- Nav Links -->
+            <ul class="nav-menu @(mobileOpen ? "is-open" : "")">
+
+                <li><NavLink href="/" Match="NavLinkMatch.All" @onclick="CloseAll">Startseite</NavLink></li>
+
+                <!-- News Dropdown -->
+                <li class="has-dropdown @(openDropdown == "news" ? "open" : "")">
+                    <button @onclick='() => ToggleDropdown("news")'>
+                        News <span class="caret">▾</span>
+                    </button>
+                    <ul class="dropdown">
+                        <li><NavLink href="/einsaetze" @onclick="CloseAll">Einsätze</NavLink></li>
+                        <li><NavLink href="/news" @onclick="CloseAll">FF-News</NavLink></li>
+                        <li><NavLink href="/ausbildung" @onclick="CloseAll">Ausbildung</NavLink></li>
+                        <li><NavLink href="/feuerwehrjugend" @onclick="CloseAll">Feuerwehrjugend</NavLink></li>
+                    </ul>
+                </li>
+
+                <!-- Feuerwehr Dropdown -->
+                <li class="has-dropdown @(openDropdown == "ff" ? "open" : "")">
+                    <button @onclick='() => ToggleDropdown("ff")'>
+                        Feuerwehr <span class="caret">▾</span>
+                    </button>
+                    <ul class="dropdown">
+                        <li><NavLink href="/chronik" @onclick="CloseAll">Chronik</NavLink></li>
+                        <li><NavLink href="/mannschaft" @onclick="CloseAll">Mannschaft</NavLink></li>
+                        <li><NavLink href="/feuerwehrhaus" @onclick="CloseAll">Feuerwehrhaus</NavLink></li>
+                        <li><NavLink href="/fahrzeuge" @onclick="CloseAll">Fahrzeuge</NavLink></li>
+                    </ul>
+                </li>
+
+                <li><NavLink href="/galerie" @onclick="CloseAll">Galerie</NavLink></li>
+                <li><NavLink href="/kontakt" @onclick="CloseAll">Kontakt</NavLink></li>
+                <li class="nav-notruf"><a href="tel:122">🚨 122</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<!-- Spacer -->
+<div class="header-spacer"></div>
+
+@code {
+    private bool scrolled = false;
+    private bool mobileOpen = false;
+    private string? openDropdown = null;
+
+    protected override void OnInitialized()
+    {
+        Nav.LocationChanged += OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+    {
+        CloseAll();
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void ToggleMobile() => mobileOpen = !mobileOpen;
+
+    private void ToggleDropdown(string name)
+    {
+        openDropdown = openDropdown == name ? null : name;
+    }
+
+    private void CloseAll()
+    {
+        mobileOpen = false;
+        openDropdown = null;
+    }
+
+    public void Dispose() => Nav.LocationChanged -= OnLocationChanged;
+}

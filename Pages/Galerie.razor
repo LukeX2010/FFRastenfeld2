@@ -1,0 +1,88 @@
+@* ── Galerie ── *@
+@page "/galerie"
+
+<PageTitle>Galerie – FF Rastenfeld</PageTitle>
+<PageHero Title="Galerie" Subtitle="Bilder aus Einsätzen, Übungen und Veranstaltungen" />
+
+<div class="site-body container">
+    <div class="content-with-sidebar">
+        <main class="main-feed">
+
+            <div class="galerie-filter">
+                @foreach (var kat in kategorien)
+                {
+                    <button class="filter-pill @(activeKat==kat?"active":"")" @onclick="()=>activeKat=kat">@kat</button>
+                }
+            </div>
+
+            <div class="galerie-grid">
+                @foreach (var b in GetFiltered())
+                {
+                    <div class="gal-item @(lightboxIdx == bilder.IndexOf(b) ? "is-open" : "")" @onclick="()=>OpenLightbox(b)">
+                        <div class="gal-placeholder"> <img src="@($"img/{b.Emoji}.jpeg")" class="hero-bg-img" /></div>
+                        <div class="gal-hover">
+                            <span class="gal-title">@b.Titel</span>
+                            <span class="gal-kat">@b.Kategorie · @b.Jahr</span>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @if (lightbox is not null)
+            {
+                <div class="lightbox-backdrop" @onclick="CloseLightbox">
+                    <div class="lightbox-box" @onclick:stopPropagation>
+                        <button class="lb-close" @onclick="CloseLightbox">✕</button>
+                        <div class="lb-img">
+                            <img src="@($"img/{lightbox.Emoji}.jpeg")" class="hero-bg-img-lg" />
+                        </div>
+                        <div class="lb-info">
+                            <strong>@lightbox.Titel</strong>
+                            <span class="untertitellightbox">@lightbox.Untertitel</span>
+                            <br/>
+                            <span>@lightbox.Kategorie · @lightbox.Jahr</span>
+                        </div>
+                        <div class="lb-nav">
+                            <button @onclick="Prev">← zurück</button>
+                            <span>@(lightboxIdx+1) / @GetFiltered().Count</span>
+                            <button @onclick="Next">weiter →</button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </main>
+        <Sidebar />
+    </div>
+</div>
+
+@code {
+    record GalBild(string Titel, string Emoji, string Kategorie, int Jahr,string Untertitel);
+
+    private List<GalBild> bilder = new()
+    {
+        new("Florianimesse 2025","florianimesse2025_1","Ausrückungen",2025, ""),
+        new("Florianimesse 2025","florianimesse2025_2","Ausrückungen",2025, ""),
+        new("Florianimesse 2025","florianimesse2025_3","Ausrückungen",2025, ""),
+        new("Tut Gut Wandertag","Tutgut_2026","Veranstaltungen",2026, ""),
+        new("Ehrungen des Abschnittsfeuerwehrtages","Johnyehrung","Sonstiges",2025, "Ehrenkommandant Johann Herzog erhielt das Verdienstzeichen 2.Klasse des NÖ Landesfeuwerwehrverbandes."),
+        new("Ehrungen des Abschnittsfeuerwehrtages","Kröpflehrung","Sonstiges",2025, "EOLM Friedrich Kröpfl wurde für die 60 jährige Feuerwehrtätigkeit geehrt."),
+
+        
+        new("Hochwasser Kamp","🌊","Einsätze",2023, ""),
+
+    };
+
+    private string activeKat = "Alle";
+    private GalBild? lightbox;
+    private int lightboxIdx = -1;
+
+    private List<GalBild> GetFiltered() => activeKat == "Alle" ? bilder : bilder.Where(b => b.Kategorie == activeKat).ToList();
+
+    private List<string> kategorien = new() { "Alle","Einsätze","Übungen","Ausbildungen & Kurse","Veranstaltungen", "Ausrückungen","Sonstiges" };
+
+    private void OpenLightbox(GalBild b) { lightbox = b; lightboxIdx = GetFiltered().IndexOf(b); }
+    private void CloseLightbox() { lightbox = null; lightboxIdx = -1; }
+    private void Next() { var f = GetFiltered(); lightboxIdx = (lightboxIdx+1)%f.Count; lightbox=f[lightboxIdx]; }
+    private void Prev() { var f = GetFiltered(); lightboxIdx = (lightboxIdx-1+f.Count)%f.Count; lightbox=f[lightboxIdx]; }
+}

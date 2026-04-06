@@ -1,0 +1,59 @@
+@* Einsätze – Übersicht *@
+@page "/einsaetze"
+@inject DataService DS
+
+<PageTitle>Einsätze – FF Rastenfeld</PageTitle>
+<PageHero Title="Einsätze" Subtitle="Chronik unserer Einsätze – transparent und aktuell" />
+
+<div class="site-body container">
+    <div class="content-with-sidebar">
+        <main class="main-feed">
+            <div class="feed-filter-bar">
+                @foreach (var f in new[]{"Alle","Brand","Technische Hilfe","Unwetter","Gefahrgut","Sonstige"})
+                {
+                    <button class="filter-pill @(activeFilter==f?"active":"")" @onclick="()=>SetFilter(f)">@f</button>
+                }
+            </div>
+
+            <div class="einsatz-stats-row">
+                <div class="estat"><strong>@all.Count</strong><span>Gesamt</span></div>
+                <div class="estat"><strong>@all.Count(e=>e.EinsatzTyp!=null&&e.EinsatzTyp.StartsWith("B"))</strong><span>Brand</span></div>
+                <div class="estat"><strong>@all.Count(e=>e.EinsatzTyp!=null&&e.EinsatzTyp.StartsWith("T"))</strong><span>THL</span></div>
+                <div class="estat"><strong>@all.Sum(e=>e.EinsatzKraefte??0)</strong><span>Kräfte gesamt</span></div>
+            </div>
+
+            @foreach (var p in filtered)
+            {
+                <PostCard Post="@p" />
+            }
+            @if (!filtered.Any())
+            {
+                <p class="empty-msg">Keine Einsätze in dieser Kategorie.</p>
+            }
+        </main>
+        <Sidebar />
+    </div>
+</div>
+
+@code {
+    private List<Post> all = new();
+    private List<Post> filtered = new();
+    private string activeFilter = "Alle";
+
+    protected override void OnInitialized()
+    {
+        all = DS.GetEinsaetze();
+        filtered = all;
+    }
+
+    private void SetFilter(string f)
+    {
+        activeFilter = f;
+        filtered = f == "Alle" ? all : all.Where(e =>
+            f == "Brand" ? e.EinsatzTyp?.StartsWith("B") == true :
+            f == "Technische Hilfe" ? e.EinsatzTyp?.StartsWith("T") == true :
+            f == "Unwetter" ? e.EinsatzTyp?.StartsWith("S") == true || e.EinsatzTyp?.StartsWith("W") == true :
+            f == "Gefahrgut" ? e.EinsatzTyp?.StartsWith("G") == true :
+            true).ToList();
+    }
+}

@@ -1,0 +1,60 @@
+@page "/fahrzeuge/{Id:int}"
+@inject DataService DS
+
+<PageTitle>@(fz?.Name ?? "Fahrzeug") – FF Rastenfeld</PageTitle>
+
+@if (fz is null)
+{
+    <div class="container" style="padding:4rem 1.5rem;text-align:center"><p>Fahrzeug nicht gefunden. <a href="/fahrzeuge">← Zurück</a></p></div>
+}
+else
+{
+    <PageHero Title="@fz.Name" Subtitle="@($"{fz.Kuerzel} – {fz.Hersteller} · Bj. {fz.Baujahr}")" ParentLabel="Fahrzeuge" ParentHref="/fahrzeuge" />
+
+    <div class="site-body container">
+        <div class="content-with-sidebar">
+            <main class="main-feed">
+                <article class="post-detail">
+
+                    <div class="detail-img fz-detail-img">
+                        <img src="@($"img/{fz.Kuerzel}.jpeg")" class="hero-bg-img" />
+                    </div>
+
+                    <div class="fz-detail-meta">
+                        <div class="fdm-item"><span>Bezeichnung</span><strong>@fz.Name</strong></div>
+                        <div class="fdm-item"><span>Kurzzeichen</span><strong>@fz.Kuerzel</strong></div>
+                        <div class="fdm-item"><span>Hersteller</span><strong>@fz.Hersteller</strong></div>
+                        <div class="fdm-item"><span>Baujahr</span><strong>@fz.Baujahr</strong></div>
+                    </div>
+
+                    <h3>Beschreibung</h3>
+                    <p>@fz.Beschreibung</p>
+
+                    <h3>Beladung & Ausstattung</h3>
+                    <ul class="ausstattung-list">
+                        @foreach (var a in fz.Ausstattung)
+                        {
+                            <li><span class="check-icon">✓</span> @a</li>
+                        }
+                    </ul>
+
+                    <div class="fz-nav">
+                        <a href="/fahrzeuge" class="btn btn-outline-small">← Alle Fahrzeuge</a>
+                        @if (fz.Id > 1)
+                        { <a href="/fahrzeuge/@(fz.Id - 1)" class="btn btn-outline-small">← Vorheriges</a> }
+                        @if (fz.Id < DS.GetFahrzeuge().Count)
+                        { <a href="/fahrzeuge/@(fz.Id + 1)" class="btn btn-outline-small">Nächstes →</a> }
+                    </div>
+
+                </article>
+            </main>
+            <Sidebar />
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public int Id { get; set; }
+    private Fahrzeug? fz;
+    protected override void OnParametersSet() => fz = DS.GetFahrzeuge().FirstOrDefault(f => f.Id == Id);
+}

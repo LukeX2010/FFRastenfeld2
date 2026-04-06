@@ -1,0 +1,29 @@
+@* Wiederverwendbare Post-Karte – für Einsätze, News, Ausbildung, Jugend *@
+
+<article class="post-card">
+    <a href="/@(Post.Kategorie == "Einsätze" ? "einsaetze" : Post.Kategorie == "FF-News" ? "news" : Post.Kategorie == "Ausbildung" ? "ausbildung" : "feuerwehrjugend")/@Post.Slug" class="post-card-img-link">
+        <div class="post-card-img">
+            <img src="@($"img/{Post.Slug}.jpeg")" class="hero-bg-img" />
+        </div>
+    </a>
+    <div class="post-card-body">
+        <time class="post-date">@Post.Datum.ToString("d. MMMM yyyy")</time>
+        <h3><a href="/@(Post.Kategorie == "Einsätze" ? "einsaetze" : Post.Kategorie == "FF-News" ? "news" : Post.Kategorie == "Ausbildung" ? "ausbildung" : "feuerwehrjugend")/@Post.Slug">@Post.Titel</a></h3>
+        @if (!string.IsNullOrEmpty(Post.EinsatzTyp))
+        {
+            <div class="post-einsatz-meta">
+                <span>⚡ @Post.EinsatzTyp</span>
+                @if (!string.IsNullOrEmpty(Post.EinsatzOrt))
+                { <span>📍 @Post.EinsatzOrt</span> }
+                @if (Post.EinsatzKraefte.HasValue)
+                { <span>👥 @Post.EinsatzKraefte Kräfte</span> }
+            </div>
+        }
+        <p>@Post.Kurztext</p>
+        <a href="/@(Post.Kategorie == "Einsätze" ? "einsaetze" : Post.Kategorie == "FF-News" ? "news" : Post.Kategorie == "Ausbildung" ? "ausbildung" : "feuerwehrjugend")/@Post.Slug" class="read-more">Weiterlesen →</a>
+    </div>
+</article>
+
+@code {
+    [Parameter, EditorRequired] public Post Post { get; set; } = default!;
+}

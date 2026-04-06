@@ -1,0 +1,48 @@
+@page "/chronik"
+
+<PageTitle>Chronik – FF Rastenfeld</PageTitle>
+<PageHero Title="Chronik" Subtitle="Geschichte der Freiwilligen Feuerwehr Rastenfeld seit 1876" ParentLabel="Feuerwehr" ParentHref="/organisation" />
+
+<div class="site-body container">
+    <div class="content-with-sidebar">
+        <main class="main-feed">
+            <article class="post-detail">
+                <h2>Von der Gründung bis heute</h2>
+                <p>Die Freiwillige Feuerwehr Rastenfeld wurde im Jahr <strong>1876</strong> gegründet. In den über 148 Jahren ihres Bestehens hat sie sich von einer kleinen Handspritzentruppe zu einer modernen, vollausgerüsteten Feuerwehr mit 40+ aktiven Mitgliedern entwickelt.</p>
+
+                <div class="timeline-list">
+                    @foreach (var e in events)
+                    {
+                        <div class="tl-item">
+                            <div class="tl-year">@e.Jahr</div>
+                            <div class="tl-content">
+                                <h4>@e.Titel</h4>
+                                <p>@e.Text</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </article>
+        </main>
+        <Sidebar />
+    </div>
+</div>
+
+@code {
+    record ChronikEvent(int Jahr, string Titel, string Text);
+
+    private List<ChronikEvent> events = new()
+    {
+        new(1876, "Gründung der Freiwilligen Feuerwehr Rastenfeld", "Am 12. April 1876 wird die Freiwillige Feuerwehr Rastenfeld mit 18 Gründungsmitgliedern ins Leben gerufen. Als erste Ausrüstung stehen zwei Handspritzen zur Verfügung."),
+        new(1892, "Erste Handdruckspritze", "Anschaffung einer leistungsstärkeren Handdruckspritze mit 200 Liter Behälter. Der Mannschaftsstand wächst auf 32 Mann."),
+        new(1924, "Erste Motorspritze", "Die FF Rastenfeld erhält ihre erste motorgetriebene Feuerspritze – ein großer Fortschritt in der Brandbekämpfung."),
+        new(1938, "Neues Gerätehaus", "Errichtung eines neuen Gerätehauses am Ortsrand. Erstmals Platz für zwei Fahrzeuge und eine Werkstatt."),
+        new(1963, "Erstes Löschfahrzeug", "Indienststellung des ersten motorisierten Löschfahrzeuges (LF 8). Die Einsatzfähigkeit verbessert sich deutlich."),
+        new(1978, "100 Jahre FF Rastenfeld", "Großes Festwochenende zum 100-Jahr-Jubiläum mit Bezirksbewerb und Festumzug. Über 2.000 Besucher aus der Region."),
+        new(1995, "Neubau Feuerwehrhaus", "Erweiterung und Modernisierung des Feuerwehrhauses. Vier Fahrzeugstellplätze, Schulungsraum, Atemschutzübungsanlage."),
+        new(2008, "Erstmals weibliche Mitglieder", "Die FF Rastenfeld öffnet sich für weibliche Mitglieder. Als erste Feuerwehrfrau tritt Maria Huber der Wehr bei."),
+        new(2016, "Neues HLF 2", "Übergabe des neuen Hilfeleistungsfahrzeuges HLF 2 (Rosenbauer / Mercedes-Benz). Modernste Technik für Brandeinsätze und THL."),
+        new(2019, "Neues TLF 4000", "Das leistungsstarke Tanklöschfahrzeug TLF 4000 verstärkt den Fuhrpark. Besonders für Waldbrände und wasserarme Gebiete wertvoll."),
+        new(2024, "148 Jahre FF Rastenfeld", "Die FF Rastenfeld blickt auf 148 erfolgreiche Jahre zurück. Aktuell 40+ aktive Mitglieder, 4 Einsatzfahrzeuge, modernste Ausrüstung."),
+    };
+}

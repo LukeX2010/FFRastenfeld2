@@ -1,0 +1,38 @@
+@* ── News Detail ── *@
+@page "/news/{Slug}"
+@inject DataService DS
+
+<PageTitle>@(post?.Titel ?? "Beitrag") – FF Rastenfeld</PageTitle>
+
+@if (post is null)
+{
+    <div class="container" style="padding:4rem 1.5rem;text-align:center"><p>Beitrag nicht gefunden. <a href="/news">← Zurück</a></p></div>
+}
+else
+{
+    <PageHero Title="@post.Titel" ParentLabel="FF-News" ParentHref="/news" />
+    <div class="site-body container">
+        <div class="content-with-sidebar">
+            <main class="main-feed">
+                <article class="post-detail">
+                    <div class="detail-meta">
+                        <span class="post-card-kat post-card-kat--ff-news">FF-News</span>
+                        <time>@post.Datum.ToString("d. MMMM yyyy")</time>
+                    </div>
+                    <div class="detail-img">
+                        <img src="@($"img/{post.Slug}.jpeg")" class="hero-bg-img" />
+                    </div>
+                    <div class="detail-body"><p>@post.Volltext</p></div>
+                    <a href="/news" class="back-link">← Zurück zu FF-News</a>
+                </article>
+            </main>
+            <Sidebar />
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public string Slug { get; set; } = "";
+    private Post? post;
+    protected override void OnParametersSet() => post = DS.GetPost(Slug);
+}

@@ -1,0 +1,153 @@
+@page "/"
+@inject DataService DS
+
+<PageTitle>FF Rastenfeld – Freiwillige Feuerwehr Rastenfeld, Niederösterreich</PageTitle>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-img-wrap">
+        <!-- Placeholder Hero Image -->
+        <img src="img/cover.jpg" alt="FF Rastenfeld" class="hero-bg-img" />
+        <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content container">
+        <p class="hero-eyebrow">Bezirk Krems-Land · Niederösterreich</p>
+        <h1>Freiwillige Feuerwehr<br/><span>Rastenfeld</span></h1>
+        <p class="hero-lead">Seit 1871 für unsere Gemeinschaft im Einsatz. Jederzeit. Mit vollem Herz.</p>
+        <div class="hero-btns">
+            <a href="/einsaetze" class="btn btn-primary">Aktuelle Einsätze</a>
+            <a href="/mannschaft" class="btn btn-ghost">Über uns</a>
+        </div>
+        <div class="hero-quick">
+            <div class="hq-item"><strong>122</strong><span>Notruf</span></div>
+            <div class="hq-item"><strong>40+</strong><span>Mitglieder</span></div>
+            <div class="hq-item"><strong>2</strong><span>Fahrzeuge</span></div>
+            <div class="hq-item"><strong>24/7</strong><span>Einsatzbereit</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- NOTRUF STRIP -->
+<div class="notruf-strip">
+    <span class="blink-dot"></span>
+    <strong>Im Notfall: Feuerwehr 122 rufen!</strong>
+    <span class="strip-sep">|</span>
+    <span>Kostenlos · Rund um die Uhr</span>
+    <a href="tel:122" class="strip-btn">Jetzt anrufen</a>
+</div>
+
+<!-- MAIN CONTENT: Feed + Sidebar (wie ffwaidhofen) -->
+<div class="site-body container">
+    <div class="content-with-sidebar">
+
+        <!-- FEED -->
+        <main class="main-feed">
+            <h2 class="feed-title">Aktuelle Beiträge</h2>
+
+            @foreach (var post in feed)
+            {
+                <PostCard Post="@post" />
+            }
+
+            <div class="pagination">
+                <span class="pag-info">Seite 1 von 8</span>
+                <a href="/einsaetze" class="btn btn-outline-small">Alle Einsätze →</a>
+                <a href="/news" class="btn btn-outline-small">Alle News →</a>
+            </div>
+            
+            <!-- INSTAGRAM EMBED -->
+            <div class="container">
+               
+                <div class="instagram-embed-wrap">
+                    <iframe
+                        src="https://www.instagram.com/ff_rastenfeld/embed"
+                        frameborder="0"
+                        loading="lazy"
+                        allowtransparency="true"
+                        allowfullscreen
+                        title="Instagram FF Rastenfeld"
+                        class="instagram-iframe">
+                    </iframe>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <!-- Suche -->
+            <div class="sidebar-widget">
+                <h3>Suche</h3>
+                <div class="search-box">
+                    <input type="text" placeholder="Beiträge suchen…" @bind="searchTerm" @oninput="OnSearch"/>
+                </div>
+            </div>
+
+            <!-- Letzter Einsatz -->
+            <div class="sidebar-widget sidebar-widget--red">
+                <h3>⚡ Letzter Einsatz</h3>
+                @{var last = DS.GetEinsaetze().FirstOrDefault();}
+                @if (last != null)
+                {
+                    <p class="sidebar-einsatz-typ">@last.EinsatzTyp</p>
+                    <p class="sidebar-einsatz-title"><a href="/einsaetze/@last.Slug">@last.Titel</a></p>
+                    <time>@last.Datum.ToString("dd.MM.yyyy – HH:mm") Uhr</time>
+                }
+            </div>
+
+            <!-- Kategorien -->
+            <div class="sidebar-widget">
+                <h3>Kategorien</h3>
+                <ul class="sidebar-cats">
+                    <li><a href="/einsaetze">Einsätze <span>@DS.GetByKategorie("Einsätze").Count</span></a></li>
+                    <li><a href="/news">FF-News <span>@DS.GetByKategorie("FF-News").Count</span></a></li>
+                    <li><a href="/ausbildung">Ausbildung <span>@DS.GetByKategorie("Ausbildung").Count</span></a></li>
+                    <li><a href="/feuerwehrjugend">Feuerwehrjugend <span>@DS.GetByKategorie("Feuerwehrjugend").Count</span></a></li>
+                </ul>
+            </div>
+
+            <!-- Links -->
+            <div class="sidebar-widget">
+                <h3>Links</h3>
+                <ul class="sidebar-links">
+                    <li><a href="https://www.noelfv.at" target="_blank">NÖ Landesfeuerwehrverband</a></li>
+                    <li><a href="https://www.bfk-krems.at" target="_blank">BFK Krems-Land</a></li>
+                    <li><a href="https://www.noelfv.at/wastl" target="_blank">WASTL Einsatzmonitor</a></li>
+                    <li><a href="https://www.noelfv.at/lfws" target="_blank">NÖ Landesfeuerwehrschule</a></li>
+                    <li><a href="https://www.rastenfeld.at" target="_blank">Marktgemeinde Rastenfeld</a></li>
+                </ul>
+            </div>
+
+            <!-- Mitglied werden Banner -->
+            <div class="sidebar-widget sidebar-widget--join">
+                <p>🧑‍🚒 <strong>Werde Mitglied!</strong></p>
+                <p>Du möchtest helfen? Wir freuen uns über jede Verstärkung!</p>
+                <a href="/kontakt" class="btn btn-primary" style="width:100%;text-align:center;margin-top:.5rem;">Jetzt mitmachen</a>
+            </div>
+        </aside>
+    </div>
+</div>
+
+
+
+
+@code {
+    private List<Post> feed = new();
+    private string searchTerm = "";
+
+    protected override void OnInitialized()
+    {
+        feed = DS.GetPosts().OrderByDescending(p => p.Datum).Take(3).ToList();
+    }
+
+    private void OnSearch(ChangeEventArgs e)
+    {
+        searchTerm = e.Value?.ToString() ?? "";
+        if (string.IsNullOrWhiteSpace(searchTerm))
+            feed = DS.GetPosts().OrderByDescending(p => p.Datum).Take(100).ToList();
+        else
+            feed = DS.GetPosts()
+                .Where(p => p.Titel.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || p.Kurztext.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                .OrderByDescending(p => p.Datum).ToList();
+    }
+}

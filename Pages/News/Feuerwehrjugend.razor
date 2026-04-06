@@ -1,0 +1,28 @@
+@* ── Feuerwehrjugend Übersicht ── *@
+@page "/feuerwehrjugend"
+@inject DataService DS
+
+<PageTitle>Feuerwehrjugend – FF Rastenfeld</PageTitle>
+<PageHero Title="Feuerwehrjugend" Subtitle="Nachwuchsarbeit bei der FF Rastenfeld" />
+
+<div class="site-body container">
+    <div class="content-with-sidebar">
+        <main class="main-feed">
+
+            <!-- Info-Block oben -->
+            <div class="info-block">
+                <h2>Unsere Feuerwehrjugend</h2>
+                <p>Die Feuerwehrjugend der FF Rastenfeld ist offen für alle Jugendlichen zwischen <strong>10 und 15 Jahren</strong>. In regelmäßigen Jugendstunden lernen die Jugendlichen spielerisch die Grundlagen der Feuerwehrarbeit, fördern Teamgeist und Kameradschaft.</p>
+                <p>Betreuung: OFM Lukas Berger (Jugendbeauftragter)</p>
+                <p>Übungstermine: jeden zweiten Freitag, 18:00 Uhr im Feuerwehrhaus Rastenfeld</p>
+                <a href="/kontakt" class="btn btn-primary" style="margin-top:.75rem;">Jetzt anmelden</a>
+            </div>
+
+            @foreach (var p in DS.GetByKategorie("Feuerwehrjugend"))
+            {
+                <PostCard Post="@p" />
+            }
+        </main>
+        <Sidebar />
+    </div>
+</div>

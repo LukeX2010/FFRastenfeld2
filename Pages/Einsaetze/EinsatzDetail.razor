@@ -1,0 +1,61 @@
+@page "/einsaetze/{Slug}"
+@inject DataService DS
+@inject NavigationManager Nav
+
+<PageTitle>@(post?.Titel ?? "Einsatz") – FF Rastenfeld</PageTitle>
+
+@if (post is null)
+{
+    <div class="container" style="padding:4rem 1.5rem;text-align:center">
+        <p>Einsatz nicht gefunden. <a href="/einsaetze">← Zurück</a></p>
+    </div>
+}
+else
+{
+    <PageHero Title="@post.Titel" ParentLabel="Einsätze" ParentHref="/einsaetze" />
+
+    <div class="site-body container">
+        <div class="content-with-sidebar">
+            <main class="main-feed">
+                <article class="post-detail">
+                    <!-- Meta -->
+                    <div class="detail-meta">
+                        <span class="post-card-kat post-card-kat--einsa-tze">Einsätze</span>
+                        <time>@post.Datum.ToString("dddd, d. MMMM yyyy – HH:mm") Uhr</time>
+                    </div>
+
+                    <!-- Einsatz-Infobox -->
+                    <div class="einsatz-infobox">
+                        <div class="eib-row"><span class="eib-label">Einsatztyp</span><span>@post.EinsatzTyp</span></div>
+                        <div class="eib-row"><span class="eib-label">Einsatzort</span><span>📍 @post.EinsatzOrt</span></div>
+                        <div class="eib-row"><span class="eib-label">Alarmzeit</span><span>🕐 @post.EinsatzZeit</span></div>
+                        <div class="eib-row"><span class="eib-label">Einsatzkräfte</span><span>👥 @post.EinsatzKraefte Personen</span></div>
+                    </div>
+
+                    <!-- Platzhalterbild -->
+                    <div class="detail-img">
+                        <img src="@($"img/{post.Slug}.jpeg")" class="hero-bg-img" />
+                    </div>
+
+                    <!-- Volltext -->
+                    <div class="detail-body">
+                        <p>@post.Volltext</p>
+                    </div>
+
+                    <a href="/einsaetze" class="back-link">← Zurück zur Einsatzübersicht</a>
+                </article>
+            </main>
+            <Sidebar />
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public string Slug { get; set; } = "";
+    private Post? post;
+
+    protected override void OnParametersSet()
+    {
+        post = DS.GetPost(Slug);
+    }
+}

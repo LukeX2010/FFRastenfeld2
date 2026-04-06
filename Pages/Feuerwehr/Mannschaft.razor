@@ -1,0 +1,59 @@
+@page "/mannschaft"
+@inject DataService DS
+
+<PageTitle>Mannschaft – FF Rastenfeld</PageTitle>
+<PageHero Title="Mannschaft" Subtitle="Kommando und Mannschaft der FF Rastenfeld" ParentLabel="Feuerwehr" ParentHref="/organisation" />
+
+<div class="site-body container">
+    <div class="content-with-sidebar">
+        <main class="main-feed">
+            <article class="post-detail">
+
+                <!-- Einsatzbereich -->
+                
+
+                <!-- Kommando -->
+                <h2 style="margin-top:2.5rem;">Feuerwehrkommando</h2>
+                <p>Das Kommando der FF Rastenfeld wird alle fünf Jahre bei der Vollversammlung gewählt und trägt die Gesamtverantwortung für Einsatz, Ausbildung und Verwaltung der Feuerwehr.</p>
+
+                <div class="kommando-grid">
+                    @foreach (var m in DS.GetMitglieder().Where(m => m.IstFuehrung))
+                    {
+                        <div class="kommando-card">
+                            <div class="kk-avatar">🧑‍🚒</div>
+                            <div class="kk-info">
+                                <span class="kk-grad">@m.Dienstgrad</span>
+                                <strong>@m.Name</strong>
+                                <span class="kk-funk">@m.Funktion</span>
+                                <span class="kk-seit">Dabei seit @m.EintriebAb</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- Alle Mitglieder -->
+                <h2 style="margin-top:2.5rem;">Aktive Mannschaft</h2>
+                <div class="mitglieder-table">
+                    <table>
+                        <thead>
+                            <tr><th>Name</th><th>Dienstgrad</th><th>Funktion</th><th>Dabei seit</th></tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var m in DS.GetMitglieder())
+                            {
+                                <tr>
+                                    <td>@m.Name</td>
+                                    <td>@m.Dienstgrad</td>
+                                    <td>@m.Funktion</td>
+                                    <td>@m.EintriebAb</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </article>
+        </main>
+        <Sidebar />
+    </div>
+</div>

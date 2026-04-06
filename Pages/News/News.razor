@@ -1,0 +1,18 @@
+@* ── FF-News Übersicht ── *@
+@page "/news"
+@inject DataService DS
+
+<PageTitle>FF-News – FF Rastenfeld</PageTitle>
+<PageHero Title="FF-News" Subtitle="Aktuelles aus der Feuerwehr Rastenfeld" />
+
+<div class="site-body container">
+    <div class="content-with-sidebar">
+        <main class="main-feed">
+            @foreach (var p in DS.GetByKategorie("FF-News"))
+            {
+                <PostCard Post="@p" />
+            }
+        </main>
+        <Sidebar />
+    </div>
+</div>

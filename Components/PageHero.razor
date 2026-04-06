@@ -1,0 +1,26 @@
+@* Seitenheader-Banner *@
+
+<div class="page-hero">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/">Startseite</a>
+            @if (!string.IsNullOrEmpty(ParentLabel) && !string.IsNullOrEmpty(ParentHref))
+            {
+                <span>›</span><a href="@ParentHref">@ParentLabel</a>
+            }
+            <span>›</span><span>@Title</span>
+        </div>
+        <h1>@Title</h1>
+        @if (!string.IsNullOrEmpty(Subtitle))
+        {
+            <p>@Subtitle</p>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired] public string Title { get; set; } = "";
+    [Parameter] public string? Subtitle { get; set; }
+    [Parameter] public string? ParentLabel { get; set; }
+    [Parameter] public string? ParentHref { get; set; }
+}

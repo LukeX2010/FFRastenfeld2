@@ -1,0 +1,33 @@
+@page "/feuerwehrhaus"
+@inject DataService DS
+
+<PageTitle>Feuerwehrhaus – FF Rastenfeld</PageTitle>
+<PageHero Title="Feuerwehrhaus" Subtitle="Unser Stützpunkt im Herzen von Rastenfeld" ParentLabel="Feuerwehr" ParentHref="/organisation" />
+
+<div class="site-body container">
+    <div class="content-with-sidebar">
+        <main class="main-feed">
+            <article class="post-detail">
+
+                <div class="detail-img">
+                   <img src="img/FFhaus.png" class="hero-bg-img"/>
+                </div>
+
+                <h2>Unser Feuerwehrhaus</h2>
+                <p>Das Feuerwehrhaus der FF Rastenfeld befindet sich in  <a href="https://maps.google.com/?q=Feuerwehrhaus+Rastenfeld+178,3532+Rastenfeld"><strong>Rastenfeld 178</strong></a>. Das 1995 grundlegend sanierte und erweiterte Gebäude bietet Platz für vier Fahrzeuge sowie moderne Infrastruktur für Ausbildung und Verwaltung.</p>
+
+                <h2>Unser Einsatzbereich</h2>
+                <p>Die FF Rastenfeld ist zuständig für das gesamte Gemeindegebiet der Marktgemeinde Rastenfeld im Bezirk Krems-Land, Niederösterreich. Zum Einsatzgebiet zählen neben dem Ortszentrum auch alle Katastralgemeinden, die B35, B37 sowie der Stausee Ottenstein.</p>
+
+                <div class="info-grid-2">
+                    <div class="ig-item"><span class="ig-label">Fläche</span><strong>~45 km²</strong></div>
+                    <div class="ig-item"><span class="ig-label">Einwohner</span><strong>~1.600</strong></div>
+                    <div class="ig-item"><span class="ig-label">Seehöhe</span><strong>ca. 520 m</strong></div>
+                    <div class="ig-item"><span class="ig-label">Aktive Mitglieder</span><strong>@DS.GetMitglieder().Count</strong></div>
+                </div>
+
+            </article>
+        </main>
+        <Sidebar />
+    </div>
+</div>

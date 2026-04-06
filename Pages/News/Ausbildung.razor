@@ -1,0 +1,18 @@
+@* ── Ausbildung Übersicht ── *@
+@page "/ausbildung"
+@inject DataService DS
+
+<PageTitle>Ausbildung – FF Rastenfeld</PageTitle>
+<PageHero Title="Ausbildung" Subtitle="Kurse, Übungen und Lehrgänge der FF Rastenfeld" />
+
+<div class="site-body container">
+    <div class="content-with-sidebar">
+        <main class="main-feed">
+            @foreach (var p in DS.GetByKategorie("Ausbildung"))
+            {
+                <PostCard Post="@p" />
+            }
+        </main>
+        <Sidebar />
+    </div>
+</div>

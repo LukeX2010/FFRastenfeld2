@@ -20,25 +20,25 @@
         </div>
         <div class="hero-quick">
             <div class="oben">
-                @* Notruf: Zählt schnell auf 122 *@
-                <div class="hq-item" data-start="0" data-stop="122" data-duration="1000">
-                    <strong>0</strong><span>Notruf</span>
+               
+                <div class="hq-item" >
+                    <strong>122</strong><span>Notruf</span>
                 </div>
 
-                @* Mitglieder: Zählt auf 40 mit einem + am Ende *@
-                <div class="hq-item" data-start="0" data-stop="40" data-duration="1500" data-ed="+">
-                    <strong>0+</strong><span>Mitglieder</span>
+               
+                <div class="hq-item" >
+                    <strong>40+</strong><span>Mitglieder</span>
                 </div>
             </div>           
             <div class="unten"> 
-                @* Fahrzeuge: Zählt auf 2 *@
-                <div class="hq-item" data-start="0" data-stop="2" data-duration="800">
-                    <strong>0</strong><span>Fahrzeuge</span>
+               
+                <div class="hq-item" >
+                    <strong>2</strong><span>Fahrzeuge</span>
                 </div>
 
-                @* Einsatzbereit: Zählt auf 24 mit /7 am Ende *@
-                <div class="hq-item" data-start="0" data-stop="24" data-duration="1200" data-ed="/7">
-                    <strong>0/7</strong><span>Einsatzbereit</span>
+                
+                <div class="hq-item" >
+                    <strong>24/7</strong><span>Einsatzbereit</span>
                 </div>
             </div>
         </div>
@@ -179,12 +179,5 @@
                 .Where(p => p.Titel.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || p.Kurztext.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
                 .OrderByDescending(p => p.Datum).ToList();
     }
-    
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JS.InvokeVoidAsync("initCounters");
-        }
-    }
+
 }

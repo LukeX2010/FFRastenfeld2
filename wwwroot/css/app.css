@@ -375,10 +375,11 @@ ul { list-style: none; }
 .empty-msg  { color: var(--text-m); padding: 2rem 0; }
 
 /* ─── PAGE HERO ─── */
-.page-hero {
+.
+page-hero {
   background: linear-gradient(135deg, var(--dark) 0%, var(--dark-2) 100%);
   padding: 2.5rem 0 2rem; position: relative;
-  border-bottom: 3px solid var(--red);
+  border-bottom: 3px solid var(--red); width: 100vw;
 }
 .page-hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--white); margin-bottom: .3rem; }
 .page-hero p  { color: #8892a0; font-size: .95rem; }
@@ -905,6 +906,7 @@ textarea.form-input { resize: vertical; min-height: 110px; }
 
     .post-detail {
         padding: 1.25rem;
+        width: 100vw;
     }
 
     .fahrzeug-item {

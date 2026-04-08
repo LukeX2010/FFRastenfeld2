@@ -1,6 +1,6 @@
 @page "/"
 @inject DataService DS
-
+@inject IJSRuntime JS
 <PageTitle>FF Rastenfeld – Freiwillige Feuerwehr Rastenfeld, Niederösterreich</PageTitle>
 
 <!-- HERO -->
@@ -19,11 +19,30 @@
             <a href="/mannschaft" class="btn btn-ghost">Über uns</a>
         </div>
         <div class="hero-quick">
-            <div class="hq-item"><strong>122</strong><span>Notruf</span></div>
-            <div class="hq-item"><strong>40+</strong><span>Mitglieder</span></div>
-            <div class="hq-item"><strong>2</strong><span>Fahrzeuge</span></div>
-            <div class="hq-item"><strong>24/7</strong><span>Einsatzbereit</span></div>
+            <div class="oben">
+                @* Notruf: Zählt schnell auf 122 *@
+                <div class="hq-item" data-start="0" data-stop="122" data-duration="1000">
+                    <strong>0</strong><span>Notruf</span>
+                </div>
+
+                @* Mitglieder: Zählt auf 40 mit einem + am Ende *@
+                <div class="hq-item" data-start="0" data-stop="40" data-duration="1500" data-ed="+">
+                    <strong>0+</strong><span>Mitglieder</span>
+                </div>
+            </div>           
+            <div class="unten"> 
+                @* Fahrzeuge: Zählt auf 2 *@
+                <div class="hq-item" data-start="0" data-stop="2" data-duration="800">
+                    <strong>0</strong><span>Fahrzeuge</span>
+                </div>
+
+                @* Einsatzbereit: Zählt auf 24 mit /7 am Ende *@
+                <div class="hq-item" data-start="0" data-stop="24" data-duration="1200" data-ed="/7">
+                    <strong>0/7</strong><span>Einsatzbereit</span>
+                </div>
+            </div>
         </div>
+                
     </div>
 </section>
 
@@ -36,7 +55,7 @@
     <a href="tel:122" class="strip-btn">Jetzt anrufen</a>
 </div>
 
-<!-- MAIN CONTENT: Feed + Sidebar (wie ffwaidhofen) -->
+<!-- MAIN CONTENT-->
 <div class="site-body container">
     <div class="content-with-sidebar">
 
@@ -56,8 +75,7 @@
             </div>
             
             <!-- INSTAGRAM EMBED -->
-            <div class="container">
-               
+            <div class="embed-row">
                 <div class="instagram-embed-wrap">
                     <iframe
                         src="https://www.instagram.com/ff_rastenfeld/embed"
@@ -69,19 +87,30 @@
                         class="instagram-iframe">
                     </iframe>
                 </div>
-
+                <div class="instagram-embed-wrap">
+                    <iframe
+                        src="https://infoscreen.florian10.info/ows/wastlmobileweb/#bezirk_10"
+                        frameborder="0"
+                        loading="lazy"
+                        allowtransparency="true"
+                        title="BAZ Krems Unwetterwarnung"
+                        class="instagram-iframe">
+                    </iframe>
+                </div>
             </div>
+            
+            
+            
         </main>
 
+        
+        
+        
+        
+        
         <!-- SIDEBAR -->
         <aside class="sidebar">
             <!-- Suche -->
-            <div class="sidebar-widget">
-                <h3>Suche</h3>
-                <div class="search-box">
-                    <input type="text" placeholder="Beiträge suchen…" @bind="searchTerm" @oninput="OnSearch"/>
-                </div>
-            </div>
 
             <!-- Letzter Einsatz -->
             <div class="sidebar-widget sidebar-widget--red">
@@ -149,5 +178,13 @@
             feed = DS.GetPosts()
                 .Where(p => p.Titel.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || p.Kurztext.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
                 .OrderByDescending(p => p.Datum).ToList();
+    }
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("initCounters");
+        }
     }
 }

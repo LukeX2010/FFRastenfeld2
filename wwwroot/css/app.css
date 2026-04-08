@@ -164,8 +164,6 @@ ul { list-style: none; }
     display: block;
 }
 .hero-bg-img-lg{
-
-    height: 100%;
     object-position: center;
     display: block; 
 }
@@ -204,7 +202,7 @@ ul { list-style: none; }
 .hero-quick { display: flex; gap: 1.5rem; flex-wrap: wrap; }
 .hq-item { display: flex; flex-direction: column; }
 .hq-item strong { font-family: var(--font-h); font-size: 1.6rem; color: var(--red-l); line-height: 1; }
-.hq-item span   { font-size: 0.85rem; color: #6b7280; text-transform: uppercase; letter-spacing: .08em;font-weight: 900 }
+.hq-item span   { font-size: 0.85rem; color: #fff; text-transform: uppercase; letter-spacing: .08em;font-weight: 900 }
 
 /* ─── INSTAGRAM ─── */
 .instagram-section {
@@ -645,14 +643,97 @@ ul { list-style: none; }
   background: var(--dark-2); border-radius: var(--r-lg); max-width: 640px; width: 100%;
   padding: 1.5rem; position: relative; animation: slideUp .25s ease;
 }
+
+.x{
+    font-weight: bolder;
+    
+}
+
 @keyframes slideUp { from{transform:translateY(25px);opacity:0} to{transform:translateY(0);opacity:1} }
 .lb-close {
-  position: absolute; top: .75rem; right: .75rem;
-  background: rgba(255,255,255,.1); border: none; color: #fff;
-  width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: .9rem; transition: background var(--t);
+    position: absolute;
+    top: .75rem;
+    right: .75rem;
+    background: rgba(255,255,255,.3);
+    border: none;
+    color: #fff;
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: .9rem;
+    transition: background var(--t);
+    background: rgba(0,0,0,.6);
+    border: 1px solid rgba(255,255,255,.4);
+    color: #fff;
+    /* width: 44px; */
+    z-index: 1;
+    /* height: 44px; */
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+    user-select: none;
+    touch-action: manipulation;
 }
 .lb-close:hover { background: var(--red); }
-.lb-img  { height: 450px; display: flex; align-items: center; justify-content: center; font-size: 6rem; background: var(--dark-3); border-radius: var(--r); margin-bottom: 1rem; }
+.lb-img  {
+  height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dark-3);
+  border-radius: var(--r);
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+}
+.lb-img:active { cursor: grabbing; }
+.lb-img img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.1s ease-out;
+  user-select: none;
+  pointer-events: none;
+}
+
+.lb-zoom-controls {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: .5rem;
+  z-index: 100;
+  pointer-events: auto;
+}
+.lb-zoom-btn {
+  background: rgba(0,0,0,.6);
+  border: 1px solid rgba(255,255,255,.4);
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+  user-select: none;
+  touch-action: manipulation;
+}
+.lb-zoom-btn:hover { background: var(--red); border-color: var(--red); transform: scale(1.1); }
+.lb-zoom-btn:active { transform: scale(0.9); }
 .lb-info strong { color: #fff; display: block; font-size: 1rem; }
 .lb-info span   { color: #8892a0; font-size: .82rem; }
 .lb-nav  { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
@@ -830,4 +911,41 @@ textarea.form-input { resize: vertical; min-height: 110px; }
         grid-template-columns: 1fr;
     }
     .nav-notruf{display: none}
+    
+    .hero-img-wrap{margin-left: -21rem}
+    
+
+    .hero-quick {
+        display: grid;
+        grid-template-columns: 1fr 2.9fr;
+        gap: 1rem;
+    }
+
+    .hero-quick .oben,
+    .hero-quick .unten {
+        display: contents;
+    }
+}
+@media (min-width: 481px) {
+    .hero-quick {
+        display: flex;
+        flex-direction: row;
+        gap: 3.5rem;
+    }
+
+    .hero-quick .oben,
+    .hero-quick .unten {
+        display: contents;
+    }
+}
+
+.embed-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.embed-row .instagram-embed-wrap {
+    flex: 1 1 300px; /* mind. 300px, dann nebeneinander */
+    min-width: 300px;
 }

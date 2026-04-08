@@ -1,5 +1,7 @@
 @* ── Galerie ── *@
 @page "/galerie"
+@inject IJSRuntime JS
+@inject DataService DS
 
 <PageTitle>Galerie – FF Rastenfeld</PageTitle>
 <PageHero Title="Galerie" Subtitle="Bilder aus Einsätzen, Übungen und Veranstaltungen" />
@@ -32,14 +34,18 @@
             {
                 <div class="lightbox-backdrop" @onclick="CloseLightbox">
                     <div class="lightbox-box" @onclick:stopPropagation>
-                        <button class="lb-close" @onclick="CloseLightbox">✕</button>
+                        <button class="lb-close" @onclick="CloseLightbox"><p class="x"><strong>✕</strong></p></button>
                         <div class="lb-img">
                             <img src="@($"img/{lightbox.Emoji}.jpeg")" class="hero-bg-img-lg" />
+
                         </div>
                         <div class="lb-info">
                             <strong>@lightbox.Titel</strong>
-                            <span class="untertitellightbox">@lightbox.Untertitel</span>
-                            <br/>
+                            @if(lightbox.Untertitel != "")
+                            {
+                                <span class="untertitellightbox">@lightbox.Untertitel</span>
+                                <br/>
+                            }
                             <span>@lightbox.Kategorie · @lightbox.Jahr</span>
                         </div>
                         <div class="lb-nav">
@@ -66,13 +72,28 @@
         new("Florianimesse 2025","florianimesse2025_3","Ausrückungen",2025, ""),
         new("Tut Gut Wandertag","Tutgut_2026","Veranstaltungen",2026, ""),
         new("Ehrungen des Abschnittsfeuerwehrtages","Johnyehrung","Sonstiges",2025, "Ehrenkommandant Johann Herzog erhielt das Verdienstzeichen 2.Klasse des NÖ Landesfeuwerwehrverbandes."),
-        new("Ehrungen des Abschnittsfeuerwehrtages","Kröpflehrung","Sonstiges",2025, "EOLM Friedrich Kröpfl wurde für die 60 jährige Feuerwehrtätigkeit geehrt."),
-
+        new("Ehrungen des Abschnittsfeuerwehrtages","Kroepflehrung","Sonstiges",2025, "EOLM Friedrich Kröpfl wurde für die 60 jährige Feuerwehrtätigkeit geehrt."),
         
-        new("Hochwasser Kamp","🌊","Einsätze",2023, ""),
 
     };
 
+    public List<Post> alleinsätze = new();
+
+
+    protected override void OnInitialized()
+    {
+        alleinsätze = DS.GetEinsaetze();
+        addeinsätze();
+    }
+    public void addeinsätze()
+    {
+        foreach (var einsätze in alleinsätze)
+        {
+            bilder.Add(new GalBild(einsätze.Titel, einsätze.Emoji, einsätze.Kategorie, einsätze.Datum.Year, ""));
+        }
+        
+    }
+    
     private string activeKat = "Alle";
     private GalBild? lightbox;
     private int lightboxIdx = -1;
@@ -81,8 +102,17 @@
 
     private List<string> kategorien = new() { "Alle","Einsätze","Übungen","Ausbildungen & Kurse","Veranstaltungen", "Ausrückungen","Sonstiges" };
 
-    private void OpenLightbox(GalBild b) { lightbox = b; lightboxIdx = GetFiltered().IndexOf(b); }
+    private async Task OpenLightbox(GalBild b) 
+    { 
+        lightbox = b; 
+        lightboxIdx = GetFiltered().IndexOf(b); 
+        await Task.Delay(100); 
+        await JS.InvokeVoidAsync("initLightboxZoom");
+    }
     private void CloseLightbox() { lightbox = null; lightboxIdx = -1; }
-    private void Next() { var f = GetFiltered(); lightboxIdx = (lightboxIdx+1)%f.Count; lightbox=f[lightboxIdx]; }
-    private void Prev() { var f = GetFiltered(); lightboxIdx = (lightboxIdx-1+f.Count)%f.Count; lightbox=f[lightboxIdx]; }
+    private async Task Next() { var f = GetFiltered(); lightboxIdx = (lightboxIdx+1)%f.Count; lightbox=f[lightboxIdx]; await Task.Delay(50); await JS.InvokeVoidAsync("initLightboxZoom"); }
+    private async Task Prev() { var f = GetFiltered(); lightboxIdx = (lightboxIdx-1+f.Count)%f.Count; lightbox=f[lightboxIdx]; await Task.Delay(50); await JS.InvokeVoidAsync("initLightboxZoom"); }
+
+    private async Task ZoomIn() => await JS.InvokeVoidAsync("lightboxZoom", 0.33);
+    private async Task ZoomOut() => await JS.InvokeVoidAsync("lightboxZoom", -0.33);
 }

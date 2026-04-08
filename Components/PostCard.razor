@@ -3,7 +3,7 @@
 <article class="post-card">
     <a href="/@(Post.Kategorie == "Einsätze" ? "einsaetze" : Post.Kategorie == "FF-News" ? "news" : Post.Kategorie == "Ausbildung" ? "ausbildung" : "feuerwehrjugend")/@Post.Slug" class="post-card-img-link">
         <div class="post-card-img">
-            <img src="@($"img/{Post.Slug}.jpeg")" class="hero-bg-img" />
+            <img src="@($"img/{Post.Slug}.jpeg")" class="hero-bg-img"/>
         </div>
     </a>
     <div class="post-card-body">

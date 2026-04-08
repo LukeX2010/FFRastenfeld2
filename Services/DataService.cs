@@ -7,78 +7,12 @@ public class DataService
     // ── POSTS (Einsätze + News + Ausbildung + Jugend) ─────────────────────────
     public List<Post> GetPosts() => new()
     {
-        new Post
-        {
-            Id = 1, Slug = "zimmerbrand-ortszentrum", Titel = "Zimmerbrand im Ortszentrum", Kategorie = "Einsätze",
-            Datum = new DateTime(2025, 3, 15, 3, 17, 0),
-            Kurztext =
-                "In den frühen Morgenstunden wurden die Einsatzkräfte zu einem Zimmerbrand alarmiert. Starke Rauchentwicklung erschwerte die Löscharbeiten.",
-            Volltext =
-                "Um 03:17 Uhr wurde die FF Rastenfeld zu einem Zimmerbrand im Ortszentrum alarmiert. Beim Eintreffen der ersten Kräfte drang starker Rauch aus den Fenstern des Erdgeschoßes. Drei Atemschutztrupps gingen zur Brandbekämpfung vor. Die Bewohner konnten das Gebäude rechtzeitig verlassen und blieben unverletzt. Nach rund 90 Minuten konnte der Einsatz beendet werden.",
-            BildPlaceholder = "🏠", EinsatzTyp = "B2 – Zimmerbrand", EinsatzOrt = "Rastenfeld, Ortszentrum",
-            EinsatzZeit = "03:17 Uhr", EinsatzKraefte = 18
-        },
-
-        new Post
-        {
-            Id = 2, Slug = "verkehrsunfall-b35", Titel = "Verkehrsunfall mit eingeklemmter Person – B35",
-            Kategorie = "Einsätze",
-            Datum = new DateTime(2025, 2, 28, 7, 45, 0),
-            Kurztext =
-                "Auf der B35 kam es zu einem schweren Verkehrsunfall. Eine Person musste durch hydraulisches Rettungsgerät befreit werden.",
-            Volltext =
-                "Am frühen Morgen ereignete sich auf der B35 Richtung Zwettl ein Verkehrsunfall, bei dem ein PKW von der Fahrbahn abkam und mit der Leitplanke kollidierte. Die Fahrerin war im Fahrzeug eingeklemmt und musste mittels Spreizer und Schere befreit werden. Nach rund 35 Minuten konnte die verletzte Person dem Rettungsdienst übergeben werden.",
-            BildPlaceholder = "🚗", EinsatzTyp = "T2 – Verkehrsunfall", EinsatzOrt = "B35 bei Rastenfeld",
-            EinsatzZeit = "07:45 Uhr", EinsatzKraefte = 14
-        },
-
-        new Post
-        {
-            Id = 3, Slug = "waldbrand-ottenstein", Titel = "Waldbrand im Bereich Stausee Ottenstein",
-            Kategorie = "Einsätze",
-            Datum = new DateTime(2024, 7, 14, 14, 22, 0),
-            Kurztext = "Ausgedehnter Waldbrand am Ufer des Stausees Ottenstein. Mehrere Feuerwehren im Großeinsatz.",
-            Volltext =
-                "Durch die anhaltende Trockenheit brach am Ostufer des Stausees Ottenstein ein Waldbrand aus. Mehrere Feuerwehren des Abschnitts Krems rückten aus. Das TLF 4000 der FF Rastenfeld übernahm die Wasserversorgung aus dem Stausee. Nach rund vier Stunden konnte das Feuer unter Kontrolle gebracht werden. Ein Übergreifen auf Wohngebiet konnte verhindert werden.",
-            BildPlaceholder = "🌲", EinsatzTyp = "B3 – Waldbrand", EinsatzOrt = "Stausee Ottenstein",
-            EinsatzZeit = "14:22 Uhr", EinsatzKraefte = 32
-        },
-
-        new Post
-        {
-            Id = 4, Slug = "unwetter-sturm-rastenfeld", Titel = "Sturmschäden im gesamten Gemeindegebiet",
-            Kategorie = "Einsätze",
-            Datum = new DateTime(2024, 5, 19, 18, 10, 0),
-            Kurztext =
-                "Nach einem Unwetter musste die FF Rastenfeld zu zahlreichen Sturmeinsätzen ausrücken. Bäume blockierten mehrere Straßen.",
-            Volltext =
-                "Ein heftiges Unwetter zog über das Gemeindegebiet Rastenfeld und hinterließ zahlreiche Sturmschäden. Die FF Rastenfeld rückte zu insgesamt 11 Einsatzstellen aus. Umgestürzte Bäume blockierten die Zufahrt zur B37 sowie mehrere Gemeindestraßen. Keller wurden ausgepumpt, Dächer gesichert.",
-            BildPlaceholder = "⛈️", EinsatzTyp = "S1 – Sturm", EinsatzOrt = "Gemeindegebiet Rastenfeld",
-            EinsatzZeit = "18:10 Uhr", EinsatzKraefte = 22
-        },
-
-        new Post
-    {
-        Id = 5,
-        Slug = "gma-brand-steininger",
-        Titel = "GMA-Brand bei Gebrüder Steininger",
-        Kategorie = "Einsätze",
-        Datum = new DateTime(2025, 12, 17, 21, 27, 0),
-        Kurztext =
-            "Auslösung einer Brandmeldeanlage bei der Firma Gebrüder Steininger in Rastenfeld.",
-        Volltext =
-            "Am 17.12.2025 wurde die Feuerwehr zu einer ausgelösten Brandmeldeanlage bei der Firma Gebrüder Steininger alarmiert. Nach Kontrolle des betroffenen Bereichs konnte kein Brand festgestellt werden. Die Anlage wurde zurückgestellt und der Einsatz beendet.",
-        BildPlaceholder = "🚒",
-        EinsatzTyp = "B1 – GMA-Brand",
-        EinsatzOrt = "Rastenfeld 168",
-        EinsatzZeit = "21:27 Uhr",
-        EinsatzKraefte = 0
-    },
 
     new Post
     {
         Id = 6,
         Slug = "vu-menschenrettung-rastenberg",
+        Emoji = "vu-menschenrettung-rastenberg",
         Titel = "Verkehrsunfall mit Menschenrettung",
         Kategorie = "Einsätze",
         Datum = new DateTime(2025, 11, 25, 17, 56, 0),
@@ -96,7 +30,8 @@ public class DataService
     new Post
     {
         Id = 7,
-        Slug = "bergung-pkw-b38",
+        Slug = "test1",
+        Emoji = "test1",
         Titel = "PKW-Bergung nach Auffahrunfall",
         Kategorie = "Einsätze",
         Datum = new DateTime(2026, 1, 27, 17, 35, 0),
@@ -114,7 +49,8 @@ public class DataService
     new Post
     {
         Id = 8,
-        Slug = "gma-brand-hotel-ottenstein",
+        Slug = "test2",
+        Emoji = "test2",
         Titel = "GMA-Alarm im Hotel Ottenstein",
         Kategorie = "Einsätze",
         Datum = new DateTime(2025, 12, 20, 23, 50, 0),
@@ -160,6 +96,7 @@ public class DataService
         new  Post{
             Id = 14,
             Slug = "mosertronik-begehung",
+            Emoji = "mosertronik-begehung",
             Titel = "Sicherheit durch Zusammenarbeit",
             Kategorie = "FF-News",
             Datum = new DateTime(2026, 3, 27),

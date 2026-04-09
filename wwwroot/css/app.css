@@ -540,6 +540,24 @@ ul { list-style: none; }
 .ig-label { display: block; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-m); margin-bottom: .25rem; }
 .ig-item strong { font-family: var(--font-h); font-size: 1.4rem; color: var(--red); display: block; }
 
+.ig-label1{
+    padding: 0.2rem;
+    display: block;
+    font-weight: 900;
+    font-size: .92rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: #0f0f0f;
+}
+
+.map-wrap {
+    margin-top: 2rem;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    box-shadow: var(--sh-md);
+    border: 1px solid var(--border);
+}
+
 .kommando-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(230px,1fr)); gap: 1rem; margin-top: 1rem; }
 .kommando-card {
   display: flex; gap: .85rem; align-items: flex-start;

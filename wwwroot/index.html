@@ -1,25 +1,68 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Freiwillige Feuerwehr Rastenfeld – Für unsere Gemeinschaft im Einsatz. Bezirk Krems-Land, Niederösterreich." />
-    <meta name="theme-color" content="#CC1111" />
-    <title>FF Rastenfeld – Freiwillige Feuerwehr</title>
-    <base href="/" />
-    <link rel="icon" type="image/jpeg" href="img/favicon.jpg" sizes="any" style="width: fit-content(100%)" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/app.css" />
-    <meta name="google-site-verification" content="W5ccThUyb28Wnu7QMZfmD-Ky-72PI3sw5m8-t12WBfg" />
+    <!DOCTYPE html>
+    <html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#CC1111" />
+        <title>Freiwillige Feuerwehr Rastenfeld – FF Rastenfeld, NÖ</title>
+        <meta name="description" content="Offizielle Website der Freiwilligen Feuerwehr Rastenfeld, Niederösterreich. Einsätze, News, Fahrzeuge und Kontakt. Notruf: 122." />
+        <meta name="keywords" content="Feuerwehr Rastenfeld, FF Rastenfeld, Niederösterreich, Krems, Feuerwehr NÖ, Einsätze Rastenfeld, Notruf 122" />
 
-</head>
-<body>
+        <!-- Open Graph (für Social Media + Google) -->
+        <meta property="og:title" content="Freiwillige Feuerwehr Rastenfeld" />
+        <meta property="og:description" content="Offizielle Website der FF Rastenfeld – Für unsere Gemeinschaft seit 1876." />
+        <meta property="og:url" content="https://ffrastenfeld2-production.up.railway.app/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="de_AT" />
+        
+        
+        <base href="/" />
+        <link rel="icon" type="image/jpeg" href="img/favicon.jpg" sizes="any" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="css/app.css" />
+        <meta name="google-site-verification" content="W5ccThUyb28Wnu7QMZfmD-Ky-72PI3sw5m8-t12WBfg" />
+    
+    </head>
+    <body>
 
 
-    <div id="app"></div>
-    <script src="_framework/blazor.webassembly.js"></script>
-    <script src="js/app.js"></script>
-</body>
-</html>
+   
+    
+    
+    
+    
+    
+        <div id="app"></div>
+        <script src="_framework/blazor.webassembly.js"></script>
+        <script src="js/app.js"></script>
+        
+
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "FireStation",
+                "name": "Freiwillige Feuerwehr Rastenfeld",
+                "url": "https://ffrastenfeld2-production.up.railway.app",
+                "telephone": "+43-122",
+                "email": "rastenfeld@feuerwehr.gv.at",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Rastenfeld 178",
+                    "addressLocality": "Rastenfeld",
+                    "postalCode": "3532",
+                    "addressCountry": "AT",
+                    "addressRegion": "Niederösterreich"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 48.5711,
+                    "longitude": 15.3403
+                },
+                "description": "Freiwillige Feuerwehr Rastenfeld – Im Einsatz für die Gemeinschaft seit 1876."
+            }
+        </script>
+    
+    </body>
+    </html>

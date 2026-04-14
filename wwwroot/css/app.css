@@ -758,7 +758,7 @@ ul { list-style: none; }
 .lb-nav  { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
 .lb-nav button { background: var(--dark-3); border: 1px solid var(--border); color: #fff; padding: .4rem 1.1rem; border-radius: var(--r); cursor: pointer; font-family: var(--font-b); font-size: .85rem; transition: background var(--t); }
 .lb-nav button:hover { background: var(--red); border-color: var(--red); }
-.lb-nav span { color: #6b7280; font-size: .82rem; }
+.lb-nav span { color: #6b7280; font-size: .82rem; line-height: 1.1; display: inline-block;}
 .untertitellightbox{
     color: #d4d4d4; font-size: 0.9rem; font-weight: 400;
 }

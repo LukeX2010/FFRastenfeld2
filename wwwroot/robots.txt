@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Allow: /_framework/
 Disallow: /impressum
 Disallow: /datenschutz
 

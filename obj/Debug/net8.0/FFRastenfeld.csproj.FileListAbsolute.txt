@@ -2055,9 +2055,6 @@ C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\compr
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\compressed\nrfewist4x-tptq2av103.gz
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\compressed\lg65mz3wpb-lfu7j35m59.gz
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\compressed\k0w3dbkux9-oyz0vx2fzb.gz
-C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\compressed\8jhgo8224x-mprc2x4rot.gz
-C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\compressed\ynsrm5qgc4-mw0hdxf8wz.gz
-C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\compressed\qhrzwiqj6i-pp1sqhjjzz.gz
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\staticwebassets.development.json
@@ -2067,3 +2064,6 @@ C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\FFRas
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\refint\FFRastenfeld.dll
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\FFRastenfeld.pdb
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\ref\FFRastenfeld.dll
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\compressed\8jhgo8224x-7sw3w83i85.gz
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\compressed\ynsrm5qgc4-zlf7u9ou5l.gz
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\compressed\qhrzwiqj6i-itv27vq3nm.gz

@@ -5,32 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="07c4d50b-b3cd-4425-9a40-ffd0902cee81" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Components/SiteFooter.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Components/SiteFooter.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Datenschutz.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Datenschutz.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Einsaetze/Einsaetze.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Einsaetze/Einsaetze.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Einsaetze/EinsatzDetail.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Einsaetze/EinsatzDetail.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Fahrzeuge/FahrzeugDetail.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Fahrzeuge/FahrzeugDetail.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Fahrzeuge/Fahrzeuge.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Fahrzeuge/Fahrzeuge.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Feuerwehr/Chronik.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Feuerwehr/Chronik.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Feuerwehr/Feuerwehrhaus.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Feuerwehr/Feuerwehrhaus.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Feuerwehr/Mannschaft.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Feuerwehr/Mannschaft.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Galerie.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Galerie.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Impressum.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Impressum.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Kontakt.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Kontakt.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/News/Ausbildung.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/News/Ausbildung.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/News/AusbildungDetail.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/News/AusbildungDetail.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/News/Feuerwehrjugend.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/News/Feuerwehrjugend.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/News/FeuerwehrjugendDetail.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/News/FeuerwehrjugendDetail.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/News/News.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/News/News.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/News/NewsDetail.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/News/NewsDetail.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.staticwebassets.endpoints.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.staticwebassets.endpoints.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.staticwebassets.runtime.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.staticwebassets.runtime.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.js" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.native.js" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.native.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.runtime.js" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.runtime.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/emcc-props.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/emcc-props.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.pdb.gz" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.pdb.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.wasm" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.wasm" afterDir="false" />
@@ -44,9 +23,9 @@
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/blazor.boot.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/blazor.boot.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/8jhgo8224x-7sw3w83i85.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/qhrzwiqj6i-itv27vq3nm.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ynsrm5qgc4-zlf7u9ou5l.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/8jhgo8224x-of2zpkmvuk.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/qhrzwiqj6i-6dcbqd3981.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ynsrm5qgc4-gyj8e8fxip.gz" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/rbcswa.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/rbcswa.dswa.cache.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/ref/FFRastenfeld.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/ref/FFRastenfeld.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/refint/FFRastenfeld.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/refint/FFRastenfeld.dll" afterDir="false" />
@@ -127,7 +106,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1776428037677</updated>
-      <workItem from="1776428040434" duration="5375000" />
+      <workItem from="1776428040434" duration="6614000" />
     </task>
     <servers />
   </component>

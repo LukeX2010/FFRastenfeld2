@@ -8,7 +8,7 @@
 :root {
   --red:        #CC1111;
   --red-d:      #9B0D0D;
-  --red-l:      #E53030;
+  --red-l: #f32727;
   --dark:       #1a1d21;
   --dark-2:     #22262c;
   --dark-3:     #2e333b;
@@ -821,6 +821,41 @@ textarea.form-input { resize: vertical; min-height: 110px; }
 #site-footer { background: var(--dark); border-top: 3px solid var(--red); margin-top: auto;
     opacity: 0;
 }
+
+.footer-seo-text {
+    padding: 1.25rem 0 .5rem;
+    border-top: 1px solid var(--dark-3);
+    margin-top: .75rem;
+}
+.footer-seo-text h2 {
+    font-size: 1rem;
+    color: var(--white);
+    margin-bottom: .6rem;
+}
+.footer-seo-text h3 {
+    font-size: .88rem;
+    color: #9ca3af;
+    margin: 1rem 0 .3rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+.footer-seo-text p {
+    font-size: .82rem;
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: .5rem;
+}
+.footer-seo-text a {
+    color: var(--red-l);
+}
+details summary {
+    cursor: pointer;
+    font-size: .8rem;
+    color: #6b7280;
+    padding: .5rem 0;
+    user-select: none;
+}
+details summary:hover { color: #9ca3af; }
 
 .footer-grid {
   display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 2rem;

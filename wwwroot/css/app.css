@@ -441,6 +441,16 @@ ul { list-style: none; }
   font-size: .82rem; text-transform: uppercase; letter-spacing: .1em;
   color: var(--text-m); padding-bottom: .6rem; border-bottom: 1px solid var(--border); margin-bottom: .85rem;
 }
+
+summary{
+    cursor: pointer;
+    
+}
+summary:hover{
+    font-size: 102%;
+    font-weight: 600;
+}
+
 .sidebar-widget--red { border-left: 3px solid var(--red); }
 .sidebar-widget--red h3 { color: var(--red); }
 .se-typ   { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--red); margin-bottom: .25rem; }
@@ -808,7 +818,10 @@ textarea.form-input { resize: vertical; min-height: 110px; }
 .legal a  { color: var(--red); }
 
 /* ─── FOOTER ─── */
-#site-footer { background: var(--dark); border-top: 3px solid var(--red); margin-top: auto; }
+#site-footer { background: var(--dark); border-top: 3px solid var(--red); margin-top: auto;
+    opacity: 0;
+}
+
 .footer-grid {
   display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 2rem;
   padding: 2.5rem 1.25rem 2rem;

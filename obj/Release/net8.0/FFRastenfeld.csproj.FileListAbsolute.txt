@@ -1,0 +1,8 @@
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Release\net8.0\FFRastenfeld.csproj.AssemblyReference.cache
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Release\net8.0\rpswa.dswa.cache.json
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Release\net8.0\FFRastenfeld.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Release\net8.0\FFRastenfeld.AssemblyInfoInputs.cache
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Release\net8.0\FFRastenfeld.AssemblyInfo.cs
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Release\net8.0\FFRastenfeld.csproj.CoreCompileInputs.cache
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Release\net8.0\FFRastenfeld.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Release\net8.0\FFRastenfeld.sourcelink.json

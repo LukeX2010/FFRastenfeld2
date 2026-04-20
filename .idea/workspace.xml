@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="07c4d50b-b3cd-4425-9a40-ffd0902cee81" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Components/SiteFooter.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Components/SiteFooter.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Datenschutz.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Datenschutz.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Einsaetze/Einsaetze.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Einsaetze/Einsaetze.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Einsaetze/EinsatzDetail.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Einsaetze/EinsatzDetail.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Fahrzeuge/FahrzeugDetail.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Fahrzeuge/FahrzeugDetail.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Fahrzeuge/Fahrzeuge.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Fahrzeuge/Fahrzeuge.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Feuerwehr/Chronik.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Feuerwehr/Chronik.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Feuerwehr/Feuerwehrhaus.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Feuerwehr/Feuerwehrhaus.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Feuerwehr/Mannschaft.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Feuerwehr/Mannschaft.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Galerie.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Galerie.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Impressum.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Impressum.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Kontakt.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Kontakt.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/News/Ausbildung.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/News/Ausbildung.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/News/AusbildungDetail.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/News/AusbildungDetail.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/News/Feuerwehrjugend.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/News/Feuerwehrjugend.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/News/FeuerwehrjugendDetail.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/News/FeuerwehrjugendDetail.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/News/News.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/News/News.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/News/NewsDetail.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/News/NewsDetail.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.staticwebassets.endpoints.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.staticwebassets.endpoints.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.staticwebassets.runtime.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.staticwebassets.runtime.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.js" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.native.js" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.native.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.runtime.js" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.runtime.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/emcc-props.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/emcc-props.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.pdb.gz" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.pdb.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.wasm" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.wasm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.wasm.gz" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.wasm.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/blazor.boot.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/blazor.boot.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/blazor.boot.json.gz" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/blazor.boot.json.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/blazor.boot.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/blazor.boot.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/8jhgo8224x-7sw3w83i85.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/qhrzwiqj6i-itv27vq3nm.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ynsrm5qgc4-zlf7u9ou5l.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/rbcswa.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/rbcswa.dswa.cache.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/ref/FFRastenfeld.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/ref/FFRastenfeld.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/refint/FFRastenfeld.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/refint/FFRastenfeld.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/rjimswa.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/rjimswa.dswa.cache.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/rjsmcshtml.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/rjsmcshtml.dswa.cache.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/rjsmrazor.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/rjsmrazor.dswa.cache.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/rpswa.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/rpswa.dswa.cache.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.build.endpoints.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.build.endpoints.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.build.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.build.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.build.json.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.build.json.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.development.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/tmp-webcil/FFRastenfeld.wasm" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/tmp-webcil/FFRastenfeld.wasm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/webcil/FFRastenfeld.wasm" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/webcil/FFRastenfeld.wasm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wwwroot/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/wwwroot/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wwwroot/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/wwwroot/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/App.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Components/NavMenu.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Components/Sidebar.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Components/SiteFooter.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Datenschutz.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Einsaetze/Einsaetze.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Einsaetze/EinsatzDetail.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Fahrzeuge/FahrzeugDetail.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Fahrzeuge/Fahrzeuge.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Feuerwehr/Chronik.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Feuerwehr/Feuerwehrhaus.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Feuerwehr/Mannschaft.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Galerie.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Impressum.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Index.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Kontakt.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/News/Ausbildung.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/News/AusbildungDetail.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/News/Feuerwehrjugend.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/News/FeuerwehrjugendDetail.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/News/News.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/News/NewsDetail.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/_Imports.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="3CU6vg2h40nmhOKL2DXvGheot0m" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="07c4d50b-b3cd-4425-9a40-ffd0902cee81" name="Changes" comment="" />
+      <created>1776428037677</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1776428037677</updated>
+      <workItem from="1776428040434" duration="5375000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.Tasks.TaskCanceledException" breakIfHandledByOtherCode="false" displayValue="System.Threading.Tasks.TaskCanceledException" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

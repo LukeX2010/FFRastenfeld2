@@ -229,6 +229,7 @@ ul { list-style: none; }
     border: 1px solid var(--border);
     background: var(--white);
     margin-top: 1rem;
+    touch-action: none;
 }
 
 .instagram-iframe {
@@ -262,6 +263,23 @@ ul { list-style: none; }
     .instagram-iframe { height: 440px; }
 }
 
+
+ui-content {
+    border-width: 0;
+    overflow: visible;
+    overflow-x: hidden;
+    padding: 15px;
+    zoom: 40%;
+}
+
+.ui-body-c, .ui-overlay-c {
+    font-size: 1.8rem;
+    margin-left: 5rem ;
+}
+
+element.style {
+    width: 85%;
+}
 /* ─── NOTRUF STRIP ─── */
 .notruf-strip {
   background: linear-gradient(90deg, var(--red-d), var(--red));
@@ -722,7 +740,6 @@ summary:hover{
   position: relative;
   overflow: hidden;
   cursor: grab;
-  touch-action: none;
 }
 .lb-img:active { cursor: grabbing; }
 .lb-img img {

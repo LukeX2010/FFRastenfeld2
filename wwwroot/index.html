@@ -37,11 +37,14 @@
     <meta name="google-site-verification" content="W5ccThUyb28Wnu7QMZfmD-Ky-72PI3sw5m8-t12WBfg"/>
 
     <base href="/"/>
-    <link rel="icon" type="image/jpeg" href="/wwwroot/img/favicon.jpg" sizes="any"/>
+    <link rel="icon" type="image/jpg" href="/img/favicon.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Roboto+Condensed:wght@400;700&display=swap"
           rel="stylesheet"/>
+
+    <script defer src="https://cloud.umami.is/script.js"
+            data-website-id="c5262e9e-819c-4cef-a39d-b90c93356634"></script>
     <link rel="stylesheet" href="/css/app.css"/>
 </head>
 <body>
@@ -154,7 +157,10 @@
     </p>
 
   </div>
-
+    <div class="besucher-box">
+<p>Besucher heute: <span id="stats-today">...</span></p>
+<p>Besucher gesamt: <span id="stats-all">...</span></p>
+</div>
 </details>
 
             </span>
@@ -175,6 +181,39 @@
         }
     }, 200);
 </script>
+
+<script data-goatcounter="https://lukex.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script>
+async function fetchUmamiStats() {
+const websiteId = 'c5262e9e-819c-4cef-a39d-b90c93356634';
+const baseUrl = 'https://cloud.umami.is/api/websites/' + websiteId + '/stats';
+const headers = {
+'x-umami-api-key': 'api_k6PWO0WBOw5uxfXFync4dh7oB6jjdgXE',
+'Accept': 'application/json'
+};
+
+try {
+// 1. Abruf für HEUTE
+const resToday = await fetch(`${baseUrl}?period=day`, { headers });
+const dataToday = await resToday.json();
+document.getElementById('stats-today').innerText = dataToday.visitors.value;
+
+// 2. Abruf für GESAMT (all)
+const resAll = await fetch(`${baseUrl}?period=all`, { headers });
+const dataAll = await resAll.json();
+document.getElementById('stats-all').innerText = dataAll.visitors.value;
+
+} catch (error) {
+console.error("Fehler:", error);
+document.getElementById('stats-today').innerText = "Fehler";
+document.getElementById('stats-all').innerText = "Fehler";
+}
+}
+
+fetchUmamiStats();
+</script>
+
 <script type="application/ld+json">
     {
         "@context": "https://schema.org",

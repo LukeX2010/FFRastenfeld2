@@ -30,7 +30,52 @@
                 }
             </div>
         </main>
-        
+                <aside class="sidebar">
+            <!-- Suche -->
+
+            <!-- Letzter Einsatz -->
+            <div class="sidebar-widget sidebar-widget--red">
+                <h3>⚡ Letzter Einsatz</h3>
+                @{var last = DS.GetEinsaetze().FirstOrDefault();}
+                @if (last != null)
+                {
+                    <p class="sidebar-einsatz-typ">@last.EinsatzTyp</p>
+                    <p class="sidebar-einsatz-title"><a href="/einsaetze/@last.Slug">@last.Titel</a></p>
+                    <time>@last.Datum.ToString("dd.MM.yyyy – HH:mm") Uhr</time>
+                }
+            </div>
+
+            <!-- Kategorien -->
+            <div class="sidebar-widget">
+                <h3>Kategorien</h3>
+                <ul class="sidebar-cats">
+                    <li><a href="/einsaetze">Einsätze <span>@DS.GetByKategorie("Einsätze").Count</span></a></li>
+                    <li><a href="/news">FF-News <span>@DS.GetByKategorie("FF-News").Count</span></a></li>
+                    <li><a href="/ausbildung">Ausbildung <span>@DS.GetByKategorie("Ausbildung").Count</span></a></li>
+                    <li><a href="/feuerwehrjugend">Feuerwehrjugend <span>@DS.GetByKategorie("Feuerwehrjugend").Count</span></a></li>
+                </ul>
+            </div>
+
+            <!-- Links -->
+            <div class="sidebar-widget">
+                <h3>Links</h3>
+                <ul class="sidebar-links">
+                    <li><a href="https://www.noelfv.at" target="_blank">NÖ Landesfeuerwehrverband</a></li>
+                    <li><a href="https://www.bfk-krems.at" target="_blank">BFK Krems-Land</a></li>
+                    <li><a href="https://www.noelfv.at/wastl" target="_blank">WASTL Einsatzmonitor</a></li>
+                    <li><a href="https://www.noelfv.at/lfws" target="_blank">NÖ Landesfeuerwehrschule</a></li>
+                    <li><a href="https://www.rastenfeld.at" target="_blank">Marktgemeinde Rastenfeld</a></li>
+                </ul>
+            </div>
+
+            <!-- Mitglied werden Banner -->
+            <div class="sidebar-widget sidebar-widget--join">
+                <p>🧑‍🚒 <strong>Werde Mitglied!</strong></p>
+                <p>Du möchtest helfen? Wir freuen uns über jede Verstärkung!</p>
+                <a href="/kontakt" class="btn btn-primary" style="width:100%;text-align:center;margin-top:.5rem;">Jetzt mitmachen</a>
+            </div>
+        </aside>
+
 
     </div>
 </div>

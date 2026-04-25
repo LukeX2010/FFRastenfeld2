@@ -1,0 +1,240 @@
+@page "/spenden"
+@inject DataService DS
+
+<PageTitle>Spenden & Unterstützen – Freiwillige Feuerwehr Rastenfeld, NÖ</PageTitle>
+<PageHero Title="Spenden & Unterstützen"
+          Subtitle="Wir freuen uns über alles & jeder Beitrag zählt für die Sicherheit in Rastenfeld!"/>
+
+<div class="site-body container">
+    <div class="content-with-sidebar">
+        <main class="main-feed">
+            <article class="post-detail">
+
+                <!-- NOTRUF HINWEIS -->
+                <div class="notruf-box">
+                    <div class="nb-icon">🧡</div>
+                    <div>
+                        <h3>Danke für deine Unterstützung!</h3>
+                        <p>Die Freiwillige Feuerwehr Rastenfeld ist auf Spenden und freiwilliges Engagement angewiesen.
+                            Jeder Beitrag hilft uns, moderne Ausrüstung anzuschaffen und die Einsatzbereitschaft zu
+                            sichern.</p>
+                    </div>
+                </div>
+
+                <!-- MOTTO -->
+                <div class="spenden-motto">
+                    <div class="spenden-motto-icon">🔥</div>
+                    <div>
+                        <h2>„Gemeinsam für Rastenfeld – Jetzt und in Zukunft"</h2>
+                        <p>Seit 1871 schützen wir Leben und Eigentum in unserer Gemeinde – ehrenamtlich, rund um die
+                            Uhr.
+                            Mit deiner Spende sicherst du die Zukunft unserer Feuerwehr und damit die Sicherheit aller
+                            Bewohnerinnen und Bewohner im Gemeindegebiet Rastenfeld.</p>
+                    </div>
+                </div>
+
+                <!-- WOFÜR -->
+                <h2>Wofür werden Spenden verwendet?</h2>
+                <div class="spenden-verwendung-grid">
+                    <div class="sv-item">
+                        <span>🧯</span>
+                        <strong>Ausrüstung</strong>
+                        <p>Atemschutzgeräte, Schutzkleidung, Werkzeug und Sicherheitsausrüstung für unsere
+                            Einsatzkräfte.</p>
+                    </div>
+                    <div class="sv-item">
+                        <span>🚒</span>
+                        <strong>Fahrzeuge</strong>
+                        <p>Wartung, Reparatur und langfristige Erneuerung unserer Einsatzfahrzeuge.</p>
+                    </div>
+                    <div class="sv-item">
+                        <span>🎓</span>
+                        <strong>Ausbildung</strong>
+                        <p>Lehrgänge, Kurse und Übungen an der NÖ Landesfeuerwehrschule in Tulln.</p>
+                    </div>
+                    <div class="sv-item">
+                        <span>👦</span>
+                        <strong>Feuerwehrjugend</strong>
+                        <p>Ausrüstung und Aktivitäten für unsere Jugendgruppe – die Zukunft der FF Rastenfeld.</p>
+                    </div>
+                </div>
+
+                <!-- QR CODE + BANKDATEN -->
+                <h2 style="margin-top:2rem;">Jetzt spenden</h2>
+                <div class="spenden-cols">
+
+                    <!-- QR -->
+                    <div class="spenden-qr-box">
+                        <div class="spenden-qr-placeholder">
+                            <div class="qr-inner">
+                                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="160" height="160">
+                                    <!-- QR Code Platzhalter – ersetze durch echtes QR-Bild -->
+                                    <rect width="200" height="200" fill="white" rx="8"/>
+                                    <rect x="10" y="10" width="60" height="60" fill="none" stroke="#1a1d21"
+                                          stroke-width="8" rx="4"/>
+                                    <rect x="25" y="25" width="30" height="30" fill="#1a1d21" rx="2"/>
+                                    <rect x="130" y="10" width="60" height="60" fill="none" stroke="#1a1d21"
+                                          stroke-width="8" rx="4"/>
+                                    <rect x="145" y="25" width="30" height="30" fill="#1a1d21" rx="2"/>
+                                    <rect x="10" y="130" width="60" height="60" fill="none" stroke="#1a1d21"
+                                          stroke-width="8" rx="4"/>
+                                    <rect x="25" y="145" width="30" height="30" fill="#1a1d21" rx="2"/>
+                                    <rect x="90" y="10" width="10" height="10" fill="#1a1d21"/>
+                                    <rect x="110" y="10" width="10" height="10" fill="#1a1d21"/>
+                                    <rect x="90" y="30" width="20" height="10" fill="#1a1d21"/>
+                                    <rect x="90" y="50" width="10" height="10" fill="#1a1d21"/>
+                                    <rect x="90" y="90" width="10" height="60" fill="#1a1d21"/>
+                                    <rect x="110" y="90" width="10" height="10" fill="#1a1d21"/>
+                                    <rect x="130" y="90" width="30" height="10" fill="#1a1d21"/>
+                                    <rect x="130" y="110" width="10" height="10" fill="#1a1d21"/>
+                                    <rect x="150" y="110" width="40" height="10" fill="#1a1d21"/>
+                                    <rect x="110" y="130" width="10" height="60" fill="#1a1d21"/>
+                                    <rect x="130" y="130" width="10" height="10" fill="#1a1d21"/>
+                                    <rect x="150" y="130" width="10" height="10" fill="#1a1d21"/>
+                                    <rect x="130" y="150" width="60" height="10" fill="#1a1d21"/>
+                                    <rect x="130" y="170" width="10" height="20" fill="#1a1d21"/>
+                                    <rect x="160" y="160" width="30" height="10" fill="#1a1d21"/>
+                                </svg>
+                                <p class="qr-label">Zahlen mit QR-Code</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BANKDATEN -->
+                    <div class="spenden-bank-box">
+                        <h3>Bankverbindung</h3>
+                        <div class="bank-row">
+                            <span class="bank-label">Empfänger</span>
+                            <strong>Freiwillige Feuerwehr Rastenfeld</strong>
+                        </div>
+                        <div class="bank-row">
+                            <span class="bank-label">IBAN</span>
+                            <strong class="iban">AT12 3456 7890 1234 5678</strong>
+                            <button class="copy-btn" onclick="navigator.clipboard.writeText('AT12345678901234567 8')">📋
+                                Kopieren
+                            </button>
+                        </div>
+                        <div class="bank-row">
+                            <span class="bank-label">BIC</span>
+                            <strong>RLNWATWWXXX</strong>
+                        </div>
+                        <div class="bank-row">
+                            <span class="bank-label">Verwendungszweck</span>
+                            <strong>Spende FF Rastenfeld</strong>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- WARUM SPENDEN -->
+                <div class="spenden-warum">
+                    <div class="spenden-warum-text">
+                        <h2>Warum wir auf Spenden angewiesen sind</h2>
+                        <p>Die Freiwillige Feuerwehr Rastenfeld finanziert sich großteils selbst.
+                            Subventionen decken nur einen Teil der Kosten – Ausrüstung, Fahrzeugwartung
+                            und Ausbildung müssen wir zu einem großen Teil eigenständig finanzieren.</p>
+                        <ul class="warum-list">
+                            <li>✅ Keine Pflichtbeiträge – alles freiwillig</li>
+                            <li>✅ 100% der Spenden fließen in die Einsatzbereitschaft</li>
+                            <li>✅ Spendenbestätigung auf Anfrage</li>
+                            <li>✅ Gemeinnützig & transparent</li>
+                        </ul>
+                    </div>
+
+                    <div class="spenden-video-wrap">
+                        <div class="video-label">📽️ Kurz erklärt</div>
+                        <div class="yt-nocookie">
+                            <div class="yt-facade" onclick="
+        var w = this.parentElement;
+        var i = document.createElement('iframe');
+        i.src = 'https://www.youtube-nocookie.com/embed/wA2cHu4WNgw?autoplay=1&controls=1&rel=0';
+        i.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        i.allowFullscreen = true;
+        i.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
+        w.appendChild(i);
+        this.style.display='none';
+    ">
+                                <img
+                                    src="https://img.youtube.com/vi/wA2cHu4WNgw/maxresdefault.jpg"
+                                    alt="Video Vorschau – Warum braucht die Feuerwehr Spenden?"
+                                    class="yt-thumbnail"
+                                    onerror="this.src='https://img.youtube.com/vi/wA2cHu4WNgw/hqdefault.jpg'"
+                                />
+                                <div class="yt-play-overlay">
+                                    <div class="yt-play-btn">▶</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DANKE -->
+                <div class="spenden-danke">
+                    <h3>🙏 Herzlichen Dank!</h3>
+                    <p>Jede Spende – egal in welcher Höhe – ist ein wertvoller Beitrag zur Sicherheit
+                        unserer Gemeinde. Im Namen aller Mitglieder der Freiwilligen Feuerwehr Rastenfeld
+                        bedanken wir uns herzlich!</p>
+                    <div style="margin-top:1.25rem;display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;">
+                        <a href="/kontakt" class="btn btn-primary">Mitglied werden</a>
+                        <a href="/" class="btn btn-outline"
+                           style="color:var(--white);border-color:rgba(255,255,255,.3)">Zur Startseite</a>
+                    </div>
+                </div>
+            </article>
+        </main>
+        <aside class="sidebar">
+            <!-- Suche -->
+
+            <!-- Letzter Einsatz -->
+            <div class="sidebar-widget sidebar-widget--red">
+                <h3>⚡ Letzter Einsatz</h3>
+                @{ var last = DS.GetEinsaetze().FirstOrDefault(); }
+                @if (last != null)
+                {
+                    <p class="sidebar-einsatz-typ">@last.EinsatzTyp</p>
+                    <p class="sidebar-einsatz-title"><a href="/einsaetze/@last.Slug">@last.Titel</a></p>
+                    <time>@last.Datum.ToString("dd.MM.yyyy – HH:mm") Uhr</time>
+                }
+            </div>
+
+            <!-- Kategorien -->
+            <div class="sidebar-widget">
+                <h3>Kategorien</h3>
+                <ul class="sidebar-cats">
+                    <li><a href="/einsaetze">Einsätze <span>@DS.GetByKategorie("Einsätze").Count</span></a></li>
+                    <li><a href="/news">FF-News <span>@DS.GetByKategorie("FF-News").Count</span></a></li>
+                    <li><a href="/ausbildung">Ausbildung <span>@DS.GetByKategorie("Ausbildung").Count</span></a></li>
+                    <li><a href="/feuerwehrjugend">Feuerwehrjugend
+                            <span>@DS.GetByKategorie("Feuerwehrjugend").Count</span></a></li>
+                </ul>
+            </div>
+
+            <!-- Links -->
+            <div class="sidebar-widget">
+                <h3>Links</h3>
+                <ul class="sidebar-links">
+                    <li><a href="https://www.noelfv.at" target="_blank">NÖ Landesfeuerwehrverband</a></li>
+                    <li><a href="https://www.bfk-krems.at" target="_blank">BFK Krems-Land</a></li>
+                    <li><a href="https://www.noelfv.at/wastl" target="_blank">WASTL Einsatzmonitor</a></li>
+                    <li><a href="https://www.noelfv.at/lfws" target="_blank">NÖ Landesfeuerwehrschule</a></li>
+                    <li><a href="https://www.rastenfeld.at" target="_blank">Marktgemeinde Rastenfeld</a></li>
+                </ul>
+            </div>
+
+            <!-- Mitglied werden Banner -->
+            <div class="sidebar-widget sidebar-widget--join">
+                <p>🧑‍🚒 <strong>Werde Mitglied!</strong></p>
+                <p>Du möchtest helfen? Wir freuen uns über jede Verstärkung!</p>
+                <a href="/kontakt" class="btn btn-primary" style="width:100%;text-align:center;margin-top:.5rem;">Jetzt
+                    mitmachen</a>
+            </div>
+        </aside>
+
+    </div>
+</div>
+
+@code{
+
+
+}

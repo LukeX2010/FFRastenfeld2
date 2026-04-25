@@ -124,6 +124,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmV3c1xOZXdzRGV0YWlsLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Pages/Spenden.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3BlbmRlbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

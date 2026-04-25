@@ -4,4 +4,5 @@ Allow: /_framework/
 Disallow: /impressum
 Disallow: /datenschutz
 
-Sitemap: https://ffrastenfeld.up.railway.app/sitemap.xml
+Sitemap: https://ffrastenfeld.at/sitemap.xml
+

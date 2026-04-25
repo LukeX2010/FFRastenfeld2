@@ -3,17 +3,17 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-  <url><loc>https://ffrastenfeld.up.railway.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://ffrastenfeld.up.railway.app/einsaetze</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://ffrastenfeld.up.railway.app/news</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ffrastenfeld.up.railway.app/ausbildung</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://ffrastenfeld.up.railway.app/feuerwehrjugend</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://ffrastenfeld.up.railway.app/mannschaft</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://ffrastenfeld.up.railway.app/chronik</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://ffrastenfeldn.up.railway.app/feuerwehrhaus</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://ffrastenfeld.up.railway.app/fahrzeuge</loc><changefreq>yearly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://ffrastenfeld.up.railway.app/galerie</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://ffrastenfeld.up.railway.app/kontakt</loc><changefreq>yearly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ffrastenfeld.up.railway.app/impressum</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://ffrastenfeld.up.railway.app/datenschutz</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://ffrastenfeld.at/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://ffrastenfeld.at/einsaetze</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://ffrastenfeld.at/news</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ffrastenfeld.at/ausbildung</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ffrastenfeld.at/feuerwehrjugend</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ffrastenfeld.at/mannschaft</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ffrastenfeld.at/chronik</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ffrastenfeldn.at/feuerwehrhaus</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ffrastenfeld.at/fahrzeuge</loc><changefreq>yearly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ffrastenfeld.at/galerie</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ffrastenfeld.at/kontakt</loc><changefreq>yearly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ffrastenfeld.at/impressum</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://ffrastenfeld.at/datenschutz</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

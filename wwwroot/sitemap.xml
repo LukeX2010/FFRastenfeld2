@@ -10,7 +10,7 @@
   <url><loc>https://ffrastenfeld.at/feuerwehrjugend</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://ffrastenfeld.at/mannschaft</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://ffrastenfeld.at/chronik</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://ffrastenfeldn.at/feuerwehrhaus</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://ffrastenfeld.at/feuerwehrhaus</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
   <url><loc>https://ffrastenfeld.at/fahrzeuge</loc><changefreq>yearly</changefreq><priority>0.7</priority></url>
     <url><loc>https://ffrastenfeld.at/spenden</loc><changefreq>yearly</changefreq><priority>0.7</priority></url>
   <url><loc>https://ffrastenfeld.at/galerie</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>

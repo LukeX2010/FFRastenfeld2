@@ -10,6 +10,10 @@ public class Post
     public DateTime Datum { get; set; }
     public string Kurztext { get; set; } = "";
     public string Volltext { get; set; } = "";
+    
+    public List<string> Bilder { get; set; } = new List<string>();
+    
+    
     public string BildPlaceholder { get; set; } = "🔥"; // emoji for placeholder img
     public string? EinsatzTyp { get; set; }   // z.B. "B2 – Zimmerbrand"
     public string? EinsatzOrt { get; set; }

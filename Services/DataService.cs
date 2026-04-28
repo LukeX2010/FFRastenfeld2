@@ -30,8 +30,8 @@ public class DataService
     new Post
     {
         Id = 7,
-        Slug = "test1",
-        Emoji = "test1",
+        Slug = "keinbild",
+        Emoji = "keinbild",
         Titel = "PKW-Bergung nach Auffahrunfall",
         Kategorie = "Einsätze",
         Datum = new DateTime(2026, 1, 27, 17, 35, 0),
@@ -106,6 +106,23 @@ public class DataService
                 "Kürzlich besuchte eine Abordnung der Freiwilligen Feuerwehr Rastenfeld die Mosertronik GmbH im Rahmen einer gemeinsamen Gebäudebegehung. Ziel dieser Besichtigung war es, wichtige Einblicke in die betrieblichen Abläufe sowie die örtlichen Gegebenheiten zu gewinnen.\n\nDurch das frühzeitige Kennenlernen von Zufahrtswegen, technischen Anlagen und möglichen Gefahrenstellen kann im Ernstfall schneller und gezielter reagiert werden. Solche Begehungen leisten einen wichtigen Beitrag zur optimalen Einsatzvorbereitung.\n\nDie Feuerwehr bedankt sich bei der Mosertronik GmbH für die Einladung sowie die konstruktive und professionelle Zusammenarbeit.",
             BildPlaceholder = "🔍🚒"
         },
+        
+        new  Post{
+            Id = 15,
+            Slug = "Tut-Gut-Wandertag",
+            Emoji = "Tut-Gut-Wandertag",
+            Titel = "Tut Gut Wandertag",
+            Kategorie = "FF-News",
+            Datum = new DateTime(2026, 4, 26),
+            Kurztext =
+                "Die FF Rastenfeld rundete den Wandertag kulinarisch ab, indem sie die Teilnehmer im Pfarrstadl mit einem gemeinsamen Mittagstisch verpflegte.",
+            Volltext =
+                "Bei idealem Wanderwetter fand am 26. April 2026 der diesjährige Familienwandertag der Marktgemeinde Rastenfeld im Rahmen der Niederösterreichweiten Aktion „Wandererwachen“ von „Tut gut!“ NÖ statt – heuer mit einem neuen Teilnehmerrekord: Rund 220 Personen, darunter etwa 40 Kinder unter 12 Jahren, machten sich unter der Leitung von Wanderführerin Doris Kunst auf den Weg.\n\nDer Start erfolgte am Marktplatz Rastenfeld, von wo aus die Wandergruppe eine rund 8 Kilometer lange Strecke durch die Gemeinde absolvierte.\n\nStärkung unterwegs und gemütlicher Ausklang\nEntlang der Route sorgte die Feuerwehr Peygarten‑Ottenstein mit einer Jausenstation für eine willkommene Pause. Zusätzlich erhielten alle Teilnehmenden eine gesunde Jause mit Apfel und Wasser.\n\nIm Pfarrstadl erwartete die Wanderer anschließend ein Mittagstisch der Feuerwehr Rastenfeld, der den Tag kulinarisch abrundete. Dort fand auch die Verlosung der Gesunden Gemeinde Rastenfeld statt:",
+            BildPlaceholder = "🔍🚒",
+            Bilder = ["Tut-Gut-Wandertag1.jpeg","Tut-Gut-Wandertag2.jpeg","Tut-Gut-Wandertag3.jpg"]
+        },
+        
+        
     };
 
     public Post? GetPost(string slug) => GetPosts().FirstOrDefault(p => p.Slug == slug);

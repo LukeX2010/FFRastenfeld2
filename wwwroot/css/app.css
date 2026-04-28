@@ -919,6 +919,115 @@ summary:hover{
     border-radius: var(--r);
 }
 
+
+.ff-carousel {
+    position: relative;
+    width: 100%;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #1a1d21;
+}
+
+.ff-carousel__track {
+
+}
+@media (min-width: 700px) {
+    .ff-carousel__track {
+        position: relative;
+        width: 140%;
+        margin-left: -130px;
+        aspect-ratio: 16 / 9;
+    }
+}
+@media (max-width: 699px) {
+    .ff-carousel__track {
+        position: relative;
+        width: 145%;
+        margin-left: -20vw;
+        margin-top: -4vw;
+        aspect-ratio: 16 / 9;
+    }
+}
+.ff-carousel__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .4s ease;
+}
+
+.ff-carousel__slide--active {
+    opacity: 1;
+}
+
+.ff-carousel__slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.ff-carousel__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,.5);
+    color: #fff;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s;
+}
+
+.ff-carousel__btn:hover { background: rgba(0,0,0,.75); }
+.ff-carousel__btn--prev { left: 10px; }
+.ff-carousel__btn--next { right: 10px; }
+
+.ff-carousel__dots {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+}
+
+.ff-carousel__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: transparent;
+    cursor: pointer;
+    transition: background .2s;
+    padding: 0;
+}
+
+.ff-carousel__dot--active { background: #fff; }
+
+.ff-carousel__counter {
+    position: absolute;
+    bottom: 10px;
+    right: 14px;
+    color: #fff;
+    font-size: 13px;
+    background: rgba(0,0,0,.4);
+    padding: 2px 8px;
+    border-radius: 12px;
+    z-index: 10;
+}
+
+
+
+
 /* Video */
 .spenden-video-wrap { display: flex; flex-direction: column; gap: .6rem; }
 .video-label {
@@ -1288,6 +1397,12 @@ details summary:hover { color: #9ca3af; }
   .einsatz-stats-row { grid-template-columns: repeat(2,1fr); }
   .galerie-grid { grid-template-columns: repeat(2,1fr); }
     .nav-notruf{display: none}
+    .ff-carousel {
+        position: relative;
+        width: 135%;
+        margin-left: -15vw;
+        aspect-ratio: 16 / 9;
+    }
 }
 
 @media (max-width: 700px) {
@@ -1317,6 +1432,14 @@ details summary:hover { color: #9ca3af; }
   .kommando-grid { grid-template-columns: 1fr; }
   .info-grid-2 { grid-template-columns: repeat(2,1fr); }
     .nav-notruf{display: none}
+    .ff-carousel {
+        position: relative;
+        width: 100%;
+        margin: 1.5rem 0;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #2e2e2e;
+    }
 }
 
 @media (max-width: 480px) {

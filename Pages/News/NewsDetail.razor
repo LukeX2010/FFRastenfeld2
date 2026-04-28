@@ -1,16 +1,19 @@
 @* ── News Detail ── *@
 @page "/news/{Slug}"
 @inject DataService DS
+@inject IJSRuntime JS
 
 <PageTitle>@(post?.Titel ?? "Beitrag") – Freiwillige Feuerwehr Rastenfeld, NÖ</PageTitle>
 
 @if (post is null)
 {
-    <div class="container" style="padding:4rem 1.5rem;text-align:center"><p>Beitrag nicht gefunden. <a href="/news">← Zurück</a></p></div>
+    <div class="container" style="padding:4rem 1.5rem;text-align:center">
+        <p>Beitrag nicht gefunden. <a href="/news">← Zurück</a></p>
+    </div>
 }
 else
 {
-    <PageHero Title="@post.Titel" ParentLabel="FF-News" ParentHref="/news" />
+    <PageHero Title="@post.Titel" ParentLabel="FF-News" ParentHref="/news"/>
     <div class="site-body container">
         <div class="content-with-sidebar">
             <main class="main-feed">
@@ -23,10 +26,51 @@ else
                         <img src="@($"img/{post.Slug}.jpeg")" class="hero-bg-img" alt="@post.Titel"/>
                     </div>
                     <div class="detail-body"><p>@post.Volltext</p></div>
+
+                    @if (post.Bilder != null && post.Bilder.Count > 0)
+                    {
+                        <div class="ff-carousel">
+
+                            @* Bilder *@
+                            <div class="ff-carousel__track">
+                                @for (int i = 0; i < post.Bilder.Count; i++)
+                                {
+                                    <div class="ff-carousel__slide @(i == currentIndex ? "ff-carousel__slide--active" : "")">
+                                        <img src="img/@post.Bilder[i]" alt="Bild @(i + 1)" style="padding: 2vw"/>
+                                        <br/>
+                                    </div>
+                                }
+                            </div>
+
+                            @* Pfeile *@
+                            <button class="ff-carousel__btn ff-carousel__btn--prev"
+                                    @onclick="Prev" aria-label="Zurück">&#8249;</button>
+                            <button class="ff-carousel__btn ff-carousel__btn--next"
+                                    @onclick="Next" aria-label="Weiter">&#8250;</button>
+
+                            @* Punkte *@
+                            <div class="ff-carousel__dots">
+                                @for (int i = 0; i < post.Bilder.Count; i++)
+                                {
+                                    var idx = i;
+                                    <button class="ff-carousel__dot @(i == currentIndex ? "ff-carousel__dot--active" : "")"
+                                            @onclick="() => GoTo(idx)"
+                                            aria-label="Slide @(i + 1)">
+                                    </button>
+                                }
+                            </div>
+
+                            @* Zähler *@
+                            <div class="ff-carousel__counter">
+                                @(currentIndex + 1) / @post.Bilder.Count
+                            </div>
+
+                        </div>
+                    }
+
                     <a href="/news" class="back-link">← Zurück zu FF-News</a>
                 </article>
             </main>
-
         </div>
     </div>
 }
@@ -34,5 +78,25 @@ else
 @code {
     [Parameter] public string Slug { get; set; } = "";
     private Post? post;
-    protected override void OnParametersSet() => post = DS.GetPost(Slug);
+    private int currentIndex = 0;
+
+    protected override void OnParametersSet()
+    {
+        post = DS.GetPost(Slug);
+        currentIndex = 0;
+    }
+
+    private void Next()
+    {
+        if (post?.Bilder is null) return;
+        currentIndex = (currentIndex + 1) % post.Bilder.Count;
+    }
+
+    private void Prev()
+    {
+        if (post?.Bilder is null) return;
+        currentIndex = (currentIndex - 1 + post.Bilder.Count) % post.Bilder.Count;
+    }
+
+    private void GoTo(int index) => currentIndex = index;
 }

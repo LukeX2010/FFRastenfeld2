@@ -926,7 +926,7 @@ summary:hover{
     margin: 1.5rem 0;
     border-radius: 8px;
     overflow: hidden;
-    background: #1a1d21;
+    background: rgba(26, 29, 33, 0);
 }
 
 .ff-carousel__track {
@@ -1397,12 +1397,7 @@ details summary:hover { color: #9ca3af; }
   .einsatz-stats-row { grid-template-columns: repeat(2,1fr); }
   .galerie-grid { grid-template-columns: repeat(2,1fr); }
     .nav-notruf{display: none}
-    .ff-carousel {
-        position: relative;
-        width: 135%;
-        margin-left: -15vw;
-        aspect-ratio: 16 / 9;
-    }
+
 }
 
 @media (max-width: 700px) {

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FFRastenfeld")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+414494f0a625799e8aaed981182226ece4e02e3c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7be53beefb539dd9a775057b671c437092424457")]
 [assembly: System.Reflection.AssemblyProductAttribute("FFRastenfeld")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FFRastenfeld")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

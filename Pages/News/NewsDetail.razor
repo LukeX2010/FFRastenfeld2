@@ -36,7 +36,7 @@ else
                                 @for (int i = 0; i < post.Bilder.Count; i++)
                                 {
                                     <div class="ff-carousel__slide @(i == currentIndex ? "ff-carousel__slide--active" : "")">
-                                        <img src="img/@post.Bilder[i]" alt="Bild @(i + 1)" style="padding: 2vw"/>
+                                        <img src="img/@post.Bilder[i]" alt="Bild @(i + 1)" >
                                         <br/>
                                     </div>
                                 }

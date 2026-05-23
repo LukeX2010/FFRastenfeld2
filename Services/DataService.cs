@@ -10,6 +10,33 @@ public class DataService
 
     new Post
     {
+        Id = 17,
+        Slug = "auffahrunfall-b38-rastenfeld",
+        Emoji = "auffahrunfall-b38-rastenfeld",
+        Titel = "Auffahrunfall auf der B38",
+        Kategorie = "Einsätze",
+        Datum = new DateTime(2026, 5, 22, 16, 36, 0),
+        Kurztext =
+            "Auffahrunfall auf der B38 bei Rastenfeld: Zwei verletzte Personen wurden vom Rettungsdienst versorgt.",
+        Volltext =
+            "Am Freitag, dem 22. Mai 2026, wurde die Freiwillige Feuerwehr Rastenfeld um 16:36 Uhr zu einem Verkehrsunfall mit Verletzungen auf die B38, Höhe km 29 bei der Kreuzung Rastenfeld/Umfahrung Zwettl, alarmiert.\n\n" +
+            "Aus bislang unbekannter Ursache kam es zu einem Auffahrunfall. Beim Eintreffen der Feuerwehr wurden zwei verletzte Personen bereits vom Rettungsdienst versorgt; niemand war im Fahrzeug eingeklemmt.\n\n" +
+            "Die Einsatzkräfte sicherten die Unfallstelle ab, stellten den Brandschutz sicher, unterstützten Rettungsdienst und Polizei und führten die Verkehrsregelung sowie Aufräumarbeiten durch. Auch ein Notarzthubschrauber war im Einsatz.",
+        BildPlaceholder = "🚒",
+        EinsatzTyp = "T1 – VU-Verletzungen",
+        EinsatzOrt = "B38 km 29, Kreuzung Rastenfeld/Umfahrung Zwettl",
+        EinsatzZeit = "16:36 Uhr",
+        EinsatzKraefte = 11,
+        Bilder =
+        [
+            "auffahrunfall-b38-rastenfeld-hubschrauber.jpeg",
+            "auffahrunfall-b38-rastenfeld-absicherung.jpeg",
+            "auffahrunfall-b38-rastenfeld-fahrzeug.jpeg"
+        ]
+    },
+
+    new Post
+    {
         Id = 6,
         Slug = "vu-menschenrettung-rastenberg",
         Emoji = "vu-menschenrettung-rastenberg",
@@ -121,7 +148,20 @@ public class DataService
             BildPlaceholder = "🔍🚒",
             Bilder = ["Tut-Gut-Wandertag1.jpeg","Tut-Gut-Wandertag2.jpeg","Tut-Gut-Wandertag3.jpg"]
         },
-        
+        new Post{
+            Id = 16,
+            Slug = "maibaum-aufstellen-2026",
+            Emoji = "🌲",
+            Titel = "Maibaum aufstellen 2026",
+            Kategorie = "FF-News",
+            Datum = new DateTime(2026, 5, 1),
+            Kurztext =
+                "Die FF Rastenfeld hat heuer den Maibaum wieder selbst aufgestellt – von der Baumauswahl und dem Schälen bis zum Aufrichten am 1. Mai.",
+            Volltext =
+                "Auch 2026 hat die Freiwillige Feuerwehr Rastenfeld den Maibaum in Eigenregie aufgestellt. Bereits im Vorfeld wurde gemeinsam ein geeigneter Baum ausgesucht, gefällt und traditionell von Hand geschält.\n\nAm 1. Mai war es dann soweit: Mit vereinten Kräften wurde der Maibaum aufgerichtet – ganz ohne Maschinen, dafür mit viel Teamgeist.\n\nIm Anschluss an das Aufstellen lud die Feuerwehr zu einem gemütlichen Mittagessen im Pfarrstadl ein, wo die Mannschaft gemeinsam den gelungenen Vormittag ausklingen ließ.",
+            BildPlaceholder = "🌲🚒",
+            Bilder = ["Maibaum2026-1.jpeg","Maibaum2026-2.jpeg","Maibaum2026-3.jpeg"]
+        },
         
     };
 
@@ -132,6 +172,41 @@ public class DataService
 
     public List<Post> GetEinsaetze() => GetByKategorie("Einsätze");
 
+   
+// ── MITGLIEDER ──────────────────────────────────────────────────────────
+    public List<Mitglied> GetMitglieder() => new()
+{
+    new Mitglied { Id=1, Name="Matthias Goll", Dienstgrad="Hauptbrandinspektor", Funktion="Kommandant", EintriebAb=2005, IstFuehrung=true },
+    new Mitglied { Id=2, Name="Stefan Schulmeister", Dienstgrad="Brandinspektor", Funktion="Kommandant-Stv.", EintriebAb=2008, IstFuehrung=true },
+
+    new Mitglied { Id=3, Name="Gregor Dastel", Dienstgrad="Verwaltungsmeister", Funktion="Stv. Leiter des Verwaltungsdienstes", EintriebAb=2010, IstFuehrung=true },
+
+    new Mitglied { Id=4, Name="Richard Kröpfl", Dienstgrad="Brandinspektor", Funktion="Zugskommandant", EintriebAb=2009, IstFuehrung=true },
+
+    new Mitglied { Id=5, Name="Johann Herzog jun.", Dienstgrad="Oberbrandmeister", Funktion="1. Gruppenkommandant", EintriebAb=2012, IstFuehrung=true },
+    new Mitglied { Id=6, Name="Emanuel Huber", Dienstgrad="Oberbrandmeister", Funktion="2. Gruppenkommandant / Zeugmeister", EintriebAb=2011, IstFuehrung=true },
+    new Mitglied { Id=7, Name="Max Artner", Dienstgrad="Oberbrandmeister", Funktion="3. Gruppenkommandant", EintriebAb=2013, IstFuehrung=true },
+
+    new Mitglied { Id=8, Name="Alexander Gassner", Dienstgrad="Löschmeister", Funktion="Fahrmeister", EintriebAb=2015, IstFuehrung=true },
+
+    new Mitglied { Id=9, Name="Hannes Auer", Dienstgrad="Löschmeister", Funktion="Sachbearbeiter Nachrichtendienst", EintriebAb=2016, IstFuehrung=true },
+    new Mitglied { Id=10, Name="Patrick Kirchberger", Dienstgrad="Löschmeister", Funktion="Sachbearbeiter Vorbeugender Brandschutz", EintriebAb=2017, IstFuehrung=true },
+    new Mitglied { Id=11, Name="Marina Kröpfl", Dienstgrad="Löschmeister", Funktion="Sachbearbeiter Öffentlichkeitsarbeit", EintriebAb=2018, IstFuehrung=true },
+    new Mitglied { Id=12, Name="Matthias Goll", Dienstgrad="Hauptbrandinspektor", Funktion="Sachbearbeiter Schadstoffdienst", EintriebAb=2005, IstFuehrung=true },
+
+    new Mitglied { Id=13, Name="Johann Herzog sen.", Dienstgrad="Hauptlöschmeister", Funktion="Sachbearbeiter Feuerwehrgeschichte", EintriebAb=1995, IstFuehrung=true },
+    new Mitglied { Id=14, Name="Stefan Schulmeister", Dienstgrad="Brandinspektor", Funktion="Sachbearbeiter Wasserdienst", EintriebAb=2008, IstFuehrung=true },
+
+    new Mitglied { Id=15, Name="Lukas Assfall", Dienstgrad="Feuerwehrmann", Funktion="Sachbearbeiter EDV / Informationstechnologie", EintriebAb=2025, IstFuehrung=true },
+    new Mitglied { Id=16, Name="Carmen Goll", Dienstgrad="Feuerwehrfrau", Funktion="Sachbearbeiter Feuerwehrmedizinischer Dienst", EintriebAb=2019, IstFuehrung=true },
+    new Mitglied { Id=17, Name="Felix Dornahckl", Dienstgrad="Feuerwehrmamnn", Funktion="", EintriebAb=2024, IstFuehrung=true },
+    new Mitglied { Id=18, Name="Jakob Assfall", Dienstgrad="Feuerwehrmann", Funktion="", EintriebAb=2025, IstFuehrung=true },
+    new Mitglied { Id=16, Name="Victoria Lenz", Dienstgrad="Feuerwehrfrau", Funktion="", EintriebAb=2024, IstFuehrung=true },
+    
+};
+    
+    
+    
     // ── FAHRZEUGE ────────────────────────────────────────────────────────────
     public List<Fahrzeug> GetFahrzeuge() => new()
     {
@@ -180,32 +255,4 @@ public class DataService
         },
     };
 
-// ── MITGLIEDER ──────────────────────────────────────────────────────────
-    public List<Mitglied> GetMitglieder() => new()
-{
-    new Mitglied { Id=1, Name="Matthias Goll", Dienstgrad="Hauptbrandinspektor", Funktion="Kommandant", EintriebAb=2005, IstFuehrung=true },
-    new Mitglied { Id=2, Name="Stefan Schulmeister", Dienstgrad="Brandinspektor", Funktion="Kommandant-Stv.", EintriebAb=2008, IstFuehrung=true },
-
-    new Mitglied { Id=3, Name="Gregor Dastel", Dienstgrad="Verwaltungsmeister", Funktion="Stv. Leiter des Verwaltungsdienstes", EintriebAb=2010, IstFuehrung=true },
-
-    new Mitglied { Id=4, Name="Richard Kröpfl", Dienstgrad="Brandinspektor", Funktion="Zugskommandant", EintriebAb=2009, IstFuehrung=true },
-
-    new Mitglied { Id=5, Name="Johann Herzog jun.", Dienstgrad="Oberbrandmeister", Funktion="1. Gruppenkommandant", EintriebAb=2012, IstFuehrung=true },
-    new Mitglied { Id=6, Name="Emanuel Huber", Dienstgrad="Oberbrandmeister", Funktion="2. Gruppenkommandant / Zeugmeister", EintriebAb=2011, IstFuehrung=true },
-    new Mitglied { Id=7, Name="Max Artner", Dienstgrad="Oberbrandmeister", Funktion="3. Gruppenkommandant", EintriebAb=2013, IstFuehrung=true },
-
-    new Mitglied { Id=8, Name="Alexander Gassner", Dienstgrad="Löschmeister", Funktion="Fahrmeister", EintriebAb=2015, IstFuehrung=true },
-
-    new Mitglied { Id=9, Name="Hannes Auer", Dienstgrad="Löschmeister", Funktion="Sachbearbeiter Nachrichtendienst", EintriebAb=2016, IstFuehrung=true },
-    new Mitglied { Id=10, Name="Patrick Kirchberger", Dienstgrad="Löschmeister", Funktion="Sachbearbeiter Vorbeugender Brandschutz", EintriebAb=2017, IstFuehrung=true },
-    new Mitglied { Id=11, Name="Marina Kröpfl", Dienstgrad="Löschmeister", Funktion="Sachbearbeiter Öffentlichkeitsarbeit", EintriebAb=2018, IstFuehrung=true },
-    new Mitglied { Id=12, Name="Matthias Goll", Dienstgrad="Hauptbrandinspektor", Funktion="Sachbearbeiter Schadstoffdienst", EintriebAb=2005, IstFuehrung=true },
-
-    new Mitglied { Id=13, Name="Johann Herzog sen.", Dienstgrad="Hauptlöschmeister", Funktion="Sachbearbeiter Feuerwehrgeschichte", EintriebAb=1995, IstFuehrung=true },
-    new Mitglied { Id=14, Name="Stefan Schulmeister", Dienstgrad="Brandinspektor", Funktion="Sachbearbeiter Wasserdienst", EintriebAb=2008, IstFuehrung=true },
-
-    new Mitglied { Id=15, Name="Lukas Assfall", Dienstgrad="Feuerwehrmann", Funktion="Sachbearbeiter EDV / Informationstechnologie", EintriebAb=2022, IstFuehrung=true },
-    new Mitglied { Id=16, Name="Carmen Goll", Dienstgrad="Feuerwehrfrau", Funktion="Sachbearbeiter Feuerwehrmedizinischer Dienst", EintriebAb=2019, IstFuehrung=true },
-    
-};
 }

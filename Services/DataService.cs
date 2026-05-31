@@ -277,8 +277,8 @@ public class DataService
     new Mitglied { Id=1, Name="Matthias Goll", Dienstgrad="Hauptbrandinspektor", Funktion="Kommandant", EintriebAb=2019, IstFuehrung=true },
     new Mitglied { Id=2, Name="Stefan Schulmeister", Dienstgrad="Brandinspektor", Funktion="Kommandant-Stv.", EintriebAb=2011, IstFuehrung=true },
 
-    new Mitglied { Id=3, Name="Gregor Dastel", Dienstgrad="Verwaltungsmeister", Funktion="Stv. Leiter des Verwaltungsdienstes", EintriebAb=1998, IstFuehrung=true },
-    new Mitglied { Id=4, Name="Erwin Huber", Dienstgrad="Verwaltungsmeister", Funktion="Stv. Leiter des Verwaltungsdienstes", EintriebAb=2010, IstFuehrung=true },
+    new Mitglied { Id=3, Name="Erwin Huber", Dienstgrad="Verwaltungsmeister", Funktion="Leiter des Verwaltungsdienstes", EintriebAb=2001, IstFuehrung=true },
+    new Mitglied { Id=4, Name="Gregor Dastel", Dienstgrad="Verwaltungsmeister", Funktion="Stv. Leiter des Verwaltungsdienstes", EintriebAb=1998, IstFuehrung=true },
 
     new Mitglied { Id=5, Name="Johann Herzog jun.", Dienstgrad="Oberbrandmeister", Funktion="1. Gruppenkommandant", EintriebAb=2012, IstFuehrung=true },
     new Mitglied { Id=6, Name="Emanuel Huber", Dienstgrad="Oberbrandmeister", Funktion="2. Gruppenkommandant / Zeugmeister", EintriebAb=2011, IstFuehrung=true },

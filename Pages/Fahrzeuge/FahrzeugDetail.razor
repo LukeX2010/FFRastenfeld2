@@ -9,7 +9,7 @@
 }
 else
 {
-    <PageHero Title="@fz.Name" Subtitle="@($"{fz.Kuerzel} – {fz.Hersteller} · Bj. {fz.Baujahr}")" ParentLabel="Fahrzeuge" ParentHref="/fahrzeuge" />
+    <PageHero Title="@fz.Name" Subtitle="@GetSubtitle(fz)" ParentLabel="Fahrzeuge" ParentHref="/fahrzeuge" />
 
     <div class="site-body container">
         <div class="content-with-sidebar">
@@ -17,13 +17,20 @@ else
                 <article class="post-detail">
 
                     <div class="detail-img fz-detail-img">
-                        <img src="@($"img/{fz.Kuerzel}.jpeg")" class="hero-bg-img" />
+                        <img src="@($"img/{GetFahrzeugBild(fz)}.jpeg")" class="hero-bg-img" alt="@fz.Name" />
                     </div>
 
                     <div class="fz-detail-meta">
                         <div class="fdm-item"><span>Bezeichnung</span><strong>@fz.Name</strong></div>
                         <div class="fdm-item"><span>Kurzzeichen</span><strong>@fz.Kuerzel</strong></div>
-                        <div class="fdm-item"><span>Hersteller</span><strong>@fz.Hersteller</strong></div>
+                        @if (!string.IsNullOrWhiteSpace(fz.Funkrufname))
+                        {
+                            <div class="fdm-item"><span>Funkrufname</span><strong>@fz.Funkrufname</strong></div>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(fz.Hersteller))
+                        {
+                            <div class="fdm-item"><span>Hersteller</span><strong>@fz.Hersteller</strong></div>
+                        }
                         <div class="fdm-item"><span>Baujahr</span><strong>@fz.Baujahr</strong></div>
                     </div>
 
@@ -57,4 +64,20 @@ else
     [Parameter] public int Id { get; set; }
     private Fahrzeug? fz;
     protected override void OnParametersSet() => fz = DS.GetFahrzeuge().FirstOrDefault(f => f.Id == Id);
+
+    private static string GetFahrzeugBild(Fahrzeug f) =>
+        string.IsNullOrWhiteSpace(f.BildDatei) ? f.Kuerzel : f.BildDatei;
+
+    private static string GetSubtitle(Fahrzeug f)
+    {
+        var details = new List<string> { f.Kuerzel };
+
+        if (!string.IsNullOrWhiteSpace(f.Funkrufname))
+        {
+            details.Add(f.Funkrufname);
+        }
+
+        details.Add($"Bj. {f.Baujahr}");
+        return string.Join(" – ", details);
+    }
 }

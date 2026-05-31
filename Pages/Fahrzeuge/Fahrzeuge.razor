@@ -3,7 +3,7 @@
 @inject DataService DS
 
 <PageTitle>Fahrzeuge & Ausrüstung – Freiwillige Feuerwehr Rastenfeld, NÖ</PageTitle>
-<PageHero Title="Fahrzeuge & Ausrüstung" Subtitle="Der Fuhrpark der FF Rastenfeld – TLF 4000, HLF 2, MTF und Kommandofahrzeug im Überblick" ParentLabel="Feuerwehr" ParentHref="/organisation" />
+<PageHero Title="Fahrzeuge & Ausrüstung" Subtitle="Der Fuhrpark der FF Rastenfeld – TLF 4000, MTF, Abschleppachse und TSA 750 im Überblick" ParentLabel="Feuerwehr" ParentHref="/organisation" />
 
 <div class="site-body container">
     <div class="content-with-sidebar">
@@ -14,13 +14,20 @@
                     <div class="fahrzeug-item">
                         <a href="/fahrzeuge/@f.Id" class="fz-img-link">
                             <div class="fz-img">
-                                <img src="@($"img/{f.Kuerzel}.jpeg")" class="hero-bg-img" />
+                                <img src="@($"img/{GetFahrzeugBild(f)}.jpeg")" class="hero-bg-img" alt="@f.Name" />
                             </div>
                         </a>
                         <div class="fz-body">
                             <h3><a href="/fahrzeuge/@f.Id">@f.Name</a></h3>
                             <div class="fz-meta">
-                                <span>🏭 @f.Hersteller</span>
+                                @if (!string.IsNullOrWhiteSpace(f.Funkrufname))
+                                {
+                                    <span>📻 @f.Funkrufname</span>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(f.Hersteller))
+                                {
+                                    <span>🏭 @f.Hersteller</span>
+                                }
                                 <span>📅 Bj. @f.Baujahr</span>
                             </div>
                             <p>@f.Beschreibung</p>
@@ -79,3 +86,8 @@
 
     </div>
 </div>
+
+@code {
+    private static string GetFahrzeugBild(Fahrzeug f) =>
+        string.IsNullOrWhiteSpace(f.BildDatei) ? f.Kuerzel : f.BildDatei;
+}

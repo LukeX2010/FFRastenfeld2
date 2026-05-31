@@ -318,11 +318,13 @@ public class DataService
         new Fahrzeug
         {
             Id = 1,
-            Name = "Tanklöschfahrzeug 4000",
-            Kuerzel = "scaniaP340",
+            Name = "Tanklöschfahrzeug",
+            Kuerzel = "TLF 4000",
+            Funkrufname = "Tank Rastenfeld",
+            BildDatei = "scaniaP340",
             Beschreibung =
                 "Das Tanklöschfahrzeug 4000 dient zur Brandbekämpfung bei Bränden mit hohem Wasserbedarf, insbesondere bei Wald- und Flurbränden sowie in Gebieten ohne ausreichende Wasserversorgung.",
-            Baujahr = "2019",
+            Baujahr = "2008",
             Hersteller = "Rosenbauer / Scania P340",
             Emoji = "🚒",
             Ausstattung = new()
@@ -343,9 +345,11 @@ public class DataService
             Id = 2,
             Name = "Mannschaftstransportfahrzeug",
             Kuerzel = "MTF",
+            Funkrufname = "Bus Rastenfeld",
+            BildDatei = "MTF",
             Beschreibung =
                 "Das Mannschaftstransportfahrzeug dient primär zum Transport von Feuerwehrmitgliedern und Ausrüstung zu Einsätzen, Übungen und Veranstaltungen. Es wird auch für logistische Aufgaben eingesetzt.",
-            Baujahr = "2016",
+            Baujahr = "2018",
             Hersteller = "Ford Transit / ähnlich",
             Emoji = "🚒",
             Ausstattung = new()
@@ -356,6 +360,42 @@ public class DataService
                 "Warnwesten",
                 "Transportmöglichkeit für Material",
                 "Absicherungsmaterial (Pylonen, Lampen)"
+            }
+        },
+
+        new Fahrzeug
+        {
+            Id = 3,
+            Name = "Abschleppachse",
+            Kuerzel = "AAchse",
+            BildDatei = "keinbild",
+            Beschreibung =
+                "Die Abschleppachse wird bei technischen Einsätzen verwendet, um nicht mehr fahrbereite Fahrzeuge zu bewegen oder für eine sichere Bergung vorzubereiten.",
+            Baujahr = "1995",
+            Emoji = "🛞",
+            Ausstattung = new()
+            {
+                "Hilfsmittel für Fahrzeugbergungen",
+                "Transport und Sicherung beschädigter Fahrzeuge",
+                "Einsatz bei technischen Hilfeleistungen"
+            }
+        },
+
+        new Fahrzeug
+        {
+            Id = 4,
+            Name = "TS-Anhänger",
+            Kuerzel = "TSA 750",
+            BildDatei = "keinbild",
+            Beschreibung =
+                "Der Tragkraftspritzenanhänger dient zum Transport einer Tragkraftspritze und ergänzender Ausrüstung für die Löschwasserversorgung.",
+            Baujahr = "2005",
+            Emoji = "🚒",
+            Ausstattung = new()
+            {
+                "Tragkraftspritze",
+                "Saugschläuche und wasserführende Armaturen",
+                "Schlauchmaterial für die Löschwasserversorgung"
             }
         },
     };

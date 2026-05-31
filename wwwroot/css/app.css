@@ -757,11 +757,17 @@ summary:hover{
 }
 .spenden-qr-placeholder { text-align: center; width: 100%; }
 .qr-inner { display: inline-block; }
-.qr-inner svg {
+.qr-inner svg,
+.qr-inner img {
     border: 3px solid var(--dark);
     border-radius: var(--r);
     display: block;
     margin: 0 auto .75rem;
+}
+.spenden-qr-img {
+    width: min(220px, 100%);
+    height: auto;
+    background: #fff;
 }
 .qr-label { font-size: .82rem; font-weight: 700; color: var(--dark); margin-bottom: .4rem; }
 .qr-hint  {
@@ -1503,5 +1509,4 @@ details summary:hover { color: #9ca3af; }
     min-width: 300px;
     padding: 0.62rem;
 }
-
 

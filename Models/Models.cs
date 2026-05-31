@@ -29,6 +29,8 @@ public class Fahrzeug
     public string Beschreibung { get; set; } = "";
     public string Baujahr { get; set; } = "";
     public string Hersteller { get; set; } = "";
+    public string Funkrufname { get; set; } = "";
+    public string BildDatei { get; set; } = "";
     public string Emoji { get; set; } = "🚒";
     public List<string> Ausstattung { get; set; } = new();
 }

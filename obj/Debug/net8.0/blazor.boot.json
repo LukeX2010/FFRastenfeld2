@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "FFRastenfeld",
   "resources": {
-    "hash": "sha256-TnY0zpUoGsKqrK/aICuzS0QhTRCUs3YX/x6UpeE7WE4=",
+    "hash": "sha256-Lka1T2C+JO6x/W5ZssJXz4G+FHUXsu29Nt6PzYb3yTc=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-O/NCYcAN9uPocD7ns7AzF/cqx7f5vL1PTJCQs0vEXyk="
     },
@@ -209,10 +209,10 @@
       "mscorlib.wasm": "sha256-RLW/7NVuhoPfq151II3kX2kWHgBwQgpCw9aemQNg3to=",
       "netstandard.wasm": "sha256-lAg5WvTiA8wbsIwlr51xh0YWpXT9F5EX3Cnv+11O/mU=",
       "System.Private.CoreLib.wasm": "sha256-3O3muuRQwoLRecYRjfIFWUURvTjP4EmD2O8wYg2UDNY=",
-      "FFRastenfeld.wasm": "sha256-6rPeFbtX1cVc1WyPtm7WA23vulE0bAEmGLf4Lvu106g="
+      "FFRastenfeld.wasm": "sha256-0MHdZvF7SKLkETnJX05k/+HlSTfb4lIp5G5p0YtcIm0="
     },
     "pdb": {
-      "FFRastenfeld.pdb": "sha256-CF8s8CUst9Q628KnrcDYQM0WQQkb1+n2Ba1z8dO3NF0="
+      "FFRastenfeld.pdb": "sha256-TeRlSb7mPsVRfXTtRFIaXiHUpJpWxJpNIScqUvtfDog="
     }
   },
   "cacheBootResources": true,

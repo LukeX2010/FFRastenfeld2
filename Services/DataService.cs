@@ -10,6 +10,83 @@ public class DataService
 
     new Post
     {
+        Id = 21,
+        Slug = "abschnittsfeuerwehrleistungsbewerb-hadersdorf-2026",
+        Emoji = "abschnittsfeuerwehrleistungsbewerb-hadersdorf-2026",
+        Titel = "Bewerbsgruppe beim Abschnittsfeuerwehrleistungsbewerb in Hadersdorf",
+        Kategorie = "FF-News",
+        Datum = new DateTime(2026, 5, 30),
+        Kurztext =
+            "Die Bewerbsgruppe der FF Rastenfeld trat beim Abschnittsfeuerwehrleistungsbewerb in Hadersdorf am Kamp in Bronze und Silber an.",
+        Volltext =
+            "Am Samstag, dem 30. Mai 2026, nahm die Bewerbsgruppe der Freiwilligen Feuerwehr Rastenfeld am Abschnittsfeuerwehrleistungsbewerb in Hadersdorf am Kamp teil.\n\n" +
+            "In Bronze erreichte die Gruppe eine Angriffszeit von 57,43 Sekunden, musste jedoch 35 Fehlerpunkte hinnehmen. In Silber gelang ein Lauf mit 1:12,00 Minuten und 15 Fehlerpunkten.\n\n" +
+            "Auch wenn nicht alles fehlerfrei verlief, war der Bewerb ein wichtiger Teil der laufenden Vorbereitung. Jeder Antritt bringt Erfahrung, Routine und Zusammenhalt für die naechsten Bewerbe.",
+        BildPlaceholder = "🚒"
+    },
+
+    new Post
+    {
+        Id = 20,
+        Slug = "baum-auf-strasse-rastenberg-2026",
+        Emoji = "baum-auf-strasse-rastenberg-2026",
+        Titel = "Baum blockierte die L8245 bei Rastenberg",
+        Kategorie = "Einsätze",
+        Datum = new DateTime(2026, 5, 30, 13, 55, 0),
+        Kurztext =
+            "Nach einem Gewitter wurde die FF Rastenfeld zu einem umgestuerzten Baum auf der L8245 bei Rastenberg alarmiert.",
+        Volltext =
+            "Am Samstag, dem 30. Mai 2026, wurde die Freiwillige Feuerwehr Rastenfeld um 13:55 Uhr zu einem technischen Einsatz nach Rastenberg alarmiert.\n\n" +
+            "Auf der L8245, im Bereich km 14,2 vor der Ortstafel Rastenberg in Fahrtrichtung B37, war nach einem Gewitter ein Baum auf die Strasse gestuerzt und blockierte die Fahrbahn.\n\n" +
+            "Die Einsatzkraefte sicherten die Einsatzstelle ab, entfernten den Baum und reinigten anschliessend die Fahrbahn. Danach konnte die Strasse wieder freigegeben werden.",
+        BildPlaceholder = "🚒",
+        EinsatzTyp = "T1 - Objekt/Baum umgestuerzt",
+        EinsatzOrt = "L8245 km 14,2, Rastenberg",
+        EinsatzZeit = "13:55 Uhr",
+        EinsatzKraefte = 4
+    },
+
+    new Post
+    {
+        Id = 19,
+        Slug = "schadstoffuebung-mottingeramt-2026",
+        Emoji = "schadstoffuebung-mottingeramt-2026",
+        Titel = "Uebung Fahrzeugbrand und Schadstoffausruestung",
+        Kategorie = "Ausbildung",
+        Datum = new DateTime(2026, 5, 29),
+        Kurztext =
+            "In Mottingeramt beuebte die FF Rastenfeld einen Fahrzeugbrand in einer Garage und den Umgang mit neuer Schadstoffausruestung.",
+        Volltext =
+            "Am Freitag, dem 29. Mai 2026, fuehrte die Freiwillige Feuerwehr Rastenfeld in Mottingeramt eine praxisnahe Übung durch.\n\n" +
+            "Angenommen wurde ein Fahrzeugbrand in einer Garage. Neben dem Vorgehen unter Atemschutz standen auch Erkundung, Brandbekaempfung und die sichere Arbeit im direkten Gefahrenbereich im Mittelpunkt.\n\n" +
+            "Zusaetzlich wurde neue Ausruestung fuer Schadstoffeinsaetze getestet. Dazu gehoerten saeurebestaendige Ganzkoerperschutzanzuege der Kategorie 2, Moosplatten sowie eine Auffangwanne. Solche Uebungen helfen, Geraete und Ablaeufe im Team zu festigen.",
+        BildPlaceholder = "🚒",
+        Bilder =
+        [
+            "schadstoffuebung-mottingeramt-2026-ausruestung.jpeg",
+            "schadstoffuebung-mottingeramt-2026-erkundung.jpeg"
+        ]
+    },
+
+    new Post
+    {
+        Id = 18,
+        Slug = "dreidoerfer-wandertag-niedergruenbach-2026",
+        Emoji = "dreidoerfer-wandertag-niedergruenbach-2026",
+        Titel = "28. Dreidoerfer Wandertag in Niedergruenbach",
+        Kategorie = "FF-News",
+        Datum = new DateTime(2026, 5, 24),
+        Kurztext =
+            "Beim 28. Dreidoerfer Wandertag in Niedergruenbach stellte die FF Rastenfeld die zweitgroesste Wandergruppe.",
+        Volltext =
+            "Am Sonntag, dem 24. Mai 2026, fand in Niedergruenbach der 28. Dreidoerfer Wandertag statt. Start und Ziel befanden sich in Niedergruenbach; die Route fuehrte durch die Orte Niedergruenbach, Marbach im Felde und Sperkental.\n\n" +
+            "Bei sonnigem Wetter machte sich auch eine Gruppe der Freiwilligen Feuerwehr Rastenfeld auf den Weg. Entlang der Strecke sorgten drei Labstationen fuer Verpflegung und kurze Pausen.\n\n" +
+            "Besonders erfreulich: Die FF Rastenfeld stellte die zweitgroesste Wandergruppe der Veranstaltung. Im Anschluss klang der Tag bei gemeinsamer Verpflegung in Niedergruenbach gemuetlich aus.",
+        BildPlaceholder = "🚒"
+    },
+
+    new Post
+    {
         Id = 17,
         Slug = "auffahrunfall-b38-rastenfeld",
         Emoji = "auffahrunfall-b38-rastenfeld",

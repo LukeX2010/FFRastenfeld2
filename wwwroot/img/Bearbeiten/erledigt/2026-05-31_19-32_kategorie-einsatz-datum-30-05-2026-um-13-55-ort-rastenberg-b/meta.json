@@ -1,0 +1,37 @@
+{
+  "chatId": "120363407513474923@g.us",
+  "messageIds": [
+    "AC432A7B38454BC4EE367FD65B03692C",
+    "AC93BB6AF30B93185DA3BF9912CF601A"
+  ],
+  "sender": "237254060593366@lid",
+  "receivedAt": "2026-05-31T17:33:08.324Z",
+  "messageDate": "2026-05-31T17:32:48.000Z",
+  "category": "Einsätze",
+  "fields": {
+    "kategorie": "Einsätze",
+    "datum": "30.05.2026",
+    "uhrzeit": "13:55",
+    "ort": "",
+    "beschreibung": ""
+  },
+  "missingInfo": [],
+  "text": "Kategorie: Einsatz Datum:30.05.2026 um 13:55 Ort: Rastenberg Beschreibung: Gewitter riss einen Baum un der die straße versperrt",
+  "imageCount": 2,
+  "detectedImageCount": 2,
+  "images": [
+    {
+      "fileName": "bild-01.jpeg",
+      "mimetype": "image/jpeg",
+      "caption": "Kategorie: Einsatz\nDatum:30.05.2026 um 13:55\nOrt: Rastenberg\nBeschreibung: Gewitter riss einen Baum un der die straße versperrt",
+      "messageId": "AC432A7B38454BC4EE367FD65B03692C"
+    },
+    {
+      "fileName": "bild-02.jpeg",
+      "mimetype": "image/jpeg",
+      "caption": null,
+      "messageId": "AC93BB6AF30B93185DA3BF9912CF601A"
+    }
+  ],
+  "imageErrors": []
+}

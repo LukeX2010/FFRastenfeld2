@@ -1,0 +1,37 @@
+{
+  "chatId": "120363407513474923@g.us",
+  "messageIds": [
+    "AC4DD22773890AD8480789AFF0AF7B95",
+    "AC3E5C1843FD283A314A968B8484BF50"
+  ],
+  "sender": "237254060593366@lid",
+  "receivedAt": "2026-05-31T11:35:01.134Z",
+  "messageDate": "2026-05-31T11:34:45.000Z",
+  "category": "FF-News",
+  "missingInfo": [],
+  "text": "3 dörfer wandertag 24.5.2026 niedergrünbach start und Verpflegung, 2 größte gruppe\n\n--- Zusatzinfo ---\n\nNiedergrünbach\n\n--- Zusatzinfo ---\n\nOrt: Niedergrünbach\n\n--- Zusatzinfo ---\n\nKategorie: FF-News Datum: 31.05.2026 Ort: Niedergrünbach Beschreibung: Wnadertag an sonnigen tag, 2 größte wandergruppe der veranstaltung nachher verpflegung in niedergrünbah strecke war mit 3 lab stationen ausgerüstet",
+  "imageCount": 1,
+  "detectedImageCount": 1,
+  "images": [
+    {
+      "fileName": "bild-01.jpeg",
+      "mimetype": "image/jpeg",
+      "caption": null,
+      "messageId": "AC4DD22773890AD8480789AFF0AF7B95"
+    }
+  ],
+  "imageErrors": [],
+  "followupMessageIds": [
+    "AC7340286595ED344FC55AB4F49E2800",
+    "ACC0F363A6E243C550BF5D5835749C3E",
+    "3EB099FD8E69617C6BE743"
+  ],
+  "updatedAt": "2026-05-31T11:44:35.497Z",
+  "fields": {
+    "kategorie": "FF-News",
+    "datum": "31.05.2026",
+    "uhrzeit": "",
+    "ort": "",
+    "beschreibung": ""
+  }
+}

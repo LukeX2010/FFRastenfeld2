@@ -1,0 +1,31 @@
+{
+  "chatId": "120363407513474923@g.us",
+  "messageIds": [
+    "3EB01CF450930250D71602",
+    "3EB031BB6B014C735C29FD"
+  ],
+  "sender": "237254060593366@lid",
+  "receivedAt": "2026-05-31T17:23:30.809Z",
+  "messageDate": "2026-05-31T17:23:13.000Z",
+  "category": "FF-News",
+  "fields": {
+    "kategorie": "FF-News",
+    "datum": "30.05.2026",
+    "uhrzeit": "1:12",
+    "ort": "",
+    "beschreibung": ""
+  },
+  "missingInfo": [],
+  "text": "Kategorie: FF-News Datum: 30.05.2026 Ort: Hadersdorf Beschreibung: Bezirkswettkämpfe, Gruppe erreichte in bronze eine zeit von 57,43 jedoch mit hatteb sie einige fehler und bekamen +35 punkte, in Silber erreichten sie eine Zeit von 1:12.00 jedoch nur 15 fehlerpubkte",
+  "imageCount": 1,
+  "detectedImageCount": 1,
+  "images": [
+    {
+      "fileName": "bild-01.jpeg",
+      "mimetype": "image/jpeg",
+      "caption": null,
+      "messageId": "3EB01CF450930250D71602"
+    }
+  ],
+  "imageErrors": []
+}

@@ -1,0 +1,45 @@
+{
+  "chatId": "120363407513474923@g.us",
+  "messageIds": [
+    "ACF9A1A6C8FE8925ED2C16B2E4F24315",
+    "AC3207694DD6E8217E86A922D1FA9C8E",
+    "AC30544B8A906BF750F33B2363DA95C3",
+    "AC20A9C42CC04C35C7559C0BBC6E5018"
+  ],
+  "sender": "237254060593366@lid",
+  "receivedAt": "2026-05-31T11:54:40.618Z",
+  "messageDate": "2026-05-31T11:54:23.000Z",
+  "category": "Ausbildung",
+  "fields": {
+    "kategorie": "Ausbildung",
+    "datum": "29.05.2026",
+    "uhrzeit": "",
+    "ort": "",
+    "beschreibung": ""
+  },
+  "missingInfo": [],
+  "text": "Kategorie: Übungen Datum: 29.05.2026 Ort: Mottingeramt Beschreibung: Übung von Fahrzeug Brand in Garage sowie testung neuer Ausrüstung, wie säure bestehende Kategorie 2 ganz körper anzüge Mossplatten und auffang wanne",
+  "imageCount": 3,
+  "detectedImageCount": 3,
+  "images": [
+    {
+      "fileName": "bild-01.jpeg",
+      "mimetype": "image/jpeg",
+      "caption": null,
+      "messageId": "ACF9A1A6C8FE8925ED2C16B2E4F24315"
+    },
+    {
+      "fileName": "bild-02.jpeg",
+      "mimetype": "image/jpeg",
+      "caption": null,
+      "messageId": "AC3207694DD6E8217E86A922D1FA9C8E"
+    },
+    {
+      "fileName": "bild-03.jpeg",
+      "mimetype": "image/jpeg",
+      "caption": null,
+      "messageId": "AC30544B8A906BF750F33B2363DA95C3"
+    }
+  ],
+  "imageErrors": []
+}

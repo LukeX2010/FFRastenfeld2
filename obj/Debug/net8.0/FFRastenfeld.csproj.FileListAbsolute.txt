@@ -2083,10 +2083,8 @@ C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whats
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whatsapp-bot\auth_info_baileys\pre-key-37.json
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whatsapp-bot\auth_info_baileys\pre-key-38.json
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whatsapp-bot\auth_info_baileys\pre-key-40.json
-C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whatsapp-bot\auth_info_baileys\pre-key-42.json
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whatsapp-bot\auth_info_baileys\pre-key-44.json
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whatsapp-bot\auth_info_baileys\pre-key-45.json
-C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whatsapp-bot\auth_info_baileys\pre-key-46.json
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whatsapp-bot\auth_info_baileys\pre-key-47.json
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whatsapp-bot\auth_info_baileys\pre-key-48.json
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whatsapp-bot\auth_info_baileys\pre-key-5.json
@@ -2160,6 +2158,9 @@ C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whats
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whatsapp-bot\auth_info_baileys\session-99269679775932.0.json
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whatsapp-bot\package-lock.json
 C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whatsapp-bot\package.json
-C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\compressed\8jhgo8224x-98l2qdh1gv.gz
-C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\compressed\ynsrm5qgc4-sjlos9wstq.gz
-C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\compressed\qhrzwiqj6i-9bplprfyyz.gz
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whatsapp-bot\auth_info_baileys\sender-key-120363420036415631@g.us--140784816922696--0.json
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whatsapp-bot\auth_info_baileys\session-140784816922696.0.json
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\bin\Debug\net8.0\whatsapp-bot\auth_info_baileys\session-158729190301912.0.json
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\compressed\8jhgo8224x-acranxv2zu.gz
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\compressed\ynsrm5qgc4-cfatdav40x.gz
+C:\Users\lukas\RiderProjects\Feuerwehr\FFRastenfeld_clean\obj\Debug\net8.0\compressed\qhrzwiqj6i-s9m5z57u79.gz

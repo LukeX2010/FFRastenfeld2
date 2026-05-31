@@ -10,6 +10,27 @@ public class DataService
 
     new Post
     {
+        Id = 22,
+        Slug = "florianimesse-rastenfeld-2026",
+        Emoji = "florianimesse-rastenfeld-2026",
+        Titel = "Florianimesse 2026 am Marktplatz Rastenfeld",
+        Kategorie = "FF-News",
+        Datum = new DateTime(2026, 5, 14),
+        Kurztext =
+            "Die FF Rastenfeld nahm gemeinsam mit der FF Peygarten an der Florianimesse am Marktplatz Rastenfeld teil.",
+        Volltext =
+            "Am Donnerstag, dem 14. Mai 2026, fand am Marktplatz Rastenfeld die Florianimesse statt. Die Freiwillige Feuerwehr Rastenfeld nahm gemeinsam mit der FF Peygarten daran teil.\n\n" +
+            "Musikalisch begleitet wurde die Feier von der Musikkapelle Waldhausen. Nach der Messe folgte der gemeinsame Auszug am Marktplatz.\n\n" +
+            "Die Florianimesse ist fuer die Feuerwehren ein wichtiger Fixpunkt im Jahreslauf: Sie verbindet das Gedenken an den Schutzpatron der Feuerwehr mit Kameradschaft, Tradition und dem gemeinsamen Auftreten in der Gemeinde.",
+        BildPlaceholder = "ðŸš’",
+        Bilder =
+        [
+            "florianimesse-rastenfeld-2026-ausrueckung.jpeg"
+        ]
+    },
+
+    new Post
+    {
         Id = 21,
         Slug = "abschnittsfeuerwehrleistungsbewerb-hadersdorf-2026",
         Emoji = "abschnittsfeuerwehrleistungsbewerb-hadersdorf-2026",

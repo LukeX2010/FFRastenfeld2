@@ -1,0 +1,41 @@
+{
+  "chatId": "120363407513474923@g.us",
+  "messageIds": [
+    "ACBA1AD98185D4CABCDF248645055A92",
+    "AC269D7F8CE592FEF6CBE9C7D9D1DD92"
+  ],
+  "sender": "237254060593366@lid",
+  "receivedAt": "2026-05-31T18:08:16.562Z",
+  "messageDate": "2026-05-31T18:07:59.000Z",
+  "category": "FF-News",
+  "fields": {
+    "kategorie": "FF-News",
+    "datum": "14.05.2026",
+    "uhrzeit": "",
+    "ort": "",
+    "beschreibung": ""
+  },
+  "missingInfo": [],
+  "text": "Kategorie:FF-News Datum: 14.05.2026 Ort: Marktplatz Rastenfeld Beschreibung: Florianimesse, Musikkapelle Waldhausen gemeinsam mit FF Peygarten\n\n--- Zusatzinfo ---\n\nTest",
+  "imageCount": 2,
+  "detectedImageCount": 2,
+  "images": [
+    {
+      "fileName": "bild-01.jpeg",
+      "mimetype": "image/jpeg",
+      "caption": "Kategorie:FF-News\nDatum: 14.05.2026\nOrt: Marktplatz Rastenfeld \nBeschreibung: Florianimesse, Musikkapelle Waldhausen gemeinsam mit FF Peygarten",
+      "messageId": "ACBA1AD98185D4CABCDF248645055A92"
+    },
+    {
+      "fileName": "bild-02.jpeg",
+      "mimetype": "image/jpeg",
+      "caption": null,
+      "messageId": "AC269D7F8CE592FEF6CBE9C7D9D1DD92"
+    }
+  ],
+  "imageErrors": [],
+  "followupMessageIds": [
+    "AC800D4D2C608862C3FB377E691B5BF7"
+  ],
+  "updatedAt": "2026-05-31T18:13:48.051Z"
+}

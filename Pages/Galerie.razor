@@ -109,16 +109,18 @@
 </div>
 
 @code {
-    record GalBild(string Titel, string Emoji, string Kategorie, int Jahr,string Untertitel);
+    record GalBild(string Titel, string Emoji, string Kategorie, int Jahr,string Untertitel, DateTime Datum);
 
     private List<GalBild> bilder = new()
     {
-        new("Florianimesse 2025","florianimesse2025_1","Ausrückungen",2025, ""),
-        new("Florianimesse 2025","florianimesse2025_2","Ausrückungen",2025, ""),
-        new("Florianimesse 2025","florianimesse2025_3","Ausrückungen",2025, ""),
-        new("Tut Gut Wandertag","Tutgut_2026","Veranstaltungen",2026, ""),
-        new("Ehrungen des Abschnittsfeuerwehrtages","Johnyehrung","Sonstiges",2025, "Ehrenkommandant Johann Herzog erhielt das Verdienstzeichen 2.Klasse des NÖ Landesfeuwerwehrverbandes."),
-        new("Ehrungen des Abschnittsfeuerwehrtages","Kroepflehrung","Sonstiges",2025, "EOLM Friedrich Kröpfl wurde für die 60 jährige Feuerwehrtätigkeit geehrt."),
+        new("Florianimesse 2025","florianimesse2025_1","Ausrückungen",2025, "", new DateTime(2025, 1, 1)),
+        new("Florianimesse 2025","florianimesse2025_2","Ausrückungen",2025, "", new DateTime(2025, 1, 1)),
+        new("Florianimesse 2025","florianimesse2025_3","Ausrückungen",2025, "", new DateTime(2025, 1, 1)),
+        new("Florianimesse 2026","florianimesse-rastenfeld-2026","Ausr\u00FCckungen",2026, "Florianimesse am Marktplatz Rastenfeld", new DateTime(2026, 5, 14)),
+        new("Florianimesse 2026","florianimesse-rastenfeld-2026-ausrueckung","Ausr\u00FCckungen",2026, "Gemeinsamer Auszug am Marktplatz Rastenfeld", new DateTime(2026, 5, 14)),
+        new("Tut Gut Wandertag","Tutgut_2026","Veranstaltungen",2026, "", new DateTime(2026, 4, 26)),
+        new("Ehrungen des Abschnittsfeuerwehrtages","Johnyehrung","Sonstiges",2025, "Ehrenkommandant Johann Herzog erhielt das Verdienstzeichen 2.Klasse des NÖ Landesfeuwerwehrverbandes.", new DateTime(2025, 1, 1)),
+        new("Ehrungen des Abschnittsfeuerwehrtages","Kroepflehrung","Sonstiges",2025, "EOLM Friedrich Kröpfl wurde für die 60 jährige Feuerwehrtätigkeit geehrt.", new DateTime(2025, 1, 1)),
         
 
     };
@@ -135,7 +137,7 @@
     {
         foreach (var einsätze in alleinsätze)
         {
-            bilder.Add(new GalBild(einsätze.Titel, einsätze.Emoji, einsätze.Kategorie, einsätze.Datum.Year, ""));
+            bilder.Add(new GalBild(einsätze.Titel, einsätze.Emoji, einsätze.Kategorie, einsätze.Datum.Year, "", einsätze.Datum));
         }
         
     }
@@ -144,7 +146,9 @@
     private GalBild? lightbox;
     private int lightboxIdx = -1;
 
-    private List<GalBild> GetFiltered() => activeKat == "Alle" ? bilder : bilder.Where(b => b.Kategorie == activeKat).ToList();
+    private List<GalBild> GetFiltered() => (activeKat == "Alle" ? bilder : bilder.Where(b => b.Kategorie == activeKat))
+        .OrderByDescending(b => b.Datum)
+        .ToList();
 
     private List<string> kategorien = new() { "Alle","Einsätze","Übungen","Ausbildungen & Kurse","Veranstaltungen", "Ausrückungen","Sonstiges" };
 

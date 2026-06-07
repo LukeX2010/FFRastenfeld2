@@ -10,6 +10,28 @@ public class DataService
 
     new Post
     {
+        Id = 23,
+        Slug = "ehrung-johann-herzog-freiwilliger-des-jahres-2026",
+        Emoji = "ehrung-johann-herzog-freiwilliger-des-jahres-2026",
+        Titel = "Ehren-Oberbrandinspektor Johann Herzog als Freiwilliger des Jahres geehrt",
+        Kategorie = "FF-News",
+        Datum = new DateTime(2026, 6, 5),
+        Kurztext =
+            "Johann Herzog wurde bei der BIOEM in Großschönau als einer der besten Waldviertler Freiwilligen 2026 geehrt.",
+        Volltext =
+            "Am Freitag, dem 5. Juni 2026, fand im Rahmen der BIOEM in Großschönau die Ehrung der besten Waldviertler Freiwilligen 2026 statt. Die BIOEM 2026 wurde von 4. bis 7. Juni am Messegelände in Großschönau veranstaltet; die Freiwilligenehrung war Teil des offiziellen Rahmenprogramms.\n\n" +
+            "Unter den Geehrten war auch EOBI Johann Herzog aus Rastenfeld. Mit der Auszeichnung wird freiwilliges Engagement sichtbar gemacht und der Einsatz jener Menschen gewürdigt, die sich über viele Jahre hinweg für ihre Gemeinde und das Miteinander in der Region einbringen.\n\n" +
+            "Für die Freiwillige Feuerwehr Rastenfeld ist diese Ehrung eine besondere Anerkennung der langjährigen Verbundenheit, Kameradschaft und Bereitschaft, Verantwortung zu übernehmen. Johann Herzog steht damit beispielhaft für gelebtes Ehrenamt und verlässlichen Dienst an der Gemeinschaft.",
+        BildPlaceholder = "🚒",
+        Bilder =
+        [
+            "ehrung-johann-herzog-freiwilliger-des-jahres-2026-gruppe.jpeg",
+            "ehrung-johann-herzog-freiwilliger-des-jahres-2026-alle-geehrten.jpeg"
+        ]
+    },
+
+    new Post
+    {
         Id = 22,
         Slug = "florianimesse-rastenfeld-2026",
         Emoji = "florianimesse-rastenfeld-2026",
@@ -190,17 +212,6 @@ public class DataService
         EinsatzKraefte = 0
     },
 
-        new Post
-        {
-            Id = 12, Slug = "kinderfeuerwehr-besuch", Titel = "Kinderfeuerwehr besucht das Feuerwehrhaus",
-            Kategorie = "Feuerwehrjugend",
-            Datum = new DateTime(2024, 4, 20),
-            Kurztext =
-                "20 Kinder der Volksschule Rastenfeld besuchten das Feuerwehrhaus und lernten spielerisch die Arbeit der Feuerwehr kennen.",
-            Volltext =
-                "Im Rahmen der Kinderfeuerwehr besuchten 20 Schülerinnen und Schüler der Volksschule Rastenfeld das Feuerwehrhaus. Sie lernten die Fahrzeuge kennen, durften den Schlauch ausrollen und erfuhren, was zu tun ist, wenn es brennt. Notruf 122 und der richtige Umgang mit Feuer standen im Mittelpunkt.",
-            BildPlaceholder = "🧒"
-        },
         new Post
         {
             Id = 13,

@@ -28,10 +28,13 @@ const ignoreOwnMessages = parseBoolean(process.env.IGNORE_OWN_MESSAGES, false);
 const saveAllGroups = parseBoolean(process.env.SAVE_ALL_GROUPS);
 const printChatIds = parseBoolean(process.env.PRINT_CHAT_IDS, true);
 const replyInWhatsApp = parseBoolean(process.env.REPLY_IN_WHATSAPP, true);
+const startupOnlineMessage = parseBoolean(process.env.STARTUP_ONLINE_MESSAGE, true);
 const batchWindowMs = Number(process.env.BATCH_WINDOW_MS || 15000);
 const followupWindowMs = Number(process.env.FOLLOWUP_WINDOW_MS || 30 * 60 * 1000);
 const pendingBatches = new Map();
 const openFollowups = new Map();
+const botStartedAtMs = Date.now();
+
 const CATEGORY_EINSAETZE = "Eins\u00e4tze";
 const CATEGORY_AUSBILDUNG = "Ausbildung";
 const CATEGORY_JUGEND = "Feuerwehrjugend";
@@ -60,7 +63,7 @@ async function startBot() {
     auth: state,
     version,
     browser: ["FF Rastenfeld Bot", "Chrome", "1.0.0"],
-    logger: P({ level: "warn" })
+    logger: P({ level: "silent" })
   });
 
   sock.ev.on("creds.update", saveCreds);
@@ -73,6 +76,9 @@ async function startBot() {
 
     if (connection === "open") {
       console.log("WhatsApp verbunden.");
+      sendStartupOnlineMessage(sock).catch((error) => {
+        console.error("Online-Meldung konnte nicht gesendet werden:", error?.message || error);
+      });
     }
 
     if (connection === "close") {
@@ -90,7 +96,7 @@ async function startBot() {
   });
 
   sock.ev.on("messages.upsert", async ({ messages, type }) => {
-    if (type !== "notify") return;
+    console.log(`Nachrichten empfangen: type=${type}, anzahl=${messages.length}`);
 
     for (const message of messages) {
       try {
@@ -107,7 +113,16 @@ async function handleMessage(sock, message) {
   if (ignoreOwnMessages && message.key.fromMe) return;
 
   const chatId = message.key.remoteJid || "";
-  if (!chatId.endsWith("@g.us")) return;
+  if (!chatId.endsWith("@g.us")) {
+    console.log(`Ignoriert, keine Gruppe: ${chatId}`);
+    return;
+  }
+
+  const messageDate = getMessageDate(message);
+  if (messageDate.getTime() < botStartedAtMs - 10 * 60 * 1000) {
+    console.log(`Ignoriert, alte Sync-Nachricht: ${messageDate.toISOString()}`);
+    return;
+  }
 
   const text = extractText(message.message);
   const mediaParts = extractMediaParts(message.message);
@@ -118,12 +133,18 @@ async function handleMessage(sock, message) {
   }
 
   const maySave = saveAllGroups || allowedChatIds.includes(chatId);
-  if (!maySave) return;
-  if (!text && mediaParts.length === 0) return;
+  if (!maySave) {
+    console.log(`Ignoriert, Gruppe nicht freigegeben: ${chatId}`);
+    return;
+  }
+  if (!text && mediaParts.length === 0) {
+    console.log("Ignoriert, keine Text- oder Bildnachricht.");
+    return;
+  }
 
   const openFollowup = openFollowups.get(chatId);
   if (openFollowup && Date.now() <= openFollowup.expiresAt) {
-    addToFollowupBatch(sock, chatId, message, text, mediaParts, openFollowup);
+    await addToFollowupBatch(sock, chatId, message, text, mediaParts, openFollowup);
     return;
   }
 
@@ -134,16 +155,17 @@ async function handleMessage(sock, message) {
   const diskFollowup = await findOpenFollowupForChat(chatId);
   if (diskFollowup) {
     openFollowups.set(chatId, diskFollowup);
-    addToFollowupBatch(sock, chatId, message, text, mediaParts, diskFollowup);
+    await addToFollowupBatch(sock, chatId, message, text, mediaParts, diskFollowup);
     return;
   }
 
-  addToBatch(sock, chatId, message, text, mediaParts);
+  await addToBatch(sock, chatId, message, text, mediaParts);
 }
 
-function addToBatch(sock, chatId, message, text, mediaParts) {
+async function addToBatch(sock, chatId, message, text, mediaParts) {
   const existing = pendingBatches.get(chatId);
   if (existing?.timer) clearTimeout(existing.timer);
+  const isNewBatch = !existing;
 
   const batch = existing || {
     sock,
@@ -156,12 +178,9 @@ function addToBatch(sock, chatId, message, text, mediaParts) {
 
   batch.sock = sock;
   batch.messages.push(message);
-  if (text) batch.texts.push(text);
+  if (text && !isImagePolicyOnly(text, mediaParts)) batch.texts.push(text);
   if (mediaParts.length > 0) {
-    batch.mediaMessages.push({
-      message,
-      parts: mediaParts
-    });
+    batch.mediaMessages.push({ message, parts: mediaParts });
   }
 
   batch.timer = setTimeout(() => {
@@ -171,12 +190,21 @@ function addToBatch(sock, chatId, message, text, mediaParts) {
 
   pendingBatches.set(chatId, batch);
   console.log(`Nachricht vorgemerkt. Speichern in ${Math.round(batchWindowMs / 1000)} Sekunden...`);
+
+  if (replyInWhatsApp && isNewBatch) {
+    await sock.sendMessage(
+      chatId,
+      { text: buildBotNotice(`Material empfangen. Ich sammle jetzt ${Math.round(batchWindowMs / 1000)} Sekunden und speichere dann alles in einen Ordner.`) },
+      { quoted: message }
+    );
+  }
 }
 
-function addToFollowupBatch(sock, chatId, message, text, mediaParts, openFollowup) {
+async function addToFollowupBatch(sock, chatId, message, text, mediaParts, openFollowup) {
   const batchKey = `${chatId}:followup`;
   const existing = pendingBatches.get(batchKey);
   if (existing?.timer) clearTimeout(existing.timer);
+  const isNewBatch = !existing;
 
   const batch = existing || {
     sock,
@@ -190,12 +218,9 @@ function addToFollowupBatch(sock, chatId, message, text, mediaParts, openFollowu
 
   batch.sock = sock;
   batch.messages.push(message);
-  if (text) batch.texts.push(text);
+  if (text && !isImagePolicyOnly(text, mediaParts)) batch.texts.push(text);
   if (mediaParts.length > 0) {
-    batch.mediaMessages.push({
-      message,
-      parts: mediaParts
-    });
+    batch.mediaMessages.push({ message, parts: mediaParts });
   }
 
   batch.timer = setTimeout(() => {
@@ -205,6 +230,14 @@ function addToFollowupBatch(sock, chatId, message, text, mediaParts, openFollowu
 
   pendingBatches.set(batchKey, batch);
   console.log(`Zusatzinfo vorgemerkt. Aktualisieren in ${Math.round(batchWindowMs / 1000)} Sekunden...`);
+
+  if (replyInWhatsApp && isNewBatch) {
+    await sock.sendMessage(
+      chatId,
+      { text: buildBotNotice(`Zusatzinfo empfangen. Ich ergänze gleich den bestehenden Ordner: ${openFollowup.folderName}`) },
+      { quoted: message }
+    );
+  }
 }
 
 async function saveBatch(batch) {
@@ -216,12 +249,14 @@ async function saveBatch(batch) {
   const folderPath = path.join(outputDir, folderName);
   await fs.mkdir(folderPath, { recursive: true });
 
+  const { savedImages, imageErrors } = await saveImages(folderPath, batch.mediaMessages, 0);
+  const data = buildDataJson(fields, analysis, savedImages);
+
   await fs.writeFile(path.join(folderPath, "nachricht.txt"), text || "", "utf8");
-  await fs.writeFile(path.join(folderPath, "daten.json"), `${JSON.stringify(fields, null, 2)}\n`, "utf8");
+  await fs.writeFile(path.join(folderPath, "daten.json"), `${JSON.stringify(data, null, 2)}\n`, "utf8");
   await fs.writeFile(path.join(folderPath, "kategorie.txt"), `${analysis.category}\n`, "utf8");
   await fs.writeFile(path.join(folderPath, "analyse.txt"), buildAnalysisText(analysis), "utf8");
-
-  const { savedImages, imageErrors } = await saveImages(folderPath, batch.mediaMessages, 0);
+  await fs.writeFile(path.join(folderPath, "codex-prompt.txt"), buildCodexPrompt(data, text), "utf8");
 
   const meta = {
     chatId: batch.chatId,
@@ -230,7 +265,7 @@ async function saveBatch(batch) {
     receivedAt: new Date().toISOString(),
     messageDate: timestamp.toISOString(),
     category: analysis.category,
-    fields,
+    fields: data,
     missingInfo: analysis.missingInfo,
     text,
     imageCount: savedImages.length,
@@ -255,10 +290,9 @@ async function saveBatch(batch) {
   }
 
   if (replyInWhatsApp) {
-    const detectedImageCount = countDetectedImages(batch.mediaMessages);
     await batch.sock.sendMessage(
       batch.chatId,
-      { text: buildReplyText(analysis, savedImages.length, folderName, false, detectedImageCount) },
+      { text: buildReplyText(analysis, savedImages.length, folderName, false, countDetectedImages(batch.mediaMessages)) },
       { quoted: batch.firstMessage }
     );
   }
@@ -270,7 +304,8 @@ async function appendFollowup(batch) {
   const additionText = batch.texts.join("\n\n");
   const combinedText = [existingText, additionText].filter(Boolean).join("\n\n--- Zusatzinfo ---\n\n");
   const existingMeta = await readJsonFile(path.join(followup.folderPath, "meta.json"));
-  const existingFields = await readJsonFile(path.join(followup.folderPath, "daten.json"));
+  const existingData = await readJsonFile(path.join(followup.folderPath, "daten.json"));
+  const existingFields = existingData.fields || existingData;
   const additionFields = extractFields(additionText, followup.missingInfo);
   const combinedFields = mergeFields(existingFields, additionFields);
   const existingImageCount = Number(existingMeta.images?.length || existingMeta.imageCount || 0);
@@ -278,16 +313,18 @@ async function appendFollowup(batch) {
   const allImages = [...(existingMeta.images || []), ...savedImages];
   const allErrors = [...(existingMeta.imageErrors || []), ...imageErrors];
   const analysis = analyzeMessage(combinedText, allImages.length, combinedFields);
+  const data = buildDataJson(combinedFields, analysis, allImages);
 
   await fs.writeFile(path.join(followup.folderPath, "nachricht.txt"), combinedText, "utf8");
-  await fs.writeFile(path.join(followup.folderPath, "daten.json"), `${JSON.stringify(combinedFields, null, 2)}\n`, "utf8");
+  await fs.writeFile(path.join(followup.folderPath, "daten.json"), `${JSON.stringify(data, null, 2)}\n`, "utf8");
   await fs.writeFile(path.join(followup.folderPath, "kategorie.txt"), `${analysis.category}\n`, "utf8");
   await fs.writeFile(path.join(followup.folderPath, "analyse.txt"), buildAnalysisText(analysis), "utf8");
+  await fs.writeFile(path.join(followup.folderPath, "codex-prompt.txt"), buildCodexPrompt(data, combinedText), "utf8");
 
   const meta = {
     ...existingMeta,
     category: analysis.category,
-    fields: combinedFields,
+    fields: data,
     missingInfo: analysis.missingInfo,
     text: combinedText,
     imageCount: allImages.length,
@@ -318,10 +355,9 @@ async function appendFollowup(batch) {
   console.log(`Aktualisiert: ${followup.folderPath}`);
 
   if (replyInWhatsApp) {
-    const detectedImageCount = Number(meta.detectedImageCount || allImages.length);
     await batch.sock.sendMessage(
       batch.chatId,
-      { text: buildReplyText(analysis, allImages.length, followup.folderName, true, detectedImageCount) },
+      { text: buildReplyText(analysis, allImages.length, followup.folderName, true, Number(meta.detectedImageCount || allImages.length)) },
       { quoted: batch.firstMessage }
     );
   }
@@ -347,11 +383,14 @@ function extractMediaParts(message) {
   const parts = [];
 
   if (content.imageMessage) {
+    const caption = normalizeWhitespace(content.imageMessage.caption || "");
     parts.push({
       kind: "image",
       contentType,
       mimetype: content.imageMessage.mimetype,
-      caption: content.imageMessage.caption
+      caption,
+      publishAllowed: isImagePublishAllowed(caption),
+      publishUsage: isImagePublishAllowed(caption) ? "website" : "context_only"
     });
   }
 
@@ -392,10 +431,7 @@ function formatDateForFolder(date) {
 }
 
 function slugify(value) {
-  return normalizeWhitespace(value)
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+  return normalizeForAnalysis(value)
     .replace(/ä/g, "ae")
     .replace(/ö/g, "oe")
     .replace(/ü/g, "ue")
@@ -406,6 +442,13 @@ function slugify(value) {
 
 function normalizeWhitespace(value) {
   return String(value || "").replace(/\s+/g, " ").trim();
+}
+
+function normalizeForAnalysis(value) {
+  return normalizeWhitespace(value)
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 }
 
 function mimeToExtension(mimetype = "") {
@@ -433,7 +476,9 @@ async function saveImages(folderPath, mediaMessages, existingCount) {
           fileName,
           mimetype: media.mimetype || null,
           caption: media.caption || null,
-          messageId: mediaMessage.message.key.id || null
+          messageId: mediaMessage.message.key.id || null,
+          publishAllowed: media.publishAllowed !== false,
+          publishUsage: media.publishUsage || "website"
         });
       } catch (error) {
         imageErrors.push({
@@ -503,74 +548,6 @@ async function findOpenFollowupForChat(chatId) {
   return candidates[0] || null;
 }
 
-function analyzeMessage(text, imageCount = 0, fields = extractFields(text)) {
-  const normalized = normalizeForAnalysis(text);
-  const category = fields.kategorie || detectCategory(text);
-  const missingInfo = [];
-  const hasAnyText = normalizeWhitespace(text).length > 0;
-
-  if (!hasAnyText && imageCount > 0) {
-    return {
-      category,
-      missingInfo: [
-        "kurze Beschreibung",
-        "Datum",
-        category === CATEGORY_EINSAETZE ? "Einsatzort" : "Ort/Veranstaltungsort"
-      ]
-    };
-  }
-
-  if (!fields.datum && !hasDate(text)) missingInfo.push("Datum");
-
-  if (category === CATEGORY_EINSAETZE) {
-    if (!fields.uhrzeit && !hasTime(text)) missingInfo.push("Alarmzeit/Uhrzeit");
-    if (!fields.ort && !hasPlace(text)) missingInfo.push("Einsatzort");
-    if (!fields.beschreibung && !/(einsatz|alarm|t\d|b\d|s\d|vu|verkehrsunfall|brand|bergung|menschenrettung|unwetter)/i.test(normalized)) {
-      missingInfo.push("Einsatzart");
-    }
-  } else {
-    if (!fields.ort && !hasPlace(text)) missingInfo.push("Ort/Veranstaltungsort");
-    if (!fields.beschreibung && !hasEventTopic(text)) missingInfo.push("was genau passiert ist");
-  }
-
-  return { category, missingInfo: [...new Set(missingInfo)] };
-}
-
-function legacyDetectCategory(lower) {
-  if (/(einsatz|alarm|alarmierung|t\d|b\d|s\d|vu|verkehrsunfall|brand|bergung|menschenrettung|unwetter|technischer einsatz)/i.test(lower)) {
-    return "Einsätze";
-  }
-
-  if (/(ausbildung|uebung|übung|schulung|atemschutz|funkuebung|funkübung|einsatzuebung|einsatzübung|mitgliederschulung)/i.test(lower)) {
-    return "Ausbildung";
-  }
-
-  if (/(feuerwehrjugend|jugend|bewerb der jugend|wissenstest|fertigkeitsabzeichen|kinderfeuerwehr)/i.test(lower)) {
-    return "Feuerwehrjugend";
-  }
-
-  return "FF-News";
-}
-
-function legacyHasDate(text) {
-  return /(\b\d{1,2}\.\s?\d{1,2}\.\s?\d{2,4}\b|\b\d{1,2}\.\s?(januar|februar|maerz|märz|april|mai|juni|juli|august|september|oktober|november|dezember)\b|\b(montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag)\b|\bheute\b|\bgestern\b|\bmorgen\b)/i.test(text);
-}
-
-function legacyHasTime(text) {
-  return /(\b\d{1,2}:\d{2}\b|\b\d{1,2}\.\d{2}\s?uhr\b|\b\d{1,2}\s?uhr\b)/i.test(text);
-}
-
-function legacyHasPlace(text) {
-  return /(\b(in|bei|auf|am)\s+[A-ZÄÖÜA-Za-zÃ¤Ã¶Ã¼Ã„Ã–Ãœ][\wÃ¤Ã¶Ã¼Ã„Ã–ÃœÃŸ-]+|\b(ort|einsatzort)\b|rastenfeld|rastenberg|peygarten|ottenstein|niedernondorf|haderdorf|hadersdorf|b38|b 38|l8245|l 8245)/i.test(text);
-}
-
-function legacyHasEventTopic(text) {
-  const normalized = normalizeWhitespace(text);
-  if (normalized.length >= 35) return true;
-
-  return /(bewerb|wettkampf|wettk[aä]mpf|fest|messe|floriani|wandertag|maibaum|ausflug|begehung|anschaffung|ehrung|besuch|veranstaltung|uebung|übung|ausbildung|jugend|feuerwehrjugend|einsatz)/i.test(text);
-}
-
 function extractFields(text, missingInfo = []) {
   const fields = {
     kategorie: readField(text, ["kategorie", "category"]),
@@ -628,67 +605,37 @@ function normalizeCategory(value) {
   return CATEGORY_NEWS;
 }
 
-function extractDateValue(text) {
-  const match = /(\b\d{1,2}\.\s?\d{1,2}\.\s?\d{2,4}\b|\b\d{1,2}\.\s?(januar|februar|maerz|märz|marz|april|mai|juni|juli|august|september|oktober|november|dezember)\b|\b(montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag)\b|\bheute\b|\bgestern\b|\bmorgen\b)/i.exec(text);
-  return match ? normalizeWhitespace(match[1]) : "";
-}
+function analyzeMessage(text, imageCount = 0, fields = extractFields(text)) {
+  const normalized = normalizeForAnalysis(text);
+  const category = fields.kategorie || detectCategory(text);
+  const missingInfo = [];
+  const hasAnyText = normalizeWhitespace(text).length > 0;
 
-function extractTimeValue(text) {
-  const match = /(\b\d{1,2}:\d{2}\b|\b\d{1,2}\.\d{2}\s?uhr\b|\b\d{1,2}\s?uhr\b)/i.exec(text);
-  return match ? normalizeWhitespace(match[1]) : "";
-}
-
-function buildAnalysisText(analysis) {
-  const missing = analysis.missingInfo.length > 0
-    ? analysis.missingInfo.map((item) => `- ${item}`).join("\n")
-    : "- keine offensichtlichen Pflichtinfos fehlen";
-
-  return `Website Bot Analyse\n\nKategorie: ${analysis.category}\n\nFehlende/unklare Infos:\n${missing}\n`;
-}
-
-function buildReplyText(analysis, imageCount, folderName, updated = false, detectedImageCount = imageCount) {
-  const imageLine = detectedImageCount === imageCount
-    ? `Bilder: ${imageCount}`
-    : `Bilder: ${imageCount} gespeichert, ${detectedImageCount} erkannt`;
-  const lines = [
-    "*----- Website Bot :) -----*",
-    updated ? "Update gespeichert" : "Material gespeichert",
-    "",
-    `Status: ${analysis.missingInfo.length > 0 ? "Rueckfrage offen" : "bereit fuer Bearbeitung"}`,
-    `Kategorie: ${analysis.category}`,
-    imageLine,
-    `Ordner: ${folderName}`
-  ];
-
-  if (analysis.missingInfo.length > 0) {
-    lines.push("");
-    lines.push("Mir fehlt noch:");
-    for (const item of analysis.missingInfo) {
-      lines.push(`- ${item}`);
-    }
-    lines.push("");
-    lines.push("Bitte so antworten:");
-    lines.push("Kategorie: FF-News");
-    lines.push("Datum: 31.05.2026");
-    lines.push("Ort: Rastenfeld");
-    lines.push("Beschreibung: kurzer Inhalt fuer den Bericht");
-  } else {
-    lines.push("");
-    lines.push("Danke, alle Basisinfos sind vorhanden.");
+  if (!hasAnyText && imageCount > 0) {
+    return {
+      category,
+      missingInfo: [
+        "kurze Beschreibung",
+        "Datum",
+        category === CATEGORY_EINSAETZE ? "Einsatzort" : "Ort/Veranstaltungsort"
+      ]
+    };
   }
 
-  return lines.join("\n");
-}
+  if (!fields.datum && !hasDate(text)) missingInfo.push("Datum");
 
-function isBotReply(text) {
-  return text.startsWith("*----- Website Bot") || text.startsWith("Gespeichert fuer die Website-Bearbeitung.");
-}
+  if (category === CATEGORY_EINSAETZE) {
+    if (!fields.uhrzeit && !hasTime(text)) missingInfo.push("Alarmzeit/Uhrzeit");
+    if (!fields.ort && !hasPlace(text)) missingInfo.push("Einsatzort");
+    if (!fields.beschreibung && !/(einsatz|alarm|t\d|b\d|s\d|vu|verkehrsunfall|brand|bergung|menschenrettung|unwetter)/i.test(normalized)) {
+      missingInfo.push("Einsatzart");
+    }
+  } else {
+    if (!fields.ort && !hasPlace(text)) missingInfo.push("Ort/Veranstaltungsort");
+    if (!fields.beschreibung && !hasEventTopic(text)) missingInfo.push("was genau passiert ist");
+  }
 
-function normalizeForAnalysis(value) {
-  return normalizeWhitespace(value)
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+  return { category, missingInfo: [...new Set(missingInfo)] };
 }
 
 function detectCategory(text) {
@@ -732,6 +679,143 @@ function hasEventTopic(text) {
   if (normalized.length >= 35) return true;
 
   return /(bewerb|wettkampf|fest|messe|floriani|wandertag|maibaum|ausflug|begehung|anschaffung|ehrung|besuch|veranstaltung|ubung|uebung|ausbildung|jugend|feuerwehrjugend|einsatz)/i.test(normalized);
+}
+
+function extractDateValue(text) {
+  const match = /(\b\d{1,2}\.\s?\d{1,2}\.\s?\d{2,4}\b|\b\d{1,2}\.\s?(januar|februar|maerz|märz|marz|april|mai|juni|juli|august|september|oktober|november|dezember)\b|\b(montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag)\b|\bheute\b|\bgestern\b|\bmorgen\b)/i.exec(text);
+  return match ? normalizeWhitespace(match[1]) : "";
+}
+
+function extractTimeValue(text) {
+  const match = /(\b\d{1,2}:\d{2}\b|\b\d{1,2}\.\d{2}\s?uhr\b|\b\d{1,2}\s?uhr\b)/i.exec(text);
+  return match ? normalizeWhitespace(match[1]) : "";
+}
+
+function buildDataJson(fields, analysis, images) {
+  const publishableImages = images.filter((image) => image.publishAllowed !== false);
+  const contextOnlyImages = images.filter((image) => image.publishAllowed === false);
+
+  return {
+    status: analysis.missingInfo.length > 0 ? "needs_review" : "ready",
+    category: analysis.category,
+    fields,
+    missingInfo: analysis.missingInfo,
+    imagePolicy: {
+      total: images.length,
+      publishable: publishableImages.length,
+      contextOnly: contextOnlyImages.length,
+      rule: "Bilder mit Caption 'nein', 'nicht posten', 'intern' oder ähnlichem nicht veröffentlichen; nur als Kontext verwenden."
+    },
+    images: images.map((image) => ({
+      fileName: image.fileName,
+      caption: image.caption || "",
+      publishAllowed: image.publishAllowed !== false,
+      usage: image.publishAllowed === false ? "context_only" : "website",
+      note: image.publishAllowed === false
+        ? "Nicht auf der Website verwenden. Nur als Infodetail/Kontext fuer den Beitrag."
+        : "Darf fuer die Website verwendet werden, sofern bei manueller Pruefung keine Datenschutzprobleme auffallen."
+    })),
+    aiInstructions: [
+      "Keine Fakten erfinden.",
+      "Fehlende Informationen neutral formulieren oder als fehlend markieren.",
+      "Bilder mit publishAllowed=false nie veroeffentlichen, nur als Kontext/Infodetail nutzen.",
+      "Bei Einsatzbildern, Personen, Kennzeichen oder sensiblen Infos besonders vorsichtig sein.",
+      "Online-Informationen duerfen nur zur vorsichtigen Pruefung oder Ergaenzung genutzt werden, wenn sie eindeutig aktuell und zum Thema passend sind.",
+      "Wenn online nichts Sicheres gefunden wird, nichts dazuerfinden."
+    ]
+  };
+}
+
+function buildCodexPrompt(data, text) {
+  const publishable = data.images.filter((image) => image.publishAllowed).map((image) => image.fileName);
+  const contextOnly = data.images.filter((image) => !image.publishAllowed).map((image) => image.fileName);
+
+  return [
+    "Aufgabe fuer Codex/KI:",
+    "Erstelle aus diesem Ordner einen Website-Beitrag fuer die FF Rastenfeld.",
+    "",
+    "Wichtige Regeln:",
+    "- Keine Fakten erfinden.",
+    "- Wenn Informationen fehlen, neutral formulieren oder fehlende Informationen nennen.",
+    "- Online-Informationen duerfen nur zur Pruefung/Ergaenzung genutzt werden, wenn sie eindeutig aktuell, verlaesslich und direkt zum Thema passend sind.",
+    "- Wenn online keine sicheren Informationen gefunden werden, nichts ergaenzen und nichts dazuerfinden.",
+    "- Stil, Aufbau und Formulierung an bestehenden Website-Beitraegen orientieren.",
+    "- Beitrag zuerst als Entwurf/Codevorschlag behandeln, nicht automatisch veroeffentlichen.",
+    "",
+    "Bildregeln:",
+    `- Fuer Website erlaubt: ${publishable.length > 0 ? publishable.join(", ") : "keine"}`,
+    `- Nur Kontext/Infodetail, NICHT veroeffentlichen: ${contextOnly.length > 0 ? contextOnly.join(", ") : "keine"}`,
+    "- context_only-Bilder duerfen inhaltlich ausgewertet werden, aber nicht als Website-Bild eingebunden werden.",
+    "",
+    "Strukturierte Daten:",
+    JSON.stringify(data, null, 2),
+    "",
+    "Originalnachricht:",
+    text || "(kein Text)"
+  ].join("\n");
+}
+
+function buildAnalysisText(analysis) {
+  const missing = analysis.missingInfo.length > 0
+    ? analysis.missingInfo.map((item) => `- ${item}`).join("\n")
+    : "- keine offensichtlichen Pflichtinfos fehlen";
+
+  return `Website Bot Analyse\n\nKategorie: ${analysis.category}\n\nFehlende/unklare Infos:\n${missing}\n`;
+}
+
+function buildReplyText(analysis, imageCount, folderName, updated = false, detectedImageCount = imageCount) {
+  const imageLine = detectedImageCount === imageCount
+    ? `Bilder: ${imageCount}`
+    : `Bilder: ${imageCount} gespeichert, ${detectedImageCount} erkannt`;
+  const lines = [
+    "*----- Website Bot :) -----*",
+    updated ? "Zusatzinfos wurden im bestehenden Ordner ergaenzt." : "Gespeichert fuer die Website-Bearbeitung.",
+    `Kategorie: ${analysis.category}`,
+    imageLine,
+    `Ordner: ${folderName}`
+  ];
+
+  if (analysis.missingInfo.length > 0) {
+    lines.push("");
+    lines.push(`Bitte noch als Zusatzinfo schicken: ${analysis.missingInfo.join(", ")}`);
+  } else {
+    lines.push("");
+    lines.push("Alle wichtigen Basisinfos sind vorhanden.");
+  }
+
+  return lines.join("\n");
+}
+
+function buildBotNotice(message) {
+  return ["*----- Website Bot :) -----*", message].join("\n");
+}
+
+async function sendStartupOnlineMessage(sock) {
+  if (!replyInWhatsApp || !startupOnlineMessage) return;
+
+  for (const chatId of allowedChatIds) {
+    await sock.sendMessage(chatId, {
+      text: buildBotNotice("Bot ist online und hört wieder auf neue Nachrichten.")
+    });
+  }
+}
+
+function isBotReply(text) {
+  return text.startsWith("*----- Website Bot") || text.startsWith("Gespeichert fuer die Website-Bearbeitung.");
+}
+
+function isImagePublishAllowed(caption) {
+  const normalized = normalizeForAnalysis(caption);
+  if (!normalized) return true;
+
+  return !/(^|\s)(nein|no|nicht posten|nicht veroeffentlichen|nicht veroffentlichen|nicht verwenden|intern|privat|keine freigabe|nur info|nur kontext)(\s|$)/i.test(normalized);
+}
+
+function isImagePolicyOnly(text, mediaParts) {
+  if (!text || mediaParts.length === 0) return false;
+  const normalized = normalizeForAnalysis(text);
+
+  return /^(nein|no|nicht posten|nicht veroeffentlichen|nicht veroffentlichen|nicht verwenden|intern|privat|keine freigabe|nur info|nur kontext)$/.test(normalized);
 }
 
 function parseBoolean(value, fallback = false) {

@@ -10,6 +10,31 @@ public class DataService
 
     new Post
     {
+        Id = 24,
+        Slug = "bergung-wasserfahrzeug-ruessbucht-rastenfeld",
+        Emoji = "bergung-wasserfahrzeug-ruessbucht-rastenfeld",
+        Titel = "Bergung eines Wasserfahrzeuges in der Ruessbucht",
+        Kategorie = "Einsätze",
+        Datum = new DateTime(2026, 6, 8, 10, 45, 0),
+        Kurztext =
+            "Die FF Rastenfeld wurde zu einem untergegangenen Boot bei der Bootsanlegestelle Ruessbucht alarmiert.",
+        Volltext =
+            "Am Montag, dem 8. Juni 2026, wurde die Freiwillige Feuerwehr Rastenfeld um 10:45 Uhr zu einer Bergung eines Wasserfahrzeuges in die Ruessbucht bei Rastenfeld alarmiert.\n\n" +
+            "Bei der Bootsanlegestelle Ruessbucht war ein Boot untergegangen. Die Einsatzkräfte unterstützten vor Ort bei der Bergung des Wasserfahrzeuges und arbeiteten dabei im Uferbereich des Stausees.\n\n" +
+            "Die Ruessbucht liegt im Gemeindegebiet Rastenfeld und ist unter anderem als Bootsanlegestelle sowie als Bereich am Stausee bekannt. Nach Abschluss der Arbeiten konnte der Einsatz beendet werden.",
+        BildPlaceholder = "🚒",
+        EinsatzTyp = "T1 – Bergung Wasserfahrzeug",
+        EinsatzOrt = "Bootsanlegestelle Ruessbucht, Rastenfeld",
+        EinsatzZeit = "10:45 Uhr",
+        EinsatzKraefte = 3,
+        Bilder =
+        [
+            "bergung-wasserfahrzeug-ruessbucht-rastenfeld-zufahrt.jpeg"
+        ]
+    },
+
+    new Post
+    {
         Id = 23,
         Slug = "ehrung-johann-herzog-freiwilliger-des-jahres-2026",
         Emoji = "ehrung-johann-herzog-freiwilliger-des-jahres-2026",

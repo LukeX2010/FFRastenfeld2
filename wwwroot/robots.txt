@@ -1,8 +1,5 @@
 User-agent: *
 Allow: /
 Allow: /_framework/
-Disallow: /impressum
-Disallow: /datenschutz
 
 Sitemap: https://ffrastenfeld.at/sitemap.xml
-

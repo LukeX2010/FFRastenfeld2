@@ -4,43 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="07c4d50b-b3cd-4425-9a40-ffd0902cee81" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/DataService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/DataService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.staticwebassets.endpoints.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.staticwebassets.endpoints.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.staticwebassets.runtime.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.staticwebassets.runtime.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.pdb.gz" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.pdb.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.wasm" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.wasm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.wasm.gz" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.wasm.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/blazor.boot.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/blazor.boot.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/blazor.boot.json.gz" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/blazor.boot.json.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/blazor.boot.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/blazor.boot.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/8jhgo8224x-033t3ch5d8.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/qhrzwiqj6i-7bnt0nx5yn.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ynsrm5qgc4-0y6e0gsc7q.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/rbcswa.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/rbcswa.dswa.cache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/ref/FFRastenfeld.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/ref/FFRastenfeld.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/refint/FFRastenfeld.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/refint/FFRastenfeld.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/rjimswa.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/rjimswa.dswa.cache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/rjsmcshtml.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/rjsmcshtml.dswa.cache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/rjsmrazor.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/rjsmrazor.dswa.cache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/rpswa.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/rpswa.dswa.cache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.build.endpoints.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.build.endpoints.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.build.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.build.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.build.json.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.build.json.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.development.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/tmp-webcil/FFRastenfeld.wasm" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/tmp-webcil/FFRastenfeld.wasm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/webcil/FFRastenfeld.wasm" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/webcil/FFRastenfeld.wasm" afterDir="false" />
-    </list>
+    <list default="true" id="07c4d50b-b3cd-4425-9a40-ffd0902cee81" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -113,6 +77,7 @@
       <workItem from="1776689924118" duration="7000" />
       <workItem from="1776876956130" duration="2530000" />
       <workItem from="1779186135705" duration="2064000" />
+      <workItem from="1780913301475" duration="852000" />
     </task>
     <servers />
   </component>

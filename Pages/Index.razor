@@ -74,28 +74,35 @@
                 <a href="/news" class="btn btn-outline-small">Alle News →</a>
             </div>
             
-            <!-- INSTAGRAM EMBED -->
+            <!-- Externe Medien: werden erst nach Zustimmung oder Klick geladen -->
             <div class="embed-row">
-                <div class="instagram-embed-wrap">
-                    <iframe
-                        src="https://www.instagram.com/ff_rastenfeld/embed" 
-                        frameborder="0"
-                        loading="lazy"
-                        allowtransparency="true" scrolling="no"
-                        allowfullscreen
-                        title="Instagram FF Rastenfeld"
-                        class="instagram-iframe" >
-                    </iframe>
+                <div class="instagram-embed-wrap external-media-placeholder"
+                     data-external-embed
+                     data-embed-type="iframe"
+                     data-src="https://www.instagram.com/ff_rastenfeld/embed"
+                     data-title="Instagram FF Rastenfeld"
+                     data-class="external-media-frame external-media-frame--instagram"
+                     data-referrer-policy="no-referrer-when-downgrade">
+                    <div class="external-media-placeholder__inner">
+                        <span class="external-media-placeholder__icon">IG</span>
+                        <h3>Instagram anzeigen</h3>
+                        <p>Der Instagram-Beitrag wird von Meta geladen. Dabei koennen personenbezogene Daten an Meta uebermittelt werden.</p>
+                        <button type="button" class="btn btn-primary" data-load-external>Instagram laden</button>
+                    </div>
                 </div>
-                <div class="instagram-embed-wrap">
-                    <iframe
-                        src="https://infoscreen.florian10.info/ows/wastlmobileweb/#bezirk_10"
-                        frameborder="0"
-                        loading="lazy"
-                        allowtransparency="true"
-                        title="BAZ Krems Unwetterwarnung"
-                        class="instagram-iframe">
-                    </iframe>
+                <div class="instagram-embed-wrap external-media-placeholder"
+                     data-external-embed
+                     data-embed-type="iframe"
+                     data-src="https://infoscreen.florian10.info/ows/wastlmobileweb/#bezirk_10"
+                     data-title="BAZ Krems Unwetterwarnung"
+                     data-class="external-media-frame external-media-frame--infoscreen"
+                     data-referrer-policy="no-referrer-when-downgrade">
+                    <div class="external-media-placeholder__inner">
+                        <span class="external-media-placeholder__icon">i</span>
+                        <h3>Infoscreen anzeigen</h3>
+                        <p>Der Florian10 Infoscreen wird extern geladen und kann Verbindungsdaten an den Anbieter uebertragen.</p>
+                        <button type="button" class="btn btn-primary" data-load-external>Infoscreen laden</button>
+                    </div>
                 </div>
             </div>
             
@@ -139,11 +146,11 @@
             <div class="sidebar-widget">
                 <h3>Links</h3>
                 <ul class="sidebar-links">
-                    <li><a href="https://www.noelfv.at" target="_blank">NÖ Landesfeuerwehrverband</a></li>
-                    <li><a href="https://www.bfk-krems.at" target="_blank">BFK Krems-Land</a></li>
-                    <li><a href="https://www.noelfv.at/wastl" target="_blank">WASTL Einsatzmonitor</a></li>
-                    <li><a href="https://www.noelfv.at/lfws" target="_blank">NÖ Landesfeuerwehrschule</a></li>
-                    <li><a href="https://www.rastenfeld.at" target="_blank">Marktgemeinde Rastenfeld</a></li>
+                    <li><a href="https://www.noelfv.at" target="_blank" rel="noopener noreferrer">NÖ Landesfeuerwehrverband</a></li>
+                    <li><a href="https://www.bfk-krems.at" target="_blank" rel="noopener noreferrer">BFK Krems-Land</a></li>
+                    <li><a href="https://www.noelfv.at/wastl" target="_blank" rel="noopener noreferrer">WASTL Einsatzmonitor</a></li>
+                    <li><a href="https://www.noelfv.at/lfws" target="_blank" rel="noopener noreferrer">NÖ Landesfeuerwehrschule</a></li>
+                    <li><a href="https://www.rastenfeld.at" target="_blank" rel="noopener noreferrer">Marktgemeinde Rastenfeld</a></li>
                 </ul>
             </div>
 

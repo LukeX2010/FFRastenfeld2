@@ -18,7 +18,16 @@ else
                         <span class="post-card-kat post-card-kat--feuerwehrjugend">Feuerwehrjugend</span>
                         <time>@post.Datum.ToString("d. MMMM yyyy")</time>
                     </div>
-                    <div class="detail-img"><span class="detail-img-emoji">@post.BildPlaceholder</span><p class="img-caption">Foto: FF Rastenfeld (Platzhalterbild)</p></div>
+                    @if (post.Bilder?.Any(image => image.Replace("\\", "/").StartsWith("posts/", StringComparison.OrdinalIgnoreCase)) == true)
+                    {
+                        <div class="detail-img">
+                            <img src="@DS.GetMainImageSrc(post)" class="hero-bg-img" alt="@post.Titel" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="detail-img"><span class="detail-img-emoji">@post.BildPlaceholder</span><p class="img-caption">Foto: FF Rastenfeld (Platzhalterbild)</p></div>
+                    }
                     <div class="detail-body"><p>@post.Volltext</p></div>
                     <a href="/feuerwehrjugend" class="back-link">← Zurück zu Feuerwehrjugend</a>
                 </article>

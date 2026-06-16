@@ -1,19 +1,36 @@
 @using Microsoft.AspNetCore.Components.Routing
+@inject DataService DS
 
-<Router AppAssembly="@typeof(App).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(Layouts.MainLayout)" />
-        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
-    </Found>
-    <NotFound>
-        <PageTitle>404 – Seite nicht gefunden | FF Rastenfeld</PageTitle>
-        <LayoutView Layout="@typeof(Layouts.MainLayout)">
-            <div class="not-found">
-                <h1>404</h1>
-                <p>Diese Seite wurde nicht gefunden.</p>
-                <a href="/" class="btn btn-primary">Zur Startseite</a>
-            </div>
-        </LayoutView>
-    </NotFound>
-</Router>
+@if (!postsReady)
+{
+    <div class="app-loading">Beitr&auml;ge werden geladen...</div>
+}
+else
+{
+    <Router AppAssembly="@typeof(App).Assembly">
+        <Found Context="routeData">
+            <RouteView RouteData="@routeData" DefaultLayout="@typeof(Layouts.MainLayout)" />
+            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+        </Found>
+        <NotFound>
+            <PageTitle>404 - Seite nicht gefunden | FF Rastenfeld</PageTitle>
+            <LayoutView Layout="@typeof(Layouts.MainLayout)">
+                <div class="not-found">
+                    <h1>404</h1>
+                    <p>Diese Seite wurde nicht gefunden.</p>
+                    <a href="/" class="btn btn-primary">Zur Startseite</a>
+                </div>
+            </LayoutView>
+        </NotFound>
+    </Router>
+}
 
+@code {
+    private bool postsReady;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await DS.EnsurePostsLoadedAsync();
+        postsReady = true;
+    }
+}

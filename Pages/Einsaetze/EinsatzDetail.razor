@@ -34,7 +34,7 @@ else
 
                     <!-- Platzhalterbild -->
                     <div class="detail-img">
-                        <img src="@($"img/{post.Slug}.jpeg")" class="hero-bg-img" alt="@post.Titel" />
+                        <img src="@DS.GetMainImageSrc(post)" class="hero-bg-img" alt="@post.Titel" />
                     </div>
 
                     <!-- Volltext -->

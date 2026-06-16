@@ -23,7 +23,7 @@ else
                         <time>@post.Datum.ToString("d. MMMM yyyy")</time>
                     </div>
                     <div class="detail-img">
-                        <img src="@($"img/{post.Slug}.jpeg")" class="hero-bg-img" alt="@post.Titel"/>
+                        <img src="@DS.GetMainImageSrc(post)" class="hero-bg-img" alt="@post.Titel"/>
                     </div>
                     <div class="detail-body"><p>@post.Volltext</p></div>
 

@@ -1,313 +1,87 @@
+using System.Net.Http.Json;
+using System.Text.Json;
 using FFRastenfeld.Models;
 
 namespace FFRastenfeld.Services;
 
 public class DataService
 {
-    // ── POSTS (Einsätze + News + Ausbildung + Jugend) ─────────────────────────
-    public List<Post> GetPosts() => new()
+    // POSTS (werden aus wwwroot/data/posts.json geladen)
+    private static readonly JsonSerializerOptions PostJsonOptions = new(JsonSerializerDefaults.Web)
     {
-
-    new Post
-    {
-        Id = 24,
-        Slug = "bergung-wasserfahrzeug-ruessbucht-rastenfeld",
-        Emoji = "bergung-wasserfahrzeug-ruessbucht-rastenfeld",
-        Titel = "Bergung eines Wasserfahrzeuges in der Ruessbucht",
-        Kategorie = "Einsätze",
-        Datum = new DateTime(2026, 6, 8, 10, 45, 0),
-        Kurztext =
-            "Die FF Rastenfeld wurde zu einem untergegangenen Boot bei der Bootsanlegestelle Ruessbucht alarmiert.",
-        Volltext =
-            "Am Montag, dem 8. Juni 2026, wurde die Freiwillige Feuerwehr Rastenfeld um 10:45 Uhr zu einer Bergung eines Wasserfahrzeuges in die Ruessbucht bei Rastenfeld alarmiert.\n\n" +
-            "Bei der Bootsanlegestelle Ruessbucht war ein Boot untergegangen. Die Einsatzkräfte unterstützten vor Ort bei der Bergung des Wasserfahrzeuges und arbeiteten dabei im Uferbereich des Stausees.\n\n" +
-            "Die Ruessbucht liegt im Gemeindegebiet Rastenfeld und ist unter anderem als Bootsanlegestelle sowie als Bereich am Stausee bekannt. Nach Abschluss der Arbeiten konnte der Einsatz beendet werden.",
-        BildPlaceholder = "🚒",
-        EinsatzTyp = "T1 – Bergung Wasserfahrzeug",
-        EinsatzOrt = "Bootsanlegestelle Ruessbucht, Rastenfeld",
-        EinsatzZeit = "10:45 Uhr",
-        EinsatzKraefte = 3,
-        Bilder =
-        [
-            "bergung-wasserfahrzeug-ruessbucht-rastenfeld-zufahrt.jpeg"
-        ]
-    },
-
-    new Post
-    {
-        Id = 23,
-        Slug = "ehrung-johann-herzog-freiwilliger-des-jahres-2026",
-        Emoji = "ehrung-johann-herzog-freiwilliger-des-jahres-2026",
-        Titel = "Ehren-Oberbrandinspektor Johann Herzog als Freiwilliger des Jahres geehrt",
-        Kategorie = "FF-News",
-        Datum = new DateTime(2026, 6, 5),
-        Kurztext =
-            "Johann Herzog wurde bei der BIOEM in Großschönau als einer der besten Waldviertler Freiwilligen 2026 geehrt.",
-        Volltext =
-            "Am Freitag, dem 5. Juni 2026, fand im Rahmen der BIOEM in Großschönau die Ehrung der besten Waldviertler Freiwilligen 2026 statt. Die BIOEM 2026 wurde von 4. bis 7. Juni am Messegelände in Großschönau veranstaltet; die Freiwilligenehrung war Teil des offiziellen Rahmenprogramms.\n\n" +
-            "Unter den Geehrten war auch EOBI Johann Herzog aus Rastenfeld. Mit der Auszeichnung wird freiwilliges Engagement sichtbar gemacht und der Einsatz jener Menschen gewürdigt, die sich über viele Jahre hinweg für ihre Gemeinde und das Miteinander in der Region einbringen.\n\n" +
-            "Für die Freiwillige Feuerwehr Rastenfeld ist diese Ehrung eine besondere Anerkennung der langjährigen Verbundenheit, Kameradschaft und Bereitschaft, Verantwortung zu übernehmen. Johann Herzog steht damit beispielhaft für gelebtes Ehrenamt und verlässlichen Dienst an der Gemeinschaft.",
-        BildPlaceholder = "🚒",
-        Bilder =
-        [
-            "ehrung-johann-herzog-freiwilliger-des-jahres-2026-gruppe.jpeg",
-            "ehrung-johann-herzog-freiwilliger-des-jahres-2026-alle-geehrten.jpeg"
-        ]
-    },
-
-    new Post
-    {
-        Id = 22,
-        Slug = "florianimesse-rastenfeld-2026",
-        Emoji = "florianimesse-rastenfeld-2026",
-        Titel = "Florianimesse 2026 am Marktplatz Rastenfeld",
-        Kategorie = "FF-News",
-        Datum = new DateTime(2026, 5, 14),
-        Kurztext =
-            "Die FF Rastenfeld nahm gemeinsam mit der FF Peygarten an der Florianimesse am Marktplatz Rastenfeld teil.",
-        Volltext =
-            "Am Donnerstag, dem 14. Mai 2026, fand am Marktplatz Rastenfeld die Florianimesse statt. Die Freiwillige Feuerwehr Rastenfeld nahm gemeinsam mit der FF Peygarten daran teil.\n\n" +
-            "Musikalisch begleitet wurde die Feier von der Musikkapelle Waldhausen. Nach der Messe folgte der gemeinsame Auszug am Marktplatz.\n\n" +
-            "Die Florianimesse ist fuer die Feuerwehren ein wichtiger Fixpunkt im Jahreslauf: Sie verbindet das Gedenken an den Schutzpatron der Feuerwehr mit Kameradschaft, Tradition und dem gemeinsamen Auftreten in der Gemeinde.",
-        BildPlaceholder = "ðŸš’",
-        Bilder =
-        [
-            "florianimesse-rastenfeld-2026-ausrueckung.jpeg"
-        ]
-    },
-
-    new Post
-    {
-        Id = 21,
-        Slug = "abschnittsfeuerwehrleistungsbewerb-hadersdorf-2026",
-        Emoji = "abschnittsfeuerwehrleistungsbewerb-hadersdorf-2026",
-        Titel = "Bewerbsgruppe beim Abschnittsfeuerwehrleistungsbewerb in Hadersdorf",
-        Kategorie = "FF-News",
-        Datum = new DateTime(2026, 5, 30),
-        Kurztext =
-            "Die Bewerbsgruppe der FF Rastenfeld trat beim Abschnittsfeuerwehrleistungsbewerb in Hadersdorf am Kamp in Bronze und Silber an.",
-        Volltext =
-            "Am Samstag, dem 30. Mai 2026, nahm die Bewerbsgruppe der Freiwilligen Feuerwehr Rastenfeld am Abschnittsfeuerwehrleistungsbewerb in Hadersdorf am Kamp teil.\n\n" +
-            "In Bronze erreichte die Gruppe eine Angriffszeit von 57,43 Sekunden, musste jedoch 35 Fehlerpunkte hinnehmen. In Silber gelang ein Lauf mit 1:12,00 Minuten und 15 Fehlerpunkten.\n\n" +
-            "Auch wenn nicht alles fehlerfrei verlief, war der Bewerb ein wichtiger Teil der laufenden Vorbereitung. Jeder Antritt bringt Erfahrung, Routine und Zusammenhalt für die naechsten Bewerbe.",
-        BildPlaceholder = "🚒"
-    },
-
-    new Post
-    {
-        Id = 20,
-        Slug = "baum-auf-strasse-rastenberg-2026",
-        Emoji = "baum-auf-strasse-rastenberg-2026",
-        Titel = "Baum blockierte die L8245 bei Rastenberg",
-        Kategorie = "Einsätze",
-        Datum = new DateTime(2026, 5, 30, 13, 55, 0),
-        Kurztext =
-            "Nach einem Gewitter wurde die FF Rastenfeld zu einem umgestuerzten Baum auf der L8245 bei Rastenberg alarmiert.",
-        Volltext =
-            "Am Samstag, dem 30. Mai 2026, wurde die Freiwillige Feuerwehr Rastenfeld um 13:55 Uhr zu einem technischen Einsatz nach Rastenberg alarmiert.\n\n" +
-            "Auf der L8245, im Bereich km 14,2 vor der Ortstafel Rastenberg in Fahrtrichtung B37, war nach einem Gewitter ein Baum auf die Strasse gestuerzt und blockierte die Fahrbahn.\n\n" +
-            "Die Einsatzkraefte sicherten die Einsatzstelle ab, entfernten den Baum und reinigten anschliessend die Fahrbahn. Danach konnte die Strasse wieder freigegeben werden.",
-        BildPlaceholder = "🚒",
-        EinsatzTyp = "T1 - Objekt/Baum umgestuerzt",
-        EinsatzOrt = "L8245 km 14,2, Rastenberg",
-        EinsatzZeit = "13:55 Uhr",
-        EinsatzKraefte = 4
-    },
-
-    new Post
-    {
-        Id = 19,
-        Slug = "schadstoffuebung-mottingeramt-2026",
-        Emoji = "schadstoffuebung-mottingeramt-2026",
-        Titel = "Uebung Fahrzeugbrand und Schadstoffausruestung",
-        Kategorie = "Ausbildung",
-        Datum = new DateTime(2026, 5, 29),
-        Kurztext =
-            "In Mottingeramt beuebte die FF Rastenfeld einen Fahrzeugbrand in einer Garage und den Umgang mit neuer Schadstoffausruestung.",
-        Volltext =
-            "Am Freitag, dem 29. Mai 2026, fuehrte die Freiwillige Feuerwehr Rastenfeld in Mottingeramt eine praxisnahe Übung durch.\n\n" +
-            "Angenommen wurde ein Fahrzeugbrand in einer Garage. Neben dem Vorgehen unter Atemschutz standen auch Erkundung, Brandbekaempfung und die sichere Arbeit im direkten Gefahrenbereich im Mittelpunkt.\n\n" +
-            "Zusaetzlich wurde neue Ausruestung fuer Schadstoffeinsaetze getestet. Dazu gehoerten saeurebestaendige Ganzkoerperschutzanzuege der Kategorie 2, Moosplatten sowie eine Auffangwanne. Solche Uebungen helfen, Geraete und Ablaeufe im Team zu festigen.",
-        BildPlaceholder = "🚒",
-        Bilder =
-        [
-            "schadstoffuebung-mottingeramt-2026-ausruestung.jpeg",
-            "schadstoffuebung-mottingeramt-2026-erkundung.jpeg"
-        ]
-    },
-
-    new Post
-    {
-        Id = 18,
-        Slug = "dreidoerfer-wandertag-niedergruenbach-2026",
-        Emoji = "dreidoerfer-wandertag-niedergruenbach-2026",
-        Titel = "28. Dreidoerfer Wandertag in Niedergruenbach",
-        Kategorie = "FF-News",
-        Datum = new DateTime(2026, 5, 24),
-        Kurztext =
-            "Beim 28. Dreidoerfer Wandertag in Niedergruenbach stellte die FF Rastenfeld die zweitgroesste Wandergruppe.",
-        Volltext =
-            "Am Sonntag, dem 24. Mai 2026, fand in Niedergruenbach der 28. Dreidoerfer Wandertag statt. Start und Ziel befanden sich in Niedergruenbach; die Route fuehrte durch die Orte Niedergruenbach, Marbach im Felde und Sperkental.\n\n" +
-            "Bei sonnigem Wetter machte sich auch eine Gruppe der Freiwilligen Feuerwehr Rastenfeld auf den Weg. Entlang der Strecke sorgten drei Labstationen fuer Verpflegung und kurze Pausen.\n\n" +
-            "Besonders erfreulich: Die FF Rastenfeld stellte die zweitgroesste Wandergruppe der Veranstaltung. Im Anschluss klang der Tag bei gemeinsamer Verpflegung in Niedergruenbach gemuetlich aus.",
-        BildPlaceholder = "🚒"
-    },
-
-    new Post
-    {
-        Id = 17,
-        Slug = "auffahrunfall-b38-rastenfeld",
-        Emoji = "auffahrunfall-b38-rastenfeld",
-        Titel = "Auffahrunfall auf der B38",
-        Kategorie = "Einsätze",
-        Datum = new DateTime(2026, 5, 22, 16, 36, 0),
-        Kurztext =
-            "Auffahrunfall auf der B38 bei Rastenfeld: Zwei verletzte Personen wurden vom Rettungsdienst versorgt.",
-        Volltext =
-            "Am Freitag, dem 22. Mai 2026, wurde die Freiwillige Feuerwehr Rastenfeld um 16:36 Uhr zu einem Verkehrsunfall mit Verletzungen auf die B38, Höhe km 29 bei der Kreuzung Rastenfeld/Umfahrung Zwettl, alarmiert.\n\n" +
-            "Aus bislang unbekannter Ursache kam es zu einem Auffahrunfall. Beim Eintreffen der Feuerwehr wurden zwei verletzte Personen bereits vom Rettungsdienst versorgt; niemand war im Fahrzeug eingeklemmt.\n\n" +
-            "Die Einsatzkräfte sicherten die Unfallstelle ab, stellten den Brandschutz sicher, unterstützten Rettungsdienst und Polizei und führten die Verkehrsregelung sowie Aufräumarbeiten durch. Auch ein Notarzthubschrauber war im Einsatz.",
-        BildPlaceholder = "🚒",
-        EinsatzTyp = "T1 – VU-Verletzungen",
-        EinsatzOrt = "B38 km 29, Kreuzung Rastenfeld/Umfahrung Zwettl",
-        EinsatzZeit = "16:36 Uhr",
-        EinsatzKraefte = 11,
-        Bilder =
-        [
-            "auffahrunfall-b38-rastenfeld-hubschrauber.jpeg",
-            "auffahrunfall-b38-rastenfeld-absicherung.jpeg",
-            "auffahrunfall-b38-rastenfeld-fahrzeug.jpeg"
-        ]
-    },
-
-    new Post
-    {
-        Id = 6,
-        Slug = "vu-menschenrettung-rastenberg",
-        Emoji = "vu-menschenrettung-rastenberg",
-        Titel = "Verkehrsunfall mit Menschenrettung",
-        Kategorie = "Einsätze",
-        Datum = new DateTime(2025, 11, 25, 17, 56, 0),
-        Kurztext =
-            "Verkehrsunfall mit eingeklemmter Person auf der L8245 bei Rastenberg.",
-        Volltext =
-            "Am 25.11.2025 wurde die Feuerwehr zu einem Verkehrsunfall mit Menschenrettung alarmiert. Zwei PKW kollidierten auf der L8245 bei Rastenberg, wobei eine Person im Fahrzeug eingeklemmt wurde. Die Einsatzkräfte sicherten die Unfallstelle und unterstützten bei der Rettung der Person.",
-        BildPlaceholder = "🚒",
-        EinsatzTyp = "T2 – VU mit Menschenrettung",
-        EinsatzOrt = "L8245 km 14.2, Rastenberg",
-        EinsatzZeit = "17:56 Uhr",
-        EinsatzKraefte = 14
-    },
-
-    new Post
-    {
-        Id = 7,
-        Slug = "keinbild",
-        Emoji = "keinbild",
-        Titel = "PKW-Bergung nach Auffahrunfall",
-        Kategorie = "Einsätze",
-        Datum = new DateTime(2026, 1, 27, 17, 35, 0),
-        Kurztext =
-            "Auffahrunfall auf der B38 bei Rastenfeld – keine Verletzten.",
-        Volltext =
-            "Am 27.01.2026 wurde die Feuerwehr zu einer PKW-Bergung auf die B38 alarmiert. Nach einem Auffahrunfall mussten die beteiligten Fahrzeuge von der Fahrbahn entfernt werden. Glücklicherweise gab es keine Verletzten.",
-        BildPlaceholder = "🚒",
-        EinsatzTyp = "T1 – Bergung PKW",
-        EinsatzOrt = "B38 km 30, Rastenfeld",
-        EinsatzZeit = "17:35 Uhr",
-        EinsatzKraefte = 8
-    },
-
-    new Post
-    {
-        Id = 8,
-        Slug = "keinbild",
-        Emoji = "keinbild",
-        Titel = "GMA-Alarm im Hotel Ottenstein",
-        Kategorie = "Einsätze",
-        Datum = new DateTime(2025, 12, 20, 23, 50, 0),
-        Kurztext =
-            "Auslösung einer Brandmeldeanlage im Hotel Ottenstein.",
-        Volltext =
-            "Am 20.12.2025 wurde die Feuerwehr zu einer ausgelösten Brandmeldeanlage im Hotel Ottenstein alarmiert. Nach Kontrolle vor Ort konnte kein Brand festgestellt werden. Die Anlage wurde überprüft und zurückgesetzt.",
-        BildPlaceholder = "🚒",
-        EinsatzTyp = "B1 – GMA-Brand",
-        EinsatzOrt = "Peygarten-Ottenstein 60",
-        EinsatzZeit = "23:50 Uhr",
-        EinsatzKraefte = 0
-    },
-
-        new Post
-        {
-            Id = 13,
-            Slug = "schwimmpumpe",
-            Titel = "Anschaffung einer Schwimmpumpe",
-            Kategorie = "FF-News",
-            Datum = new DateTime(2026, 4, 2),
-            Kurztext =
-                "Neue Schwimmpumpe wurde durch Unterstützung der Gemeinde Rastenfeld angekauft.",
-            Volltext =
-                "Die Freiwillige Feuerwehr Rastenfeld konnte kürzlich eine neue Schwimmpumpe in den Dienst stellen. " +
-                "Die Anschaffung wurde durch die Unterstützung der Gemeinde Rastenfeld ermöglicht. Die Pumpe kommt vor" +
-                " allem bei Einsätzen mit offenen Gewässern wie Teichen oder Bächen zum Einsatz und stellt eine wichtige " +
-                "Ergänzung für die Wasserversorgung bei Bränden dar. Durch die neue Ausrüstung kann die Feuerwehr noch " +
-                "schneller und effizienter Hilfe leisten.",
-            BildPlaceholder = "🚒"
-        },
-        new  Post{
-            Id = 14,
-            Slug = "mosertronik-begehung",
-            Emoji = "mosertronik-begehung",
-            Titel = "Sicherheit durch Zusammenarbeit",
-            Kategorie = "FF-News",
-            Datum = new DateTime(2026, 3, 27),
-            Kurztext =
-                "Gemeinsame Gebäudebegehung bei der Mosertronik GmbH zur Verbesserung der Einsatzvorbereitung.",
-            Volltext =
-                "Kürzlich besuchte eine Abordnung der Freiwilligen Feuerwehr Rastenfeld die Mosertronik GmbH im Rahmen einer gemeinsamen Gebäudebegehung. Ziel dieser Besichtigung war es, wichtige Einblicke in die betrieblichen Abläufe sowie die örtlichen Gegebenheiten zu gewinnen.\n\nDurch das frühzeitige Kennenlernen von Zufahrtswegen, technischen Anlagen und möglichen Gefahrenstellen kann im Ernstfall schneller und gezielter reagiert werden. Solche Begehungen leisten einen wichtigen Beitrag zur optimalen Einsatzvorbereitung.\n\nDie Feuerwehr bedankt sich bei der Mosertronik GmbH für die Einladung sowie die konstruktive und professionelle Zusammenarbeit.",
-            BildPlaceholder = "🔍🚒"
-        },
-        
-        new  Post{
-            Id = 15,
-            Slug = "Tut-Gut-Wandertag",
-            Emoji = "Tut-Gut-Wandertag",
-            Titel = "Tut Gut Wandertag",
-            Kategorie = "FF-News",
-            Datum = new DateTime(2026, 4, 26),
-            Kurztext =
-                "Die FF Rastenfeld rundete den Wandertag kulinarisch ab, indem sie die Teilnehmer im Pfarrstadl mit einem gemeinsamen Mittagstisch verpflegte.",
-            Volltext =
-                "Bei idealem Wanderwetter fand am 26. April 2026 der diesjährige Familienwandertag der Marktgemeinde Rastenfeld im Rahmen der Niederösterreichweiten Aktion „Wandererwachen“ von „Tut gut!“ NÖ statt – heuer mit einem neuen Teilnehmerrekord: Rund 220 Personen, darunter etwa 40 Kinder unter 12 Jahren, machten sich unter der Leitung von Wanderführerin Doris Kunst auf den Weg.\n\nDer Start erfolgte am Marktplatz Rastenfeld, von wo aus die Wandergruppe eine rund 8 Kilometer lange Strecke durch die Gemeinde absolvierte.\n\nStärkung unterwegs und gemütlicher Ausklang\nEntlang der Route sorgte die Feuerwehr Peygarten‑Ottenstein mit einer Jausenstation für eine willkommene Pause. Zusätzlich erhielten alle Teilnehmenden eine gesunde Jause mit Apfel und Wasser.\n\nIm Pfarrstadl erwartete die Wanderer anschließend ein Mittagstisch der Feuerwehr Rastenfeld, der den Tag kulinarisch abrundete. Dort fand auch die Verlosung der Gesunden Gemeinde Rastenfeld statt:",
-            BildPlaceholder = "🔍🚒",
-            Bilder = ["Tut-Gut-Wandertag1.jpeg","Tut-Gut-Wandertag2.jpeg","Tut-Gut-Wandertag3.jpg"]
-        },
-        new Post{
-            Id = 16,
-            Slug = "maibaum-aufstellen-2026",
-            Emoji = "🌲",
-            Titel = "Maibaum aufstellen 2026",
-            Kategorie = "FF-News",
-            Datum = new DateTime(2026, 5, 1),
-            Kurztext =
-                "Die FF Rastenfeld hat heuer den Maibaum wieder selbst aufgestellt – von der Baumauswahl und dem Schälen bis zum Aufrichten am 1. Mai.",
-            Volltext =
-                "Auch 2026 hat die Freiwillige Feuerwehr Rastenfeld den Maibaum in Eigenregie aufgestellt. Bereits im Vorfeld wurde gemeinsam ein geeigneter Baum ausgesucht, gefällt und traditionell von Hand geschält.\n\nAm 1. Mai war es dann soweit: Mit vereinten Kräften wurde der Maibaum aufgerichtet – ganz ohne Maschinen, dafür mit viel Teamgeist.\n\nIm Anschluss an das Aufstellen lud die Feuerwehr zu einem gemütlichen Mittagessen im Pfarrstadl ein, wo die Mannschaft gemeinsam den gelungenen Vormittag ausklingen ließ.",
-            BildPlaceholder = "🌲🚒",
-            Bilder = ["Maibaum2026-1.jpeg","Maibaum2026-2.jpeg","Maibaum2026-3.jpeg"]
-        },
-        
+        PropertyNameCaseInsensitive = true
     };
 
+    private readonly HttpClient _httpClient;
+    private List<Post> _posts = new();
+    private Task? _postsLoadTask;
+
+    public DataService(HttpClient httpClient)
+    {
+        _httpClient = httpClient;
+    }
+
+    public async Task EnsurePostsLoadedAsync()
+    {
+        _postsLoadTask ??= LoadPostsAsync();
+        await _postsLoadTask;
+    }
+
+    public List<Post> GetPosts() => _posts;
+
+    public async Task<List<Post>> GetPostsAsync()
+    {
+        await EnsurePostsLoadedAsync();
+        return GetPosts();
+    }
+
     public Post? GetPost(string slug) => GetPosts().FirstOrDefault(p => p.Slug == slug);
+
+    public async Task<Post?> GetPostAsync(string slug)
+    {
+        await EnsurePostsLoadedAsync();
+        return GetPost(slug);
+    }
 
     public List<Post> GetByKategorie(string kat) =>
         GetPosts().Where(p => p.Kategorie == kat).OrderByDescending(p => p.Datum).ToList();
 
-    public List<Post> GetEinsaetze() => GetByKategorie("Einsätze");
+    public async Task<List<Post>> GetByKategorieAsync(string kat)
+    {
+        await EnsurePostsLoadedAsync();
+        return GetByKategorie(kat);
+    }
 
-   
-// ── MITGLIEDER ──────────────────────────────────────────────────────────
+    public List<Post> GetEinsaetze() => GetByKategorie("Eins\u00e4tze");
+
+    public Task<List<Post>> GetEinsaetzeAsync() => GetByKategorieAsync("Eins\u00e4tze");
+
+    public string GetMainImageSrc(Post post)
+    {
+        var firstImage = post.Bilder?.FirstOrDefault()?.Replace('\\', '/');
+        if (!string.IsNullOrWhiteSpace(firstImage) &&
+            firstImage.StartsWith("posts/", StringComparison.OrdinalIgnoreCase))
+        {
+            return $"img/{firstImage}";
+        }
+
+        return $"img/{post.Slug}.jpeg";
+    }
+
+    private async Task LoadPostsAsync()
+    {
+        try
+        {
+            var posts = await _httpClient.GetFromJsonAsync<List<Post>>("data/posts.json", PostJsonOptions);
+            _posts = posts ?? new List<Post>();
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Posts konnten nicht aus data/posts.json geladen werden: {ex.Message}");
+            _posts = new List<Post>();
+        }
+    }
+
     public List<Mitglied> GetMitglieder() => new()
 {
     new Mitglied { Id=1, Name="Matthias Goll", Dienstgrad="Hauptbrandinspektor", Funktion="Kommandant", EintriebAb=2019, IstFuehrung=true },

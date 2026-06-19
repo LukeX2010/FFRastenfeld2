@@ -18,7 +18,7 @@ else
                         <span class="post-card-kat post-card-kat--feuerwehrjugend">Feuerwehrjugend</span>
                         <time>@post.Datum.ToString("d. MMMM yyyy")</time>
                     </div>
-                    @if (post.Bilder?.Any(image => image.Replace("\\", "/").StartsWith("posts/", StringComparison.OrdinalIgnoreCase)) == true)
+                    @if (DS.HasPostImage(post))
                     {
                         <div class="detail-img">
                             <img src="@DS.GetMainImageSrc(post)" class="hero-bg-img" alt="@post.Titel" />

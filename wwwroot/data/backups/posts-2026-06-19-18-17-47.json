@@ -1,21 +1,5 @@
 [
   {
-    "Id": 26,
-    "Slug": "interne-systemprufung-erstellung-einer-testdatei",
-    "Emoji": "",
-    "Titel": "Interne Systemprüfung: Erstellung einer Testdatei",
-    "Kategorie": "FF-News",
-    "Datum": "2026-06-19T00:00:00",
-    "Kurztext": "Im Rahmen einer internen Systemprüfung wurde eine Testdatei für die Website-Beitragserstellung angelegt.",
-    "Volltext": "Am 19. Juni 2026 wurde gemäß einer internen Anweisung eine Testdatei für die Website-Beitragserstellung generiert. Dieser Vorgang dient der Überprüfung und Anpassung der redaktionellen Abläufe und des Content-Management-Systems der Freiwilligen Feuerwehr Rastenfeld. Es handelt sich hierbei um keinen Bericht über ein tatsächliches Ereignis, einen Einsatz oder eine Veranstaltung, sondern um eine rein interne Maßnahme zur Qualitätssicherung.",
-    "Bilder": [],
-    "BildPlaceholder": "🔥",
-    "EinsatzTyp": null,
-    "EinsatzOrt": null,
-    "EinsatzZeit": null,
-    "EinsatzKraefte": null
-  },
-  {
     "Id": 25,
     "Slug": "unterstutzung-ottensteiner-seelauf-2026",
     "Emoji": "",

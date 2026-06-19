@@ -1,24 +1,35 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using FFRastenfeld.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace FFRastenfeld.Services;
 
 public class DataService
 {
-    // POSTS (werden aus wwwroot/data/posts.json geladen)
+    // POSTS (werden zur Laufzeit aus der konfigurierten JSON-Quelle geladen)
     private static readonly JsonSerializerOptions PostJsonOptions = new(JsonSerializerDefaults.Web)
     {
         PropertyNameCaseInsensitive = true
     };
 
     private readonly HttpClient _httpClient;
+    private readonly string _postsUrl;
+    private readonly string _fallbackPostsUrl;
+    private readonly string _imageBaseUrl;
+    private readonly int _cacheBustingMinutes;
     private List<Post> _posts = new();
     private Task? _postsLoadTask;
 
-    public DataService(HttpClient httpClient)
+    public DataService(HttpClient httpClient, IConfiguration configuration)
     {
         _httpClient = httpClient;
+
+        var dataConfig = configuration.GetSection("WebsiteData");
+        _postsUrl = NormalizeConfigValue(dataConfig["PostsUrl"]) ?? "data/posts.json";
+        _fallbackPostsUrl = NormalizeConfigValue(dataConfig["FallbackPostsUrl"]) ?? "data/posts.json";
+        _imageBaseUrl = TrimTrailingSlash(NormalizeConfigValue(dataConfig["ImageBaseUrl"]) ?? "img");
+        _cacheBustingMinutes = int.TryParse(dataConfig["CacheBustingMinutes"], out var minutes) ? minutes : 5;
     }
 
     public async Task EnsurePostsLoadedAsync()
@@ -59,27 +70,90 @@ public class DataService
     public string GetMainImageSrc(Post post)
     {
         var firstImage = post.Bilder?.FirstOrDefault()?.Replace('\\', '/');
-        if (!string.IsNullOrWhiteSpace(firstImage) &&
-            firstImage.StartsWith("posts/", StringComparison.OrdinalIgnoreCase))
+        if (!string.IsNullOrWhiteSpace(firstImage))
         {
-            return $"img/{firstImage}";
+            return GetImageSrc(firstImage);
         }
 
-        return $"img/{post.Slug}.jpeg";
+        return GetImageSrc($"{post.Slug}.jpeg");
+    }
+
+    public bool HasPostImage(Post post) =>
+        post.Bilder?.Any(image => !string.IsNullOrWhiteSpace(image)) == true;
+
+    public string GetImageSrc(string? imagePath)
+    {
+        var normalized = imagePath?.Replace('\\', '/').Trim();
+        if (string.IsNullOrWhiteSpace(normalized))
+        {
+            return "img/keinbild.jpeg";
+        }
+
+        if (Uri.TryCreate(normalized, UriKind.Absolute, out _) ||
+            normalized.StartsWith("/", StringComparison.Ordinal))
+        {
+            return normalized;
+        }
+
+        if (normalized.StartsWith("img/", StringComparison.OrdinalIgnoreCase))
+        {
+            return normalized;
+        }
+
+        return $"{_imageBaseUrl}/{normalized}";
     }
 
     private async Task LoadPostsAsync()
     {
-        try
+        var errors = new List<string>();
+        foreach (var postsUrl in GetPostsUrls())
         {
-            var posts = await _httpClient.GetFromJsonAsync<List<Post>>("data/posts.json", PostJsonOptions);
-            _posts = posts ?? new List<Post>();
+            try
+            {
+                var posts = await _httpClient.GetFromJsonAsync<List<Post>>(AddCacheBuster(postsUrl), PostJsonOptions);
+                _posts = posts ?? new List<Post>();
+                return;
+            }
+            catch (Exception ex)
+            {
+                errors.Add($"{postsUrl}: {ex.Message}");
+            }
         }
-        catch (Exception ex)
+
+        Console.Error.WriteLine($"Posts konnten nicht geladen werden: {string.Join(" | ", errors)}");
+        _posts = new List<Post>();
+    }
+
+    private IEnumerable<string> GetPostsUrls()
+    {
+        var urls = new[] { _postsUrl, _fallbackPostsUrl };
+        return urls
+            .Where(url => !string.IsNullOrWhiteSpace(url))
+            .Distinct(StringComparer.OrdinalIgnoreCase);
+    }
+
+    private string AddCacheBuster(string url)
+    {
+        if (_cacheBustingMinutes <= 0)
         {
-            Console.Error.WriteLine($"Posts konnten nicht aus data/posts.json geladen werden: {ex.Message}");
-            _posts = new List<Post>();
+            return url;
         }
+
+        var intervalSeconds = Math.Max(60, _cacheBustingMinutes * 60);
+        var cacheBucket = DateTimeOffset.UtcNow.ToUnixTimeSeconds() / intervalSeconds;
+        var separator = url.Contains('?') ? "&" : "?";
+        return $"{url}{separator}v={cacheBucket}";
+    }
+
+    private static string? NormalizeConfigValue(string? value)
+    {
+        var normalized = value?.Trim();
+        return string.IsNullOrWhiteSpace(normalized) ? null : normalized;
+    }
+
+    private static string TrimTrailingSlash(string value)
+    {
+        return value.TrimEnd('/');
     }
 
     public List<Mitglied> GetMitglieder() => new()

@@ -22,7 +22,7 @@
                 @foreach (var b in GetFiltered())
                 {
                     <div class="gal-item @(lightboxIdx == bilder.IndexOf(b) ? "is-open" : "")" @onclick="()=>OpenLightbox(b)">
-                        <div class="gal-placeholder"> <img src="@($"img/{b.Emoji}.jpeg")" class="hero-bg-img" /></div>
+                        <div class="gal-placeholder"> <img src="@GetGalleryImageSrc(b)" class="hero-bg-img" /></div>
                         <div class="gal-hover">
                             <span class="gal-title">@b.Titel</span>
                             <span class="gal-kat">@b.Kategorie · @b.Jahr</span>
@@ -37,7 +37,7 @@
                     <div class="lightbox-box" @onclick:stopPropagation>
                         <button class="lb-close" @onclick="CloseLightbox"><p class="x"><strong>✕</strong></p></button>
                         <div class="lb-img">
-                            <img src="@($"img/{lightbox.Emoji}.jpeg")" class="hero-bg-img-lg" />
+                            <img src="@GetGalleryImageSrc(lightbox)" class="hero-bg-img-lg" />
 
                         </div>
                         <div class="lb-info">
@@ -109,7 +109,7 @@
 </div>
 
 @code {
-    record GalBild(string Titel, string Emoji, string Kategorie, int Jahr,string Untertitel, DateTime Datum);
+    record GalBild(string Titel, string ImageSrc, string Kategorie, int Jahr,string Untertitel, DateTime Datum);
 
     private List<GalBild> bilder = new()
     {
@@ -142,6 +142,24 @@
         
     }
     
+    private string GetGalleryImageSrc(GalBild bild)
+    {
+        var src = bild.ImageSrc?.Trim() ?? "";
+        if (string.IsNullOrWhiteSpace(src))
+        {
+            return "img/keinbild.jpeg";
+        }
+
+        if (Uri.TryCreate(src, UriKind.Absolute, out _) ||
+            src.StartsWith("/", StringComparison.Ordinal) ||
+            src.StartsWith("img/", StringComparison.OrdinalIgnoreCase))
+        {
+            return src;
+        }
+
+        return DS.GetImageSrc($"{src}.jpeg");
+    }
+
     private string activeKat = "Alle";
     private GalBild? lightbox;
     private int lightboxIdx = -1;

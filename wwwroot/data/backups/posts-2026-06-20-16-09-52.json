@@ -1,25 +1,5 @@
 [
   {
-    "Id": 27,
-    "Slug": "teilnahme-bezirkswettbewerbe-langenlois",
-    "Emoji": "",
-    "Titel": "Teilnahme an Bezirkswettbewerben in Langenlois",
-    "Kategorie": "FF-News",
-    "Datum": "2026-06-20T00:00:00",
-    "Kurztext": "Die Freiwillige Feuerwehr Rastenfeld nahm am 20. Juni 2026 an den Bezirkswettbewerben in Langenlois teil und erzielte Ergebnisse in den Bewerben Bronze und Silber.",
-    "Volltext": "Eine Gruppe der Freiwilligen Feuerwehr Rastenfeld nahm am 20. Juni 2026 an den Bezirkswettbewerben in Langenlois teil. Im Bewerb Bronze erreichte die Gruppe eine Zeit von 53,54 Sekunden mit 35 Fehlerpunkten. Im Bewerb Silber wurde eine Zeit von 71,35 Sekunden mit 25 Fehlerpunkten erzielt.",
-    "Bilder": [
-      "posts/teilnahme-bezirkswettbewerbe-langenlois/bild-01.jpeg",
-      "posts/teilnahme-bezirkswettbewerbe-langenlois/bild-02.jpeg",
-      "posts/teilnahme-bezirkswettbewerbe-langenlois/bild-03.jpeg"
-    ],
-    "BildPlaceholder": "🔥",
-    "EinsatzTyp": null,
-    "EinsatzOrt": null,
-    "EinsatzZeit": null,
-    "EinsatzKraefte": null
-  },
-  {
     "Id": 26,
     "Slug": "gratulation-60-geburtstag-herbert-weitl",
     "Emoji": "",

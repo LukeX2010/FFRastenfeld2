@@ -1,22 +1,5 @@
 [
-  {
-    "Id": 26,
-    "Slug": "gratulation-60-geburtstag-herbert-weitl",
-    "Emoji": "",
-    "Titel": "Gratulation zum 60. Geburtstag von Kamerad Herbert Weitl",
-    "Kategorie": "FF-News",
-    "Datum": "2026-06-20T00:00:00",
-    "Kurztext": "Die Freiwillige Feuerwehr Rastenfeld gratuliert ihrem Kameraden Herbert Weitl herzlich zum 60. Geburtstag.",
-    "Volltext": "Am 20. Juni 2026 überbrachten die Kameraden der Freiwilligen Feuerwehr Rastenfeld ihrem Kameraden Herbert Weitl die besten Glückwünsche zu seinem 60. Geburtstag. Die Feuerwehr Rastenfeld schätzt das Engagement und die Kameradschaft von Herbert Weitl und wünscht ihm für das neue Lebensjahrzehnt alles Gute, Gesundheit und weiterhin viel Freude.",
-    "Bilder": [
-      "posts/gratulation-60-geburtstag-herbert-weitl/bild-01.jpeg"
-    ],
-    "BildPlaceholder": "🔥",
-    "EinsatzTyp": null,
-    "EinsatzOrt": null,
-    "EinsatzZeit": null,
-    "EinsatzKraefte": null
-  },
+
   {
     "Id": 25,
     "Slug": "unterstutzung-ottensteiner-seelauf-2026",

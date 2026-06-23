@@ -179,7 +179,7 @@ public class DataService
 
     new Mitglied { Id=15, Name="Lukas Assfall", Dienstgrad="Feuerwehrmann", Funktion="Sachbearbeiter EDV / Informationstechnologie", EintriebAb=2025, IstFuehrung=true },
     new Mitglied { Id=16, Name="Carmen Goll", Dienstgrad="Feuerwehrfrau", Funktion="Sachbearbeiter Feuerwehrmedizinischer Dienst", EintriebAb=2019, IstFuehrung=true },
-    new Mitglied { Id=17, Name="Felix Dornahckl", Dienstgrad="Feuerwehrmamnn", Funktion="", EintriebAb=2024, IstFuehrung=true },
+    new Mitglied { Id=17, Name="Felix Dornhackl", Dienstgrad="Feuerwehrmann", Funktion="", EintriebAb=2024, IstFuehrung=true },
     new Mitglied { Id=18, Name="Jakob Assfall", Dienstgrad="Feuerwehrmann", Funktion="", EintriebAb=2025, IstFuehrung=true },
     new Mitglied { Id=16, Name="Victoria Lenz", Dienstgrad="Feuerwehrfrau", Funktion="Sachbearbeiter Öffentlichkeitsarbeit", EintriebAb=2024, IstFuehrung=true },
     new Mitglied { Id=17, Name="Hannes Auer", Dienstgrad="Löschmeister", Funktion="Sachbearbeiter Nachrichtendienst", EintriebAb=2016, IstFuehrung=true },

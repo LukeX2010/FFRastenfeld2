@@ -10,7 +10,7 @@
     "migrate:posts": "node scripts/migrate-posts-from-dataservice.js"
   },
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.7.18",
+    "@whiskeysockets/baileys": "^7.0.0-rc13",
     "pino": "^9.5.0",
     "qrcode-terminal": "^0.12.0"
   }

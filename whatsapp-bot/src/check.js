@@ -66,7 +66,10 @@ async function checkCoreImports() {
     "VORSCHAU": "preview",
     "BILD 1 NEIN": "imageSet",
     "SUCHE: Ottensteiner Seelauf 2026": "search",
-    "FERTIG": "finish"
+    "FERTIG": "finish",
+    "GIT STATUS": "gitStatus",
+    "COMMIT: Test": "gitCommit",
+    "PUSH": "gitPush"
   };
 
   for (const [command, type] of Object.entries(commandChecks)) {

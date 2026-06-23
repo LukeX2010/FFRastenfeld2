@@ -1,6 +1,6 @@
 # WhatsApp Redaktionsbot FF Rastenfeld
 
-Der Bot sammelt WhatsApp-Nachrichten und Bilder lokal, erstellt optional mit Ollama einen Website-Entwurf und uebernimmt freigegebene Beitraege in `wwwroot/data/posts.json`.
+Der Bot sammelt WhatsApp-Nachrichten und Bilder lokal, erstellt optional mit Ollama einen Website-Entwurf und uebernimmt freigegebene Beitraege in die konfigurierte `posts.json`.
 
 ## Installation
 
@@ -131,6 +131,9 @@ FERTIG
 STOP
 ABBRUCH
 HILFE
+GIT STATUS
+COMMIT: <Nachricht>
+PUSH
 ```
 
 - `START` oder `NEU` startet das Sammeln fuer genau einen neuen Beitrag.
@@ -143,11 +146,14 @@ HILFE
 - `RECHERCHE` startet eine passende Recherche, bei Einsaetzen aber nicht breit automatisch.
 - `SUCHE: ...` startet eine bewusste gezielte Suche.
 - `STATUS` zeigt den aktuellen Entwurf erneut.
-- `ONLINE` schreibt den Beitrag nach `wwwroot/data/posts.json` und kopiert freigegebene Bilder nach `wwwroot/img/posts/<slug>/`.
+- `ONLINE` schreibt den Beitrag nach `POSTS_JSON_PATH` und kopiert freigegebene Bilder nach `PUBLIC_IMAGE_DIR/<slug>/`.
 - `ONLINE TROTZDEM` veroeffentlicht bewusst trotz fehlender Infos, aber nicht bei harten Datenschutz-/Sicherheitswarnungen.
 - `FERTIG` verschiebt den Entwurf nach `wwwroot/img/Bearbeiten/Entwurf/` und neue Nachrichten starten wieder einen neuen Beitrag.
 - `STOP` beendet die aktuelle Aufnahme, ohne neue Nachrichten weiter anzuhängen.
 - `ABBRUCH` lehnt den Entwurf ab. Der lokale Ordner bleibt erhalten.
+- `GIT STATUS` zeigt, welche erlaubten Dateien der Bot committen wuerde.
+- `COMMIT: ...` erstellt einen Git-Commit nur mit erlaubten Website-Dateien.
+- `PUSH` schiebt den letzten vorbereiteten Commit nach GitHub. Falls GitHub am Laptop ein Benutzer-/Login-Fenster zeigt, muss dieses dort bestaetigt werden.
 
 ## Datenschutz und Bilder
 
@@ -185,11 +191,20 @@ Fuer Einsaetze bleibt Recherche automatisch sehr vorsichtig beziehungsweise deak
 
 ## Website-Daten
 
-Bestehende und neue Beitraege liegen in:
+Standardmaessig liegen bestehende und neue Beitraege in:
 
 ```text
 wwwroot/data/posts.json
 ```
+
+Wenn die Website ihre Inhalte ohne Netlify-Deploy aus einem separaten GitHub-Pages-Content-Repository laden soll, setze in `.env` stattdessen zum Beispiel:
+
+```env
+POSTS_JSON_PATH=../../ffrastenfeld-content/posts.json
+PUBLIC_IMAGE_DIR=../../ffrastenfeld-content/img/posts
+```
+
+Der genaue Ablauf ist in `../EXTERNAL_CONTENT.md` beschrieben.
 
 Vor jeder Aenderung erstellt der Bot ein Backup unter:
 

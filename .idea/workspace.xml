@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="07c4d50b-b3cd-4425-9a40-ffd0902cee81" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.razor" beforeDir="false" afterPath="$PROJECT_DIR$/App.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Components/PostCard.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Components/PostCard.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Einsaetze/EinsatzDetail.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Einsaetze/EinsatzDetail.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/News/AusbildungDetail.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/News/AusbildungDetail.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/News/FeuerwehrjugendDetail.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/News/FeuerwehrjugendDetail.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/News/NewsDetail.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/News/NewsDetail.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Einsaetze/Einsaetze.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Einsaetze/Einsaetze.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Services/DataService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/DataService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.pdb" afterDir="false" />
@@ -47,7 +43,9 @@
       <change beforePath="$PROJECT_DIR$/whatsapp-bot/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/whatsapp-bot/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/whatsapp-bot/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/whatsapp-bot/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/whatsapp-bot/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/whatsapp-bot/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatsapp-bot/src/check.js" beforeDir="false" afterPath="$PROJECT_DIR$/whatsapp-bot/src/check.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/whatsapp-bot/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/whatsapp-bot/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatsapp-bot/src/review/commands.js" beforeDir="false" afterPath="$PROJECT_DIR$/whatsapp-bot/src/review/commands.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,33 +56,34 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/App.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/App.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Components/NavMenu.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Components/PostCard.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Components/Sidebar.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Components/Sidebar.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Components/SiteFooter.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Models/Models.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/Datenschutz.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/Einsaetze/Einsaetze.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Models/Models.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Datenschutz.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Einsaetze/Einsaetze.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/Einsaetze/EinsatzDetail.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/Fahrzeuge/FahrzeugDetail.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Fahrzeuge/FahrzeugDetail.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/Fahrzeuge/Fahrzeuge.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/Feuerwehr/Chronik.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/Feuerwehr/Feuerwehrhaus.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/Feuerwehr/Mannschaft.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/Galerie.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/Impressum.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/Index.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/Kontakt.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/News/Ausbildung.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/News/AusbildungDetail.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/News/Feuerwehrjugend.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/News/FeuerwehrjugendDetail.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Impressum.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Index.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Kontakt.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/News/Ausbildung.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/News/AusbildungDetail.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/News/Feuerwehrjugend.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/News/FeuerwehrjugendDetail.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/News/News.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/News/NewsDetail.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/News/NewsDetail.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Services/DataService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/_Imports.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Services/DataService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/_Imports.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/wwwroot/data/posts.json" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -123,7 +122,8 @@
       <workItem from="1779186135705" duration="2064000" />
       <workItem from="1780913301475" duration="852000" />
       <workItem from="1781590722173" duration="4586000" />
-      <workItem from="1781646029764" duration="389000" />
+      <workItem from="1781646029764" duration="1007000" />
+      <workItem from="1782134865944" duration="1231000" />
     </task>
     <servers />
   </component>

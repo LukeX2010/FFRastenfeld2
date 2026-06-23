@@ -16,12 +16,15 @@ import { createPostDraft } from "./ai/postGenerator.js";
 import { parseReviewCommands } from "./review/commands.js";
 import { runWebResearch } from "./search/webSearch.js";
 import { publishDraft } from "./website/publisher.js";
+import { createCommit, getGitStatus, pushToOrigin } from "./git/gitActions.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const botRoot = path.resolve(__dirname, "..");
 const projectRoot = path.resolve(botRoot, "..");
+const pidFilePath = path.join(botRoot, "bot.pid");
 
 await loadDotEnv(path.join(botRoot, ".env"));
+await ensureSingleBotInstance();
 
 const outputDir = path.resolve(botRoot, process.env.OUTPUT_DIR || "../wwwroot/img/Bearbeiten");
 const allowedChatIds = (process.env.ALLOWED_CHAT_IDS || "")
@@ -33,6 +36,7 @@ const saveAllGroups = parseBoolean(process.env.SAVE_ALL_GROUPS);
 const printChatIds = parseBoolean(process.env.PRINT_CHAT_IDS, true);
 const replyInWhatsApp = parseBoolean(process.env.REPLY_IN_WHATSAPP, true);
 const startupOnlineMessage = parseBoolean(process.env.STARTUP_ONLINE_MESSAGE, true);
+const whatsappWebVersion = parseVersion(process.env.WHATSAPP_WEB_VERSION || "2.3000.1035194821");
 const batchWindowMs = Number(process.env.BATCH_WINDOW_MS || 15000);
 const followupWindowMs = Number(process.env.FOLLOWUP_WINDOW_MS || 30 * 60 * 1000);
 const requireStartCommand = parseBoolean(process.env.REQUIRE_START_COMMAND, true);
@@ -62,6 +66,8 @@ const openFollowups = new Map();
 const openReviews = new Map();
 const activeCaptures = new Map();
 const lastStartHints = new Map();
+const pendingPushes = new Map();
+const startupMessagesSent = new Set();
 const botStartedAtMs = Date.now();
 
 const botConfig = {
@@ -110,9 +116,11 @@ startBot();
 
 async function startBot() {
   const { state, saveCreds } = await useMultiFileAuthState(path.join(botRoot, "auth_info_baileys"));
-  const { version, isLatest } = await fetchLatestBaileysVersion();
+  const latest = await fetchLatestBaileysVersion();
+  const version = latest.isLatest ? latest.version : whatsappWebVersion;
+  const isLatest = latest.isLatest;
 
-  console.log(`WhatsApp-Web-Version: ${version.join(".")} (${isLatest ? "aktuell" : "nicht aktuell"})`);
+  console.log(`WhatsApp-Web-Version: ${version.join(".")} (${isLatest ? "aktuell" : "Fallback"})`);
 
   const sock = makeWASocket({
     auth: state,
@@ -139,9 +147,13 @@ async function startBot() {
     if (connection === "close") {
       const statusCode = lastDisconnect?.error?.output?.statusCode;
       const loggedOut = statusCode === DisconnectReason.loggedOut;
+      const connectionReplaced = statusCode === DisconnectReason.connectionReplaced;
       console.log(`Verbindung geschlossen. Status: ${statusCode ?? "unbekannt"}`);
 
-      if (!loggedOut) {
+      if (connectionReplaced) {
+        console.log("Verbindung wurde von einer anderen WhatsApp-Web/Bot-Sitzung ersetzt.");
+        console.log("Kein automatischer Reconnect, damit keine Endlosschleife entsteht. Bitte doppelte Bot-Prozesse beenden.");
+      } else if (!loggedOut) {
         console.log("Verbinde erneut...");
         setTimeout(() => startBot(), 5000);
       } else {
@@ -1307,6 +1319,11 @@ async function writeRedactionReport(folderPath, draftResult, research) {
 }
 
 async function handleReviewCommand(sock, chatId, message, command) {
+  if (command.type === "gitStatus" || command.type === "gitCommit" || command.type === "gitPush") {
+    await handleGitCommand(sock, chatId, message, command);
+    return;
+  }
+
   if (command.type === "start") {
     const existing = pendingBatches.get(chatId);
     if (existing?.timer) clearTimeout(existing.timer);
@@ -1615,6 +1632,114 @@ async function handleReviewCommand(sock, chatId, message, command) {
       }, { quoted: message });
     }
   }
+}
+
+async function handleGitCommand(sock, chatId, message, command) {
+  try {
+    if (command.type === "gitStatus") {
+      const status = await getGitStatus({ cwd: projectRoot });
+      await sock.sendMessage(chatId, { text: buildGitStatusText(status) }, { quoted: message });
+      return;
+    }
+
+    if (command.type === "gitCommit") {
+      const result = await createCommit({ cwd: projectRoot, message: command.message });
+      if (!result.ok) {
+        await sock.sendMessage(chatId, { text: buildBotNotice(result.reason) }, { quoted: message });
+        return;
+      }
+
+      pendingPushes.set(chatId, {
+        commit: result.commit,
+        message: result.message,
+        createdAt: Date.now()
+      });
+
+      await sock.sendMessage(chatId, { text: buildCommitResultText(result) }, { quoted: message });
+      return;
+    }
+
+    if (command.type === "gitPush") {
+      const pending = pendingPushes.get(chatId);
+      await sock.sendMessage(chatId, {
+        text: [
+          "🌐 *Push wird gestartet*",
+          "",
+          pending ? `Commit: ${pending.commit}` : "Commit: letzte lokale Commits auf diesem Branch",
+          "Remote: GitHub LukeX2010/FFRastenfeld2",
+          "",
+          "Falls GitHub ein Anmelde-/Benutzerfenster öffnet, musst du es am Laptop bestätigen.",
+          "Danach deployed Netlify automatisch, wenn dein Netlify-Setup mit diesem Repo verbunden ist."
+        ].filter((line) => !line.includes("Anmelde-/Benutzerfenster")).join("\n")
+      }, { quoted: message });
+
+      const result = await pushToOrigin({ cwd: projectRoot });
+      if (!result.ok) {
+        await sock.sendMessage(chatId, { text: buildBotNotice(result.reason) }, { quoted: message });
+        return;
+      }
+
+      pendingPushes.delete(chatId);
+      await sock.sendMessage(chatId, { text: buildPushResultText(result) }, { quoted: message });
+    }
+  } catch (error) {
+    await sock.sendMessage(chatId, {
+      text: buildBotNotice(`Git-Aktion fehlgeschlagen:\n${error?.message || error}`)
+    }, { quoted: message });
+  }
+}
+
+function buildGitStatusText(status) {
+  const allowed = status.allowed.map((file) => `- ${file.path}`).slice(0, 20);
+  const blocked = status.blocked.map((file) => `- ${file.path}`).slice(0, 12);
+
+  return [
+    "🧾 *Git Status*",
+    "",
+    `Remote: ${status.remote || "nicht erkannt"}`,
+    `Branch: ${status.branch || "nicht erkannt"}`,
+    "",
+    "*Würde committen:*",
+    allowed.length ? allowed.join("\n") : "- keine erlaubten Änderungen",
+    "",
+    "*Wird ignoriert:*",
+    blocked.length ? blocked.join("\n") : "- nichts",
+    "",
+    "Nächster Schritt:",
+    "`COMMIT: deine Nachricht`"
+  ].join("\n");
+}
+
+function buildCommitResultText(result) {
+  return [
+    "✅ *Commit erstellt*",
+    "",
+    `Commit: ${result.commit}`,
+    `Nachricht: ${result.message}`,
+    "",
+    "*Dateien:*",
+    result.staged.slice(0, 20).map((line) => `- ${line}`).join("\n"),
+    result.blocked.length
+      ? `\n*Nicht mitgenommen:*\n${result.blocked.slice(0, 10).map((file) => `- ${file.path}`).join("\n")}`
+      : "",
+    "",
+    "Zum Hochladen:",
+    "`PUSH`",
+    "",
+    "Hinweis: Wenn GitHub nach Benutzer fragt, am Laptop das Fenster bestätigen."
+  ].filter((line) => Boolean(line) && !line.includes("GitHub nach Benutzer")).join("\n");
+}
+
+function buildPushResultText(result) {
+  return [
+    "🌐 *Push erfolgreich*",
+    "",
+    `Branch: ${result.branch}`,
+    "Repo: LukeX2010/FFRastenfeld2",
+    "",
+    "Netlify sollte jetzt automatisch deployen, wenn es mit diesem Branch verbunden ist.",
+    result.output ? `\nGit:\n${result.output.slice(0, 1000)}` : ""
+  ].join("\n");
 }
 
 async function findCurrentReview(chatId) {
@@ -2110,6 +2235,9 @@ async function sendStartupOnlineMessage(sock) {
   if (!replyInWhatsApp || !startupOnlineMessage) return;
 
   for (const chatId of allowedChatIds) {
+    if (startupMessagesSent.has(chatId)) continue;
+    startupMessagesSent.add(chatId);
+
     await sock.sendMessage(chatId, {
       text: buildBotNotice("Bot ist online und hört wieder auf neue Nachrichten.")
     });
@@ -2152,6 +2280,15 @@ function parseBoolean(value, fallback = false) {
   return ["1", "true", "yes", "ja"].includes(String(value).toLowerCase());
 }
 
+function parseVersion(value) {
+  const parts = String(value || "")
+    .split(".")
+    .map((part) => Number(part.trim()))
+    .filter((part) => Number.isInteger(part) && part >= 0);
+
+  return parts.length === 3 ? parts : [2, 3000, 1035194821];
+}
+
 function loadDotEnv(filePath) {
   return fs.readFile(filePath, "utf8")
     .then((content) => {
@@ -2170,4 +2307,57 @@ function loadDotEnv(filePath) {
       }
     })
     .catch(() => undefined);
+}
+
+async function ensureSingleBotInstance() {
+  let existingPid = null;
+
+  try {
+    const content = await fs.readFile(pidFilePath, "utf8");
+    existingPid = Number(content.trim());
+  } catch {
+    existingPid = null;
+  }
+
+  if (existingPid && existingPid !== process.pid && isProcessRunning(existingPid)) {
+    console.error(`Bot laeuft bereits mit PID ${existingPid}.`);
+    console.error("Bitte zuerst das alte Bot-Terminal schliessen oder den Node-Prozess beenden.");
+    process.exit(1);
+  }
+
+  await fs.writeFile(pidFilePath, String(process.pid), "utf8");
+
+  const cleanup = async () => {
+    try {
+      const content = await fs.readFile(pidFilePath, "utf8");
+      if (Number(content.trim()) === process.pid) {
+        await fs.rm(pidFilePath, { force: true });
+      }
+    } catch {
+      // PID-Datei ist nur eine Startsperre. Fehler beim Aufraeumen sind unkritisch.
+    }
+  };
+
+  process.once("SIGINT", async () => {
+    await cleanup();
+    process.exit(0);
+  });
+
+  process.once("SIGTERM", async () => {
+    await cleanup();
+    process.exit(0);
+  });
+
+  process.once("exit", () => {
+    fs.rm(pidFilePath, { force: true }).catch(() => undefined);
+  });
+}
+
+function isProcessRunning(pid) {
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch (error) {
+    return error?.code === "EPERM";
+  }
 }

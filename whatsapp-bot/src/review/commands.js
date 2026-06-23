@@ -21,6 +21,8 @@ export function parseReviewCommand(text) {
 
   if (["menu", "menue", "m"].includes(normalized)) return { type: "menu", label: "MENUE" };
   if (["hilfe", "help", "?"].includes(normalized)) return { type: "help", label: "HILFE" };
+  if (["git status", "gitstatus", "gstatus", "gs"].includes(normalized)) return { type: "gitStatus", label: "GIT STATUS" };
+  if (["push", "git push"].includes(normalized)) return { type: "gitPush", label: "PUSH" };
   if (["status", "s"].includes(normalized)) return { type: "status", label: "STATUS" };
   if (["vorschau", "v"].includes(normalized)) return { type: "preview", label: "VORSCHAU" };
   if (["details", "d"].includes(normalized)) return { type: "details", label: "DETAILS" };
@@ -49,12 +51,18 @@ export function parseReviewCommand(text) {
     const value = raw.slice(separator + 1).trim();
 
     if (["suche", "search"].includes(command)) return { type: "search", query: value, label: "SUCHE" };
+    if (["commit", "git commit"].includes(command)) return { type: "gitCommit", message: value, label: "COMMIT" };
     if (["andern", "aendern", "change"].includes(command)) return { type: "change", instruction: value, label: "AENDERN" };
     if (command === "stil") return { type: "style", style: normalize(value), rawStyle: value, label: "STIL" };
     if (["kategorie", "category"].includes(command)) return { type: "fieldSet", field: "category", value, label: "KATEGORIE" };
     if (["datum", "date"].includes(command)) return { type: "fieldSet", field: "date", value, label: "DATUM" };
     if (["uhrzeit", "zeit", "time"].includes(command)) return { type: "fieldSet", field: "time", value, label: "UHRZEIT" };
     if (["ort", "location"].includes(command)) return { type: "fieldSet", field: "location", value, label: "ORT" };
+  }
+
+  const commitLine = /^(git\s+commit|commit)\s+(.+)$/i.exec(normalized);
+  if (commitLine) {
+    return { type: "gitCommit", message: raw.replace(/^(git\s+commit|commit)\s+/i, "").trim(), label: "COMMIT" };
   }
 
   return null;

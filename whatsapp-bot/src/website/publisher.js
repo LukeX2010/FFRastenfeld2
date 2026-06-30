@@ -51,6 +51,17 @@ export async function publishDraft({ folderPath, draft, data, meta, config, forc
   return { ok: true, post, published };
 }
 
+function buildPostImageEntry(image) {
+  const pfad = image.relativePath;
+  const beschreibung = cleanNullable(image.description);
+
+  if (beschreibung) {
+    return { Pfad: pfad, Beschreibung: beschreibung };
+  }
+
+  return pfad;
+}
+
 function buildPost({ posts, slug, draft, copiedImages, meta }) {
   const category = normalizeCategory(draft.category);
   const datum = buildDateTime(draft.date, draft.time, meta?.messageDate);
@@ -64,7 +75,7 @@ function buildPost({ posts, slug, draft, copiedImages, meta }) {
     Datum: datum,
     Kurztext: draft.shortText || "",
     Volltext: draft.fullText || "",
-    Bilder: copiedImages.map((image) => image.relativePath),
+    Bilder: copiedImages.map((image) => buildPostImageEntry(image)),
     BildPlaceholder: "🔥",
     EinsatzTyp: category === "Einsätze" ? cleanNullable(draft.einsatzType) : null,
     EinsatzOrt: category === "Einsätze" ? cleanNullable(draft.location) : null,
@@ -94,7 +105,8 @@ async function copyPublishableImages({ folderPath, slug, data, config }) {
         fileName: safeName,
         source,
         target,
-        relativePath: path.relative(imgRoot, target).replace(/\\/g, "/")
+        relativePath: path.relative(imgRoot, target).replace(/\\/g, "/"),
+        description: cleanNullable(image.description)
       });
     } catch (error) {
       copied.push({

@@ -327,7 +327,7 @@ async function addToBatch(sock, chatId, message, text, mediaParts) {
 
   batch.sock = sock;
   batch.messages.push(message);
-  if (text && !isImagePolicyOnly(text, mediaParts)) batch.texts.push(text);
+  if (text && shouldAddBatchText(text, mediaParts)) batch.texts.push(text);
   if (mediaParts.length > 0) {
     batch.mediaMessages.push({ message, parts: mediaParts });
   }
@@ -367,7 +367,7 @@ async function addToFollowupBatch(sock, chatId, message, text, mediaParts, openF
 
   batch.sock = sock;
   batch.messages.push(message);
-  if (text && !isImagePolicyOnly(text, mediaParts)) batch.texts.push(text);
+  if (text && shouldAddBatchText(text, mediaParts)) batch.texts.push(text);
   if (mediaParts.length > 0) {
     batch.mediaMessages.push({ message, parts: mediaParts });
   }
@@ -831,7 +831,8 @@ function buildImagesText(bundle) {
     images.length
       ? images.map((image, index) => [
         `${index + 1}️⃣ ${image.fileName} ${image.publishAllowed === false ? "❌ Nur Kontext" : "✅ Website"}`,
-        `Caption: ${image.caption || "-"}`,
+        `Beschreibung: ${image.description || "-"}`,
+        image.caption && image.caption !== image.description ? `Caption: ${image.caption}` : "",
         image.role ? `Rolle: ${image.role}` : ""
       ].filter(Boolean).join("\n")).join("\n\n")
       : "Keine Bilder in diesem Entwurf.",
@@ -1824,13 +1825,16 @@ function extractMediaParts(message) {
 
   if (content.imageMessage) {
     const caption = normalizeWhitespace(content.imageMessage.caption || "");
+    const { description, policyText } = parseImageCaption(caption);
     parts.push({
       kind: "image",
       contentType,
       mimetype: content.imageMessage.mimetype,
       caption,
-      publishAllowed: isImagePublishAllowed(caption),
-      publishUsage: isImagePublishAllowed(caption) ? "website" : "context_only"
+      description,
+      policyText,
+      publishAllowed: isImagePublishAllowed(policyText),
+      publishUsage: isImagePublishAllowed(policyText) ? "website" : "context_only"
     });
   }
 
@@ -1916,6 +1920,7 @@ async function saveImages(folderPath, mediaMessages, existingCount) {
           fileName,
           mimetype: media.mimetype || null,
           caption: media.caption || null,
+          description: media.description || null,
           messageId: mediaMessage.message.key.id || null,
           publishAllowed: media.publishAllowed !== false,
           publishUsage: media.publishUsage || "website"
@@ -2149,6 +2154,7 @@ function buildDataJson(fields, analysis, images) {
     images: images.map((image) => ({
       fileName: image.fileName,
       caption: image.caption || "",
+      description: image.description || "",
       publishAllowed: image.publishAllowed !== false,
       usage: image.publishAllowed === false ? "context_only" : "website",
       note: image.publishAllowed === false
@@ -2261,6 +2267,18 @@ function isBotReply(text) {
   ].some((prefix) => text.startsWith(prefix));
 }
 
+function parseImageCaption(caption) {
+  const raw = normalizeWhitespace(caption);
+  if (!raw) return { description: null, policyText: "" };
+
+  const match = /\bD\s*:\s*(.+)/i.exec(raw);
+  if (!match) return { description: null, policyText: raw };
+
+  const description = normalizeWhitespace(match[1]) || null;
+  const policyText = normalizeWhitespace(raw.slice(0, match.index));
+  return { description, policyText };
+}
+
 function isImagePublishAllowed(caption) {
   const normalized = normalizeForAnalysis(caption);
   if (!normalized) return true;
@@ -2273,6 +2291,23 @@ function isImagePolicyOnly(text, mediaParts) {
   const normalized = normalizeForAnalysis(text);
 
   return /^(nein|no|nicht posten|nicht veroeffentlichen|nicht veroffentlichen|nicht verwenden|intern|privat|keine freigabe|nur info|nur kontext)$/.test(normalized);
+}
+
+function shouldAddBatchText(text, mediaParts) {
+  if (!text) return false;
+  if (isImagePolicyOnly(text, mediaParts)) return false;
+  if (isImageCaptionText(text, mediaParts)) return false;
+  return true;
+}
+
+function isImageCaptionText(text, mediaParts) {
+  const normalized = normalizeWhitespace(text);
+  return mediaParts.some((part) => {
+    if (part.caption && normalizeWhitespace(part.caption) === normalized) return true;
+    if (part.description && normalizeWhitespace(part.description) === normalized) return true;
+    if (part.description && normalizeWhitespace(`D: ${part.description}`) === normalized) return true;
+    return false;
+  });
 }
 
 function parseBoolean(value, fallback = false) {

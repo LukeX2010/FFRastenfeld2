@@ -1,0 +1,71 @@
+@inject DataService DS
+
+@if (Images != null && Images.Count > 0)
+{
+    <div class="ff-carousel">
+        <div class="ff-carousel__track">
+            @for (int i = 0; i < Images.Count; i++)
+            {
+                var bild = Images[i];
+                var altText = !string.IsNullOrWhiteSpace(bild.Beschreibung)
+                    ? bild.Beschreibung
+                    : $"{ImageAltPrefix} {i + 1}";
+
+                <div class="ff-carousel__slide @(i == currentIndex ? "ff-carousel__slide--active" : "")">
+                    <img src="@DS.GetImageSrc(bild.Pfad)" alt="@altText" />
+                </div>
+            }
+        </div>
+
+        <button class="ff-carousel__btn ff-carousel__btn--prev"
+                @onclick="Prev" aria-label="Zurück">&#8249;</button>
+        <button class="ff-carousel__btn ff-carousel__btn--next"
+                @onclick="Next" aria-label="Weiter">&#8250;</button>
+
+        <div class="ff-carousel__dots">
+            @for (int i = 0; i < Images.Count; i++)
+            {
+                var idx = i;
+                <button class="ff-carousel__dot @(i == currentIndex ? "ff-carousel__dot--active" : "")"
+                        @onclick="() => GoTo(idx)"
+                        aria-label="Slide @(i + 1)">
+                </button>
+            }
+        </div>
+
+        <div class="ff-carousel__counter">
+            @(currentIndex + 1) / @Images.Count
+        </div>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Images[currentIndex].Beschreibung))
+    {
+        <p class="ff-carousel__caption">@Images[currentIndex].Beschreibung</p>
+    }
+}
+
+@code {
+    [Parameter] public List<PostBild>? Images { get; set; }
+    [Parameter] public string ImageAltPrefix { get; set; } = "Bild";
+
+    private int currentIndex = 0;
+
+    protected override void OnParametersSet()
+    {
+        currentIndex = 0;
+    }
+
+    private void Next()
+    {
+        if (Images is null || Images.Count == 0) return;
+        currentIndex = (currentIndex + 1) % Images.Count;
+    }
+
+    private void Prev()
+    {
+        if (Images is null || Images.Count == 0) return;
+        currentIndex = (currentIndex - 1 + Images.Count) % Images.Count;
+    }
+
+    private void GoTo(int index) => currentIndex = index;
+}

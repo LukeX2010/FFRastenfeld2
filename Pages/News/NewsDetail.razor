@@ -7,44 +7,49 @@
 
 @if (post is null)
 {
-    <div class="container" style="padding:4rem 1.5rem;text-align:center">
-        <p>Beitrag nicht gefunden. <a href="/news">← Zurück</a></p>
-    </div>
+<div class="container" style="padding:4rem 1.5rem;text-align:center">
+    <p>Beitrag nicht gefunden. <a href="/news">← Zurück</a></p>
+</div>
 }
 else
 {
-    <PageHero Title="@post.Titel" ParentLabel="FF-News" ParentHref="/news"/>
-    <div class="site-body container">
-        <div class="content-with-sidebar">
-            <main class="main-feed">
-                <article class="post-detail">
-                    <div class="detail-meta">
-                        <span class="post-card-kat post-card-kat--ff-news">FF-News</span>
-                        <time>@post.Datum.ToString("d. MMMM yyyy")</time>
-                    </div>
-                    <div class="detail-img">
-                        <img src="@DS.GetMainImageSrc(post)" class="hero-bg-img" alt="@post.Titel"/>
-                    </div>
-                    <div class="detail-body"><p>@post.Volltext</p></div>
+<PageHero Title="@post.Titel" ParentLabel="FF-News" ParentHref="/news"/>
+<div class="site-body container">
+    <div class="content-with-sidebar">
+        <main class="main-feed">
+            <article class="post-detail">
+                <div class="detail-meta">
+                    <span class="post-card-kat post-card-kat--ff-news">FF-News</span>
+                    <time>@post.Datum.ToString("d. MMMM yyyy")</time>
+                </div>
+                <div class="detail-img">
+                    <img src="@DS.GetMainImageSrc(post)" class="hero-bg-img" alt="@post.Titel"/>
+                </div>
+                <div class="detail-body"><p>@post.Volltext</p></div>
 
-                    @if (post.Bilder != null && post.Bilder.Count > 0)
-                    {
-   						 <PostImageCarousel Images="post.Bilder.Skip(1).ToList()" ImageAltPrefix="Bild" />
-                    }
+                @if (post.Bilder != null && post.Bilder.Count > 0)
+                {
+                var gefilterteBilder = post.Bilder.Skip(1).ToList();
 
-                    <a href="/news" class="back-link">← Zurück zu FF-News</a>
-                </article>
-            </main>
-        </div>
+                if (gefilterteBilder.Any())
+                {
+                <PostImageCarousel Images="gefilterteBilder" ImageAltPrefix="Bild"/>
+                }
+                }
+
+                <a href="/news" class="back-link">← Zurück zu FF-News</a>
+            </article>
+        </main>
     </div>
+</div>
 }
 
 @code {
-    [Parameter] public string Slug { get; set; } = "";
-    private Post? post;
+[Parameter] public string Slug { get; set; } = "";
+private Post? post;
 
-    protected override void OnParametersSet()
-    {
-        post = DS.GetPost(Slug);
-    }
+protected override void OnParametersSet()
+{
+post = DS.GetPost(Slug);
+}
 }

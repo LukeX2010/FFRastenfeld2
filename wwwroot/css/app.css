@@ -419,8 +419,9 @@ element.style {
 
 .detail-img {
   border-radius: var(--r); margin-bottom: 1rem;
+
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  min-height: 350px; font-size: 7rem;
+   font-size: 7rem;
 }
 .detail-img .hero-bg-img {
   object-fit: contain;
@@ -937,7 +938,6 @@ summary:hover{
     margin: 1.5rem 0;
     border-radius: 8px;
     overflow: hidden;
-    background: rgba(26, 29, 33, 0);
 }
 
 .ff-carousel__track {
@@ -1034,6 +1034,16 @@ summary:hover{
     padding: 2px 8px;
     border-radius: 12px;
     z-index: 10;
+}
+
+.ff-carousel__caption {
+    margin: -1.25rem 0 0;
+    padding: 0 0.5rem;
+    font-size: 0.95rem;
+    color: var(--text-muted, #5c6570);
+    text-align: center;
+    line-height: 1.5;
+    font-weight: 550;
 }
 
 
@@ -1450,7 +1460,6 @@ details summary:hover { color: #9ca3af; }
         margin: 1.5rem 0;
         border-radius: 8px;
         overflow: hidden;
-        background: #2e2e2e;
     }
 }
 

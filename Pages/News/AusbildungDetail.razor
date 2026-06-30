@@ -26,37 +26,7 @@ else
 
                     @if (post.Bilder != null && post.Bilder.Count > 0)
                     {
-                        <div class="ff-carousel">
-                            <div class="ff-carousel__track">
-                                @for (int i = 0; i < post.Bilder.Count; i++)
-                                {
-                                    <div class="ff-carousel__slide @(i == currentIndex ? "ff-carousel__slide--active" : "")">
-                                        <img src="@DS.GetImageSrc(post.Bilder[i])" alt="Übungsbild @(i + 1)" />
-                                        <br/>
-                                    </div>
-                                }
-                            </div>
-
-                            <button class="ff-carousel__btn ff-carousel__btn--prev"
-                                    @onclick="Prev" aria-label="Zurück">&#8249;</button>
-                            <button class="ff-carousel__btn ff-carousel__btn--next"
-                                    @onclick="Next" aria-label="Weiter">&#8250;</button>
-
-                            <div class="ff-carousel__dots">
-                                @for (int i = 0; i < post.Bilder.Count; i++)
-                                {
-                                    var idx = i;
-                                    <button class="ff-carousel__dot @(i == currentIndex ? "ff-carousel__dot--active" : "")"
-                                            @onclick="() => GoTo(idx)"
-                                            aria-label="Slide @(i + 1)">
-                                    </button>
-                                }
-                            </div>
-
-                            <div class="ff-carousel__counter">
-                                @(currentIndex + 1) / @post.Bilder.Count
-                            </div>
-                        </div>
+                        <PostImageCarousel Images="post.Bilder" ImageAltPrefix="Übungsbild" />
                     }
                     <a href="/ausbildung" class="back-link">← Zurück zu Ausbildung</a>
                 </article>
@@ -69,25 +39,9 @@ else
 @code {
     [Parameter] public string Slug { get; set; } = "";
     private Post? post;
-    private int currentIndex = 0;
 
     protected override void OnParametersSet()
     {
         post = DS.GetPost(Slug);
-        currentIndex = 0;
     }
-
-    private void Next()
-    {
-        if (post?.Bilder is null || post.Bilder.Count == 0) return;
-        currentIndex = (currentIndex + 1) % post.Bilder.Count;
-    }
-
-    private void Prev()
-    {
-        if (post?.Bilder is null || post.Bilder.Count == 0) return;
-        currentIndex = (currentIndex - 1 + post.Bilder.Count) % post.Bilder.Count;
-    }
-
-    private void GoTo(int index) => currentIndex = index;
 }

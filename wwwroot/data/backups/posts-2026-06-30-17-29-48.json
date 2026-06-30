@@ -1,54 +1,5 @@
 [
   {
-    "Id": 29,
-    "Slug": "baum-uber-fahrbahn-entfernt",
-    "Emoji": "",
-    "Titel": "Baum über Fahrbahn entfernt",
-    "Kategorie": "Einsätze",
-    "Datum": "2026-06-30T17:30:00",
-    "Kurztext": "Die Freiwillige Feuerwehr Rastenfeld wurde am 30. Juni 2026 zu einem Einsatz gerufen, bei dem ein umgestürzter Baum eine Fahrbahn blockierte. Die Einsatzkräfte beseitigten den Baum und stellten die Verkehrssicherheit wieder her.",
-    "Volltext": "Am 30. Juni 2026 wurde die Freiwillige Feuerwehr Rastenfeld um 17:30 Uhr zu einem technischen Einsatz alarmiert. Ein Baum war umgestürzt und blockierte die Fahrbahn vollständig, wodurch der Verkehr beeinträchtigt wurde.\n\nDie ausgerückten Einsatzkräfte begannen umgehend mit der Beseitigung des Baumes. Mittels Motorsägen wurde der Baum zerlegt und von der Straße entfernt. Nach Abschluss der Arbeiten wurde die Fahrbahn gereinigt, um die Verkehrssicherheit wieder vollständig herzustellen. Der Einsatz konnte erfolgreich abgeschlossen werden.",
-    "Bilder": [
-      "posts/baum-uber-fahrbahn-entfernt/bild-02.jpeg",
-      "posts/baum-uber-fahrbahn-entfernt/bild-03.jpeg",
-      "posts/baum-uber-fahrbahn-entfernt/bild-04.jpeg",
-      "posts/baum-uber-fahrbahn-entfernt/bild-05.jpeg"
-    ],
-    "BildPlaceholder": "🔥",
-    "EinsatzTyp": "T1",
-    "EinsatzOrt": "Seestraße Kilometer 3,4",
-    "EinsatzZeit": "17:30",
-    "EinsatzKraefte": 6
-  },
-  {
-    "Id": 28,
-    "Slug": "teilnahme-riesenwuzzlerturnier-ufc-rastenfeld-2026",
-    "Emoji": "",
-    "Titel": "Erfolgreiche Teilnahme am Riesenwuzzlerturnier",
-    "Kategorie": "FF-News",
-    "Datum": "2026-06-27T17:00:00",
-    "Kurztext": "Zwei Teams der Freiwilligen Feuerwehr Rastenfeld nahmen am 27. Juni 2026 erfolgreich am Riesenwuzzlerturnier des UFC Rastenfeld teil und erzielten dabei beachtliche Platzierungen.",
-    "Volltext": "Am 27. Juni 2026 beteiligten sich zwei Mannschaften der Freiwilligen Feuerwehr Rastenfeld am Riesenwuzzlerturnier, das vom UFC Rastenfeld auf dem Fußballplatz Rastenfeld veranstaltet wurde. Die Teams zeigten eine engagierte Leistung und konnten gute Ergebnisse erzielen.\n\nDas Team „Elite Firefighters“ erreichte den 5. Platz im Turnier. Die Mannschaft „Firefighters“ sicherte sich den 3. Platz. Im Vergleich zum Vorjahr, in dem die „Firefighters“ den ersten Platz belegten, konnte der Titel in diesem Jahr leider nicht verteidigt werden.\n\nBesonders erfreulich war der Erfolg in der Spritzerwertung, bei der die Freiwillige Feuerwehr Rastenfeld den 1. Platz mit einem Unentschieden für sich verbuchen konnte. Die Teilnahme an solchen lokalen Veranstaltungen fördert nicht nur den Teamgeist innerhalb der Feuerwehr, sondern auch die Gemeinschaft mit anderen Vereinen in Rastenfeld.",
-    "Bilder": [
-      "posts/teilnahme-riesenwuzzlerturnier-ufc-rastenfeld-2026/bild-06.jpeg",
-      {
-        "Pfad": "posts/teilnahme-riesenwuzzlerturnier-ufc-rastenfeld-2026/bild-01.jpeg",
-        "Beschreibung": "Elite Firefighters"
-      },
-      {
-        "Pfad": "posts/teilnahme-riesenwuzzlerturnier-ufc-rastenfeld-2026/bild-02.jpeg",
-        "Beschreibung": "Firefighters"
-      },
-      "posts/teilnahme-riesenwuzzlerturnier-ufc-rastenfeld-2026/bild-04.jpeg",
-      "posts/teilnahme-riesenwuzzlerturnier-ufc-rastenfeld-2026/bild-05.jpeg"
-    ],
-    "BildPlaceholder": "🔥",
-    "EinsatzTyp": null,
-    "EinsatzOrt": null,
-    "EinsatzZeit": null,
-    "EinsatzKraefte": null
-  },
-  {
     "Id": 27,
     "Slug": "teilnahme-bezirkswettbewerbe-langenlois",
     "Emoji": "",

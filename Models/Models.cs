@@ -1,4 +1,13 @@
+using System.Text.Json.Serialization;
+
 namespace FFRastenfeld.Models;
+
+[JsonConverter(typeof(PostBildJsonConverter))]
+public class PostBild
+{
+    public string Pfad { get; set; } = "";
+    public string? Beschreibung { get; set; }
+}
 
 public class Post
 {
@@ -11,7 +20,7 @@ public class Post
     public string Kurztext { get; set; } = "";
     public string Volltext { get; set; } = "";
     
-    public List<string> Bilder { get; set; } = new List<string>();
+    public List<PostBild> Bilder { get; set; } = new();
     
     
     public string BildPlaceholder { get; set; } = "🔥"; // emoji for placeholder img

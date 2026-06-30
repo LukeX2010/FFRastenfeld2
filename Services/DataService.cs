@@ -69,7 +69,7 @@ public class DataService
 
     public string GetMainImageSrc(Post post)
     {
-        var firstImage = post.Bilder?.FirstOrDefault()?.Replace('\\', '/');
+        var firstImage = post.Bilder?.FirstOrDefault()?.Pfad?.Replace('\\', '/');
         if (!string.IsNullOrWhiteSpace(firstImage))
         {
             return GetImageSrc(firstImage);
@@ -79,7 +79,7 @@ public class DataService
     }
 
     public bool HasPostImage(Post post) =>
-        post.Bilder?.Any(image => !string.IsNullOrWhiteSpace(image)) == true;
+        post.Bilder?.Any(image => !string.IsNullOrWhiteSpace(image.Pfad)) == true;
 
     public string GetImageSrc(string? imagePath)
     {

@@ -1,26 +1,5 @@
 [
   {
-    "Id": 29,
-    "Slug": "baum-uber-fahrbahn-entfernt",
-    "Emoji": "",
-    "Titel": "Baum über Fahrbahn entfernt",
-    "Kategorie": "Einsätze",
-    "Datum": "2026-06-30T17:30:00",
-    "Kurztext": "Die Freiwillige Feuerwehr Rastenfeld wurde am 30. Juni 2026 zu einem Einsatz gerufen, bei dem ein umgestürzter Baum eine Fahrbahn blockierte. Die Einsatzkräfte beseitigten den Baum und stellten die Verkehrssicherheit wieder her.",
-    "Volltext": "Am 30. Juni 2026 wurde die Freiwillige Feuerwehr Rastenfeld um 17:30 Uhr zu einem technischen Einsatz alarmiert. Ein Baum war umgestürzt und blockierte die Fahrbahn vollständig, wodurch der Verkehr beeinträchtigt wurde.\n\nDie ausgerückten Einsatzkräfte begannen umgehend mit der Beseitigung des Baumes. Mittels Motorsägen wurde der Baum zerlegt und von der Straße entfernt. Nach Abschluss der Arbeiten wurde die Fahrbahn gereinigt, um die Verkehrssicherheit wieder vollständig herzustellen. Der Einsatz konnte erfolgreich abgeschlossen werden.",
-    "Bilder": [
-      "posts/baum-uber-fahrbahn-entfernt/bild-02.jpeg",
-      "posts/baum-uber-fahrbahn-entfernt/bild-03.jpeg",
-      "posts/baum-uber-fahrbahn-entfernt/bild-04.jpeg",
-      "posts/baum-uber-fahrbahn-entfernt/bild-05.jpeg"
-    ],
-    "BildPlaceholder": "🔥",
-    "EinsatzTyp": "T1",
-    "EinsatzOrt": "Seestraße Kilometer 3,4",
-    "EinsatzZeit": "17:30",
-    "EinsatzKraefte": 6
-  },
-  {
     "Id": 28,
     "Slug": "teilnahme-riesenwuzzlerturnier-ufc-rastenfeld-2026",
     "Emoji": "",
@@ -41,6 +20,7 @@
       },
       "posts/teilnahme-riesenwuzzlerturnier-ufc-rastenfeld-2026/bild-04.jpeg",
       "posts/teilnahme-riesenwuzzlerturnier-ufc-rastenfeld-2026/bild-05.jpeg"
+      
     ],
     "BildPlaceholder": "🔥",
     "EinsatzTyp": null,

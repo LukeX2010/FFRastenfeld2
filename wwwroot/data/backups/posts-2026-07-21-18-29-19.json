@@ -1,24 +1,5 @@
 [
   {
-    "Id": 30,
-    "Slug": "baum-auf-fahrbahn-nach-gewitter-19-07-2026",
-    "Emoji": "",
-    "Titel": "Baum auf Fahrbahn nach Gewitter",
-    "Kategorie": "Einsätze",
-    "Datum": "2026-07-19T12:03:00",
-    "Kurztext": "Am 19. Juli 2026 wurde die Freiwillige Feuerwehr Rastenfeld zu einem Einsatz gerufen, bei dem ein umgestürzter Baum die Fahrbahn blockierte.",
-    "Volltext": "Am 19. Juli 2026 um 12:03 Uhr wurde die Freiwillige Feuerwehr Rastenfeld zu einem technischen Einsatz alarmiert. Ein kurzes, aber starkes Gewitter mit übermäßigem Wind hatte eine große Fichte umstürzen lassen, die bei Kilometer 4.6 die Fahrbahn vollständig blockierte.\n\nDie Einsatzkräfte der Freiwilligen Feuerwehr Rastenfeld rückten aus, um die Gefahrenstelle zu beseitigen. Gemeinsam mit der Feuerwehr Sperkental wurde der umgestürzte Baum rasch von der Straße entfernt. Im Zuge der Aufräumarbeiten wurden zudem weitere kleinere Bäume, die durch den Sturm beschädigt waren, entlang des Weges beseitigt.\n",
-    "Bilder": [
-      "posts/baum-auf-fahrbahn-nach-gewitter-19-07-2026/bild-01.jpeg",
-      "posts/baum-auf-fahrbahn-nach-gewitter-19-07-2026/bild-02.jpeg"
-    ],
-    "BildPlaceholder": "🔥",
-    "EinsatzTyp": null,
-    "EinsatzOrt": "Rastenfeld",
-    "EinsatzZeit": "12:03",
-    "EinsatzKraefte": 10
-  },
-  {
     "Id": 29,
     "Slug": "baum-uber-fahrbahn-entfernt",
     "Emoji": "",

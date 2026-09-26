@@ -235,6 +235,11 @@ export function makePublication(draft, posts, imagesRoot = "wwwroot/img") {
 }
 
 export function createHandler(env, dependencies = {}) {
+  const additionalUsers = JSON.parse(env.ADMIN_USERS || '[]');
+  const users = [...additionalUsers];
+  if (env.ADMIN_USERNAME && env.ADMIN_PASSWORD_HASH && !users.some(u => u.username === env.ADMIN_USERNAME))
+    users.push({username: env.ADMIN_USERNAME, displayName: env.ADMIN_USERNAME, passwordHash: env.ADMIN_PASSWORD_HASH});
+  const publicUser = u => ({username:u.username, displayName:u.displayName || u.username});
   const store = dependencies.store || new GitStore(env);
   const fetcher = dependencies.fetch || fetch;
   const postsPath = env.POSTS_PATH || "wwwroot/data/posts.json";
@@ -249,14 +254,12 @@ export function createHandler(env, dependencies = {}) {
       .find((x) => x.startsWith(cookieName + "="))
       ?.slice(cookieName.length + 1);
     if (!token || !env.SESSION_SECRET) return false;
-    const [body, signature] = token.split(".");
-    if (!equal(sign(body), signature)) return false;
     try {
+      const [body, signature] = token.split(".");
+      if (!body || !signature || !equal(sign(body), signature)) return false;
       const data = JSON.parse(Buffer.from(body, "base64url"));
-      return (
-        data.exp > Date.now() &&
-        data.version === hash(env.ADMIN_PASSWORD_HASH || "")
-      );
+      const user = users.find(u => u.username === data.sub && !u.disabled);
+      return user && data.exp > Date.now() && data.version === hash(user.passwordHash) ? publicUser(user) : false;
     } catch {
       return false;
     }
@@ -287,7 +290,19 @@ export function createHandler(env, dependencies = {}) {
     const snap = await store.snapshot(true);
     return { snap, index: (await store.read(snap, "index.json", true)) || [] };
   }
-  async function save(draft) {
+  const activity = (user, action, details = {}) => ({id:randomBytes(16).toString('hex'), at:new Date().toISOString(), username:user.username, displayName:user.displayName, action, ...details});
+  async function activityFile(snap, event) {
+    const previous = await store.read(snap, 'activity.json', true) || [];
+    return jsonFile('activity.json', [event, ...previous].slice(0,1000));
+  }
+  async function record(event) {
+    for (let attempt=0; attempt<3; attempt++) {
+      const snap=await store.snapshot(true);
+      try { await store.commit(snap,[await activityFile(snap,event)],'Redaktion: Aktivität'); return; }
+      catch(e) { if(e.status!==409 || attempt===2) throw e; }
+    }
+  }
+  async function save(draft, user) {
     validateDraft(draft);
     const { snap, index } = await draftsState();
     const old = await store.read(snap, `drafts/${draft.id}.json`, true);
@@ -312,6 +327,7 @@ export function createHandler(env, dependencies = {}) {
     await store.commit(
       snap,
       [
+        await activityFile(snap, activity(user, old ? 'draft.updated' : 'draft.created', {draftId:draft.id,title:draft.titel.slice(0,250)})),
         jsonFile(`drafts/${next.id}.json`, next),
         jsonFile("index.json", [
           summary,
@@ -323,9 +339,11 @@ export function createHandler(env, dependencies = {}) {
     return next;
   }
   return async (request) => {
+    let actor = null;
+    let route = '';
     try {
       const url = new URL(request.url);
-      const route =
+      route =
         url.pathname
           .replace(/^\/(?:api\/admin|\.netlify\/functions\/admin)/, "")
           .replace(/\/$/, "") || "/";
@@ -345,18 +363,20 @@ export function createHandler(env, dependencies = {}) {
       }
       const cookie = (value) =>
         `${cookieName}=${value}; Path=/api/admin; HttpOnly; SameSite=Strict; Max-Age=${value ? 28800 : 0}${url.protocol === "https:" ? "; Secure" : ""}`;
+      actor = session(request);
       if (route === "/session" && request.method === "GET")
-        return reply({ authenticated: session(request) });
+        return reply({ authenticated: !!actor, user: actor || null });
       if (route === "/login" && request.method === "POST") {
         requireValue(
-          env.ADMIN_USERNAME &&
-            env.ADMIN_PASSWORD_HASH &&
+          users.length &&
             env.SESSION_SECRET?.length >= 32,
           "Der Admin-Zugang ist noch nicht eingerichtet.",
           503,
         );
         const credentials = await body(request);
-        const [salt] = env.ADMIN_PASSWORD_HASH.split(":");
+        const user = users.find(u => u.username === credentials.username && !u.disabled);
+        const checkHash = user?.passwordHash || users[0].passwordHash;
+        const [salt] = checkHash.split(":");
         requireValue(
           typeof credentials.password === "string" &&
             credentials.password.length < 256,
@@ -365,29 +385,36 @@ export function createHandler(env, dependencies = {}) {
         );
         const valid = equal(
           passwordHash(credentials.password, salt),
-          env.ADMIN_PASSWORD_HASH,
+          checkHash,
         );
         requireValue(
-          valid && equal(credentials.username, env.ADMIN_USERNAME),
+          valid && user,
           "Benutzername oder Passwort stimmen nicht.",
           401,
         );
         const data = Buffer.from(
           JSON.stringify({
             exp: Date.now() + 28800000,
-            version: hash(env.ADMIN_PASSWORD_HASH),
+            sub: user.username,
+            version: hash(user.passwordHash),
           }),
         ).toString("base64url");
-        return reply({ authenticated: true }, 200, {
+        await record(activity(publicUser(user),'login'));
+        return reply({ authenticated: true, user: publicUser(user) }, 200, {
           "Set-Cookie": cookie(`${data}.${sign(data)}`),
         });
       }
-      if (route === "/logout" && request.method === "POST")
+      if (route === "/logout" && request.method === "POST") {
+        if(actor) await record(activity(actor,'logout'));
         return reply({ ok: true }, 200, { "Set-Cookie": cookie("") });
-      requireValue(session(request), "Bitte erneut anmelden.", 401);
+      }
+      requireValue(actor, "Bitte erneut anmelden.", 401);
+      if(route === '/activity' && request.method === 'GET')
+        return reply(await store.read(await store.snapshot(true),'activity.json',true) || []);
       if (route === "/settings" && request.method === "GET")
         return reply({
-          username: env.ADMIN_USERNAME,
+          username: actor.username,
+          user: actor,
           githubConfigured: !!env.GITHUB_TOKEN,
           draftsConfigured: !!env.DRAFTS_REPO,
           aiConfigured: !!env.GEMINI_API_KEY,
@@ -415,6 +442,7 @@ export function createHandler(env, dependencies = {}) {
         await store.commit(
           snap,
           [
+            await activityFile(snap, activity(actor,'settings.updated')),
             jsonFile("settings.json", {
               style: preferences.style,
               defaultCategory: preferences.defaultCategory,
@@ -437,7 +465,7 @@ export function createHandler(env, dependencies = {}) {
         return reply(draft);
       }
       if (route === "/drafts" && request.method === "POST")
-        return reply(await save(await body(request)));
+        return reply(await save(await body(request), actor));
       if (route === "/ai" && request.method === "POST") {
         requireValue(
           env.GEMINI_API_KEY,
@@ -511,6 +539,7 @@ export function createHandler(env, dependencies = {}) {
           "Gemini hat keinen verwendbaren Text geliefert.",
           502,
         );
+        await record(activity(actor,'ai.generated',{draftId:draft.id,title:draft.titel.slice(0,250)}));
         return reply({
           ...draft,
           titel: generated.titel,
@@ -540,6 +569,7 @@ export function createHandler(env, dependencies = {}) {
           posts,
           env.IMAGES_PATH || "wwwroot/img",
         );
+        if(!publication.unchanged) await record(activity(actor,'publish.started',{draftId:draft.id,title:draft.titel.slice(0,250)}));
         const commit = publication.unchanged
           ? snap.head
           : await store.commit(
@@ -566,6 +596,7 @@ export function createHandler(env, dependencies = {}) {
           await store.commit(
             state.snap,
             [
+              await activityFile(state.snap,activity(actor,publication.unchanged ? 'publish.retried' : 'post.published',{draftId:draft.id,title:draft.titel.slice(0,250),postId:publication.post.Id,commit})),
               jsonFile(`drafts/${saved.id}.json`, saved),
               jsonFile(
                 "index.json",
@@ -589,6 +620,9 @@ export function createHandler(env, dependencies = {}) {
       }
       throw new ApiError(404, "Diese Funktion gibt es nicht.");
     } catch (error) {
+      if(actor && request.method === 'POST' && route !== '/login') {
+        try { await record(activity(actor,'action.failed',{route,status:error instanceof ApiError ? error.status : 500})); } catch { /* Return the original error; never include request bodies or secrets. */ }
+      }
       return reply(
         {
           message:

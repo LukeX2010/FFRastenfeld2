@@ -4,6 +4,7 @@ let posts = [],
   drafts = [],
   draft = null,
   settings = null,
+  currentUser = null,
   tab = "posts",
   dirty = false,
   busy = false,
@@ -81,15 +82,17 @@ async function task(fn) {
 const on = (selector, event, handler) =>
   root.querySelector(selector)?.addEventListener(event, handler);
 function header() {
-  return `<header class="topbar"><div class="brand"><img src="/img/logo.jpg" alt=""><div><strong>FF Rastenfeld</strong><small>REDAKTION</small></div></div><div class="toplinks"><a href="/" target="_blank" rel="noopener">Website ansehen ↗</a><button id="logout" class="subtle">Abmelden</button></div></header>${settings?.local ? '<div class="local">Lokaler Test · Änderungen bleiben auf diesem Laptop. Keine Veröffentlichung ins Internet.</div>' : ""}`;
+  return `<header class="topbar"><div class="brand"><img src="/img/logo.jpg" alt=""><div><strong>${esc(currentUser?.displayName || 'FF Rastenfeld')}</strong><small>ANGEMELDET · ${esc(currentUser?.username || 'REDAKTION')}</small></div></div><div class="toplinks"><button id="activity">Aktivitäten</button><a href="/" target="_blank" rel="noopener">Website ansehen ↗</a><button id="logout" class="subtle">Abmelden</button></div></header>${settings?.local ? '<div class="local">Lokaler Test · Änderungen bleiben auf diesem Laptop. Keine Veröffentlichung ins Internet.</div>' : ""}`;
 }
 function logoutBind() {
+  on('#activity','click',()=>{if(leave())task(activityPage);});
   on("#logout", "click", () =>
     task(async () => {
       if (!leave()) return;
       await api("/logout", {});
       draft = null;
       dirty = false;
+      currentUser = null;
       login();
     }),
   );
@@ -105,7 +108,7 @@ function login() {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));
     task(async () => {
-      await api("/login", data);
+      currentUser = (await api("/login", data)).user;
       await dashboard();
     });
   });
@@ -119,6 +122,7 @@ async function dashboard() {
   posts = results[0].status === "fulfilled" ? results[0].value : [];
   drafts = results[1].status === "fulfilled" ? results[1].value : [];
   settings = results[2].status === "fulfilled" ? results[2].value : settings;
+  currentUser = settings?.user || currentUser;
   draft = null;
   dirty = false;
   overview();
@@ -422,6 +426,18 @@ function preferences() {
     });
   });
 }
+const activityLabels = {'login':'Angemeldet','logout':'Abgemeldet','draft.created':'Entwurf erstellt','draft.updated':'Entwurf gespeichert','ai.generated':'KI-Text erstellt / überarbeitet','settings.updated':'Einstellungen geändert','publish.started':'Veröffentlichung gestartet','post.published':'Auf GitHub veröffentlicht','publish.retried':'Veröffentlichung erneut bestätigt','action.failed':'Aktion fehlgeschlagen'};
+async function activityPage() {
+  const events = await api('/activity');
+  draft=null; dirty=false;
+  root.innerHTML=header()+`<main><button id="back" class="back">← Zur Übersicht</button><p class="eyebrow">Privates Redaktionsprotokoll</p><h1>Aktivitäten</h1><p class="help">Die letzten 1.000 Aktionen seit Einführung des Protokolls. Zeitpunkt in Österreich. Keine Passwörter, internen Notizen oder KI-Prompts. „Veröffentlicht“ bestätigt den GitHub-Commit, nicht den späteren Website-Build.</p><div class="toolbar"><input id="activitySearch" class="search" type="search" placeholder="Benutzer, Aktion oder Beitrag …" aria-label="Aktivitäten durchsuchen"><button id="refreshActivity">Aktualisieren</button></div><div id="activityList" class="list"></div></main>`;
+  logoutBind(); on('#back','click',()=>task(dashboard)); on('#refreshActivity','click',()=>task(activityPage));
+  const render=()=>{
+    const query=root.querySelector('#activitySearch').value.toLocaleLowerCase('de');
+    const filtered=events.filter(e=>[e.username,e.displayName,e.title,activityLabels[e.action]||e.action].join(' ').toLocaleLowerCase('de').includes(query));
+    root.querySelector('#activityList').innerHTML=filtered.length ? filtered.map(e=>`<article class="panel activity-entry"><div class="activity-meta"><strong>${esc(e.displayName || e.username)}</strong><span>${esc(e.username)}</span><time datetime="${esc(e.at)}">${esc(new Date(e.at).toLocaleString('de-AT',{timeZone:'Europe/Vienna'}))}</time></div><h2>${esc(activityLabels[e.action]||e.action)}</h2>${e.title?`<p>${esc(e.title)}</p>`:''}${e.route?`<p class="help">${esc(e.route)} · Fehler ${esc(e.status)}</p>`:''}${e.commit?`<small>Git-Commit: ${esc(e.commit.slice(0,12))}</small>`:''}</article>`).join('') : '<p class="empty">Keine passenden Aktivitäten.</p>';
+  }; on('#activitySearch','input',render); render();
+}
 window.addEventListener("beforeunload", (e) => {
   if (dirty) {
     e.preventDefault();
@@ -431,6 +447,7 @@ window.addEventListener("beforeunload", (e) => {
 task(async () => {
   try {
     const session = await api("/session");
+    currentUser = session.user;
     if (session.authenticated) await dashboard();
     else login();
   } catch (e) {

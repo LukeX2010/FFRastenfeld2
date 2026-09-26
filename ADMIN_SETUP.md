@@ -51,4 +51,12 @@ Die temporäre Variable anschließend entfernen. `SESSION_SECRET` benötigt mind
 
 ## Tests
 
+## Benutzer und Aktivitäten
+
+`ADMIN_USERS` ist ein serverseitiges Secret mit einer JSON-Liste aus `username`, `displayName` und `passwordHash` (scrypt, kein Klartext). Der bisherige Zugang aus `ADMIN_USERNAME` / `ADMIN_PASSWORD_HASH` bleibt erhalten. Alle Konten besitzen dieselben Redaktionsrechte und sehen das gemeinsame Protokoll. Mit `disabled: true` oder einer Passwort-Hash-Änderung wird eine bestehende Sitzung dieses Kontos ungültig. Beim Umstieg müssen bisherige Sitzungen neu angemeldet werden, damit jede Aktion einem Benutzer zugeordnet ist.
+
+Die Seite **Aktivitäten** zeigt die letzten 1.000 Einträge aus `activity.json` im privaten Entwürfe-Repository; ältere Versionen bleiben in dessen Git-Historie. Erfasst werden erfolgreiche An-/Abmeldungen, Entwurf-Speicherungen, KI-Ergebnisse, Einstellungen, Veröffentlichungsversuche und -erfolge sowie Fehler angemeldeter Benutzer. Nicht erfasst: einzelne Tastatureingaben, Seitenaufrufe, Passwörter, interne Notizen und Prompts. Die Zuordnung erfolgt aus der signierten Sitzung, niemals aus einem Benutzerfeld der Anfrage. Vor Einführung des Protokolls gibt es keine verlässliche Benutzerzuordnung. Protokollierung löst keine öffentlichen Website-Deploys aus.
+
+„Auf GitHub veröffentlicht“ bestätigt den Git-Commit; der Netlify-Build folgt separat. Wenn die private Abschlussbuchung einer Veröffentlichung fehlschlägt, zeigt der Editor eine Warnung; ein vorheriger „Veröffentlichung gestartet“-Eintrag bleibt nachvollziehbar. Das Protokoll ist eine Redaktionshilfe, kein manipulationssicheres externes Sicherheitsarchiv.
+
 `npm test` prüft Anmeldung, CSRF-Schutz, Geheimnisschutz, Entwurfsrevisionen, Publikation, Bildfilterung, KI-Anfragen und Git-Transaktionen. Lokale Tests ersetzen nicht den abschließenden Test auf Netlify.

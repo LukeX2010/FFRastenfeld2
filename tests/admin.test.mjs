@@ -19,6 +19,32 @@ const png='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAA
 const image=(caption,extra={})=>({id:caption,name:caption,dataUrl:png,caption,isTitleImage:false,isInformationOnly:false,...extra});
 const draft=()=>({id:'abcde-12345-67890',titel:'Neue Übung',kategorie:'Ausbildung',datum:'2026-09-26',ort:'Rastenfeld',einsatzTyp:'',einsatzZeit:'',einsatzKraefte:null,kurztext:'Kurztext',volltext:'Ein sachlicher Bericht.',notizen:'Private Notiz',kiAnweisung:'Kurz',bilder:[image('Galerie'),image('Titel',{isTitleImage:true}),image('Geheimes Infobild',{isInformationOnly:true})]});
 const env={ADMIN_USERNAME:'tester',ADMIN_PASSWORD_HASH:passwordHash('test-password'),SESSION_SECRET:'x'.repeat(64),GITHUB_TOKEN:'test',GITHUB_REPO:'test/site',DRAFTS_REPO:'test/private',GEMINI_API_KEY:'test'};
+test('separate users are returned by session, audit attribution cannot be forged, and passwords stay private',async()=>{
+  const users=[{username:'Felix',displayName:'Felix Dornhackl',passwordHash:passwordHash('shared-test')},{username:'Matthias',displayName:'Matthias Goll',passwordHash:passwordHash('shared-test')}];
+  const config={...env,ADMIN_USERS:JSON.stringify(users)};const store=new MemoryStore();const handler=createHandler(config,{store});
+  assert.equal((await handler(req('/activity'))).status,401);
+  for(const user of users){
+    const login=await handler(req('/login',{username:user.username,password:'shared-test'}));assert.equal(login.status,200);
+    const cookie=login.headers.get('set-cookie').split(';')[0];
+    assert.equal((await(await handler(req('/session',undefined,cookie))).json()).user.username,user.username);
+    const saved=await handler(req('/drafts',{...draft(),id:crypto.randomUUID(),username:'forged'},cookie));assert.equal(saved.status,200);
+    const log=await(await handler(req('/activity',undefined,cookie))).json();assert.equal(log[0].username,user.username);assert.equal(log[0].action,'draft.created');
+    assert(!JSON.stringify(log).includes('Private Notiz'));assert(!JSON.stringify(log).includes('shared-test'));assert(!JSON.stringify(log).includes(user.passwordHash));
+    const disabled=createHandler({...config,ADMIN_USERS:JSON.stringify(users.map(u=>({...u,disabled:u.username===user.username})))},{store});
+    assert.equal((await disabled(req('/activity',undefined,cookie))).status,401);
+  }
+});
+test('audit commits retry conflicts, without duplicate entries',async()=>{
+  const store=new MemoryStore();let first=true;const commit=store.commit.bind(store);store.commit=async(...args)=>{if(first){first=false;throw new ApiError(409,'Conflict');}return commit(...args);};
+  const handler=createHandler(env,{store});assert.equal((await handler(req('/login',{username:'tester',password:'test-password'}))).status,200);
+  assert.equal(store.data.private['activity.json'].length,1);
+});
+test('successful publication is attributed privately and includes the commit',async()=>{
+  const {handler,cookie,store}=await fixture();const saved=await(await handler(req('/drafts',draft(),cookie))).json();
+  assert.equal((await handler(req('/publish',saved,cookie))).status,200);
+  const log=store.data.private['activity.json'];assert.equal(log[0].action,'post.published');assert.equal(log[0].username,'tester');assert.equal(log[0].commit,'commit-id');
+  assert(!JSON.stringify(store.data.public).includes('activity.json'));
+});
 class MemoryStore {
   constructor(){this.data={public:{'wwwroot/data/posts.json':[]},private:{}};this.commits=[];}
   async snapshot(priv=false){return{repo:priv?'private':'public'};}

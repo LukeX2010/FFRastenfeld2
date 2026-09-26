@@ -10,7 +10,7 @@ export class GitStore {
     return repo;
   }
   async api(repo, path, method = 'GET', body) {
-    const response = await this.fetch(`https://api.github.com/repos/${repo}/${path}`, {
+    const response = await this.fetch(`https://api.github.com/repos/${repo}${path ? '/' + path : ''}`, {
       method, headers: { Authorization: `Bearer ${this.env.GITHUB_TOKEN}`, 'User-Agent': 'FFRastenfeld-Redaktion', Accept: 'application/vnd.github+json', 'Content-Type': 'application/json', 'X-GitHub-Api-Version': '2022-11-28' },
       body: body === undefined ? undefined : JSON.stringify(body), signal: AbortSignal.timeout(18000)
     });

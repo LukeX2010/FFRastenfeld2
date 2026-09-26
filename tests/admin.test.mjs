@@ -1,4 +1,16 @@
 import test from 'node:test';
+test('repository metadata request has no trailing slash (GitHub rejects it)', async () => {
+  const calls = [];
+  const store = new GitStore({GITHUB_TOKEN:'test',GITHUB_REPO:'test/site'}, async (url) => {
+    calls.push(url);
+    if(url.endsWith('/')) return Response.json({}, {status:404});
+    if(url.endsWith('/git/ref/heads/main')) return Response.json({object:{sha:'head'}});
+    if(url.endsWith('/git/commits/head')) return Response.json({tree:{sha:'tree'}});
+    return Response.json({default_branch:'main'});
+  });
+  assert.equal((await store.snapshot()).tree,'tree');
+  assert.equal(calls[0],'https://api.github.com/repos/test/site');
+});
 import assert from 'node:assert/strict';
 import { createHandler, makePublication, postToDraft, hash, passwordHash } from '../server/admin.mjs';
 import { GitStore, ApiError } from '../server/github.mjs';

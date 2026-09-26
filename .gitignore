@@ -6,3 +6,13 @@ whatsapp-bot/.env
 whatsapp-bot/auth_info_baileys/
 whatsapp-bot/bot.pid
 wwwroot/img/Bearbeiten/
+AdminServer/data/
+AdminServer/appsettings.Development.json
+.admin-local-site/
+.env.local
+.env.*.local
+.netlify/
+.admin-data/
+.publish/
+netlify/functions/*.zip
+netlify/functions/manifest.json

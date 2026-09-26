@@ -1,5 +1,28 @@
 [
   {
+    "Id": 31,
+    "Slug": "erfolgreicher-atemschutzkurs-in-krems-an-der-donau-cf720ec4",
+    "Titel": "Erfolgreicher Atemschutzkurs in Krems an der Donau",
+    "Kategorie": "Ausbildung",
+    "Datum": "2026-09-05T12:00:00",
+    "Kurztext": "Vier Mitglieder absolvierten den Atemschutzgeräteträger-Kurs in Krems an der Donau erfolgreich.",
+    "Volltext": "Von 4. bis 5. September 2026 absolvierten Victoria Lenz, Felix Dornhackl, Jakob Assfall und Lukas Assfall den Atemschutzgeräteträger- Kurs (kurz AT20) in Krems an der Donau.\n\nNeben theoretischen Grundlagen standen auch zahlreiche praktische Übungen auf dem Programm, bei denen wichtige Handgriffe und Vorgehensweisen für den Atemschutzeinsatz erlernt und geübt wurden.\n\nWir gratulieren allen vier recht herzlich zum erfolgreichen Abschluss des Kurses und freuen uns, sie nun als neue Atemschutzgeräteträger in unserer Feuerwehr begrüßen zu dürfen! ",
+    "Bilder": [
+      {
+        "Pfad": "posts/erfolgreicher-atemschutzkurs-in-krems-an-der-donau-cf720ec4/d3285dfe0c416d07.jpg",
+        "Beschreibung": null
+      }
+    ],
+    "Emoji": "",
+    "BildPlaceholder": "🚒",
+    "EinsatzOrt": "Krems an der Donau",
+    "EinsatzTyp": null,
+    "EinsatzZeit": null,
+    "EinsatzKraefte": null,
+    "AdminDraftId": "01eb534d-f069-40e5-a23c-833acf720ec4",
+    "AdminPublicationHash": "841634bd54c1061d815c912d0ddffe676dd929e8b156d77c52e234c22a500018"
+  },
+  {
     "Id": 30,
     "Slug": "baum-auf-fahrbahn-nach-gewitter-19-07-2026",
     "Emoji": "",

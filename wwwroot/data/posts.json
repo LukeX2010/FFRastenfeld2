@@ -1,5 +1,28 @@
 [
   {
+    "Id": 31,
+    "Slug": "technischer-redaktionstest-a2aa50d4",
+    "Titel": "Technischer Redaktionstest",
+    "Kategorie": "FF-News",
+    "Datum": "2026-09-26T12:00:00",
+    "Kurztext": "Die Bearbeitung der Website der FF Rastenfeld wurde durchgeführt. Dabei wurden Inhalte aktualisiert und die Darstellung optimiert.",
+    "Volltext": "Im Rahmen eines technischen Tests wurde die Website der Freiwilligen Feuerwehr Rastenfeld überarbeitet. Diese Maßnahme diente der Aktualisierung bestehender Inhalte und der Optimierung der Benutzerfreundlichkeit. Die Darstellung wurde angepasst, um die Informationsbereitstellung zu verbessern.",
+    "Bilder": [
+      {
+        "Pfad": "posts/technischer-redaktionstest-a2aa50d4/78abf9183c967e65.jpg",
+        "Beschreibung": "Öffentliches Feuerwehrlogo als Testbild"
+      }
+    ],
+    "Emoji": "",
+    "BildPlaceholder": "🚒",
+    "EinsatzOrt": null,
+    "EinsatzTyp": null,
+    "EinsatzZeit": null,
+    "EinsatzKraefte": null,
+    "AdminDraftId": "03c1d6e2-54e8-487f-b244-004aa2aa50d4",
+    "AdminPublicationHash": "e661615f28ab572a0de414817ec1c67f68bbeb6cc8ab1f5d52556b4db77cdb09"
+  },
+  {
     "Id": 30,
     "Slug": "baum-auf-fahrbahn-nach-gewitter-19-07-2026",
     "Emoji": "",

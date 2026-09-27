@@ -1,4 +1,5 @@
 import http from "node:http";
+import { randomUUID } from 'node:crypto';
 import { parseEnv } from "node:util";
 import { readFile, mkdir, writeFile, rename } from "node:fs/promises";
 import { resolve, extname, dirname, join } from "node:path";
@@ -46,11 +47,11 @@ export class LocalStore {
       );
       await rename(target + ".tmp", target);
     }
-    return "lokaler-test";
+    return "lokal-" + randomUUID();
   }
 }
 if (process.env.NODE_ENV !== "test") {
-  Object.assign(process.env, parseEnv(await readFile('.env.local', 'utf8')));
+  Object.assign(process.env, parseEnv(await readFile(process.env.ADMIN_ENV_FILE || '.env.local', 'utf8')));
   const store = new LocalStore();
   const handler = createHandler(
     { ...process.env, LOCAL_EDITOR: "true" },

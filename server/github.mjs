@@ -38,9 +38,11 @@ export class GitStore {
   }
   async commit(snapshot, files, message) {
     const tree = [];
-    for (const file of files) {
+    for (let i=0; i<files.length; i+=6) {
+      await Promise.all(files.slice(i,i+6).map(async file => {
       const blob = await this.api(snapshot.repo, 'git/blobs', 'POST', { content: file.content, encoding: file.encoding || 'utf-8' });
       tree.push({ path: file.path, mode: '100644', type: 'blob', sha: blob.sha });
+      }));
     }
     const nextTree = await this.api(snapshot.repo, 'git/trees', 'POST', { base_tree: snapshot.tree, tree });
     const commit = await this.api(snapshot.repo, 'git/commits', 'POST', { message, tree: nextTree.sha, parents: [snapshot.head] });

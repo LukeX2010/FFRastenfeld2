@@ -1,4 +1,7 @@
 import { postToDraft } from "./post-map.js";
+let budget = null;
+const filters = {query:'',category:'',sort:'newest'};
+const normalize = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('de').replace(/ß/g,'ss');
 const root = document.querySelector("#app");
 let posts = [],
   drafts = [],
@@ -118,10 +121,12 @@ async function dashboard() {
     api("/posts"),
     api("/drafts"),
     api("/settings"),
+    api("/budget"),
   ]);
   posts = results[0].status === "fulfilled" ? results[0].value : [];
   drafts = results[1].status === "fulfilled" ? results[1].value : [];
   settings = results[2].status === "fulfilled" ? results[2].value : settings;
+  budget = results[3].status === "fulfilled" ? results[3].value : null;
   currentUser = settings?.user || currentUser;
   draft = null;
   dirty = false;
@@ -133,7 +138,7 @@ async function dashboard() {
 function overview() {
   root.innerHTML =
     header() +
-    `<main><div class="heading"><div class="eyebrow">Deine Website. Deine Geschichten.</div><h1>Redaktionsübersicht</h1><p>Alles an einem Ort – vom ersten Stichwort bis zum fertigen Bericht.</p><div class="actions"><button id="new" class="primary">＋ Neuer Beitrag</button><button id="settings">Einstellungen</button></div></div><div class="stats"><div class="stat"><strong>${posts.length}</strong><span>Veröffentlichte Beiträge</span></div><div class="stat"><strong>${drafts.length}</strong><span>Gespeicherte Entwürfe</span></div><div class="stat"><strong>${settings?.aiConfigured ? "Bereit" : "Offen"}</strong><span>KI-Unterstützung</span></div></div><div class="toolbar"><div class="tabs"><button id="postsTab" class="${tab === "posts" ? "selected" : ""}">Veröffentlicht</button><button id="draftsTab" class="${tab === "drafts" ? "selected" : ""}">Entwürfe</button></div><input class="search" id="search" type="search" placeholder="Beiträge durchsuchen …" aria-label="Beiträge durchsuchen"></div><div id="list" class="list"></div></main>`;
+    `<main><div class="heading dashboard-heading"><div class="eyebrow">Deine Website. Deine Geschichten.</div><h1>FF Dashboard</h1><p>Alles an einem Ort – vom ersten Stichwort bis zum fertigen Bericht.</p><div class="actions"><button id="new" class="primary">＋ Neuer Beitrag</button><button id="settings">Einstellungen</button></div></div><div class="stats"><div class="stat"><strong>${posts.length}</strong><span>Veröffentlichte Beiträge</span></div><div class="stat"><strong>${drafts.length}</strong><span>Gespeicherte Entwürfe</span></div><div class="stat"><strong>${settings?.aiConfigured ? "Bereit" : "Offen"}</strong><span>KI-Unterstützung</span></div></div><section class="panel"><h2>Veröffentlichungsbudget</h2><strong>${budget ? budget.remaining+' von '+budget.limit+' übrig' : 'Zähler derzeit nicht verfügbar'}</strong><p class="help">${budget ? readable(budget.cycle)+' bis '+readable(new Date(new Date(budget.reset).getTime()-86400000))+' · '+budget.used+' verwendet · wieder voll am '+readable(budget.reset) : ''}</p><p class="help">Persönlicher Richtwert, keine Live-Netlify-Credits. Startwert: 5 Deploys, Stand 27.09.2026. Neue Veröffentlichungen hier zählen automatisch; spätere Code-/manuelle Deploys sind nicht enthalten. Entwürfe speichern löst keinen Website-Deploy aus.</p><button id="publishAll" class="primary" ${drafts.length ? '' : 'disabled'}>Alle ${drafts.length} Entwürfe gemeinsam veröffentlichen</button><p class="help">Alle gespeicherten Entwürfe, unabhängig vom Filter. Ein gemeinsamer GitHub-Commit statt einzelner Deploys. Unvollständige Entwürfe stoppen das gesamte Paket.</p></section><div class="toolbar"><div class="tabs"><button id="postsTab" class="${tab === "posts" ? "selected" : ""}">Veröffentlicht</button><button id="draftsTab" class="${tab === "drafts" ? "selected" : ""}">Entwürfe</button></div><input class="search" id="search" type="search" placeholder="Titel, Text, Ort …" aria-label="Beiträge durchsuchen" value="${esc(filters.query)}"><select id="categoryFilter" aria-label="Kategorie filtern"><option value="">Alle Kategorien</option>${cats.map(c=>`<option ${filters.category===c?'selected':''}>${c}</option>`).join('')}</select><select id="sortFilter" aria-label="Sortierung"><option value="newest" ${filters.sort==='newest'?'selected':''}>Neueste zuerst</option><option value="oldest" ${filters.sort==='oldest'?'selected':''}>Älteste zuerst</option><option value="title" ${filters.sort==='title'?'selected':''}>Titel A–Z</option></select><button id="resetFilters">Filter zurücksetzen</button></div><p id="resultCount" class="help"></p><div id="list" class="list"></div></main>`;
   logoutBind();
   on("#new", "click", () => {
     draft = {
@@ -163,16 +168,31 @@ function overview() {
     tab = "drafts";
     overview();
   });
-  on("#search", "input", list);
+  on("#search", "input", e=>{filters.query=e.target.value;list();});
+  on("#categoryFilter", "change", e=>{filters.category=e.target.value;list();});
+  on("#sortFilter", "change", e=>{filters.sort=e.target.value;list();});
+  on("#resetFilters","click",()=>{Object.assign(filters,{query:'',category:'',sort:'newest'});overview();});
+  on("#publishAll","click",()=>task(async()=>{
+    if(!confirm('Alle '+drafts.length+' gespeicherten Entwürfe gemeinsam veröffentlichen? Auch Entwürfe außerhalb des Filters sind enthalten.'))return;
+    const refs = [];
+    for(const d of drafts) {
+      const current = await api('/drafts/'+d.id);
+      refs.push({id:current.id,revision:current.revision});
+    }
+    const result = await api('/publish-batch',{drafts:refs});
+    await dashboard();
+    toast(result.warning || result.message,!!result.warning);
+  }));
   list();
 }
 function list() {
-  const query = root.querySelector("#search").value.toLowerCase();
-  const rows = (
-    tab === "posts"
-      ? [...posts].sort((a, b) => b.Datum.localeCompare(a.Datum))
-      : drafts
-  ).filter((p) => (p.Titel || p.titel || "").toLowerCase().includes(query));
+  const words = normalize(filters.query).trim().split(/\s+/).filter(Boolean);
+  const date = p=>p.Datum || p.datum || p.updatedAt || '';
+  const rows = [...(tab === 'posts' ? posts : drafts)].filter(p=>{
+    const text = normalize([p.Titel,p.titel,p.Kurztext,p.Volltext,p.EinsatzOrt,p.ort,p.EinsatzTyp,p.einsatzTyp,p.Kategorie,p.kategorie,p.updatedBy,p.searchText].join(' '));
+    return (!filters.category || (p.Kategorie || p.kategorie) === filters.category) && words.every(w=>text.includes(w));
+  }).sort((a,b)=>filters.sort === 'title' ? (a.Titel||a.titel||'').localeCompare(b.Titel||b.titel||'','de') : filters.sort === 'oldest' ? date(a).localeCompare(date(b)) : date(b).localeCompare(date(a)));
+  root.querySelector('#resultCount').textContent = rows.length+' passende Beiträge';
   root.querySelector("#list").innerHTML = rows.length
     ? rows
         .map(
@@ -201,7 +221,7 @@ function field(key, label, type = "text") {
 function editor() {
   root.innerHTML =
     header() +
-    `<main><button id="back" class="subtle back">← Zur Übersicht</button><div class="heading"><div><div class="eyebrow">${draft.postId ? "Beitrag bearbeiten" : "Neuer Beitrag"}</div><h1>Deine Geschichte gestalten</h1><p>Fotos auswählen, Gedanken sammeln, Text verfeinern.</p></div><span class="badge">${esc(draft.status || "Ungespeichert")}</span></div><div class="editor"><div><section class="panel"><h2><span class="sectionnum">1</span>Bilder auswählen</h2><p class="help">Das Titelbild erscheint zuerst. „Nur KI-Info“ bleibt privat und wird nicht veröffentlicht.</p><label class="upload">＋ Bilder hinzufügen<input id="files" type="file" accept="image/jpeg,image/png,image/webp" multiple></label><div id="photos" class="photos"></div></section><section class="panel"><h2><span class="sectionnum">2</span>Was ist passiert?</h2><div class="grid"><div class="wide">${field("titel", "Titel")}</div><label>Kategorie<select data-field="kategorie">${cats.map((c) => `<option ${c === draft.kategorie ? "selected" : ""}>${c}</option>`).join("")}</select></label>${field("datum", "Datum", "date")}<div class="wide">${field("ort", "Ort")}</div>${field("einsatzTyp", "Einsatzart (optional)")}${field("einsatzZeit", "Alarmzeit (optional)", "time")}${field("einsatzKraefte", "Einsatzkräfte (optional)", "number")}</div><label>Notizen und Informationen<textarea data-field="notizen" rows="5" placeholder="Was, wo, wann? Beteiligte, Fakten, wichtige Hinweise …">${esc(draft.notizen)}</textarea></label></section><section class="panel ai"><h2><span class="sectionnum">3</span>Mit KI formulieren</h2><p class="help">Aus deinen Angaben und Bildern wird ein Vorschlag. Beim Überarbeiten berücksichtigt die KI auch den aktuellen Text. Fakten und Bildfreigaben bitte selbst prüfen.</p><label>Dein Auftrag an die KI<textarea data-field="kiAnweisung" rows="2" placeholder="Zum Beispiel: kürzer, sachlicher, keine Namen nennen …">${esc(draft.kiAnweisung)}</textarea></label><button id="generate">✧ Text vorschlagen / überarbeiten</button><button id="undoAi" class="subtle" ${draft.previousText ? "" : "disabled"}>Vorherigen Text zurückholen</button></section><section class="panel"><h2><span class="sectionnum">4</span>Text fertigstellen</h2><label>Kurztext<textarea data-field="kurztext" rows="3">${esc(draft.kurztext)}</textarea></label><label>Vollständiger Beitrag<textarea data-field="volltext" rows="12">${esc(draft.volltext)}</textarea></label></section></div><aside class="aside"><section class="panel"><h2>Bereit für die Website?</h2><p class="help">Speichere deinen Zwischenstand oder prüfe die Vorschau vor der Veröffentlichung.</p><div class="actions"><button id="preview">Vorschau ansehen</button><button id="save">Entwurf speichern</button><button id="publish" class="primary">${draft.postId ? "Änderungen veröffentlichen" : "Veröffentlichen"}</button></div><p id="savehint" class="savehint">${draft.updatedAt ? "Zuletzt gespeichert: " + new Date(draft.updatedAt).toLocaleString("de-AT") : "Noch nicht gespeichert."}</p><p class="help">Nach dem Veröffentlichen benötigt die Website einen kurzen Moment zur Aktualisierung.</p></section></aside></div></main>`;
+    `<main><button id="back" class="subtle back">← Zur Übersicht</button><div class="heading"><div><div class="eyebrow">${draft.postId ? "Beitrag bearbeiten" : "Neuer Beitrag"}</div><h1>Deine Geschichte gestalten</h1><p>Fotos auswählen, Gedanken sammeln, Text verfeinern.</p></div><span class="badge">${esc(draft.status || "Ungespeichert")}</span></div><div class="editor"><div><section class="panel"><h2><span class="sectionnum">1</span>Bilder auswählen</h2><p class="help">Das Titelbild erscheint zuerst. „Nur KI-Info“ bleibt privat und wird nicht veröffentlicht.</p><label class="upload">＋ Bilder hinzufügen<input id="files" type="file" accept="image/jpeg,image/png,image/webp" multiple></label><div id="photos" class="photos"></div></section><section class="panel"><h2><span class="sectionnum">2</span>Was ist passiert?</h2><div class="grid"><div class="wide">${field("titel", "Titel")}</div><label>Kategorie<select data-field="kategorie">${cats.map((c) => `<option ${c === draft.kategorie ? "selected" : ""}>${c}</option>`).join("")}</select></label>${field("datum", "Datum", "date")}<div class="wide">${field("ort", "Ort")}</div>${draft.kategorie==='Einsätze' ? '<label>Einsatztyp (Pflicht bei Veröffentlichung)<select data-field="einsatzTyp" required><option value="">Bitte auswählen …</option>'+[...new Set(['B1','B2','B3','B4','T1','T2','T3','S1','S2','S3','W – Unwetter','Sonstiger Einsatz',...posts.filter(p=>p.Kategorie==='Einsätze').map(p=>p.EinsatzTyp),draft.einsatzTyp].filter(Boolean))].map(t=>'<option value="'+esc(t)+'" '+(t===draft.einsatzTyp?'selected':'')+'>'+esc(t)+'</option>').join('')+'</select></label>' : ''}${field("einsatzZeit", "Alarmzeit (optional)", "time")}${field("einsatzKraefte", "Einsatzkräfte (optional)", "number")}</div><label>Notizen und Informationen<textarea data-field="notizen" rows="5" placeholder="Was, wo, wann? Beteiligte, Fakten, wichtige Hinweise …">${esc(draft.notizen)}</textarea></label></section><section class="panel ai"><h2><span class="sectionnum">3</span>Mit KI formulieren</h2><p class="help">Aus deinen Angaben und Bildern wird ein Vorschlag. Beim Überarbeiten berücksichtigt die KI auch den aktuellen Text. Fakten und Bildfreigaben bitte selbst prüfen.</p><label>Dein Auftrag an die KI<textarea data-field="kiAnweisung" rows="2" placeholder="Zum Beispiel: kürzer, sachlicher, keine Namen nennen …">${esc(draft.kiAnweisung)}</textarea></label><button id="generate">✧ Text vorschlagen / überarbeiten</button><button id="undoAi" class="subtle" ${draft.previousText ? "" : "disabled"}>Vorherigen Text zurückholen</button></section><section class="panel"><h2><span class="sectionnum">4</span>Text fertigstellen</h2><label>Kurztext<textarea data-field="kurztext" rows="3">${esc(draft.kurztext)}</textarea></label><label>Vollständiger Beitrag<textarea data-field="volltext" rows="12">${esc(draft.volltext)}</textarea></label></section></div><aside class="aside"><section class="panel"><h2>Bereit für die Website?</h2><p class="help">Speichere deinen Zwischenstand oder prüfe die Vorschau vor der Veröffentlichung.</p><div class="actions"><button id="preview">Vorschau ansehen</button><button id="save">Entwurf speichern</button><button id="publish" class="primary">${draft.postId ? "Änderungen veröffentlichen" : "Veröffentlichen"}</button></div><p id="savehint" class="savehint">${draft.updatedAt ? "Zuletzt gespeichert: " + new Date(draft.updatedAt).toLocaleString("de-AT") : "Noch nicht gespeichert."}</p><p class="help">Nach dem Veröffentlichen benötigt die Website einen kurzen Moment zur Aktualisierung.</p></section></aside></div></main>`;
   logoutBind();
   photos();
   on("#back", "click", () => {
@@ -216,6 +236,7 @@ function editor() {
             : Number(el.value)
           : el.value;
       markDirty();
+      if(el.dataset.field === 'kategorie') editor();
     }),
   );
   on("#files", "change", (e) => task(() => addImages(e.target.files)));
@@ -426,7 +447,7 @@ function preferences() {
     });
   });
 }
-const activityLabels = {'login':'Angemeldet','logout':'Abgemeldet','draft.created':'Entwurf erstellt','draft.updated':'Entwurf gespeichert','ai.generated':'KI-Text erstellt / überarbeitet','settings.updated':'Einstellungen geändert','publish.started':'Veröffentlichung gestartet','post.published':'Auf GitHub veröffentlicht','publish.retried':'Veröffentlichung erneut bestätigt','action.failed':'Aktion fehlgeschlagen'};
+const activityLabels = {'batch.published':'Beiträge gemeinsam veröffentlicht','login':'Angemeldet','logout':'Abgemeldet','draft.created':'Entwurf erstellt','draft.updated':'Entwurf gespeichert','ai.generated':'KI-Text erstellt / überarbeitet','settings.updated':'Einstellungen geändert','publish.started':'Veröffentlichung gestartet','post.published':'Auf GitHub veröffentlicht','publish.retried':'Veröffentlichung erneut bestätigt','action.failed':'Aktion fehlgeschlagen'};
 async function activityPage() {
   const events = await api('/activity');
   draft=null; dirty=false;
@@ -434,8 +455,8 @@ async function activityPage() {
   logoutBind(); on('#back','click',()=>task(dashboard)); on('#refreshActivity','click',()=>task(activityPage));
   const render=()=>{
     const query=root.querySelector('#activitySearch').value.toLocaleLowerCase('de');
-    const filtered=events.filter(e=>[e.username,e.displayName,e.title,activityLabels[e.action]||e.action].join(' ').toLocaleLowerCase('de').includes(query));
-    root.querySelector('#activityList').innerHTML=filtered.length ? filtered.map(e=>`<article class="panel activity-entry"><div class="activity-meta"><strong>${esc(e.displayName || e.username)}</strong><span>${esc(e.username)}</span><time datetime="${esc(e.at)}">${esc(new Date(e.at).toLocaleString('de-AT',{timeZone:'Europe/Vienna'}))}</time></div><h2>${esc(activityLabels[e.action]||e.action)}</h2>${e.title?`<p>${esc(e.title)}</p>`:''}${e.route?`<p class="help">${esc(e.route)} · Fehler ${esc(e.status)}</p>`:''}${e.commit?`<small>Git-Commit: ${esc(e.commit.slice(0,12))}</small>`:''}</article>`).join('') : '<p class="empty">Keine passenden Aktivitäten.</p>';
+    const filtered=events.filter(e=>[e.username,e.displayName,e.title,e.category,e.details,activityLabels[e.action]||e.action].join(' ').toLocaleLowerCase('de').includes(query));
+    root.querySelector('#activityList').innerHTML=filtered.length ? filtered.map(e=>`<article class="panel activity-entry"><div class="activity-meta"><strong>${esc(e.displayName || e.username)}</strong><span>${esc(e.username)}</span><time datetime="${esc(e.at)}">${esc(new Date(e.at).toLocaleString('de-AT',{timeZone:'Europe/Vienna'}))}</time></div><h2>${esc(activityLabels[e.action]||e.action)}</h2>${e.title?`<p>${esc(e.title)}</p>`:''}${e.category?`<p class="help">Kategorie: ${esc(e.category)}</p>`:''}${e.details?`<p class="help">Geänderte Felder: ${esc(e.details.split(', ').map(k=>({titel:'Titel',kategorie:'Kategorie',datum:'Datum',ort:'Ort',einsatzTyp:'Einsatztyp',einsatzZeit:'Alarmzeit',einsatzKraefte:'Einsatzkräfte',kurztext:'Kurztext',volltext:'Beitragstext',bilder:'Bilder'}[k]||k)).join(', '))}</p>`:''}${e.count>1?`<p class="help">${esc(e.count)} Beiträge · ein gemeinsamer Commit</p>`:''}${e.route?`<p class="help">${esc(e.route)} · Fehler ${esc(e.status)}</p>`:''}${e.commit?`<small>Git-Commit: ${esc(e.commit.slice(0,12))}</small>`:''}</article>`).join('') : '<p class="empty">Keine passenden Aktivitäten.</p>';
   }; on('#activitySearch','input',render); render();
 }
 window.addEventListener("beforeunload", (e) => {

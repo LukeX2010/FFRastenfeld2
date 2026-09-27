@@ -25,7 +25,7 @@ else
                 <div class="detail-img">
                     <img src="@DS.GetMainImageSrc(post)" class="hero-bg-img" alt="@post.Titel"/>
                 </div>
-                <div class="detail-body"><p>@post.Volltext</p></div>
+                <div class="detail-body"><p style="white-space: pre-wrap; overflow-wrap: anywhere;">@post.Volltext</p></div>
 
                 @if (post.Bilder != null && post.Bilder.Count > 0)
                 {

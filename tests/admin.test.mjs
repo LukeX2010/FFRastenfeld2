@@ -1,4 +1,40 @@
 import test from 'node:test';
+import { publicationBudget } from '../server/budget.mjs';
+test('budget resets on the tenth in Austrian time, including year rollover',()=>{
+  assert.equal(publicationBudget([],new Date('2026-09-27T10:00:00Z')).remaining,10);
+  assert.equal(publicationBudget([],new Date('2026-10-09T21:59:59Z')).remaining,10);
+  assert.equal(publicationBudget([],new Date('2026-10-09T22:00:00Z')).remaining,15);
+  assert.equal(publicationBudget([],new Date('2027-01-09T10:00:00Z')).cycle,'2026-12-10');
+  assert.equal(publicationBudget([{cycle:'2026-10-10',commit:'a'},{cycle:'2026-10-10',commit:'a'}],new Date('2026-10-11')).used,1);
+});
+test('batch publishes all posts in one commit, counts once and retries without another commit',async()=>{
+  const {handler,cookie,store}=await fixture();
+  const refs=[];
+  for(let i=0;i<3;i++) refs.push(await(await handler(req('/drafts',{...draft(),id:crypto.randomUUID(),titel:'Beitrag '+i},cookie))).json());
+  assert.equal((await handler(req('/publish-batch',{drafts:refs},cookie))).status,200);
+  assert.equal(store.commits.filter(c=>c.repo==='public').length,1);
+  assert.equal(store.data.public['wwwroot/data/posts.json'].length,3);
+  assert.equal(store.data.private['publication-usage.json'].length,1);
+  assert.equal(store.data.private['index.json'].length,0);
+  assert.equal((await handler(req('/publish-batch',{drafts:refs},cookie))).status,200);
+  assert.equal(store.commits.filter(c=>c.repo==='public').length,1);
+  // Retry the originally stored content after a lost response/private-finalization failure.
+  for(const d of refs) store.data.private['drafts/'+d.id+'.json']=d;
+  assert.equal((await handler(req('/publish-batch',{drafts:refs},cookie))).status,200);
+  assert.equal(store.commits.filter(c=>c.repo==='public').length,1);
+});
+test('incomplete or stale batch publishes nothing; Einsatztyp is required only for publishing',async()=>{
+  const {handler,cookie,store}=await fixture();
+  const a=await(await handler(req('/drafts',draft(),cookie))).json();
+  const b=await(await handler(req('/drafts',{...draft(),id:crypto.randomUUID(),kategorie:'Einsätze'},cookie))).json();
+  assert.ok(b.revision);
+  assert.equal((await handler(req('/publish-batch',{drafts:[a,b]},cookie))).status,400);
+  assert.equal(store.commits.filter(c=>c.repo==='public').length,0);
+  assert.equal((await handler(req('/publish-batch',{drafts:[{...a,revision:'stale'}]},cookie))).status,409);
+  assert.equal((await handler(req('/publish-batch',{drafts:[a,a]},cookie))).status,400);
+  assert.equal(store.commits.filter(c=>c.repo==='public').length,0);
+  assert.doesNotThrow(()=>makePublication({...b,einsatzTyp:'T1'},[]));
+});
 test('repository metadata request has no trailing slash (GitHub rejects it)', async () => {
   const calls = [];
   const store = new GitStore({GITHUB_TOKEN:'test',GITHUB_REPO:'test/site'}, async (url) => {

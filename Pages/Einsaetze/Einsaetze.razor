@@ -2,7 +2,7 @@
 @page "/einsaetze"
 @inject DataService DS
 
-<PageTitle>Einsätze 2025 – Freiwillige Feuerwehr Rastenfeld, Niederösterreich</PageTitle>
+<PageTitle>Einsätze – Freiwillige Feuerwehr Rastenfeld, Niederösterreich</PageTitle>
 <PageHero Title="Einsatzchronik FF Rastenfeld" Subtitle="Aktuelle Einsätze der FF Rastenfeld im Bezirk Krems-Land, NÖ" />
 
 <div class="site-body container">
@@ -98,8 +98,8 @@
         filtered = f == "Alle" ? all : all.Where(e =>
             f == "Brand" ? e.EinsatzTyp?.StartsWith("B") == true :
             f == "Technische Hilfe" ? e.EinsatzTyp?.StartsWith("T") == true :
-            f == "Unwetter" ? e.EinsatzTyp?.StartsWith("S") == true || e.EinsatzTyp?.StartsWith("W") == true :
-            f == "Gefahrgut" ? e.EinsatzTyp?.StartsWith("G") == true :
-            true).ToList();
+            f == "Unwetter" ? e.EinsatzTyp?.StartsWith("W", StringComparison.OrdinalIgnoreCase) == true :
+            f == "Gefahrgut" ? e.EinsatzTyp?.StartsWith("G", StringComparison.OrdinalIgnoreCase) == true || System.Text.RegularExpressions.Regex.IsMatch(e.EinsatzTyp ?? "", @"^S[1-3]", System.Text.RegularExpressions.RegexOptions.IgnoreCase) :
+            !System.Text.RegularExpressions.Regex.IsMatch(e.EinsatzTyp ?? "", @"^(B|T|W|G|S[1-3])", System.Text.RegularExpressions.RegexOptions.IgnoreCase)).ToList();
     }
 }

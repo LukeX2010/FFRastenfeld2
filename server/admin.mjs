@@ -6,6 +6,7 @@ import {
   timingSafeEqual,
 } from "node:crypto";
 import { ApiError, GitStore } from "./github.mjs";
+import { publicationBudget } from './budget.mjs';
 
 const categories = ["FF-News", "Einsätze", "Ausbildung", "Feuerwehrjugend"];
 const cookieName = "ffr_editor";
@@ -143,6 +144,7 @@ export function postToDraft(post) {
 }
 export function makePublication(draft, posts, imagesRoot = "wwwroot/img") {
   validateDraft(draft);
+  requireValue(draft.kategorie !== 'Einsätze' || draft.einsatzTyp.trim(), 'Bitte einen Einsatztyp auswählen: ' + draft.titel);
   requireValue(
     draft.titel.trim() && draft.volltext.trim(),
     "Titel und Beitrag fehlen.",
@@ -293,7 +295,7 @@ export function createHandler(env, dependencies = {}) {
   const activity = (user, action, details = {}) => ({id:randomBytes(16).toString('hex'), at:new Date().toISOString(), username:user.username, displayName:user.displayName, action, ...details});
   async function activityFile(snap, event) {
     const previous = await store.read(snap, 'activity.json', true) || [];
-    return jsonFile('activity.json', [event, ...previous].slice(0,1000));
+    return jsonFile('activity.json', [...(Array.isArray(event) ? event : [event]), ...previous].slice(0,1000));
   }
   async function record(event) {
     for (let attempt=0; attempt<3; attempt++) {
@@ -323,11 +325,17 @@ export function createHandler(env, dependencies = {}) {
       kategorie: next.kategorie,
       updatedAt: next.updatedAt,
       status: next.status,
+      datum: next.datum,
+      revision: next.revision,
+      ort: next.ort,
+      einsatzTyp: next.einsatzTyp,
+      updatedBy: user.displayName,
+      searchText: [next.kurztext,next.volltext].join(' '),
     };
     await store.commit(
       snap,
       [
-        await activityFile(snap, activity(user, old ? 'draft.updated' : 'draft.created', {draftId:draft.id,title:draft.titel.slice(0,250)})),
+        await activityFile(snap, activity(user, old ? 'draft.updated' : 'draft.created', {draftId:draft.id,title:draft.titel.slice(0,250), category:draft.kategorie, details: ['titel','kategorie','datum','ort','einsatzTyp','einsatzZeit','einsatzKraefte','kurztext','volltext','bilder'].filter(k=>JSON.stringify(old?.[k])!==JSON.stringify(draft[k])).join(', '), imageCount:draft.bilder.filter(b=>!b.isInformationOnly).length})),
         jsonFile(`drafts/${next.id}.json`, next),
         jsonFile("index.json", [
           summary,
@@ -409,6 +417,8 @@ export function createHandler(env, dependencies = {}) {
         return reply({ ok: true }, 200, { "Set-Cookie": cookie("") });
       }
       requireValue(actor, "Bitte erneut anmelden.", 401);
+      if(route === '/budget' && request.method === 'GET')
+        return reply(publicationBudget(await store.read(await store.snapshot(true),'publication-usage.json',true) || []));
       if(route === '/activity' && request.method === 'GET')
         return reply(await store.read(await store.snapshot(true),'activity.json',true) || []);
       if (route === "/settings" && request.method === "GET")
@@ -547,76 +557,68 @@ export function createHandler(env, dependencies = {}) {
           volltext: generated.volltext,
         });
       }
-      if (route === "/publish" && request.method === "POST") {
-        const draft = validateDraft(await body(request));
-        // Preserve private input before attempting the public transaction.
-        const stateBefore = await draftsState();
-        const storedDraft = await store.read(
-          stateBefore.snap,
-          `drafts/${draft.id}.json`,
-          true,
-        );
-        requireValue(
-          storedDraft && storedDraft.revision === draft.revision,
-          "Bitte zuerst den aktuellen Entwurf speichern.",
-          409,
-        );
-        const saved = { ...draft };
-        const snap = await store.snapshot();
-        const posts = await store.read(snap, postsPath);
-        const publication = makePublication(
-          saved,
-          posts,
-          env.IMAGES_PATH || "wwwroot/img",
-        );
-        if(!publication.unchanged) await record(activity(actor,'publish.started',{draftId:draft.id,title:draft.titel.slice(0,250)}));
-        const commit = publication.unchanged
-          ? snap.head
-          : await store.commit(
-              snap,
-              [...publication.files, jsonFile(postsPath, publication.posts)],
-              `Redaktion: ${draft.titel} [${draft.id}]`,
-            );
-        saved.postId = publication.post.Id;
-        saved.slug = publication.post.Slug;
-        saved.basePostHash = hash(publication.post);
-        saved.status = "Veröffentlicht";
-        let warning = "";
-        try {
-          const state = await draftsState();
-          const current = await store.read(
-            state.snap,
-            `drafts/${saved.id}.json`,
-          );
-          requireValue(
-            current.revision === saved.revision,
-            "Entwurf zwischenzeitlich geändert.",
-            409,
-          );
-          await store.commit(
-            state.snap,
-            [
-              await activityFile(state.snap,activity(actor,publication.unchanged ? 'publish.retried' : 'post.published',{draftId:draft.id,title:draft.titel.slice(0,250),postId:publication.post.Id,commit})),
-              jsonFile(`drafts/${saved.id}.json`, saved),
-              jsonFile(
-                "index.json",
-                state.index.filter((d) => d.id !== saved.id),
-              ),
-            ],
-            "Redaktion: Veröffentlichung vermerken",
-          );
-        } catch {
-          warning =
-            "Veröffentlicht. Der private Entwurf konnte nicht abgeschlossen werden. Bitte den Beitrag über „Veröffentlicht“ öffnen.";
+      if (['/publish','/publish-batch'].includes(route) && request.method === "POST") {
+        const input = await body(request);
+        const refs = route === '/publish' ? [input] : input.drafts;
+        requireValue(Array.isArray(refs) && refs.length > 0, 'Keine Entwürfe ausgewählt.');
+        requireValue(new Set(refs.map(d=>d.id)).size === refs.length, 'Entwurf mehrfach ausgewählt.');
+        const before = await draftsState();
+        const selected = [];
+        for (const ref of refs) {
+          requireValue(/^[a-zA-Z0-9-]{12,80}$/.test(ref.id || ''), 'Ungültige Entwurf-ID.');
+          const stored = await store.read(before.snap, `drafts/${ref.id}.json`, true);
+          requireValue(stored && stored.revision === ref.revision, 'Entwurf inzwischen geändert oder nicht gespeichert. Bitte Übersicht neu laden.', 409);
+          selected.push(stored);
         }
-        return reply({
-          draft: saved,
-          post: publication.post,
-          commit,
-          warning,
-          message:
-            env.LOCAL_EDITOR === 'true' ? 'Lokal gespeichert. Es wurde nichts ins Internet veröffentlicht.' : "Auf GitHub gespeichert. Die Website erscheint nach Abschluss des Netlify-Deploys aktualisiert.",
+        const targets = selected.filter(d=>d.postId != null).map(d=>d.postId);
+        requireValue(new Set(targets).size === targets.length, 'Mehrere Entwürfe bearbeiten denselben Beitrag. Bitte einzeln prüfen.');
+        const snap = await store.snapshot();
+        let posts = await store.read(snap, postsPath);
+        const publications = selected.map(d=>{
+          try {
+            if(d.status === 'Veröffentlicht') {
+              const existing = posts.find(p=>p.Id===d.postId);
+              requireValue(existing && hash(existing)===d.basePostHash, 'Bereits veröffentlicht und inzwischen geändert. Bitte neu öffnen.',409);
+              return {post:existing,posts,files:[],unchanged:true};
+            }
+            const p = makePublication(d, posts, env.IMAGES_PATH || 'wwwroot/img');
+            posts = p.posts;
+            return p;
+          } catch(e) { if(e instanceof ApiError) e.message = (d.titel || 'Unbenannter Entwurf') + ': ' + e.message; throw e; }
         });
+        const changed = publications.some(p=>!p.unchanged);
+        if(changed) await record(activity(actor,'publish.started',{title:selected.map(d=>d.titel).join(' · '),count:selected.length}));
+        const uniqueFiles = new Map(publications.flatMap(p=>p.files).map(f=>[f.path,f]));
+        const commit = changed ? await store.commit(snap,[...uniqueFiles.values(),jsonFile(postsPath,posts)],
+          selected.length === 1 ? `Redaktion: ${selected[0].titel} [${selected[0].id}]` : `Redaktion: ${selected.length} Beiträge gemeinsam veröffentlichen`) : snap.head;
+        const saved = selected.map((d,i)=>({...d,postId:publications[i].post.Id,slug:publications[i].post.Slug,basePostHash:hash(publications[i].post),status:'Veröffentlicht'}));
+        let warning = '';
+        try {
+          // Retry only private bookkeeping. The public transaction is never repeated here.
+          for(let attempt=0;attempt<3;attempt++) {
+            const state = await draftsState();
+            const files = [];
+            const done = new Set();
+            for(const d of saved) {
+              const current = await store.read(state.snap,`drafts/${d.id}.json`);
+              if(current.revision === d.revision) {files.push(jsonFile(`drafts/${d.id}.json`,d));done.add(d.id);}
+              else warning = 'Veröffentlicht. Parallel bearbeitete Entwürfe bleiben zur Prüfung erhalten.';
+            }
+            const ledger = await store.read(state.snap,'publication-usage.json',true) || [];
+            if(commit && selected.some(d=>d.status !== 'Veröffentlicht') && !ledger.some(e=>e.commit === commit))
+              ledger.push({commit,cycle:publicationBudget().cycle,at:new Date().toISOString()});
+            const events = saved.map((d,i)=>activity(actor,publications[i].unchanged?'publish.retried':'post.published',
+              {draftId:d.id,title:d.titel,category:d.kategorie,postId:d.postId,commit,count:saved.length}));
+            if(saved.length>1) events.push(activity(actor,'batch.published',{title:saved.map(d=>d.titel).join(' · '),count:saved.length,commit}));
+            files.push(await activityFile(state.snap,events),jsonFile('index.json',state.index.filter(d=>!done.has(d.id))),jsonFile('publication-usage.json',ledger));
+            try {await store.commit(state.snap,files,'Redaktion: Veröffentlichung vermerken');break;}
+            catch(e) {if(e.status!==409 || attempt===2)throw e;}
+          }
+        } catch {
+          warning = 'Auf GitHub veröffentlicht. Protokoll/Zähler und Entwürfe konnten nicht abgeschlossen werden. Bitte neu laden und erneut bestätigen; identische Beiträge werden nicht doppelt veröffentlicht.';
+        }
+        return reply({draft:saved[0],post:publications[0].post,commit,count:saved.length,warning,
+          message:env.LOCAL_EDITOR === 'true' ? `${saved.length} Beiträge lokal gespeichert. Keine Veröffentlichung ins Internet.` : `${saved.length} Beiträge gemeinsam auf GitHub gespeichert. Ein Website-Deploy wird ausgelöst.`});
       }
       throw new ApiError(404, "Diese Funktion gibt es nicht.");
     } catch (error) {

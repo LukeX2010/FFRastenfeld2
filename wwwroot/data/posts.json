@@ -239,20 +239,28 @@
     "Id": 19,
     "Slug": "schadstoffuebung-mottingeramt-2026",
     "Emoji": "schadstoffuebung-mottingeramt-2026",
-    "Titel": "Uebung Fahrzeugbrand und Schadstoffausruestung",
+    "Titel": "Übung Fahrzeugbrand und Schadstoffausrüstung",
     "Kategorie": "Ausbildung",
     "Datum": "2026-05-29T00:00:00",
     "Kurztext": "In Mottingeramt beuebte die FF Rastenfeld einen Fahrzeugbrand in einer Garage und den Umgang mit neuer Schadstoffausruestung.",
     "Volltext": "Am Freitag, dem 29. Mai 2026, fuehrte die Freiwillige Feuerwehr Rastenfeld in Mottingeramt eine praxisnahe Übung durch.\n\nAngenommen wurde ein Fahrzeugbrand in einer Garage. Neben dem Vorgehen unter Atemschutz standen auch Erkundung, Brandbekaempfung und die sichere Arbeit im direkten Gefahrenbereich im Mittelpunkt.\n\nZusaetzlich wurde neue Ausruestung fuer Schadstoffeinsaetze getestet. Dazu gehoerten saeurebestaendige Ganzkoerperschutzanzuege der Kategorie 2, Moosplatten sowie eine Auffangwanne. Solche Uebungen helfen, Geraete und Ablaeufe im Team zu festigen.",
     "Bilder": [
-      "schadstoffuebung-mottingeramt-2026-ausruestung.jpeg",
-      "schadstoffuebung-mottingeramt-2026-erkundung.jpeg"
+      {
+        "Pfad": "schadstoffuebung-mottingeramt-2026-ausruestung.jpeg",
+        "Beschreibung": null
+      },
+      {
+        "Pfad": "schadstoffuebung-mottingeramt-2026-erkundung.jpeg",
+        "Beschreibung": null
+      }
     ],
     "BildPlaceholder": "🚒",
     "EinsatzTyp": null,
-    "EinsatzOrt": null,
+    "EinsatzOrt": "Mottingeramt",
     "EinsatzZeit": null,
-    "EinsatzKraefte": null
+    "EinsatzKraefte": null,
+    "AdminDraftId": "25de7218-7c77-4c7b-b2da-35a6ad379d90",
+    "AdminPublicationHash": "98fe24961cccd908e79bf1fdbc51e30bf5a200a59d52bc386f3054585fd064cb"
   },
   {
     "Id": 18,

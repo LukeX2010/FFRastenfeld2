@@ -1,5 +1,44 @@
 [
   {
+    "Id": 32,
+    "Slug": "verkehrsunfall-mit-menschenrettung-f549fdba",
+    "Titel": "Verkehrsunfall mit Menschenrettung",
+    "Kategorie": "Einsätze",
+    "Datum": "2026-09-27T22:26:00",
+    "Kurztext": "Am Dienstagabend, dem 22. September 2026, wurde die FF Rastenfeld zu einem Verkehrsunfall auf der B37 bei Rastenfeld alarmiert. Eine Person musste aus einem verunfallten Pkw gerettet und das Fahrzeug anschließend geborgen werden.",
+    "Volltext": "Am Dienstagabend, dem 22. September 2026, ereignete sich auf der B37 bei Rastenfeld ein Verkehrsunfall mit Menschenrettung. Ein Pkw kam von der Straße ab, prallte gegen eine Böschung und einen Brunnen und wurde in den gegenüberliegenden Straßengraben geschleudert. Der Fahrer befand sich noch im Fahrzeug, war jedoch nicht eingeklemmt.\n\nDie Feuerwehren Peygarten-Ottenstein, Rastenfeld und Sperkental führten gemeinsam mit dem Roten Kreuz die Rettung der Person durch. Für die Fahrzeugbergung wurde zusätzlich die FF Friedersbach nachalarmiert. Das Fahrzeug wurde mittels Hebekreuz aus dem Graben gehoben und anschließend abtransportiert.\n\nNach dem Binden der ausgelaufenen Betriebsmittel und der Reinigung der Fahrbahn konnte der Einsatz nach rund 90 Minuten beendet werden.\n\nDanke an alle eingesetzten Feuerwehren, das Rote Kreuz und die Polizei für die gute Zusammenarbeit!🤝🚒",
+    "Bilder": [
+      {
+        "Pfad": "posts/verkehrsunfall-mit-menschenrettung-f549fdba/9bc1e1784aa785ba.jpg",
+        "Beschreibung": null
+      },
+      {
+        "Pfad": "posts/verkehrsunfall-mit-menschenrettung-f549fdba/28798eb4d8e84264.jpg",
+        "Beschreibung": null
+      },
+      {
+        "Pfad": "posts/verkehrsunfall-mit-menschenrettung-f549fdba/c8677efe7a40b014.jpg",
+        "Beschreibung": null
+      },
+      {
+        "Pfad": "posts/verkehrsunfall-mit-menschenrettung-f549fdba/e47e6c6df36a4ba7.jpg",
+        "Beschreibung": null
+      },
+      {
+        "Pfad": "posts/verkehrsunfall-mit-menschenrettung-f549fdba/c7d16a93f7fb7970.jpg",
+        "Beschreibung": null
+      }
+    ],
+    "Emoji": "",
+    "BildPlaceholder": "🚒",
+    "EinsatzOrt": "Rastenfeld, B37",
+    "EinsatzTyp": "T2 – VU mit Menschenrettung",
+    "EinsatzZeit": "22:26",
+    "EinsatzKraefte": 8,
+    "AdminDraftId": "6bf58352-5274-40ba-bdc0-1371f549fdba",
+    "AdminPublicationHash": "56afd3749142cf422e844e9f7d1c3cc580c83b8961b57a1b7ae5eee10b81d53a"
+  },
+  {
     "Id": 31,
     "Slug": "erfolgreicher-atemschutzkurs-in-krems-an-der-donau-cf720ec4",
     "Titel": "Erfolgreicher Atemschutzkurs in Krems an der Donau",
@@ -32,14 +71,22 @@
     "Kurztext": "Am 19. Juli 2026 wurde die Freiwillige Feuerwehr Rastenfeld zu einem Einsatz gerufen, bei dem ein umgestürzter Baum die Fahrbahn blockierte.",
     "Volltext": "Am 19. Juli 2026 um 12:03 Uhr wurde die Freiwillige Feuerwehr Rastenfeld zu einem technischen Einsatz alarmiert. Ein kurzes, aber starkes Gewitter mit übermäßigem Wind hatte eine große Fichte umstürzen lassen, die bei Kilometer 4.6 die Fahrbahn vollständig blockierte.\n\nDie Einsatzkräfte der Freiwilligen Feuerwehr Rastenfeld rückten aus, um die Gefahrenstelle zu beseitigen. Gemeinsam mit der Feuerwehr Sperkental wurde der umgestürzte Baum rasch von der Straße entfernt. Im Zuge der Aufräumarbeiten wurden zudem weitere kleinere Bäume, die durch den Sturm beschädigt waren, entlang des Weges beseitigt.\n",
     "Bilder": [
-      "posts/baum-auf-fahrbahn-nach-gewitter-19-07-2026/bild-01.jpeg",
-      "posts/baum-auf-fahrbahn-nach-gewitter-19-07-2026/bild-02.jpeg"
+      {
+        "Pfad": "posts/baum-auf-fahrbahn-nach-gewitter-19-07-2026/bild-01.jpeg",
+        "Beschreibung": null
+      },
+      {
+        "Pfad": "posts/baum-auf-fahrbahn-nach-gewitter-19-07-2026/bild-02.jpeg",
+        "Beschreibung": null
+      }
     ],
     "BildPlaceholder": "🔥",
-    "EinsatzTyp": null,
+    "EinsatzTyp": "T1 - Objekt/Baum umgestuerzt",
     "EinsatzOrt": "Rastenfeld",
     "EinsatzZeit": "12:03",
-    "EinsatzKraefte": 10
+    "EinsatzKraefte": 10,
+    "AdminDraftId": "82d1cffb-c80f-4617-aa6a-df43e609f95c",
+    "AdminPublicationHash": "acaa0e75d86201baa7256fcf43fa73d6a4f0cbb720fb595d405062b8e198a6a6"
   },
   {
     "Id": 29,

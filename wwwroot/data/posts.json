@@ -1,5 +1,28 @@
 [
   {
+    "Id": 33,
+    "Slug": "gratulation-zum-40-geburtstag-5ed8349e",
+    "Titel": "Gratulation zum 40. Geburtstag",
+    "Kategorie": "FF-News",
+    "Datum": "2026-10-02T19:00:00",
+    "Kurztext": "Die FF Rastenfeld gratulierte am Freitag, den 3. Oktober 2026, ihrem Kameraden Bernhard Traxler zu seinem 40. Geburtstag.",
+    "Volltext": "Am Freitag, 3.10.2026, trafen wir uns, um unserem Kameraden Bernhard Traxler zu seinem 40. Geburtstag zu gratulieren und gemeinsam mit ihm zu feiern.\n\nLieber Bernhard, wir wünschen dir alles Gute, viel Glück und vor allem Gesundheit für dein neues Lebensjahr! Auf viele weitere gemeinsame Jahre und schöne Stunden bei der Feuerwehr!",
+    "Bilder": [
+      {
+        "Pfad": "posts/gratulation-zum-40-geburtstag-5ed8349e/43b4b2dec814c16f.jpg",
+        "Beschreibung": null
+      }
+    ],
+    "Emoji": "",
+    "BildPlaceholder": "🚒",
+    "EinsatzOrt": "Rastenfeld",
+    "EinsatzTyp": null,
+    "EinsatzZeit": "19:00",
+    "EinsatzKraefte": null,
+    "AdminDraftId": "b2393d1f-6c88-40ef-b0b8-eeb35ed8349e",
+    "AdminPublicationHash": "e88cdbe8934f53974cfaaf99f0e88fc7e8fa9fb79fd54f4664122b86efd8eaa8"
+  },
+  {
     "Id": 32,
     "Slug": "verkehrsunfall-mit-menschenrettung-f549fdba",
     "Titel": "Verkehrsunfall mit Menschenrettung",

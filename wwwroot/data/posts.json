@@ -1,5 +1,28 @@
 [
   {
+    "Id": 34,
+    "Slug": "feuerloscher-uberprufung-bei-der-ff-rastenfeld-46db3cd1",
+    "Titel": "Feuerlöscher-Überprüfung bei der FF Rastenfeld",
+    "Kategorie": "FF-News",
+    "Datum": "2026-10-17T12:00:00",
+    "Kurztext": "Am Samstag, den 17. Oktober 2026, wird im Feuerwehrhaus Rastenfeld eine Feuerlöscher-Überprüfung angeboten. Interessierte können ihre Geräte von 9.00 bis 11.30 Uhr zur Prüfung bringen.",
+    "Volltext": "Die Freiwillige Feuerwehr Rastenfeld informiert über eine anstehende Feuerlöscher-Überprüfung. Diese findet am Samstag, den 17. Oktober 2026, im Feuerwehrhaus Rastenfeld statt. Von 9.00 Uhr bis 11.30 Uhr besteht für Bürgerinnen und Bürger die Möglichkeit, ihre Feuerlöscher fachgerecht überprüfen zu lassen. Die Kosten für die Überprüfung eines Feuerlöschers betragen 9,00 Euro, inklusive Mehrwertsteuer. Die Durchführung der Prüfung erfolgt durch die Firma L&E Feuerlöschtechnik OG.",
+    "Bilder": [
+      {
+        "Pfad": "posts/feuerloscher-uberprufung-bei-der-ff-rastenfeld-46db3cd1/2712de8896c3e652.jpg",
+        "Beschreibung": null
+      }
+    ],
+    "Emoji": "",
+    "BildPlaceholder": "🚒",
+    "EinsatzOrt": null,
+    "EinsatzTyp": null,
+    "EinsatzZeit": null,
+    "EinsatzKraefte": null,
+    "AdminDraftId": "dab451c3-f325-4102-9d48-ff6546db3cd1",
+    "AdminPublicationHash": "8f4f891166df24f478c83ec6ecac998cd1a9532957d74b77eb11e4c928e01531"
+  },
+  {
     "Id": 33,
     "Slug": "gratulation-zum-40-geburtstag-5ed8349e",
     "Titel": "Gratulation zum 40. Geburtstag",

@@ -1,5 +1,36 @@
 [
   {
+    "Id": 35,
+    "Slug": "brand-in-gewerbebetrieb-in-rastenfeld-c2283255",
+    "Titel": "Brand in Gewerbebetrieb in Rastenfeld",
+    "Kategorie": "FF-News",
+    "Datum": "2026-10-27T22:00:00",
+    "Kurztext": "Am späten Dienstagabend, dem 27. Oktober 2026, kam es in einem Gewerbebetrieb in Rastenfeld zu einem Brand in einem Produktionsturm. Die Bereichsalarmzentrale Krems alarmierte daraufhin neun Feuerwehren sowie das Rote Kreuz und die Polizei. Beim Eintreffen der Einsatzkräfte stand der Turm bereits in Vollbrand. Umfangreiche Lösch- und Nachlöscharbeiten zogen sich bis in die späte Nacht hinein.",
+    "Volltext": "In den späten Abendstunden des Dienstags, dem 27. Oktober 2026, wurde die Feuerwehr Rastenfeld zu einem Brand in einem Gewerbebetrieb alarmiert. Dort war ein Produktionsturm in Brand geraten. Aufgrund der Brandmeldung alarmierte die Bereichsalarmzentrale Krems ein Großaufgebot an Einsatzkräften, darunter neun Feuerwehren aus der Region sowie aus dem benachbarten Bezirk Zwettl, das Rote Kreuz Krems und Zwettl sowie mehrere Polizeistreifen.\n\nBeim Eintreffen der ersten Einsatzkräfte stand der betroffene Produktionsturm bereits in Vollbrand. Umgehend wurden die beiden Hubrettungsgeräte der Feuerwehren Gföhl und Zwettl-Stadt in Stellung gebracht, um einen effektiven Außenangriff zu ermöglichen. Parallel dazu waren mehrere Atemschutztrupps nacheinander im Inneren des Turms im Einsatz, um den Brandherd zu lokalisieren und das Feuer unter Kontrolle zu bringen.\n\nNachdem der Brand größtenteils abgelöscht war, konnten die ersten Löschmaßnahmen eingestellt werden. Anschließend führten die Feuerwehren vor Ort umfangreiche Nachlöscharbeiten durch, um verbliebene Glutnester abzulöschen. Zusätzlich belüfteten die Einsatzkräfte angrenzende Gebäude, um eine weitere Ausbreitung oder Gefährdung zu verhindern.\n\nBereits während der Nachlöscharbeiten konnten die ersten Fahrzeuge der alarmierten Feuerwehren wieder abrücken. Auch das zur Unterstützung bereitgestellte Rote Kreuz konnte den Einsatzort ohne weitere Tätigkeit verlassen. Die Nachlöscharbeiten und weitere notwendige Tätigkeiten der Feuerwehren zogen sich bis in die späte Nacht hinein. Die Ursache des Brandes ist unbekannt.",
+    "Bilder": [
+      {
+        "Pfad": "posts/brand-in-gewerbebetrieb-in-rastenfeld-c2283255/fbec9b3b7b696e47.jpg",
+        "Beschreibung": null
+      },
+      {
+        "Pfad": "posts/brand-in-gewerbebetrieb-in-rastenfeld-c2283255/5c7a45c6c846181a.jpg",
+        "Beschreibung": null
+      },
+      {
+        "Pfad": "posts/brand-in-gewerbebetrieb-in-rastenfeld-c2283255/acbc9436aeaf1489.jpg",
+        "Beschreibung": null
+      }
+    ],
+    "Emoji": "",
+    "BildPlaceholder": "🚒",
+    "EinsatzOrt": "Rastenfeld",
+    "EinsatzTyp": null,
+    "EinsatzZeit": "22:00",
+    "EinsatzKraefte": 11,
+    "AdminDraftId": "353d1b96-fb05-4620-841a-d549c2283255",
+    "AdminPublicationHash": "4a99191552435ead7eeee11259684e4277de40684a864e564727152c36c3804d"
+  },
+  {
     "Id": 34,
     "Slug": "feuerloscher-uberprufung-bei-der-ff-rastenfeld-46db3cd1",
     "Titel": "Feuerlöscher-Überprüfung bei der FF Rastenfeld",

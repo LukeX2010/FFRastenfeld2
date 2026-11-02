@@ -3,7 +3,7 @@
     "Id": 35,
     "Slug": "brand-in-gewerbebetrieb-in-rastenfeld-c2283255",
     "Titel": "Brand in Gewerbebetrieb in Rastenfeld",
-    "Kategorie": "FF-News",
+    "Kategorie": "Einsätze",
     "Datum": "2026-10-27T22:00:00",
     "Kurztext": "Am späten Dienstagabend, dem 27. Oktober 2026, kam es in einem Gewerbebetrieb in Rastenfeld zu einem Brand in einem Produktionsturm. Die Bereichsalarmzentrale Krems alarmierte daraufhin neun Feuerwehren sowie das Rote Kreuz und die Polizei. Beim Eintreffen der Einsatzkräfte stand der Turm bereits in Vollbrand. Umfangreiche Lösch- und Nachlöscharbeiten zogen sich bis in die späte Nacht hinein.",
     "Volltext": "In den späten Abendstunden des Dienstags, dem 27. Oktober 2026, wurde die Feuerwehr Rastenfeld zu einem Brand in einem Gewerbebetrieb alarmiert. Dort war ein Produktionsturm in Brand geraten. Aufgrund der Brandmeldung alarmierte die Bereichsalarmzentrale Krems ein Großaufgebot an Einsatzkräften, darunter neun Feuerwehren aus der Region sowie aus dem benachbarten Bezirk Zwettl, das Rote Kreuz Krems und Zwettl sowie mehrere Polizeistreifen.\n\nBeim Eintreffen der ersten Einsatzkräfte stand der betroffene Produktionsturm bereits in Vollbrand. Umgehend wurden die beiden Hubrettungsgeräte der Feuerwehren Gföhl und Zwettl-Stadt in Stellung gebracht, um einen effektiven Außenangriff zu ermöglichen. Parallel dazu waren mehrere Atemschutztrupps nacheinander im Inneren des Turms im Einsatz, um den Brandherd zu lokalisieren und das Feuer unter Kontrolle zu bringen.\n\nNachdem der Brand größtenteils abgelöscht war, konnten die ersten Löschmaßnahmen eingestellt werden. Anschließend führten die Feuerwehren vor Ort umfangreiche Nachlöscharbeiten durch, um verbliebene Glutnester abzulöschen. Zusätzlich belüfteten die Einsatzkräfte angrenzende Gebäude, um eine weitere Ausbreitung oder Gefährdung zu verhindern.\n\nBereits während der Nachlöscharbeiten konnten die ersten Fahrzeuge der alarmierten Feuerwehren wieder abrücken. Auch das zur Unterstützung bereitgestellte Rote Kreuz konnte den Einsatzort ohne weitere Tätigkeit verlassen. Die Nachlöscharbeiten und weitere notwendige Tätigkeiten der Feuerwehren zogen sich bis in die späte Nacht hinein. Die Ursache des Brandes ist unbekannt.",
@@ -24,11 +24,11 @@
     "Emoji": "",
     "BildPlaceholder": "🚒",
     "EinsatzOrt": "Rastenfeld",
-    "EinsatzTyp": null,
+    "EinsatzTyp": "B3",
     "EinsatzZeit": "22:00",
     "EinsatzKraefte": 11,
-    "AdminDraftId": "353d1b96-fb05-4620-841a-d549c2283255",
-    "AdminPublicationHash": "4a99191552435ead7eeee11259684e4277de40684a864e564727152c36c3804d"
+    "AdminDraftId": "5143f3a0-9372-4d6b-bb8e-83ecb080bce9",
+    "AdminPublicationHash": "153f7bfdcb22249ed7aff0a1c937f460cbeeecba95400520598e5f0239967ed7"
   },
   {
     "Id": 34,

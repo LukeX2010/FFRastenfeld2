@@ -39,10 +39,22 @@
     <meta property="og:image" content="https://ffrastenfeld.at/img/cover.jpg" />
     <base href="/"/>
     <link rel="icon" type="image/jpg" href="/img/favicon.jpg">
-    <link rel="stylesheet" href="/css/app.css"/>
+    <link rel="stylesheet" href="/css/app.css?v=header-layout-2"/>
+    <link rel="stylesheet" href="/css/photo-gallery.css"/>
+    <link rel="stylesheet" href="/css/skeleton.css"/>
 </head>
 <body>
-<div id="app"></div>
+<div id="app">
+    <div class="loading-skeleton loading-skeleton--boot" role="status" aria-busy="true">
+        <span class="sk-sr-only">Seite wird geladen …</span>
+        <div aria-hidden="true">
+            <div class="sk-boot-header"><div class="sk-boot-top"></div><div class="container sk-boot-nav"><div class="sk-boot-brand"><span class="sk"></span><strong>FF Rastenfeld</strong></div></div></div>
+            <div class="sk-hero"><div class="container sk-hero-inner"><span class="sk sk-line sk-short"></span><span class="sk sk-title"></span><span class="sk sk-line sk-medium"></span></div></div>
+            <div class="container sk-body"><div class="sk sk-article-image"></div></div>
+        </div>
+    </div>
+</div>
+<script src="/js/loading-skeleton.js"></script>
 <script src="_framework/blazor.webassembly.js"></script>
 <script src="/js/app.js"></script>
 <footer id="site-footer">

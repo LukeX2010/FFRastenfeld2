@@ -27,14 +27,9 @@ else
                 </div>
                 <div class="detail-body"><p style="white-space: pre-wrap; overflow-wrap: anywhere;">@post.Volltext</p></div>
 
-                @if (post.Bilder != null && post.Bilder.Count > 0)
+                @if (post.Bilder is { Count: > 0 })
                 {
-                var gefilterteBilder = post.Bilder.Skip(1).ToList();
-
-                if (gefilterteBilder.Any())
-                {
-                <PostImageCarousel Images="gefilterteBilder" ImageAltPrefix="Bild"/>
-                }
+                    <PostImageCarousel Images="post.Bilder" ImageAltPrefix="Bild" />
                 }
 
                 <a href="/news" class="back-link">← Zurück zu FF-News</a>

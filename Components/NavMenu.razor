@@ -2,17 +2,6 @@
 @implements IDisposable
 
 <header id="site-header" class="@(scrolled ? "scrolled" : "")">
-    <div class="header-top">
-        <div class="container">
-            <span class="header-top-left">📍<a href="https://maps.app.goo.gl/Pgy7qGUUTKshM3H16"> Rastenfeld 178, 3532 Rastenfeld, NÖ</a></span>
-            <span class="header-top-right">
-                <a href="tel:122">🚨 Notruf: <strong>122</strong></a>
-                &nbsp;|&nbsp;
-                <a href="mailto:rastenfeld@feuerwehr.gv.at">📧 rastenfeld&#64;feuerwehr.gv.at</a>
-            </span>
-        </div>
-    </div>
-
     <nav class="navbar">
         <div class="container nav-inner">
             <!-- Brand -->
@@ -65,7 +54,6 @@
                 <li><NavLink href="/galerie" @onclick="CloseAll">Galerie</NavLink></li>
                 <li><NavLink href="/kontakt" @onclick="CloseAll">Kontakt</NavLink></li>
                 <li><NavLink href="/spenden" @onclick="CloseAll">Spenden</NavLink></li>
-                <li class="nav-notruf"><a href="tel:122">🚨 122</a></li>
             </ul>
         </div>
     </nav>

@@ -1,0 +1,21 @@
+<button class="team-sheet-grip" data-sheet-grip type="button" aria-label="Personeninformation schließen" @onclick="OnClose"><span></span></button>
+<button type="button" class="team-info-close" aria-label="Personeninformation schließen" @onclick="OnClose">×</button>
+<button type="button" class="team-info-main" @onclick="() => OnProfile.InvokeAsync(Member.Id)" aria-label="@($"Zum Profil von {Member.Name}")">
+    <TeamPortrait Photo="Photo" Spot="Spot" Alt="@(Demo ? "Bildplatz – Zuordnung zum Namen noch unbestätigt" : $"Porträt von {Member.Name}")" />
+    <span class="team-info-copy">
+        @if (Demo) { <span class="team-info-demo">Fotozuordnung · Demo</span> }
+        <strong id="team-selected-name">@Member.Name</strong>
+        @if (Member.Rank != "") { <span class="team-info-rank">@Member.Rank</span> }
+        @if (Member.Role != "") { <span class="team-info-role">@Member.Role</span> }
+        @if (Member.Since.HasValue) { <small>Mitglied seit @Member.Since</small> }
+        <span class="team-profile-link">Zum Profil <span aria-hidden="true">↗</span></span>
+    </span>
+</button>
+@code {
+    [Parameter, EditorRequired] public TeamMember Member { get; set; } = default!;
+    [Parameter] public TeamPhoto? Photo { get; set; }
+    [Parameter] public TeamSpot? Spot { get; set; }
+    [Parameter] public bool Demo { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+    [Parameter] public EventCallback<string> OnProfile { get; set; }
+}

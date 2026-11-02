@@ -1,0 +1,21 @@
+@using System.Globalization
+@if (Photo is not null && Spot is not null)
+{
+    <svg class="team-portrait" viewBox="@CropBox" preserveAspectRatio="xMidYMin slice" role="img" aria-label="@Alt" focusable="false">
+        <image href="@Photo.Src" width="@Photo.Width" height="@Photo.Height" />
+    </svg>
+}
+else
+{
+    <svg class="team-portrait team-portrait--empty" viewBox="0 0 96 120" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Kein Porträt verfügbar" focusable="false">
+        <rect width="96" height="120" fill="#e8ebef" />
+        <circle cx="48" cy="40" r="18" fill="#a7afb9" />
+        <path d="M12 120v-15c0-22 14-37 36-37s36 15 36 37v15Z" fill="#a7afb9" />
+    </svg>
+}
+@code {
+    [Parameter] public TeamPhoto? Photo { get; set; }
+    [Parameter] public TeamSpot? Spot { get; set; }
+    [Parameter] public string Alt { get; set; } = "Porträtausschnitt";
+    private string CropBox => string.Join(" ", Spot!.Crop.Select(n => n.ToString(CultureInfo.InvariantCulture)));
+}

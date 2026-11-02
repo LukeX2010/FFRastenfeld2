@@ -1,6 +1,5 @@
 @* ── Galerie ── *@
 @page "/galerie"
-@inject IJSRuntime JS
 @inject DataService DS
 
 <PageTitle>Galerie – Einsatz- & Übungsbilder Freiwillige Feuerwehr Rastenfeld</PageTitle>
@@ -21,42 +20,17 @@
             <div class="galerie-grid">
                 @foreach (var b in GetFiltered())
                 {
-                    <div class="gal-item @(lightboxIdx == bilder.IndexOf(b) ? "is-open" : "")" @onclick="()=>OpenLightbox(b)">
-                        <div class="gal-placeholder"> <img src="@GetGalleryImageSrc(b)" class="hero-bg-img" /></div>
+                    <button type="button" class="gal-item" aria-label="@($"{b.Titel} im Foto-Viewer öffnen")" @onclick="() => OpenPhoto(b)">
+                        <div class="gal-placeholder"> <img src="@GetGalleryImageSrc(b)" class="hero-bg-img" alt="@b.Titel" loading="lazy" /></div>
                         <div class="gal-hover">
                             <span class="gal-title">@b.Titel</span>
                             <span class="gal-kat">@b.Kategorie · @b.Jahr</span>
                         </div>
-                    </div>
+                    </button>
                 }
             </div>
 
-            @if (lightbox is not null)
-            {
-                <div class="lightbox-backdrop" @onclick="CloseLightbox">
-                    <div class="lightbox-box" @onclick:stopPropagation>
-                        <button class="lb-close" @onclick="CloseLightbox"><p class="x"><strong>✕</strong></p></button>
-                        <div class="lb-img">
-                            <img src="@GetGalleryImageSrc(lightbox)" class="hero-bg-img-lg" />
-
-                        </div>
-                        <div class="lb-info">
-                            <strong>@lightbox.Titel</strong>
-                            @if(lightbox.Untertitel != "")
-                            {
-                                <span class="untertitellightbox">@lightbox.Untertitel</span>
-                                <br/>
-                            }
-                            <span>@lightbox.Kategorie · @lightbox.Jahr</span>
-                        </div>
-                        <div class="lb-nav">
-                            <button @onclick="Prev">← zurück</button>
-                            <span>@(lightboxIdx+1) / @GetFiltered().Count</span>
-                            <button @onclick="Next">weiter →</button>
-                        </div>
-                    </div>
-                </div>
-            }
+            <PhotoGallery @ref="_viewer" Photos="FilteredPhotos" ShowPreview="false" Label="Galerie der FF Rastenfeld" />
 
         </main>
         <aside class="sidebar">
@@ -137,7 +111,15 @@
     {
         foreach (var einsätze in alleinsätze)
         {
-            bilder.Add(new GalBild(einsätze.Titel, einsätze.Emoji, einsätze.Kategorie, einsätze.Datum.Year, "", einsätze.Datum));
+            if (einsätze.Bilder is { Count: > 0 })
+            {
+                foreach (var foto in einsätze.Bilder.Where(b => !string.IsNullOrWhiteSpace(b.Pfad)))
+                    bilder.Add(new GalBild(einsätze.Titel, DS.GetImageSrc(foto.Pfad), einsätze.Kategorie, einsätze.Datum.Year, foto.Beschreibung ?? "", einsätze.Datum));
+            }
+            else
+            {
+                bilder.Add(new GalBild(einsätze.Titel, DS.GetMainImageSrc(einsätze), einsätze.Kategorie, einsätze.Datum.Year, "", einsätze.Datum));
+            }
         }
         
     }
@@ -161,8 +143,8 @@
     }
 
     private string activeKat = "Alle";
-    private GalBild? lightbox;
-    private int lightboxIdx = -1;
+    private PhotoGallery? _viewer;
+    private IReadOnlyList<GalleryPhoto> FilteredPhotos => GetFiltered().Select(b => new GalleryPhoto(GetGalleryImageSrc(b), b.Titel, string.IsNullOrWhiteSpace(b.Untertitel) ? $"{b.Titel} · {b.Kategorie} · {b.Jahr}" : $"{b.Titel} · {b.Untertitel}")).ToList();
 
     private List<GalBild> GetFiltered() => (activeKat == "Alle" ? bilder : bilder.Where(b => b.Kategorie == activeKat))
         .OrderByDescending(b => b.Datum)
@@ -170,17 +152,5 @@
 
     private List<string> kategorien = new() { "Alle","Einsätze","Übungen","Ausbildungen & Kurse","Veranstaltungen", "Ausrückungen","Sonstiges" };
 
-    private async Task OpenLightbox(GalBild b) 
-    { 
-        lightbox = b; 
-        lightboxIdx = GetFiltered().IndexOf(b); 
-        await Task.Delay(100); 
-        await JS.InvokeVoidAsync("initLightboxZoom");
-    }
-    private void CloseLightbox() { lightbox = null; lightboxIdx = -1; }
-    private async Task Next() { var f = GetFiltered(); lightboxIdx = (lightboxIdx+1)%f.Count; lightbox=f[lightboxIdx]; await Task.Delay(50); await JS.InvokeVoidAsync("initLightboxZoom"); }
-    private async Task Prev() { var f = GetFiltered(); lightboxIdx = (lightboxIdx-1+f.Count)%f.Count; lightbox=f[lightboxIdx]; await Task.Delay(50); await JS.InvokeVoidAsync("initLightboxZoom"); }
-
-    private async Task ZoomIn() => await JS.InvokeVoidAsync("lightboxZoom", 0.33);
-    private async Task ZoomOut() => await JS.InvokeVoidAsync("lightboxZoom", -0.33);
+    private Task OpenPhoto(GalBild photo) => _viewer?.OpenAsync(GetFiltered().IndexOf(photo)) ?? Task.CompletedTask;
 }

@@ -1,0 +1,36 @@
+/* Shared photo controls for article galleries, single photos and the gallery page. */
+.photo-gallery { margin:1.5rem 0; min-width:0; }
+.photo-gallery-inline { overflow:hidden; border:0; border-radius:12px; background:transparent; }
+.photo-stage { position:relative; isolation:isolate; overflow:hidden; min-width:0; width:100%; aspect-ratio:16/10; background:transparent; touch-action:pan-y; user-select:none; -webkit-user-select:none; }
+.photo-stage.is-zoomed { cursor:grab; touch-action:none; }.photo-stage.is-zoomed:active { cursor:grabbing; }
+.photo-plane { position:absolute; left:50%; top:50%; transform-origin:center; }
+.photo-plane.is-settling { transition:transform .18s cubic-bezier(.2,.65,.3,1); }
+.photo-plane>img { display:block; width:100%; height:100%; max-width:none; object-fit:contain; pointer-events:none; user-select:none; }
+.photo-gallery .photo-gallery-caption { margin:9px 2px 0; font-size:.84rem; line-height:1.4; color:var(--grey,#59616c); }
+.photo-toolbar { position:absolute; left:50%; bottom:14px; transform:translateX(-50%); z-index:5; display:flex; align-items:center; gap:2px; width:max-content; max-width:calc(100% - 16px); padding:4px; border:1px solid #ffffff26; border-radius:11px; background:#171b20ed; box-shadow:0 4px 14px #0003; color:#fff; }
+.photo-toolbar button { display:flex; justify-content:center; align-items:center; gap:7px; min-width:42px; min-height:40px; padding:4px 10px; border:0; border-radius:7px; background:transparent; color:#fff; font:600 1.15rem/1 var(--font-b,Arial,sans-serif); cursor:pointer; touch-action:manipulation; }
+.photo-toolbar button:hover { background:#ffffff20; }.photo-toolbar button:disabled { opacity:.35; cursor:default; }
+.photo-toolbar .photo-toolbar-reset { font-size:.75rem; min-width:82px; }
+.photo-toolbar-counter { min-width:44px; font:600 .74rem/1 var(--font-b,Arial,sans-serif); text-align:center; white-space:nowrap; }
+.photo-toolbar-divider { flex:none; width:1px; height:20px; margin:0 3px; background:#ffffff30; }
+.photo-toolbar-word { font-size:.75rem; }
+.photo-gallery :is(button,[tabindex]):focus-visible { outline:3px solid #e13c32; outline-offset:3px; }
+.photo-modal { position:fixed; inset:0; width:100%; height:100%; height:100dvh; max-width:none; max-height:none; margin:0; padding:0; border:0; border-radius:0; background:#14191c; color:#fff; }
+.photo-modal:not([open]) { display:none; }.photo-modal[open] { display:flex; flex-direction:column; }
+.photo-modal::backdrop { background:#101417f2; }
+.photo-modal .photo-modal-stage { flex:1; min-height:0; aspect-ratio:auto; touch-action:none; }
+.photo-modal .photo-modal-caption { flex:none; margin:0; padding:8px 20px 0; max-height:70px; overflow:auto; text-align:center; font-size:.85rem; line-height:1.4; color:#d1d5db; }
+.photo-modal .photo-toolbar { position:relative; flex:none; left:auto; bottom:auto; transform:none; align-self:center; margin:12px 16px max(16px,env(safe-area-inset-bottom)); }
+.photo-image-error { position:absolute; inset:0; z-index:2; display:grid; place-items:center; padding:24px; margin:0; color:#fff; background:#20262a; text-align:center; }.photo-image-error[hidden] { display:none; }
+.galerie-grid button.gal-item { display:block; padding:0; border:0; text-align:inherit; background:transparent; font:inherit; cursor:pointer; }
+@media(max-width:700px) {
+    .photo-gallery { margin:1.15rem 0; }.photo-stage { aspect-ratio:3/2; }.photo-gallery-inline { border-radius:10px; }
+    .photo-toolbar { gap:0; bottom:8px; padding:3px; border-radius:9px; }
+    .photo-toolbar button { min-width:44px; min-height:44px; padding:3px 7px; }
+    .photo-toolbar .photo-toolbar-reset { min-width:36px; }.photo-toolbar-reset [data-photo-zoom],.photo-toolbar-word { display:none; }
+    .photo-toolbar-counter { min-width:38px; font-size:.7rem; }.photo-toolbar-divider { margin:0 2px; }
+    .photo-modal .photo-toolbar { margin:8px 10px max(10px,env(safe-area-inset-bottom)); }
+    .photo-modal .photo-modal-caption { padding:5px 14px 0; font-size:.78rem; max-height:54px; }
+}
+@media(max-height:450px) and (orientation:landscape) { .photo-modal .photo-modal-caption { max-height:32px; padding:2px 16px 0; font-size:.72rem; }.photo-modal .photo-toolbar { margin-top:4px; margin-bottom:6px; }.photo-modal .photo-toolbar button { min-height:32px; } }
+@media(prefers-reduced-motion:reduce) { .photo-gallery * { transition:none!important; animation:none!important; } }

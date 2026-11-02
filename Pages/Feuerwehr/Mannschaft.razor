@@ -1,105 +1,138 @@
 @page "/mannschaft"
-@inject DataService DS
+@inject HttpClient Http
+@inject Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment HostEnvironment
+@using Microsoft.AspNetCore.Components.WebAssembly.Http
 
-<PageTitle>Mannschaft & Kommando – Freiwillige Feuerwehr Rastenfeld, NÖ</PageTitle>
-<PageHero Title="Mannschaft & Kommando" Subtitle="40+ aktive Mitglieder der FF Rastenfeld im Einsatz für Rastenfeld und Umgebung, Bezirk Krems-Land" ParentLabel="Feuerwehr" ParentHref="/organisation" />
-
-<div class="site-body container">
-    <div class="content-with-sidebar">
-        <main class="main-feed">
-            <article class="post-detail">
-
-                <!-- Einsatzbereich -->
-                
-
-                <!-- Kommando -->
-                <h2 style="margin-top:2.5rem;">Feuerwehrkommando</h2>
-                <p>Das Kommando der FF Rastenfeld wird alle fünf Jahre bei der Vollversammlung gewählt und trägt die Gesamtverantwortung für Einsatz, Ausbildung und Verwaltung der Feuerwehr.</p>
-
-                <div class="kommando-grid">
-                    @foreach (var m in DS.GetMitglieder().Where(m => m.IstFuehrung))
+<PageTitle>Unsere Mannschaft – Freiwillige Feuerwehr Rastenfeld</PageTitle>
+<HeadContent><link rel="stylesheet" href="/css/mannschaft.css" /></HeadContent>
+<PageHero Title="Unsere Mannschaft" Subtitle="Die Menschen hinter der Freiwilligen Feuerwehr Rastenfeld." ParentLabel="Feuerwehr" ParentHref="/organisation" />
+<div class="team-page">
+    <div class="container team-content">
+        @if (_error)
+        {
+            <div class="team-empty" role="alert">
+                <h2>Die Mannschaftsdaten sind gerade nicht verfügbar.</h2><p>Bitte versuche es erneut.</p>
+                @if (HostEnvironment.Environment == "Development" && _errorDetail is not null)
+                {
+                    <details class="team-error-detail" open>
+                        <summary>Hinweis zur lokalen Konfiguration</summary>
+                        <p>@_errorDetail</p>
+                        <p>Datei: <code>wwwroot/data/mannschaft.json</code>. Mitglieds-IDs müssen eindeutig sein. Für die Fotozuordnung wird <code>photos → spots → memberId</code> geändert.</p>
+                    </details>
+                }
+                <button type="button" class="team-button" @onclick="Load">Erneut laden</button>
+            </div>
+        }
+        else if (_catalog is null)
+        {
+            <LoadingSkeleton Variant="team" Embedded="true" />
+        }
+        else
+        {
+            <section class="team-photo-section" id="mannschaftsfoto" aria-labelledby="team-photo-title">
+                <div class="team-section-heading"><div><span class="team-eyebrow">Gemeinsam für Rastenfeld</span></div></div>
+                @if (_catalog.DemoAssignments)
+                {
+                    <p class="team-demo-notice"><strong>Vorläufige Fotozuordnung</strong> · Namen und Porträts sind noch nicht bestätigt.</p>
+                }
+                <TeamPhotoViewer @ref="_viewer" Catalog="_catalog" PhotoId="@_photoId" SelectedId="@_selectedId" InfoOpen="_infoOpen" OnPhotoChange="ChangePhoto" OnSelect="Select" OnClose="CloseInfo" OnProfile="ShowProfile" />
+            </section>
+            <section class="team-directory" id="mitglieder" aria-labelledby="team-directory-title">
+                <div class="team-section-heading"><div><span class="team-eyebrow">Die Menschen hinter dem Einsatz</span><h2 id="team-directory-title">Unser Mitgliederverzeichnis</h2></div></div>
+                <div class="team-filters">
+                    <label class="team-search"><span class="team-sr-only">Nach Name suchen</span><span aria-hidden="true">⌕</span><input type="search" placeholder="Mitglied suchen …" @bind="_search" @bind:event="oninput" @bind:after="ClearRevealNotice" /></label>
+                    <label><span class="team-sr-only">Nach Dienstgrad filtern</span><select @bind="_rank" @bind:after="ClearRevealNotice"><option value="">Alle Dienstgrade</option>@foreach (var rank in _catalog.Members.Select(m => m.Rank).Where(r => r != "").Distinct().Order()) { <option value="@rank">@rank</option> }</select></label>
+                    <label><span class="team-sr-only">Nach Funktion filtern</span><select @bind="_role" @bind:after="ClearRevealNotice"><option value="">Alle Funktionen</option>@foreach (var role in _catalog.Members.Select(m => m.Role).Where(r => r != "").Distinct().Order()) { <option value="@role">@role</option> }</select></label>
+                    <label><span class="team-sr-only">Sortierung</span><select @bind="_sort"><option value="structure">Mannschaftsstruktur</option><option value="name">Name A–Z</option></select></label>
+                </div>
+                <div class="team-results" role="status" aria-live="polite"><span>@VisibleMembers.Count() von @_catalog.Members.Count Profilen</span>@if (HasFilters) { <button type="button" @onclick="ResetFilters">Filter zurücksetzen ×</button> }</div>
+                @if (_revealed) { <p class="team-revealed" role="status">Die Filter wurden zurückgesetzt, damit das ausgewählte Profil sichtbar ist.</p> }
+                <div class="team-member-grid">
+                    @foreach (var member in VisibleMembers)
                     {
-                        <div class="kommando-card">
-                            <div class="kk-avatar">🧑‍🚒</div>
-                            <div class="kk-info">
-                                <span class="kk-grad">@m.Dienstgrad</span>
-                                <strong>@m.Name</strong>
-                                <span class="kk-funk">@m.Funktion</span>
-                                <span class="kk-seit">Dabei seit @m.EintriebAb</span>
+                        var portraitPhoto = PortraitPhoto(member);
+                        var spot = portraitPhoto?.Spots.FirstOrDefault(s => s.MemberId == member.Id);
+                        <article @key="member.Id" id="@($"mitglied-{member.Id}")" class="team-member-card @(_selectedId == member.Id ? "is-selected" : "")" tabindex="-1" aria-labelledby="@($"name-{member.Id}")">
+                            <button type="button" class="team-portrait-button" aria-label="@($"{member.Name} im Gruppenfoto anzeigen")" @onclick="() => ShowOnPhoto(member.Id)" disabled="@(spot is null)">
+                                <TeamPortrait Photo="portraitPhoto" Spot="spot" Alt="@(_catalog.DemoAssignments ? "Vorläufig zugeordneter Bildausschnitt" : $"Porträt von {member.Name}")" />
+                                @if (_catalog.DemoAssignments && spot is not null) { <span class="team-portrait-demo">Demo</span> }
+                            </button>
+                            <div class="team-member-copy"><span class="team-member-rank">@(member.Placeholder ? "Name noch offen" : string.IsNullOrEmpty(member.Rank) ? "Angaben folgen" : member.Rank)</span><h3 id="@($"name-{member.Id}")">@member.Name</h3>@if (member.Role != "") { <p>@member.Role</p> }@if (member.Since.HasValue) { <small>Mitglied seit @member.Since</small> }
+                                @if (spot is not null) { <button type="button" class="team-show-photo" @onclick="() => ShowOnPhoto(member.Id)">Im Gruppenfoto <span aria-hidden="true">↗</span></button> }
+                                else { <small>Fotozuordnung folgt</small> }
                             </div>
-                        </div>
+                        </article>
                     }
                 </div>
-
-                <!-- Alle Mitglieder -->
-                <h2 style="margin-top:2.5rem;">Aktive Mannschaft</h2>
-                <div class="mitglieder-table">
-                    <table>
-                        <thead>
-                            <tr><th>Name</th><th>Dienstgrad</th><th>Funktion</th><th>Dabei seit</th></tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var m in DS.GetMitglieder())
-                            {
-                                <tr>
-                                    <td>@m.Name</td>
-                                    <td>@m.Dienstgrad</td>
-                                    <td>@m.Funktion</td>
-                                    <td>@m.EintriebAb</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-
-            </article>
-        </main>
-
-        <aside class="sidebar">
-            <!-- Suche -->
-
-            <!-- Letzter Einsatz -->
-            <div class="sidebar-widget sidebar-widget--red">
-                <h3>⚡ Letzter Einsatz</h3>
-                @{var last = DS.GetEinsaetze().FirstOrDefault();}
-                @if (last != null)
-                {
-                <p class="sidebar-einsatz-typ">@last.EinsatzTyp</p>
-                <p class="sidebar-einsatz-title"><a href="/einsaetze/@last.Slug">@last.Titel</a></p>
-                <time>@last.Datum.ToString("dd.MM.yyyy – HH:mm") Uhr</time>
-                }
-            </div>
-
-            <!-- Kategorien -->
-            <div class="sidebar-widget">
-                <h3>Kategorien</h3>
-                <ul class="sidebar-cats">
-                    <li><a href="/einsaetze">Einsätze <span>@DS.GetByKategorie("Einsätze").Count</span></a></li>
-                    <li><a href="/news">FF-News <span>@DS.GetByKategorie("FF-News").Count</span></a></li>
-                    <li><a href="/ausbildung">Ausbildung <span>@DS.GetByKategorie("Ausbildung").Count</span></a></li>
-                    <li><a href="/feuerwehrjugend">Feuerwehrjugend <span>@DS.GetByKategorie("Feuerwehrjugend").Count</span></a></li>
-                </ul>
-            </div>
-
-            <!-- Links -->
-            <div class="sidebar-widget">
-                <h3>Links</h3>
-                <ul class="sidebar-links">
-                    <li><a href="https://www.noelfv.at" target="_blank" rel="noopener noreferrer">NÖ Landesfeuerwehrverband</a></li>
-                    <li><a href="https://www.bfk-krems.at" target="_blank" rel="noopener noreferrer">BFK Krems-Land</a></li>
-                    <li><a href="https://www.noelfv.at/wastl" target="_blank" rel="noopener noreferrer">WASTL Einsatzmonitor</a></li>
-                    <li><a href="https://www.noelfv.at/lfws" target="_blank" rel="noopener noreferrer">NÖ Landesfeuerwehrschule</a></li>
-                    <li><a href="https://www.rastenfeld.at" target="_blank" rel="noopener noreferrer">Marktgemeinde Rastenfeld</a></li>
-                </ul>
-            </div>
-
-            <!-- Mitglied werden Banner -->
-            <div class="sidebar-widget sidebar-widget--join">
-                <p>🧑‍🚒 <strong>Werde Mitglied!</strong></p>
-                <p>Du möchtest helfen? Wir freuen uns über jede Verstärkung!</p>
-                <a href="/kontakt" class="btn btn-primary" style="width:100%;text-align:center;margin-top:.5rem;">Jetzt mitmachen</a>
-            </div>
-        </aside>
-
+                @if (!VisibleMembers.Any()) { <div class="team-empty"><h3>Kein Mitglied gefunden.</h3><p>Versuche einen anderen Namen oder setze die Filter zurück.</p><button type="button" class="team-button" @onclick="ResetFilters">Alle Profile anzeigen</button></div> }
+            </section>
+            <section class="team-join"><div><span class="team-eyebrow">Dein Platz ist bei uns</span><h2>Gemeinsam können wir mehr.</h2><p>Du möchtest dich einbringen? Wir freuen uns, dich kennenzulernen.</p></div><a href="/kontakt" class="team-button">Mitglied werden <span aria-hidden="true">↗</span></a></section>
+        }
     </div>
 </div>
+@code {
+    private TeamCatalog? _catalog;
+    private TeamPhotoViewer? _viewer;
+    private bool _error, _revealed, _infoOpen;
+    private string? _errorDetail;
+    private string _photoId = "", _search = "", _rank = "", _role = "", _sort = "structure";
+    private string? _selectedId;
+    private IEnumerable<TeamMember> VisibleMembers
+    {
+        get
+        {
+            var members = _catalog!.Members.Where(m => m.Name.Contains(_search.Trim(), StringComparison.CurrentCultureIgnoreCase) && (_rank == "" || m.Rank == _rank) && (_role == "" || m.Role == _role));
+            return _sort == "name" ? members.OrderBy(m => m.Name, StringComparer.Create(System.Globalization.CultureInfo.GetCultureInfo("de-AT"), true)) : members.OrderBy(m => m.Order);
+        }
+    }
+    private bool HasFilters => _search != "" || _rank != "" || _role != "";
+    protected override Task OnInitializedAsync() => Load();
+    private async Task Load()
+    {
+        _error = false;
+        _errorDetail = null;
+        try
+        {
+            using var request = new HttpRequestMessage(HttpMethod.Get, "data/mannschaft.json");
+            request.SetBrowserRequestCache(BrowserRequestCache.NoStore);
+            using var response = await Http.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            var catalog = await response.Content.ReadFromJsonAsync<TeamCatalog>();
+            catalog!.Validate();
+            _catalog = catalog;
+            _photoId = catalog.Photos[0].Id;
+        }
+        catch (Exception ex) when (ex is HttpRequestException or System.Text.Json.JsonException or InvalidDataException or NullReferenceException)
+        {
+            Console.Error.WriteLine($"Mannschaftsdaten konnten nicht geladen werden: {ex.Message}");
+            _errorDetail = ex.Message;
+            _error = true;
+        }
+    }
+    private TeamPhoto? PortraitPhoto(TeamMember m) => _catalog!.Photos.FirstOrDefault(p => p.Id == m.PortraitPhotoId && p.Spots.Any(s => s.MemberId == m.Id)) ?? _catalog.Photos.LastOrDefault(p => p.Spots.Any(s => s.MemberId == m.Id));
+    private void Select(string id) { _selectedId = id; _infoOpen = true; _revealed = false; }
+    private void CloseInfo() { _infoOpen = false; _selectedId = null; }
+    private void ChangePhoto(string id) { _photoId = id; _selectedId = null; _infoOpen = false; }
+    private void ResetFilters() { _search = _rank = _role = ""; _revealed = false; }
+    private void ClearRevealNotice() => _revealed = false;
+    private async Task ShowProfile(string id)
+    {
+        var hidden = !VisibleMembers.Any(m => m.Id == id);
+        if (hidden) { ResetFilters(); _revealed = true; }
+        _selectedId = id;
+        _infoOpen = false;
+        StateHasChanged();
+        await Task.Yield();
+        if (_viewer is not null) await _viewer.GoToProfile(id);
+    }
+    private async Task ShowOnPhoto(string id)
+    {
+        var photo = _catalog!.Photos.FirstOrDefault(p => p.Id == _photoId && p.Spots.Any(s => s.MemberId == id)) ?? _catalog.Photos.FirstOrDefault(p => p.Spots.Any(s => s.MemberId == id));
+        if (photo is null) return;
+        _photoId = photo.Id;
+        _selectedId = id;
+        _infoOpen = true;
+        StateHasChanged();
+        if (_viewer is not null) await _viewer.ShowMember(id);
+    }
+}

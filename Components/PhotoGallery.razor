@@ -1,0 +1,94 @@
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+
+<div class="photo-gallery @Class" @ref="_element" data-photo-count="@Photos.Count">
+    @if (Photos.Count > 0)
+    {
+        @if (ShowPreview)
+        {
+            <div class="photo-gallery-inline">
+                <div class="photo-stage" data-photo-stage="inline" tabindex="0" role="group" aria-label="@($"{Label}. Wischen zum Bildwechsel. Plus und Minus zum Zoomen, Pfeiltasten zur Navigation.")">
+                    <div class="photo-plane" data-photo-plane><img src="@Current.Src" alt="@Current.Alt" loading="lazy" decoding="async" draggable="false" data-gallery-image /></div>
+                    <p class="photo-image-error" data-photo-error hidden>Das Bild konnte nicht geladen werden.</p>
+                    <PhotoToolbar Index="_index" Count="Photos.Count" />
+                </div>
+            </div>
+            @if (!string.IsNullOrWhiteSpace(Current.Caption))
+            {
+                <p class="photo-gallery-caption">@Current.Caption</p>
+            }
+        }
+        <dialog class="photo-modal" aria-label="@($"{Label} – Vollbild")" data-photo-modal>
+            <div class="photo-stage photo-modal-stage" data-photo-stage="modal" tabindex="0" role="group" aria-label="Foto. Wischen zum Bildwechsel, zwei Finger zum Zoomen. Escape schließt.">
+                <div class="photo-plane" data-photo-plane><img src="@Current.Src" alt="@Current.Alt" decoding="async" draggable="false" data-gallery-image /></div>
+                <p class="photo-image-error" data-photo-error hidden>Das Bild konnte nicht geladen werden.</p>
+            </div>
+            <p class="photo-modal-caption">@(Current.Caption ?? Current.Alt)</p>
+            <PhotoToolbar Index="_index" Count="Photos.Count" Modal="true" />
+        </dialog>
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired] public IReadOnlyList<GalleryPhoto> Photos { get; set; } = [];
+    [Parameter] public bool ShowPreview { get; set; } = true;
+    [Parameter] public string Label { get; set; } = "Fotogalerie";
+    [Parameter] public string? Class { get; set; }
+    private ElementReference _element;
+    private int _index;
+    private string? _signature;
+    private bool _refresh, _openPending;
+    private IJSObjectReference? _module, _controller;
+    private DotNetObjectReference<PhotoGallery>? _self;
+    private GalleryPhoto Current => Photos[_index];
+
+    protected override void OnParametersSet()
+    {
+        var signature = string.Join('\n', Photos.Select(p => $"{p.Src}\t{p.Alt}\t{p.Caption}"));
+        if (signature == _signature) return;
+        _signature = signature;
+        _index = 0;
+        _refresh = true;
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (Photos.Count == 0)
+        {
+            if (_controller is not null) { await _controller.InvokeVoidAsync("dispose"); await _controller.DisposeAsync(); _controller = null; }
+            _self?.Dispose(); _self = null;
+            return;
+        }
+        if (_controller is null)
+        {
+            _module ??= await JS.InvokeAsync<IJSObjectReference>("import", "/js/photo-gallery.js");
+            _self = DotNetObjectReference.Create(this);
+            _controller = await _module.InvokeAsync<IJSObjectReference>("mount", _element, _self);
+        }
+        if (_refresh) { _refresh = false; await _controller.InvokeVoidAsync("refresh"); }
+        if (_openPending) { _openPending = false; await _controller.InvokeVoidAsync("open"); }
+    }
+    public async Task OpenAsync(int index = 0)
+    {
+        if (Photos.Count == 0) return;
+        _index = Math.Clamp(index, 0, Photos.Count - 1);
+        _refresh = _openPending = true;
+        await InvokeAsync(StateHasChanged);
+    }
+    [JSInvokable] public async Task Step(int direction)
+    {
+        if (Photos.Count <= 1) return;
+        _index = (_index + (direction < 0 ? -1 : 1) + Photos.Count) % Photos.Count;
+        _refresh = true;
+        await InvokeAsync(StateHasChanged);
+    }
+    public async ValueTask DisposeAsync()
+    {
+        try
+        {
+            if (_controller is not null) { await _controller.InvokeVoidAsync("dispose"); await _controller.DisposeAsync(); }
+            if (_module is not null) await _module.DisposeAsync();
+        }
+        catch (JSDisconnectedException) { }
+        _self?.Dispose();
+    }
+}

@@ -1,0 +1,138 @@
+@inject NavigationManager Navigation
+@implements IDisposable
+
+@if (ShowNavigation && View != "admin")
+{
+    <NavMenu />
+}
+
+<div class="loading-skeleton @(Embedded ? "loading-skeleton--embedded" : "")" data-view="@View" role="status" aria-live="polite" aria-busy="true">
+    <span class="sk-sr-only">@LoadingLabel</span>
+    <div aria-hidden="true">
+        @if (!Embedded && View != "admin")
+        {
+            <div class="sk-hero">
+                <div class="container sk-hero-inner">
+                    <span class="sk sk-line sk-short"></span>
+                    <span class="sk sk-title"></span>
+                    @if (View == "home") { <span class="sk sk-title sk-medium"></span> }
+                    <span class="sk sk-line sk-medium"></span>
+                    @if (View == "home")
+                    {
+                        <div class="sk-actions"><span class="sk sk-button"></span><span class="sk sk-button"></span></div>
+                    }
+                </div>
+            </div>
+        }
+        <div class="container sk-body">
+            <div class="sk-layout">
+                <div class="sk-main">
+                    @if (View is "home" or "feed" or "vehicles")
+                    {
+                        @if (View == "home") { <span class="sk sk-line sk-heading"></span> }
+                        @for (var i = 0; i < 3; i++)
+                        {
+                            <div class="sk-card sk-feed-card">
+                                <div class="sk sk-card-image"></div>
+                                <div class="sk-copy">
+                                    <span class="sk sk-line sk-short"></span><span class="sk sk-subtitle"></span>
+                                    <span class="sk sk-line"></span><span class="sk sk-line sk-medium"></span>
+                                    <span class="sk sk-line sk-link"></span>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else if (View == "gallery")
+                    {
+                        <div class="sk-actions"><span class="sk sk-button"></span><span class="sk sk-button"></span><span class="sk sk-button"></span></div>
+                        <div class="sk-gallery">
+                            @for (var i = 0; i < 9; i++) { <div class="sk sk-gallery-image"></div> }
+                        </div>
+                    }
+                    else if (View == "team")
+                    {
+                        <span class="sk sk-subtitle sk-medium"></span>
+                        <div class="sk sk-team-photo"></div>
+                        <div class="sk-actions"><span class="sk sk-button"></span><span class="sk sk-button"></span></div>
+                        <div class="sk-team-grid">
+                            @for (var i = 0; i < 4; i++)
+                            {
+                                <div class="sk-card"><div class="sk sk-portrait"></div><div class="sk-copy"><span class="sk sk-line sk-short"></span><span class="sk sk-subtitle"></span><span class="sk sk-line sk-medium"></span></div></div>
+                            }
+                        </div>
+                    }
+                    else if (View == "admin")
+                    {
+                        <div class="sk-card sk-admin">
+                            <span class="sk sk-admin-logo"></span><span class="sk sk-subtitle"></span><span class="sk sk-line sk-medium"></span>
+                            <span class="sk sk-line sk-short"></span><span class="sk sk-input"></span>
+                            <span class="sk sk-line sk-short"></span><span class="sk sk-input"></span><span class="sk sk-input"></span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="sk-card sk-article">
+                            @if (View == "detail") { <div class="sk sk-article-image"></div> }
+                            <span class="sk sk-subtitle sk-medium"></span>
+                            @for (var paragraph = 0; paragraph < 3; paragraph++)
+                            {
+                                <div class="sk-paragraph"><span class="sk sk-line"></span><span class="sk sk-line"></span><span class="sk sk-line sk-medium"></span></div>
+                            }
+                            @if (View == "contact") { <div class="sk sk-article-image"></div> }
+                        </div>
+                    }
+                </div>
+                @if (View is not ("team" or "admin"))
+                {
+                    <div class="sk-sidebar">
+                        @for (var i = 0; i < 3; i++)
+                        {
+                            <div class="sk-card sk-widget"><span class="sk sk-subtitle sk-medium"></span><span class="sk sk-line"></span><span class="sk sk-line sk-medium"></span><span class="sk sk-line sk-short"></span></div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public string? Variant { get; set; }
+    [Parameter] public bool Embedded { get; set; }
+    [Parameter] public bool ShowNavigation { get; set; }
+
+    private string View => Variant ?? ViewForPath;
+    private string ViewForPath
+    {
+        get
+        {
+            var path = Navigation.ToBaseRelativePath(Navigation.Uri).Split('?', '#')[0].Trim('/').ToLowerInvariant();
+            var section = path.Split('/')[0];
+            if (path.Contains('/') && section is "einsaetze" or "news" or "ausbildung" or "feuerwehrjugend" or "fahrzeuge") return "detail";
+            return section switch
+            {
+                "" => "home",
+                "einsaetze" or "news" or "ausbildung" or "feuerwehrjugend" => "feed",
+                "fahrzeuge" => "vehicles",
+                "galerie" => "gallery",
+                "mannschaft" => "team",
+                "feuerwehrhaus" => "detail",
+                "kontakt" => "contact",
+                "admin" => "admin",
+                _ => "article"
+            };
+        }
+    }
+
+    private string LoadingLabel => View switch
+    {
+        "team" => "Unsere Mannschaft wird geladen …",
+        "gallery" => "Galerie wird geladen …",
+        "admin" => "Redaktion wird geöffnet …",
+        _ => "Seite wird geladen …"
+    };
+
+    protected override void OnInitialized() => Navigation.LocationChanged += OnLocationChanged;
+    private void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs args) => _ = InvokeAsync(StateHasChanged);
+    public void Dispose() => Navigation.LocationChanged -= OnLocationChanged;
+}

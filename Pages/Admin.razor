@@ -1,0 +1,156 @@
+@page "/admin"
+@layout Layouts.AdminLayout
+@inject AdminApiClient AdminApi
+@inject IJSRuntime JS
+
+<PageTitle>Redaktion | FF Rastenfeld</PageTitle>
+
+<div class="admin-shell">
+    @if (!loaded)
+    {
+        <LoadingSkeleton Variant="admin" Embedded="true" />
+    }
+    else if (!loggedIn)
+    {
+        <main class="admin-login">
+            <div class="admin-brand"><span>🚒</span><strong>FF Rastenfeld</strong><small>Website-Redaktion</small></div>
+            <h1>Anmelden</h1>
+            <p>Dieser Bereich ist nur für die Website-Redaktion.</p>
+            <label>Benutzername <input @bind="login.Username" autocomplete="username" /></label>
+            <label>Passwort <input type="password" @bind="login.Password" autocomplete="current-password" @onkeydown="LoginKeyDown" /></label>
+            @if (!string.IsNullOrWhiteSpace(message)) { <p class="admin-error">@message</p> }
+            <button class="admin-primary" @onclick="LoginAsync" disabled="@busy">@(busy ? "Bitte warten …" : "Anmelden")</button>
+        </main>
+    }
+    else
+    {
+        <header class="admin-header">
+            <div><strong>🚒 FF Rastenfeld</strong><span>Redaktion</span></div>
+            <button class="admin-text-button" @onclick="LogoutAsync">Abmelden</button>
+        </header>
+        <main class="admin-main">
+            @if (view == AdminView.Overview)
+            {
+                <section class="admin-welcome">
+                    <div><p class="admin-eyebrow">WEBSITE-REDAKTION</p><h1>Beiträge verwalten</h1><p>Erstelle einen Entwurf, lass dir beim Text helfen und veröffentliche erst nach deiner Kontrolle.</p></div>
+                    <button class="admin-primary admin-new" @onclick="NewDraft">＋ Neuer Beitrag</button>
+                </section>
+                @if (!string.IsNullOrWhiteSpace(message)) { <p class="admin-notice">@message</p> }
+                <section class="admin-drafts">
+                    <h2>Entwürfe</h2>
+                    @if (drafts.Count == 0) { <p class="admin-empty">Noch keine Entwürfe. Der erste Beitrag kann direkt vom Handy entstehen.</p> }
+                    @foreach (var item in drafts.OrderByDescending(x => x.UpdatedAt))
+                    {
+                        <button class="admin-draft-card" @onclick="() => OpenDraftAsync(item.Id)">
+                            <span class="admin-draft-icon">@CategoryIcon(item.Kategorie)</span>
+                            <span><strong>@(string.IsNullOrWhiteSpace(item.Titel) ? "Unbenannter Entwurf" : item.Titel)</strong><small>@item.Kategorie · @item.UpdatedAt.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</small></span>
+                            <span>›</span>
+                        </button>
+                    }
+                </section>
+            }
+            else
+            {
+                <div class="admin-editor-header"><button class="admin-back" @onclick="BackToOverview">← Entwürfe</button><span class="admin-status">@draft.Status</span></div>
+                <section class="admin-editor-title"><p class="admin-eyebrow">BEITRAG ERSTELLEN</p><h1>@(string.IsNullOrWhiteSpace(draft.Titel) ? "Neuer Beitrag" : draft.Titel)</h1></section>
+                @if (!string.IsNullOrWhiteSpace(message)) { <p class="@(messageIsError ? "admin-error" : "admin-notice")">@message</p> }
+
+                <section class="admin-card">
+                    <h2>1. Bilder</h2><p class="admin-help">Wähle veröffentlichbare Bilder und bei Bedarf zusätzliche Bilder nur als Kontext für die KI.</p>
+                    <label class="admin-upload"><InputFile OnChange="FilesSelectedAsync" multiple accept="image/jpeg,image/png,image/webp" /><span>＋ Bilder vom Handy auswählen</span></label>
+                    @if (draft.Bilder.Count > 0)
+                    {
+                        <div class="admin-images">
+                            @for (var i = 0; i < draft.Bilder.Count; i++)
+                            {
+                                var image = draft.Bilder[i]; var index = i;
+                                <article class="admin-image @(image.IsInformationOnly ? "is-info" : "")">
+                                    <img src="@image.DataUrl" alt="@image.Name" />
+                                    <div class="admin-image-controls">
+                                        <strong>@image.Name</strong>
+                                        <label><input type="radio" name="titleImage" checked="@image.IsTitleImage" @onchange="() => SetTitleImage(index)" disabled="@image.IsInformationOnly" /> Titelbild</label>
+                                        <label><input type="checkbox" @bind="image.IsInformationOnly" @bind:after="() => ImagePolicyChanged(index)" /> Nur KI-Info – nicht posten</label>
+                                        <input placeholder="Bildbeschreibung (optional)" @bind="image.Caption" />
+                                        <div><button @onclick="() => MoveImage(index, -1)" disabled="@(index == 0)">←</button><button @onclick="() => MoveImage(index, 1)" disabled="@(index == draft.Bilder.Count - 1)">→</button><button class="admin-danger-text" @onclick="() => RemoveImage(index)">Entfernen</button></div>
+                                    </div>
+                                </article>
+                            }
+                        </div>
+                    }
+                </section>
+
+                <section class="admin-card admin-form-grid">
+                    <h2>2. Grunddaten</h2>
+                    <label class="admin-wide">Titel <input placeholder="z. B. Erfolgreiche Atemschutzübung" @bind="draft.Titel" /></label>
+                    <label>Kategorie <select @bind="draft.Kategorie"><option>FF-News</option><option>Einsätze</option><option>Ausbildung</option><option>Feuerwehrjugend</option></select></label>
+                    <label>Datum <input type="date" @bind-value="draft.Datum" @bind-value:format="yyyy-MM-dd" /></label>
+                    <label class="admin-wide">Ort <input placeholder="z. B. Rastenfeld" @bind="draft.Ort" /></label>
+                    <label class="admin-wide">Deine Notizen <textarea rows="5" placeholder="Was ist passiert? Wer war dabei? Wichtige Fakten, Links oder Formulierungen …" @bind="draft.Notizen"></textarea></label>
+                </section>
+
+                <section class="admin-card admin-ai-card">
+                    <h2>3. KI-Entwurf</h2><p class="admin-help">Die KI verwendet nur deine Angaben und die ausgewählten Info-Bilder. Kontrolliere Fakten und Datenschutz vor dem Veröffentlichen.</p>
+                    <label>Zusätzliche Anweisung für die KI <input placeholder="z. B. kurz und sachlich, keine Namen nennen" @bind="draft.KiAnweisung" /></label>
+                    <button class="admin-secondary" @onclick="GenerateAsync" disabled="@busy">✨ @(busy ? "KI schreibt …" : "Entwurf mit KI erstellen / neu schreiben")</button>
+                </section>
+
+                <section class="admin-card admin-form-grid">
+                    <h2>4. Text prüfen und bearbeiten</h2>
+                    <label class="admin-wide">Kurztext <textarea rows="3" @bind="draft.Kurztext"></textarea></label>
+                    <label class="admin-wide">Vollständiger Beitrag <textarea rows="12" @bind="draft.Volltext"></textarea></label>
+                </section>
+                <div class="admin-actions"><button class="admin-secondary" @onclick="SaveAsync" disabled="@busy">Entwurf speichern</button><button class="admin-primary" @onclick="PublishAsync" disabled="@busy">@(busy ? "Wird verarbeitet …" : "✓ Auf GitHub veröffentlichen")</button></div>
+            }
+        </main>
+    }
+</div>
+
+@code {
+    private bool loaded, loggedIn, busy, messageIsError;
+    private string? message;
+    private AdminLoginRequest login = new();
+    private List<AdminDraft> drafts = new();
+    private AdminDraft draft = new();
+    private AdminView view = AdminView.Overview;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try { loggedIn = await AdminApi.HasSessionAsync(); if (loggedIn) await LoadDraftsAsync(); }
+        catch { message = "Der Redaktionsdienst ist nicht erreichbar. Starte für den lokalen Test auch den Admin-Server."; messageIsError = true; }
+        finally { loaded = true; }
+    }
+
+    private async Task LoginAsync()
+    {
+        busy = true; message = null;
+        try { var result = await AdminApi.LoginAsync(login); loggedIn = result.Success; message = result.Message; messageIsError = !result.Success; if (loggedIn) await LoadDraftsAsync(); }
+        catch { message = "Der Redaktionsdienst ist nicht erreichbar."; messageIsError = true; }
+        finally { busy = false; }
+    }
+    private async Task LoginKeyDown(KeyboardEventArgs e) { if (e.Key == "Enter") await LoginAsync(); }
+    private async Task LogoutAsync() { await AdminApi.LogoutAsync(); loggedIn = false; view = AdminView.Overview; }
+    private async Task LoadDraftsAsync() { drafts = await AdminApi.GetDraftsAsync(); }
+    private void NewDraft() { draft = new AdminDraft(); message = null; view = AdminView.Editor; }
+    private async Task OpenDraftAsync(string id) { var loadedDraft = await AdminApi.GetDraftAsync(id); if (loadedDraft is not null) { draft = loadedDraft; message = null; view = AdminView.Editor; } }
+    private async Task BackToOverview() { view = AdminView.Overview; await LoadDraftsAsync(); message = null; }
+    private async Task FilesSelectedAsync(InputFileChangeEventArgs args)
+    {
+        foreach (var file in args.GetMultipleFiles(12))
+        {
+            if (!file.ContentType.StartsWith("image/", StringComparison.OrdinalIgnoreCase)) continue;
+            await using var stream = file.OpenReadStream(12 * 1024 * 1024);
+            using var memory = new MemoryStream(); await stream.CopyToAsync(memory);
+            draft.Bilder.Add(new AdminImage { Name = file.Name, DataUrl = $"data:{file.ContentType};base64,{Convert.ToBase64String(memory.ToArray())}", IsTitleImage = !draft.Bilder.Any(x => !x.IsInformationOnly) });
+        }
+    }
+    private void SetTitleImage(int index) { for (var i = 0; i < draft.Bilder.Count; i++) draft.Bilder[i].IsTitleImage = i == index; }
+    private void ImagePolicyChanged(int index) { if (draft.Bilder[index].IsInformationOnly && draft.Bilder[index].IsTitleImage) { draft.Bilder[index].IsTitleImage = false; var next = draft.Bilder.FindIndex(x => !x.IsInformationOnly); if (next >= 0) draft.Bilder[next].IsTitleImage = true; } }
+    private void MoveImage(int index, int direction) { var target = index + direction; if (target is < 0 or >= 99 || target >= draft.Bilder.Count) return; (draft.Bilder[index], draft.Bilder[target]) = (draft.Bilder[target], draft.Bilder[index]); }
+    private void RemoveImage(int index) { draft.Bilder.RemoveAt(index); if (!draft.Bilder.Any(x => x.IsTitleImage)) { var first = draft.Bilder.FirstOrDefault(x => !x.IsInformationOnly); if (first is not null) first.IsTitleImage = true; } }
+    private async Task GenerateAsync() { await ExecuteAsync(() => AdminApi.GenerateAsync(draft), result => { if (result.Draft is not null) draft = result.Draft; }, "KI-Entwurf übernommen."); }
+    private async Task SaveAsync() { await ExecuteAsync(() => AdminApi.SaveDraftAsync(draft), null, "Entwurf gespeichert."); }
+    private async Task PublishAsync() { if (!await JS.InvokeAsync<bool>("confirm", "Beitrag inklusive aller freigegebenen Bilder auf GitHub veröffentlichen?")) return; await ExecuteAsync(() => AdminApi.PublishAsync(draft), null, "Der Beitrag wurde auf GitHub veröffentlicht."); }
+    private async Task ExecuteAsync(Func<Task<ApiResult>> action, Action<ApiResult>? successAction, string successMessage) { busy = true; message = null; try { var result = await action(); if (result.Success) { successAction?.Invoke(result); message = successMessage; messageIsError = false; } else { message = result.Message; messageIsError = true; } } catch { message = "Die Verbindung zum Redaktionsdienst ist fehlgeschlagen."; messageIsError = true; } finally { busy = false; } }
+    private static string CategoryIcon(string category) => category switch { "Einsätze" => "🚨", "Ausbildung" => "🧯", "Feuerwehrjugend" => "🧑‍🚒", _ => "📰" };
+    private enum AdminView { Overview, Editor }
+}

@@ -1,0 +1,105 @@
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+
+<dialog open class="team-viewer" @ref="_element" role="region" aria-label="Interaktives Mannschaftsfoto">
+    <div class="team-viewer-toolbar">
+        <div class="team-photo-tabs" role="group" aria-label="Gruppenfoto auswählen">
+            @foreach (var photo in Catalog.Photos)
+            {
+                <button type="button" class="@(photo.Id == PhotoId ? "is-current" : "")" aria-pressed="@(photo.Id == PhotoId)" @onclick="() => OnPhotoChange.InvokeAsync(photo.Id)">
+                    <img src="@photo.Src" alt="" width="42" height="30" loading="lazy" /><span>@photo.Label</span>
+                </button>
+            }
+        </div>
+    </div>
+    <div class="team-viewer-body">
+        <div class="team-stage" style="@FrameStyle" data-trim-top="@Photo.TrimTop" data-trim-bottom="@Photo.TrimBottom" tabindex="0" role="group" aria-label="Foto: Plus und Minus zum Zoomen, Pfeiltasten zum Verschieben. Personen mit Tab auswählen." data-stage>
+            <div class="team-canvas" data-canvas>
+                <img @key="Photo.Id" src="@(Photo.DetailSrc ?? Photo.Src)" width="@Photo.Width" height="@Photo.Height" alt="@($"FF Rastenfeld – {Photo.Label}")" draggable="false" decoding="async" fetchpriority="high" data-photo />
+                @foreach (var spot in Photo.Spots)
+                {
+                    var member = Catalog.Members.First(m => m.Id == spot.MemberId);
+                    <button @key="spot.Id" type="button" class="team-hotspot @(SelectedId == member.Id ? "is-selected" : "")" style="@Position(spot)" data-photo-y="@Invariant(spot.Y)" data-member="@member.Id" data-name="@member.Name" aria-pressed="@(SelectedId == member.Id)" aria-label="@($"{member.Name}{(Catalog.DemoAssignments ? " – vorläufige Fotozuordnung" : "")} ansehen")" @onclick="() => OnSelect.InvokeAsync(member.Id)">
+                        <span class="team-hotspot-dot"></span>
+                    </button>
+                }
+            </div>
+            <div class="team-hover-label" role="tooltip" aria-hidden="true" data-hover-label></div>
+            <div class="team-image-error" data-image-error hidden>Das Foto konnte nicht geladen werden. Das Mitgliederverzeichnis ist weiterhin verfügbar.</div>
+            <div class="team-zoom-controls" role="group" aria-label="Bildzoom">
+                <button type="button" data-zoom-out aria-label="Verkleinern">−</button>
+                <button type="button" data-reset aria-label="Zoom und Bildposition zurücksetzen"><span data-zoom-label>100 %</span> ↺</button>
+                <button type="button" data-zoom-in aria-label="Vergrößern">+</button>
+                <span class="team-controls-divider" aria-hidden="true"></span>
+                <button type="button" class="team-fullscreen" data-fullscreen aria-label="Foto im Vollbild öffnen"><span aria-hidden="true">⛶</span><span class="team-control-label">Vollbild</span></button>
+                <button type="button" class="team-exit" data-exit aria-label="Vollbild schließen"><span aria-hidden="true">×</span><span class="team-control-label">Schließen</span></button>
+            </div>
+        </div>
+        <aside class="team-photo-info @(SelectedMember is not null ? "has-selection" : "")" aria-label="Ausgewählte Person" aria-live="polite" aria-atomic="true" data-info>
+            @if (SelectedMember is not null)
+            {
+                <TeamMemberInfo Member="SelectedMember" Photo="PortraitPhoto" Spot="PortraitSpot" Demo="Catalog.DemoAssignments" OnClose="DismissInfo" OnProfile="OnProfile" />
+            }
+
+        </aside>
+    </div>
+
+</dialog>
+@code {
+    [Parameter, EditorRequired] public TeamCatalog Catalog { get; set; } = default!;
+    [Parameter] public string PhotoId { get; set; } = "";
+    [Parameter] public string? SelectedId { get; set; }
+    [Parameter] public bool InfoOpen { get; set; }
+    [Parameter] public EventCallback<string> OnPhotoChange { get; set; }
+    [Parameter] public EventCallback<string> OnSelect { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+    [Parameter] public EventCallback<string> OnProfile { get; set; }
+    private ElementReference _element;
+    private IJSObjectReference? _module, _controller;
+    private DotNetObjectReference<TeamPhotoViewer>? _self;
+    private string? _renderedPhoto, _focusPending;
+    private TeamPhoto Photo => Catalog.Photos.First(p => p.Id == PhotoId);
+    private TeamMember? SelectedMember => InfoOpen ? Catalog.Members.FirstOrDefault(m => m.Id == SelectedId) : null;
+    private TeamPhoto? PortraitPhoto => Catalog.Photos.FirstOrDefault(p => p.Id == SelectedMember?.PortraitPhotoId && p.Spots.Any(s => s.MemberId == SelectedId)) ?? Catalog.Photos.LastOrDefault(p => p.Spots.Any(s => s.MemberId == SelectedId));
+    private TeamSpot? PortraitSpot => PortraitPhoto?.Spots.FirstOrDefault(s => s.MemberId == SelectedId);
+    private int FrameHeight => Photo.Height - Photo.TrimTop - Photo.TrimBottom;
+    private string FrameStyle => FormattableString.Invariant($"--team-inline-aspect:{Photo.Width}/{FrameHeight};--team-image-top:{-Photo.TrimTop * 100.0 / FrameHeight}%;--team-image-height:{Photo.Height * 100.0 / FrameHeight}%");
+    private static string Invariant(double value) => value.ToString(System.Globalization.CultureInfo.InvariantCulture);
+    private string Position(TeamSpot s) => FormattableString.Invariant($"left:{s.X * 100}%;--inline-y:{(s.Y * Photo.Height - Photo.TrimTop) * 100.0 / FrameHeight}%;--photo-y:{s.Y * 100}%");
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _module = await JS.InvokeAsync<IJSObjectReference>("import", "/js/team-viewer.js");
+            _self = DotNetObjectReference.Create(this);
+            _controller = await _module.InvokeAsync<IJSObjectReference>("mount", _element, _self);
+        }
+        if (_controller is null) return;
+        if (_renderedPhoto != PhotoId) { _renderedPhoto = PhotoId; await _controller.InvokeVoidAsync("photoChanged"); }
+        if (_focusPending is not null) { var id = _focusPending; _focusPending = null; await _controller.InvokeVoidAsync("focusMember", id); }
+    }
+    public async Task ShowMember(string id) { _focusPending = id; await InvokeAsync(StateHasChanged); }
+    public async Task GoToProfile(string id) { if (_controller is not null) await _controller.InvokeVoidAsync("goToProfile", id); }
+    [JSInvokable] public async Task DismissInfo()
+    {
+        if (_controller is not null) await _controller.InvokeVoidAsync("restoreMarkerFocus");
+        await OnClose.InvokeAsync();
+    }
+    [JSInvokable] public Task StepPhoto(int direction)
+    {
+        if (Catalog.Photos.Count < 2) return Task.CompletedTask;
+        var index = Catalog.Photos.FindIndex(p => p.Id == PhotoId);
+        var next = (index + (direction < 0 ? -1 : 1) + Catalog.Photos.Count) % Catalog.Photos.Count;
+        return OnPhotoChange.InvokeAsync(Catalog.Photos[next].Id);
+    }
+    public async ValueTask DisposeAsync()
+    {
+        try
+        {
+            if (_controller is not null) { await _controller.InvokeVoidAsync("dispose"); await _controller.DisposeAsync(); }
+            if (_module is not null) await _module.DisposeAsync();
+        }
+        catch (JSDisconnectedException) { }
+        _self?.Dispose();
+    }
+}

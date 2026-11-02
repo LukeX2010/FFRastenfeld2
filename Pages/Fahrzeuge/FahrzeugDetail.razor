@@ -16,9 +16,7 @@ else
             <main class="main-feed">
                 <article class="post-detail">
 
-                    <div class="detail-img fz-detail-img">
-                        <img src="@($"img/{GetFahrzeugBild(fz)}.jpeg")" class="hero-bg-img" alt="@fz.Name" />
-                    </div>
+                    <PhotoGallery Photos="@(new[] { new GalleryPhoto($"img/{GetFahrzeugBild(fz)}.jpeg", fz.Name) })" Label="@fz.Name" />
 
                     <div class="fz-detail-meta">
                         <div class="fdm-item"><span>Bezeichnung</span><strong>@fz.Name</strong></div>

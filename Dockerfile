@@ -2,11 +2,15 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 COPY . .
-RUN dotnet publish FFRastenfeld.csproj -c Release -o /publish
+RUN dotnet publish FFRastenfeld.csproj -c Release -o /client
+RUN dotnet publish AdminServer/FFRastenfeld.AdminServer.csproj -c Release -o /server \
+    && mkdir -p /server/wwwroot \
+    && cp -a /client/wwwroot/. /server/wwwroot/
 
 # Serve Stage
-FROM nginx:alpine
-COPY --from=build /publish/wwwroot /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
+WORKDIR /app
+COPY --from=build /server .
+ENV ClientRoot=/app/wwwroot
 EXPOSE 8080
-CMD sh -c "sed -i 's/\$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+ENTRYPOINT ["sh", "-c", "ASPNETCORE_URLS=http://+:${PORT:-8080} dotnet FFRastenfeld.AdminServer.dll"]

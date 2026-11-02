@@ -1,0 +1,857 @@
+{
+  "demoAssignments": false,
+  "members": [
+    {
+      "id": "m28",
+      "name": "Matthias Goll",
+      "rank": "Hauptbrandinspektor",
+      "role": "Kommandant",
+      "since": 2019,
+      "order": 1,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m27",
+      "name": "Stefan Schulmeister",
+      "rank": "Brandinspektor",
+      "role": "Kommandant-Stv.",
+      "since": 2011,
+      "order": 2,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m25",
+      "name": "Erwin Huber",
+      "rank": "Verwaltungsmeister",
+      "role": "Leiter des Verwaltungsdienstes",
+      "since": 2001,
+      "order": 3,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m30",
+      "name": "Gregor Dastel",
+      "rank": "Verwaltungsmeister",
+      "role": "Stv. Leiter des Verwaltungsdienstes",
+      "since": 1998,
+      "order": 4,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m23",
+      "name": "Richard Kröpfl",
+      "rank": "Brandinspektor",
+      "role": "Zugskommandant",
+      "since": 1998,
+      "order": 5,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m01",
+      "name": "Johann Herzog jun.",
+      "rank": "Oberbrandmeister",
+      "role": "1. Gruppenkommandant",
+      "since": 2012,
+      "order": 6,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m04",
+      "name": "Emanuel Huber",
+      "rank": "Oberbrandmeister",
+      "role": "2. Gruppenkommandant / Zeugmeister",
+      "since": 2011,
+      "order": 7,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m21",
+      "name": "Max Artner",
+      "rank": "Oberbrandmeister",
+      "role": "3. Gruppenkommandant",
+      "since": 2015,
+      "order": 8,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m08",
+      "name": "Alexander Gassner",
+      "rank": "Löschmeister",
+      "role": "Fahrmeister",
+      "since": 2015,
+      "order": 9,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m14",
+      "name": "Christian Frühwirt",
+      "rank": "Brandinspektor",
+      "role": "Sachbearbeiter Wasserdienst",
+      "since": 2008,
+      "order": 10,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m10",
+      "name": "Patrick Kirchberger",
+      "rank": "Löschmeister",
+      "role": "Sachbearbeiter Vorbeugender Brandschutz",
+      "since": 2017,
+      "order": 11,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m24",
+      "name": "Marina Kröpfl",
+      "rank": "Löschmeister",
+      "role": "Sachbearbeiter Öffentlichkeitsarbeit",
+      "since": 2018,
+      "order": 12,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m32",
+      "name": "Victoria Lenz",
+      "rank": "Feuerwehrfrau",
+      "role": "Sachbearbeiter Öffentlichkeitsarbeit",
+      "since": 2024,
+      "order": 13,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m17",
+      "name": "Hannes Auer",
+      "rank": "Löschmeister",
+      "role": "Sachbearbeiter Nachrichtendienst",
+      "since": 2016,
+      "order": 14,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m22",
+      "name": "Lukas Assfall",
+      "rank": "Feuerwehrmann",
+      "role": "Sachbearbeiter EDV / Informationstechnologie",
+      "since": 2025,
+      "order": 15,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m16",
+      "name": "Carmen Goll",
+      "rank": "Feuerwehrfrau",
+      "role": "Sachbearbeiter Feuerwehrmedizinischer Dienst",
+      "since": 2019,
+      "order": 16,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m29",
+      "name": "Johann Herzog sen.",
+      "rank": "Hauptlöschmeister",
+      "role": "Sachbearbeiter Feuerwehrgeschichte",
+      "since": 1995,
+      "order": 17,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m26",
+      "name": "Bernhard Traxler",
+      "rank": "Hauptbrandinspektor",
+      "role": "",
+      "since": 2005,
+      "order": 18,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m07",
+      "name": "Felix Dornhackl",
+      "rank": "Feuerwehrmann",
+      "role": "",
+      "since": 2024,
+      "order": 19,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m12",
+      "name": "Franz Hofmann",
+      "rank": "Oberfeuerwehrmann",
+      "role": "",
+      "since": 1982,
+      "order": 20,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m20",
+      "name": "Gerhard Steininger",
+      "rank": "Oberfeuerwehrmann",
+      "role": "",
+      "since": 2010,
+      "order": 21,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m35",
+      "name": "Gottfried Pfeiffer",
+      "rank": "Oberfeuerwehrmann",
+      "role": "",
+      "since": 1990,
+      "order": 22,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m02",
+      "name": "Herbert Weitl",
+      "rank": "Oberfeuerwehrmann",
+      "role": "",
+      "since": 1990,
+      "order": 23,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m09",
+      "name": "Hermann Kaufmann",
+      "rank": "",
+      "role": "",
+      "since": null,
+      "order": 24,
+      "placeholder": false,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m03",
+      "name": "Jakob Assfall",
+      "rank": "Feuerwehrmann",
+      "role": "",
+      "since": 2025,
+      "order": 25,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m06",
+      "name": "Nick Hengstberger",
+      "rank": "Probefeuerwehrmann",
+      "role": "",
+      "since": 2026,
+      "order": 26,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m33",
+      "name": "Reinhard Hasengst",
+      "rank": "Oberfeuerwehrmann",
+      "role": "",
+      "since": 2018,
+      "order": 27,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m05",
+      "name": "Robert Zinner",
+      "rank": "Oberfeuerwehrmann",
+      "role": "",
+      "since": 1990,
+      "order": 28,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m15",
+      "name": "Thomas Hofbauer",
+      "rank": "Oberfeuerwehrmann",
+      "role": "",
+      "since": 2018,
+      "order": 29,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m31",
+      "name": "Walter Göschl",
+      "rank": "Oberfeuerwehrmann",
+      "role": "",
+      "since": 2018,
+      "order": 30,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m18",
+      "name": "Wolfgang Göschl",
+      "rank": "Oberfeuerwehrmann",
+      "role": "",
+      "since": 1982,
+      "order": 31,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m11",
+      "name": "Friedrich Kröpfl",
+      "rank": "",
+      "role": "",
+      "since": null,
+      "order": 32,
+      "placeholder": true,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m19",
+      "name": "Mitglied · Bildplatz 10",
+      "rank": "",
+      "role": "",
+      "since": null,
+      "order": 33,
+      "placeholder": true,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m34",
+      "name": "Mitglied · Bildplatz 14",
+      "rank": "",
+      "role": "",
+      "since": null,
+      "order": 34,
+      "placeholder": true,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m13",
+      "name": "Mitglied · Bildplatz 15",
+      "rank": "",
+      "role": "",
+      "since": null,
+      "order": 35,
+      "placeholder": true,
+      "portraitPhotoId": "gesamt"
+    }
+  ],
+  "photos": [
+    {
+      "id": "gesamt",
+      "label": "Gesamtmannschaft",
+      "src": "/img/mannschaft/gesamtmannschaft.webp",
+      "original": "/img/mannschaft/gesamtmannschaft.png",
+      "width": 1600,
+      "height": 1066,
+      "spots": [
+        {
+          "id": "g01",
+          "memberId": "m01",
+          "x": 0.1975,
+          "y": 0.37054,
+          "crop": [
+            256,
+            286,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g02",
+          "memberId": "m02",
+          "x": 0.26188,
+          "y": 0.36492,
+          "crop": [
+            364,
+            292,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g03",
+          "memberId": "m03",
+          "x": 0.32,
+          "y": 0.37336,
+          "crop": [
+            458,
+            284,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g04",
+          "memberId": "m04",
+          "x": 0.3875,
+          "y": 0.36585,
+          "crop": [
+            568,
+            272,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g05",
+          "memberId": "m05",
+          "x": 0.45375,
+          "y": 0.34615,
+          "crop": [
+            670,
+            264,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g06",
+          "memberId": "m33",
+          "x": 0.52812,
+          "y": 0.35084,
+          "crop": [
+            794,
+            267,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g07",
+          "memberId": "m07",
+          "x": 0.61125,
+          "y": 0.36679,
+          "crop": [
+            918,
+            290,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g08",
+          "memberId": "m06",
+          "x": 0.68,
+          "y": 0.36585,
+          "crop": [
+            1037,
+            289,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g09",
+          "memberId": "m09",
+          "x": 0.75,
+          "y": 0.37054,
+          "crop": [
+            1156,
+            280,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g10",
+          "memberId": "m19",
+          "x": 0.06563,
+          "y": 0.4728,
+          "crop": [
+            61,
+            377,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g11",
+          "memberId": "m12",
+          "x": 0.11313,
+          "y": 0.44184,
+          "crop": [
+            120,
+            370,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g12",
+          "memberId": "m11",
+          "x": 0.15438,
+          "y": 0.49343,
+          "crop": [
+            193,
+            405,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g13",
+          "memberId": "m15",
+          "x": 0.17813,
+          "y": 0.43715,
+          "crop": [
+            230,
+            369,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g14",
+          "memberId": "m34",
+          "x": 0.22312,
+          "y": 0.46248,
+          "crop": [
+            304,
+            391,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g15",
+          "memberId": "m13",
+          "x": 0.29625,
+          "y": 0.46248,
+          "crop": [
+            420,
+            391,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g16",
+          "memberId": "m35",
+          "x": 0.38438,
+          "y": 0.46341,
+          "crop": [
+            562,
+            391,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g17",
+          "memberId": "m08",
+          "x": 0.46,
+          "y": 0.44559,
+          "crop": [
+            684,
+            370,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g18",
+          "memberId": "m14",
+          "x": 0.52563,
+          "y": 0.46248,
+          "crop": [
+            786,
+            385,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g19",
+          "memberId": "m10",
+          "x": 0.5975,
+          "y": 0.46341,
+          "crop": [
+            900,
+            388,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g20",
+          "memberId": "m20",
+          "x": 0.68125,
+          "y": 0.4606,
+          "crop": [
+            1039,
+            386,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g21",
+          "memberId": "m21",
+          "x": 0.76438,
+          "y": 0.46341,
+          "crop": [
+            1166,
+            397,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g22",
+          "memberId": "m22",
+          "x": 0.825,
+          "y": 0.46248,
+          "crop": [
+            1264,
+            392,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g23",
+          "memberId": "m23",
+          "x": 0.93812,
+          "y": 0.50563,
+          "crop": [
+            1451,
+            411,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g24",
+          "memberId": "m24",
+          "x": 0.21313,
+          "y": 0.57974,
+          "crop": [
+            286,
+            495,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g25",
+          "memberId": "m25",
+          "x": 0.2925,
+          "y": 0.57223,
+          "crop": [
+            415,
+            489,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g26",
+          "memberId": "m26",
+          "x": 0.38125,
+          "y": 0.5788,
+          "crop": [
+            555,
+            494,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g27",
+          "memberId": "m27",
+          "x": 0.46313,
+          "y": 0.5666,
+          "crop": [
+            688,
+            480,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g28",
+          "memberId": "m28",
+          "x": 0.54125,
+          "y": 0.57786,
+          "crop": [
+            813,
+            493,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g29",
+          "memberId": "m29",
+          "x": 0.615,
+          "y": 0.59756,
+          "crop": [
+            927,
+            514,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g30",
+          "memberId": "m30",
+          "x": 0.68312,
+          "y": 0.58161,
+          "crop": [
+            1040,
+            496,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g31",
+          "memberId": "m31",
+          "x": 0.75625,
+          "y": 0.58818,
+          "crop": [
+            1153,
+            500,
+            105,
+            132
+          ]
+        },
+        {
+          "id": "g32",
+          "memberId": "m32",
+          "x": 0.82875,
+          "y": 0.59099,
+          "crop": [
+            1268,
+            510,
+            105,
+            132
+          ]
+        }
+      ],
+      "trimTop": 210,
+      "trimBottom": 150,
+      "detailSrc": "/img/mannschaft/gesamt-hq.webp"
+    },
+    {
+      "id": "gruppe",
+      "label": "Funktionsträger",
+      "src": "/img/mannschaft/funktionstraeger.webp",
+      "original": "/img/mannschaft/funktionstraeger.png",
+      "width": 1600,
+      "height": 1066,
+      "spots": [
+        {
+          "id": "f01",
+          "memberId": "m30",
+          "x": 0.18125,
+          "y": 0.37899,
+          "crop": [
+            232,
+            216,
+            126,
+            159
+          ]
+        },
+        {
+          "id": "f02",
+          "memberId": "m08",
+          "x": 0.27375,
+          "y": 0.38274,
+          "crop": [
+            384,
+            220,
+            126,
+            159
+          ]
+        },
+        {
+          "id": "f03",
+          "memberId": "m21",
+          "x": 0.3575,
+          "y": 0.41839,
+          "crop": [
+            514,
+            260,
+            126,
+            159
+          ]
+        },
+        {
+          "id": "f04",
+          "memberId": "m04",
+          "x": 0.4375,
+          "y": 0.37242,
+          "crop": [
+            637,
+            222,
+            126,
+            159
+          ]
+        },
+        {
+          "id": "f05",
+          "memberId": "m24",
+          "x": 0.5075,
+          "y": 0.42308,
+          "crop": [
+            749,
+            267,
+            126,
+            159
+          ]
+        },
+        {
+          "id": "f06",
+          "memberId": "m14",
+          "x": 0.57875,
+          "y": 0.37523,
+          "crop": [
+            858,
+            223,
+            126,
+            159
+          ]
+        },
+        {
+          "id": "f07",
+          "memberId": "m01",
+          "x": 0.65438,
+          "y": 0.41745,
+          "crop": [
+            971,
+            259,
+            126,
+            159
+          ]
+        },
+        {
+          "id": "f08",
+          "memberId": "m22",
+          "x": 0.71375,
+          "y": 0.35647,
+          "crop": [
+            1071,
+            221,
+            126,
+            159
+          ]
+        },
+        {
+          "id": "f09",
+          "memberId": "m23",
+          "x": 0.77,
+          "y": 0.4015,
+          "crop": [
+            1164,
+            248,
+            126,
+            159
+          ]
+        },
+        {
+          "id": "f10",
+          "memberId": "m10",
+          "x": 0.84437,
+          "y": 0.37992,
+          "crop": [
+            1278,
+            215,
+            126,
+            159
+          ]
+        }
+      ],
+      "trimTop": 150,
+      "trimBottom": 10,
+      "detailSrc": "/img/mannschaft/gruppe-hq.webp"
+    }
+  ]
+}

@@ -18,6 +18,7 @@ public class DataService
     private readonly string _fallbackPostsUrl;
     private readonly string _imageBaseUrl;
     private readonly int _cacheBustingMinutes;
+    private readonly IConfigurationSection _optimizedImages;
     private List<Post> _posts = new();
     private Task? _postsLoadTask;
 
@@ -30,6 +31,7 @@ public class DataService
         _fallbackPostsUrl = NormalizeConfigValue(dataConfig["FallbackPostsUrl"]) ?? "data/posts.json";
         _imageBaseUrl = TrimTrailingSlash(NormalizeConfigValue(dataConfig["ImageBaseUrl"]) ?? "img");
         _cacheBustingMinutes = int.TryParse(dataConfig["CacheBustingMinutes"], out var minutes) ? minutes : 5;
+        _optimizedImages = dataConfig.GetSection("OptimizedImages");
     }
 
     public async Task EnsurePostsLoadedAsync()
@@ -81,6 +83,19 @@ public class DataService
 
     public bool HasPostImage(Post post) =>
         post.Bilder?.Any(image => !string.IsNullOrWhiteSpace(image.Pfad)) == true;
+
+    public string GetMainImageAlt(Post post)
+    {
+        if (GetMainImageSrc(post).EndsWith("/keinbild.jpeg", StringComparison.OrdinalIgnoreCase)) return "";
+        var description = post.Bilder?.FirstOrDefault()?.Beschreibung;
+        return string.IsNullOrWhiteSpace(description) ? $"Foto zum Bericht „{post.Titel}“" : description;
+    }
+
+    public (string Src, string? SrcSet, string? Width, string? Height) GetOptimizedImage(string src)
+    {
+        var image = _optimizedImages.GetSection("/" + src.TrimStart('/'));
+        return (image["Src"] ?? src, image["SrcSet"], image["Width"], image["Height"]);
+    }
 
     public string GetImageSrc(string? imagePath)
     {

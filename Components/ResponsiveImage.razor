@@ -1,0 +1,17 @@
+@inject DataService DS
+
+@{
+    var image = DS.GetOptimizedImage(Src);
+}
+<img src="@image.Src" srcset="@image.SrcSet" sizes="@(image.SrcSet is null ? null : Sizes)"
+     width="@image.Width" height="@image.Height" alt="@Alt" class="@CssClass"
+     loading="@(Eager ? "eager" : "lazy")" fetchpriority="@(Priority ? "high" : null)" decoding="async" />
+
+@code {
+    [Parameter, EditorRequired] public string Src { get; set; } = "";
+    [Parameter, EditorRequired] public string Alt { get; set; } = "";
+    [Parameter] public string? CssClass { get; set; }
+    [Parameter] public string Sizes { get; set; } = "100vw";
+    [Parameter] public bool Eager { get; set; }
+    [Parameter] public bool Priority { get; set; }
+}

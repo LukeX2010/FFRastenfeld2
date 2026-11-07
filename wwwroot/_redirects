@@ -2,4 +2,5 @@
 /admin /admin/index.html 200
 /admin/* /admin/index.html 200
 /einsaetze/keinbild /einsaetze/pkw-bergung-nach-auffahrunfall 301
+/news/Tut-Gut-Wandertag /news/tut-gut-wandertag 301
 /* /index.html 200

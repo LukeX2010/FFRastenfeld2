@@ -7,7 +7,7 @@
             <!-- Brand -->
             <a href="/" class="nav-brand" @onclick="CloseAll">
                 <div class="brand-logo" >
-                    <img src="img/logo_rastenfeld.jpg" alt="FF Rastenfeld Logo" class="brand-logo-img"/>
+                    <ResponsiveImage Src="img/logo_rastenfeld.jpg" Alt="Logo der Freiwilligen Feuerwehr Rastenfeld" CssClass="brand-logo-img" Sizes="38px" Eager="true" />
                 </div>
                 <div class="brand-name">
                     <strong>FF Rastenfeld</strong>
@@ -16,18 +16,19 @@
             </a>
 
             <!-- Hamburger -->
-            <button class="hamburger @(mobileOpen ? "is-open" : "")" @onclick="ToggleMobile" aria-label="Menü">
+            <button type="button" class="hamburger @(mobileOpen ? "is-open" : "")" @onclick="ToggleMobile"
+                    aria-label="Menü" aria-controls="site-navigation" aria-expanded="@(mobileOpen ? "true" : "false")">
                 <span></span><span></span><span></span>
             </button>
 
             <!-- Nav Links -->
-            <ul class="nav-menu @(mobileOpen ? "is-open" : "")">
+            <ul id="site-navigation" class="nav-menu @(mobileOpen ? "is-open" : "")">
 
                 <li><NavLink href="/" Match="NavLinkMatch.All" @onclick="CloseAll">Startseite</NavLink></li>
 
                 <!-- News Dropdown -->
                 <li class="has-dropdown @(openDropdown == "news" ? "open" : "")">
-                    <button @onclick='() => ToggleDropdown("news")'>
+                    <button type="button" aria-expanded='@(openDropdown == "news" ? "true" : "false")' @onclick='() => ToggleDropdown("news")'>
                         News <span class="caret">▾</span>
                     </button>
                     <ul class="dropdown">
@@ -39,7 +40,7 @@
 
                 <!-- Feuerwehr Dropdown -->
                 <li class="has-dropdown @(openDropdown == "ff" ? "open" : "")">
-                    <button @onclick='() => ToggleDropdown("ff")'>
+                    <button type="button" aria-expanded='@(openDropdown == "ff" ? "true" : "false")' @onclick='() => ToggleDropdown("ff")'>
                         Feuerwehr <span class="caret">▾</span>
                     </button>
                     <ul class="dropdown">

@@ -28,6 +28,8 @@ public class Post
     public string? EinsatzOrt { get; set; }
     public string? EinsatzZeit { get; set; }
     public int?   EinsatzKraefte { get; set; }
+
+    public string GetPageTitle() => Titel.Length <= 47 ? $"{Titel} | FF Rastenfeld" : Titel;
 }
 
 public class Fahrzeug

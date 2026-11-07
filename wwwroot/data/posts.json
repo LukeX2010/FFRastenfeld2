@@ -36,8 +36,8 @@
     "Titel": "Feuerlöscher-Überprüfung bei der FF Rastenfeld",
     "Kategorie": "FF-News",
     "Datum": "2026-10-17T12:00:00",
-    "Kurztext": "Am Samstag, den 17. Oktober 2026, wird im Feuerwehrhaus Rastenfeld eine Feuerlöscher-Überprüfung angeboten. Interessierte können ihre Geräte von 9.00 bis 11.30 Uhr zur Prüfung bringen.",
-    "Volltext": "Die Freiwillige Feuerwehr Rastenfeld informiert über eine anstehende Feuerlöscher-Überprüfung. Diese findet am Samstag, den 17. Oktober 2026, im Feuerwehrhaus Rastenfeld statt. Von 9.00 Uhr bis 11.30 Uhr besteht für Bürgerinnen und Bürger die Möglichkeit, ihre Feuerlöscher fachgerecht überprüfen zu lassen. Die Kosten für die Überprüfung eines Feuerlöschers betragen 9,00 Euro, inklusive Mehrwertsteuer. Die Durchführung der Prüfung erfolgt durch die Firma L&E Feuerlöschtechnik OG.",
+    "Kurztext": "Für Samstag, den 17. Oktober 2026, war im Feuerwehrhaus Rastenfeld eine Feuerlöscher-Überprüfung von 9.00 bis 11.30 Uhr angekündigt.",
+    "Volltext": "Ankündigung zum Termin am 17. Oktober 2026: Die Freiwillige Feuerwehr Rastenfeld bot Bürgerinnen und Bürgern die Möglichkeit an, ihre Feuerlöscher im Feuerwehrhaus zwischen 9.00 und 11.30 Uhr zur Überprüfung abzugeben. Angekündigt waren Kosten von 9,00 Euro je Feuerlöscher inklusive Mehrwertsteuer und die Durchführung durch die Firma L&E Feuerlöschtechnik OG.",
     "Bilder": [
       {
         "Pfad": "posts/feuerloscher-uberprufung-bei-der-ff-rastenfeld-46db3cd1/2712de8896c3e652.jpg",
@@ -59,8 +59,8 @@
     "Titel": "Gratulation zum 40. Geburtstag",
     "Kategorie": "FF-News",
     "Datum": "2026-10-02T19:00:00",
-    "Kurztext": "Die FF Rastenfeld gratulierte am Freitag, den 3. Oktober 2026, ihrem Kameraden Bernhard Traxler zu seinem 40. Geburtstag.",
-    "Volltext": "Am Freitag, 3.10.2026, trafen wir uns, um unserem Kameraden Bernhard Traxler zu seinem 40. Geburtstag zu gratulieren und gemeinsam mit ihm zu feiern.\n\nLieber Bernhard, wir wünschen dir alles Gute, viel Glück und vor allem Gesundheit für dein neues Lebensjahr! Auf viele weitere gemeinsame Jahre und schöne Stunden bei der Feuerwehr!",
+    "Kurztext": "Die FF Rastenfeld gratulierte ihrem Kameraden Bernhard Traxler zu seinem 40. Geburtstag.",
+    "Volltext": "Wir trafen uns, um unserem Kameraden Bernhard Traxler zu seinem 40. Geburtstag zu gratulieren und gemeinsam mit ihm zu feiern.\n\nLieber Bernhard, wir wünschen dir alles Gute, viel Glück und vor allem Gesundheit für dein neues Lebensjahr! Auf viele weitere gemeinsame Jahre und schöne Stunden bei der Feuerwehr!",
     "Bilder": [
       {
         "Pfad": "posts/gratulation-zum-40-geburtstag-5ed8349e/43b4b2dec814c16f.jpg",
@@ -429,7 +429,7 @@
     "Titel": "Verkehrsunfall mit Menschenrettung bei Rastenberg",
     "Kategorie": "Einsätze",
     "Datum": "2025-11-25T17:56:00",
-    "Kurztext": "Verkehrsunfall mit eingeklemmter Person auf der L8245 bei Rastenberg.",
+    "Kurztext": "Zwei Pkw kollidierten auf der L8245 bei Rastenberg. Die Feuerwehr sicherte die Unfallstelle und unterstützte die Rettung einer eingeklemmten Person.",
     "Volltext": "Am 25.11.2025 wurde die Feuerwehr zu einem Verkehrsunfall mit Menschenrettung alarmiert. Zwei PKW kollidierten auf der L8245 bei Rastenberg, wobei eine Person im Fahrzeug eingeklemmt wurde.\n\nDie Einsatzkräfte sicherten die Unfallstelle und unterstützten bei der Rettung der Person.",
     "Bilder": [],
     "BildPlaceholder": "🚒",
@@ -445,7 +445,7 @@
     "Titel": "PKW-Bergung nach Auffahrunfall",
     "Kategorie": "Einsätze",
     "Datum": "2026-01-27T17:35:00",
-    "Kurztext": "Auffahrunfall auf der B38 bei Rastenfeld – keine Verletzten.",
+    "Kurztext": "Nach einem Auffahrunfall auf der B38 bei Rastenfeld barg die Feuerwehr die beteiligten Fahrzeuge. Bei dem Unfall wurde niemand verletzt.",
     "Volltext": "Am 27.01.2026 wurde die Feuerwehr zu einer PKW-Bergung auf die B38 alarmiert. Nach einem Auffahrunfall mussten die beteiligten Fahrzeuge von der Fahrbahn entfernt werden.\n\nGlücklicherweise gab es keine Verletzten.",
     "Bilder": [],
     "BildPlaceholder": "🚒",
@@ -461,7 +461,7 @@
     "Titel": "GMA-Alarm im Hotel Ottenstein",
     "Kategorie": "Einsätze",
     "Datum": "2025-12-20T23:50:00",
-    "Kurztext": "Auslösung einer Brandmeldeanlage im Hotel Ottenstein.",
+    "Kurztext": "Im Hotel Ottenstein löste eine Brandmeldeanlage aus. Die Freiwillige Feuerwehr Rastenfeld kontrollierte den Bereich und stellte keinen Brand fest.",
     "Volltext": "Am 20.12.2025 wurde die Feuerwehr zu einer ausgelösten Brandmeldeanlage im Hotel Ottenstein alarmiert.\n\nNach Kontrolle vor Ort konnte kein Brand festgestellt werden. Die Anlage wurde überprüft und zurückgesetzt.",
     "Bilder": [],
     "BildPlaceholder": "🚒",
@@ -504,7 +504,7 @@
   },
   {
     "Id": 15,
-    "Slug": "Tut-Gut-Wandertag",
+    "Slug": "tut-gut-wandertag",
     "Emoji": "Tut-Gut-Wandertag",
     "Titel": "Tut Gut Wandertag",
     "Kategorie": "FF-News",

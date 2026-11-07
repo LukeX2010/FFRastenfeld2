@@ -258,6 +258,21 @@ window.addEventListener('load', function () {
     }, 600);
 });
 
+document.addEventListener('click', async event => {
+    if (event.target.closest('#scroll-top')) {
+        window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    }
+    const button = event.target.closest('button[data-copy]');
+    if (button && navigator.clipboard) {
+        try {
+            await navigator.clipboard.writeText(button.dataset.copy);
+            button.setAttribute('aria-label', 'IBAN kopiert');
+        } catch {
+            button.setAttribute('aria-label', 'IBAN konnte nicht kopiert werden');
+        }
+    }
+});
+
 // Scroll: Navbar + Scroll-to-Top
 window.addEventListener('scroll', function () {
     const h = document.getElementById('site-header');

@@ -1,4 +1,8 @@
 (function () {
+    const base = document.querySelector('base[href]');
+    if (base && new URL(base.href).origin !== location.origin) {
+        base.href = '/';
+    }
     const fallback = document.getElementById('html-fallback');
     if (fallback) {
         const app = document.getElementById('app');
@@ -69,8 +73,12 @@
         setTag('meta', 'property', 'og:description', 'content', socialDescription);
         setTag('meta', 'property', 'og:url', 'content', page.canonical);
         setTag('meta', 'property', 'og:type', 'content', page.type);
+        setTag('meta', 'property', 'og:image', 'content', page.image);
+        setTag('meta', 'property', 'og:image:alt', 'content', page.imageAlt);
         setTag('meta', 'name', 'twitter:title', 'content', socialTitle);
         setTag('meta', 'name', 'twitter:description', 'content', socialDescription);
+        setTag('meta', 'name', 'twitter:image', 'content', page.image);
+        setTag('meta', 'name', 'twitter:image:alt', 'content', page.imageAlt);
 
         document.getElementById('site-structured-data')?.remove();
         if (page.structuredData) {

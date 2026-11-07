@@ -3,27 +3,28 @@
 @inject DataService DS
 
 <article class="post-card">
-    <a href="@PostHref" class="post-card-img-link">
+    <a href="@PostHref" class="post-card-link" aria-label="@Post.Titel">
         <div class="post-card-img">
-            <img src="@DS.GetMainImageSrc(Post)" class="hero-bg-img" alt="@Post.Titel"/>
+            <ResponsiveImage Src="@DS.GetMainImageSrc(Post)" Alt="@DS.GetMainImageAlt(Post)"
+                             CssClass="hero-bg-img" Sizes="(max-width: 860px) 100vw, 260px" />
+        </div>
+        <div class="post-card-body">
+            <time class="post-date">@Post.Datum.ToString("d. MMMM yyyy")</time>
+            <h3>@Post.Titel</h3>
+            @if (!string.IsNullOrEmpty(Post.EinsatzTyp))
+            {
+                <div class="post-einsatz-meta">
+                    <span>⚡ @Post.EinsatzTyp</span>
+                    @if (!string.IsNullOrEmpty(Post.EinsatzOrt))
+                    { <span>📍 @Post.EinsatzOrt</span> }
+                    @if (Post.EinsatzKraefte.HasValue)
+                    { <span>👥 @Post.EinsatzKraefte Kräfte</span> }
+                </div>
+            }
+            <p>@Post.Kurztext</p>
+            <span class="read-more">Weiterlesen →</span>
         </div>
     </a>
-    <div class="post-card-body">
-        <time class="post-date">@Post.Datum.ToString("d. MMMM yyyy")</time>
-        <h3><a href="@PostHref">@Post.Titel</a></h3>
-        @if (!string.IsNullOrEmpty(Post.EinsatzTyp))
-        {
-            <div class="post-einsatz-meta">
-                <span>⚡ @Post.EinsatzTyp</span>
-                @if (!string.IsNullOrEmpty(Post.EinsatzOrt))
-                { <span>📍 @Post.EinsatzOrt</span> }
-                @if (Post.EinsatzKraefte.HasValue)
-                { <span>👥 @Post.EinsatzKraefte Kräfte</span> }
-            </div>
-        }
-        <p>@Post.Kurztext</p>
-        <a href="@PostHref" class="read-more">Weiterlesen →</a>
-    </div>
 </article>
 
 @code {

@@ -2,7 +2,7 @@
 @page "/galerie"
 @inject DataService DS
 
-<PageTitle>Galerie – Einsatz- & Übungsbilder Freiwillige Feuerwehr Rastenfeld</PageTitle>
+<PageTitle>Galerie mit Einsatz- und Übungsfotos | FF Rastenfeld</PageTitle>
 <PageHero Title="Galerie" Subtitle="Fotos aus Einsätzen, Übungen und Veranstaltungen der FF Rastenfeld" />
 
 
@@ -21,7 +21,7 @@
                 @foreach (var b in GetFiltered())
                 {
                     <button type="button" class="gal-item" aria-label="@($"{b.Titel} im Foto-Viewer öffnen")" @onclick="() => OpenPhoto(b)">
-                        <div class="gal-placeholder"> <img src="@GetGalleryImageSrc(b)" class="hero-bg-img" alt="@b.Titel" loading="lazy" /></div>
+                        <div class="gal-placeholder"><ResponsiveImage Src="@GetGalleryImageSrc(b)" Alt="@(string.IsNullOrWhiteSpace(b.Untertitel) ? $"Foto: {b.Titel}" : b.Untertitel)" CssClass="hero-bg-img" Sizes="(max-width: 860px) 50vw, 360px" /></div>
                         <div class="gal-hover">
                             <span class="gal-title">@b.Titel</span>
                             <span class="gal-kat">@b.Kategorie · @b.Jahr</span>

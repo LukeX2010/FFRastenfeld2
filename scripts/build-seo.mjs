@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import { escapeHtml, renderStartup } from "./startup-html.mjs";
+import { escapeHtml, postImage, postImageAlt, renderStartup } from "./startup-html.mjs";
+import { buildImages, localImagePath } from "./build-images.mjs";
 
 const publish = process.argv[2] ?? ".publish/wwwroot";
 const origin = "https://ffrastenfeld.at";
@@ -11,27 +12,23 @@ const pages = {
   "/": [`${organization} – Niederösterreich`, homeDescription],
   "/einsaetze": [`Einsätze – ${organization}, Niederösterreich`, "Aktuelle Einsatzberichte der Freiwilligen Feuerwehr Rastenfeld aus dem Bezirk Krems-Land."],
   "/news": [`FF-News & Berichte – ${organization}, NÖ`, "Neuigkeiten, Veranstaltungen und Berichte der Freiwilligen Feuerwehr Rastenfeld."],
-  "/ausbildung": [`Ausbildung & Übungen – ${organization}, Bezirk Krems`, "Berichte über Übungen und Ausbildung bei der Freiwilligen Feuerwehr Rastenfeld."],
+  "/ausbildung": ["Ausbildung & Übungen | FF Rastenfeld", "Berichte über Übungen und Ausbildung bei der Freiwilligen Feuerwehr Rastenfeld."],
   "/mannschaft": [`Unsere Mannschaft – ${organization}`, "Lerne die Mannschaft und das Kommando der Freiwilligen Feuerwehr Rastenfeld kennen."],
-  "/chronik": ["Chronik seit 1871 – Geschichte der Freiwilligen Feuerwehr Rastenfeld, NÖ", "Die Geschichte der Freiwilligen Feuerwehr Rastenfeld von ihrer Gründung 1871 bis heute."],
+  "/chronik": ["Chronik seit 1871 | FF Rastenfeld", "Die Geschichte der Freiwilligen Feuerwehr Rastenfeld von ihrer Gründung 1871 bis heute."],
   "/feuerwehrhaus": ["Feuerwehrhaus Rastenfeld – Standort & Ausstattung, 3532 Rastenfeld NÖ", "Das Feuerwehrhaus der Freiwilligen Feuerwehr Rastenfeld. Informationen zum Standort und zur Ausstattung."],
   "/fahrzeuge": [`Fahrzeuge & Ausrüstung – ${organization}, NÖ`, "TLF 4000, MTF, Abschleppachse und TSA 750 der Freiwilligen Feuerwehr Rastenfeld im Überblick."],
-  "/fahrzeuge/1": [`Tanklöschfahrzeug – ${organization}, NÖ`, "Das Tanklöschfahrzeug TLF 4000 der Freiwilligen Feuerwehr Rastenfeld."],
+  "/fahrzeuge/1": [`Tanklöschfahrzeug – ${organization}, NÖ`, "Das Tanklöschfahrzeug TLF 4000 der FF Rastenfeld fasst 4.000 Liter Wasser. Technische Daten und Ausrüstung des Fahrzeugs im Überblick."],
   "/fahrzeuge/2": [`Mannschaftstransportfahrzeug – ${organization}, NÖ`, "Das Mannschaftstransportfahrzeug MTF der Freiwilligen Feuerwehr Rastenfeld."],
   "/fahrzeuge/3": [`Abschleppachse – ${organization}, NÖ`, "Die Abschleppachse der Freiwilligen Feuerwehr Rastenfeld für technische Hilfeleistungen."],
   "/fahrzeuge/4": [`TS-Anhänger – ${organization}, NÖ`, "Der Tragkraftspritzenanhänger TSA 750 der Freiwilligen Feuerwehr Rastenfeld."],
-  "/galerie": [`Galerie – Einsatz- & Übungsbilder ${organization}`, "Fotos von Einsätzen, Übungen und Veranstaltungen der Freiwilligen Feuerwehr Rastenfeld."],
+  "/galerie": ["Galerie mit Einsatz- und Übungsfotos | FF Rastenfeld", "Fotos von Einsätzen, Übungen und Veranstaltungen der Freiwilligen Feuerwehr Rastenfeld."],
   "/kontakt": [`Kontakt – ${organization}, 3532 Rastenfeld, NÖ`, "Adresse, Telefonnummer und E-Mail der Freiwilligen Feuerwehr Rastenfeld. Das Feuerwehrhaus befindet sich in Rastenfeld 178."],
   "/spenden": [`Spenden & Unterstützen – ${organization}, NÖ`, "Informationen zu Spenden für die Freiwillige Feuerwehr Rastenfeld und zur Verwendung der Spenden."],
   "/impressum": [`Impressum - ${organization}, NÖ`, "Impressum und Angaben zur Herausgeberin der Website der Freiwilligen Feuerwehr Rastenfeld."],
   "/datenschutz": [`Datenschutzerklärung - ${organization}, NÖ`, "Datenschutzerklärung der Website der Freiwilligen Feuerwehr Rastenfeld."],
 };
 
-const postSections = new Map([
-  ["Einsätze", ["einsaetze", "FF Rastenfeld, Niederösterreich"]],
-  ["FF-News", ["news", `${organization}, NÖ`]],
-  ["Ausbildung", ["ausbildung", `${organization}, NÖ`]],
-]);
+const postSections = new Map([["Einsätze", "einsaetze"], ["FF-News", "news"], ["Ausbildung", "ausbildung"]]);
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -81,20 +78,21 @@ const [shell, postsJson, redirectRules, homePage, settingsJson] = await Promise.
   readFile(new URL("../Pages/Index.razor", import.meta.url), "utf8"),
   readFile(join(publish, "appsettings.json"), "utf8"),
 ]);
-const imageBase = JSON.parse(settingsJson.replace(/^\uFEFF/, "")).WebsiteData?.ImageBaseUrl?.trim().replace(/\/+$/, "") || "img";
+const settings = JSON.parse(settingsJson.replace(/^\uFEFF/, ""));
+settings.WebsiteData ??= {};
+const imageBase = settings.WebsiteData.ImageBaseUrl?.trim().replace(/\/+$/, "") || "img";
 const marker = /<!-- page-metadata:start -->[\s\S]*?<!-- page-metadata:end -->/;
 if (!marker.test(shell)) throw new Error("SEO markers missing in index.html.");
 
+const defaultImage = { image: `${origin}/img/cover.jpg`, imageAlt: "Einsatzfahrzeug der FF Rastenfeld" };
 const routes = Object.fromEntries(Object.entries(pages).map(([path, [title, description]]) =>
-  [path, { title, description, canonical: origin + path, type: "website" }]));
+  [path, { title, description, canonical: origin + path, type: "website", ...defaultImage }]));
 routes["/"].structuredData = structuredData;
 
 const publishedPosts = [];
 for (const post of JSON.parse(postsJson.replace(/^\uFEFF/, ""))) {
-  const section = postSections.get(post.Kategorie);
-  if (!section) continue;
-
-  const [folder, titleSuffix] = section;
+  const folder = postSections.get(post.Kategorie);
+  if (!folder) continue;
   const slug = post.Slug;
   if (typeof slug !== "string" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/i.test(slug)) {
     throw new Error(`Invalid published post slug: ${slug}`);
@@ -105,17 +103,29 @@ for (const post of JSON.parse(postsJson.replace(/^\uFEFF/, ""))) {
   const summary = (post.Kurztext ?? "").replace(/\s+/g, " ").trim();
   const description = summary.length > 160 ? `${summary.slice(0, 157).replace(/\s+\S*$/, "")}…` : summary;
   routes[path] = {
-    title: `${post.Titel} – ${titleSuffix}`,
+    title: post.Titel.length <= 47 ? `${post.Titel} | FF Rastenfeld` : post.Titel,
     description: description || `„${post.Titel}“ – ein Bericht der Freiwilligen Feuerwehr Rastenfeld.`,
     canonical: origin + path,
     type: "article",
+    ...defaultImage,
   };
   publishedPosts.push({ path, post });
 }
 
 publishedPosts.sort((a, b) => Date.parse(b.post.Datum) - Date.parse(a.post.Datum));
 
-function render({ title, description, canonical, type, structuredData }, path) {
+const images = await buildImages(publish, [
+  "/img/cover.jpg", "/img/logo_rastenfeld.jpg",
+  ...publishedPosts.map(({ post }) => postImage(post, imageBase)),
+]);
+settings.WebsiteData.OptimizedImages = images;
+for (const { path, post } of publishedPosts) {
+  const image = localImagePath(postImage(post, imageBase));
+  const imageAlt = postImageAlt(post, image);
+  if (images[image] && imageAlt) Object.assign(routes[path], { image: origin + image, imageAlt });
+}
+
+function render({ title, description, canonical, type, structuredData, image, imageAlt }, path) {
   const tags = [
     `<title>${escapeHtml(title)}</title>`,
     `<meta name="description" content="${escapeHtml(description)}"/>`,
@@ -125,8 +135,12 @@ function render({ title, description, canonical, type, structuredData }, path) {
       `<meta property="og:description" content="${escapeHtml(description)}"/>`,
       `<meta property="og:url" content="${escapeHtml(canonical)}"/>`,
       `<meta property="og:type" content="${type}"/>`,
+      `<meta property="og:image" content="${escapeHtml(image)}"/>`,
+      `<meta property="og:image:alt" content="${escapeHtml(imageAlt)}"/>`,
       `<meta name="twitter:title" content="${escapeHtml(title)}"/>`,
       `<meta name="twitter:description" content="${escapeHtml(description)}"/>`,
+      `<meta name="twitter:image" content="${escapeHtml(image)}"/>`,
+      `<meta name="twitter:image:alt" content="${escapeHtml(imageAlt)}"/>`,
     ] : []),
   ];
   if (structuredData) {
@@ -135,8 +149,9 @@ function render({ title, description, canonical, type, structuredData }, path) {
   }
 
   return shell.replace('<html lang="de">', '<html lang="de" data-seo-generated>')
+    .replace('<base href="/"/>', process.env.CONTEXT === "production" ? `<base href="${origin}/"/>` : '<base href="/"/>')
     .replace(marker, () => tags.join("\n    "))
-    .replace('<div id="app">', () => renderStartup(path, homePage, publishedPosts, imageBase) + '<div id="app">');
+    .replace('<div id="app">', () => renderStartup(path, homePage, publishedPosts, imageBase, images) + '<div id="app">');
 }
 
 const notFound = {
@@ -156,6 +171,7 @@ for (const [path, metadata] of Object.entries(routes)) {
 const redirects = redirectRules.replace(/^\/\*\s+\/index\.html\s+200\s*$/m, "").trimEnd();
 const sitemapUrls = Object.values(routes).map(({ canonical }) => `  <url><loc>${escapeHtml(canonical)}</loc></url>`);
 await Promise.all([
+  writeFile(join(publish, "appsettings.json"), JSON.stringify(settings)),
   writeFile(join(publish, "_redirects"), [redirects, ...rewrites, ""].join("\n")),
   writeFile(join(publish, "_seo/routes.json"), JSON.stringify({ routes, notFound })),
   writeFile(join(publish, "404.html"), render(notFound)),

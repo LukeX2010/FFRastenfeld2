@@ -12,11 +12,8 @@
     <meta name="author" content="Freiwillige Feuerwehr Rastenfeld"/>
 
     <meta property="og:locale" content="de_AT"/>
-    <meta property="og:image" content="https://ffrastenfeld.at/img/cover.jpg"/>
-    <meta property="og:image:alt" content="Freiwillige Feuerwehr Rastenfeld"/>
     <meta property="og:site_name" content="FF Rastenfeld"/>
     <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:image" content="https://ffrastenfeld.at/img/cover.jpg"/>
 
     <!-- Google Verification -->
     <meta name="google-site-verification" content="W5ccThUyb28Wnu7QMZfmD-Ky-72PI3sw5m8-t12WBfg"/>
@@ -24,7 +21,7 @@
     <base href="/"/>
     <link rel="icon" type="image/jpeg" href="/img/favicon.jpg">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png"/>
-    <link rel="stylesheet" href="/css/app.css?v=html-fallback-2"/>
+    <link rel="stylesheet" href="/css/app.css?v=site-audit-1"/>
     <link rel="stylesheet" href="/css/photo-gallery.css"/>
     <link rel="stylesheet" href="/css/skeleton.css"/>
 </head>
@@ -40,9 +37,9 @@
     </div>
 </div>
 <script src="/js/loading-skeleton.js"></script>
-<script src="/js/seo.js?v=html-fallback-2"></script>
-<script src="_framework/blazor.webassembly.js"></script>
-<script src="/js/app.js"></script>
+<script src="/js/seo.js?v=site-audit-1"></script>
+<script src="/_framework/blazor.webassembly.js"></script>
+<script src="/js/app.js?v=site-audit-1"></script>
 <footer id="site-footer">
     <div class="container footer-grid">
         <div class="footer-col">
@@ -86,8 +83,8 @@
                 <span>🚨</span>
                 <span class="notruf-number">122</span>
             </a>
-            <p style="font-size:.82rem;margin-top:.75rem;color:#9CA3AF">Feuerwehr-Notruf<br/>kostenlos · 24/7</p>
-            <div style="margin-top:1.25rem;">
+            <p class="footer-emergency-copy">Feuerwehr-Notruf<br/>kostenlos · 24/7</p>
+            <div class="footer-social">
                 <a href="https://www.facebook.com/profile.php?id=100066674045868" target="_blank" rel="noopener noreferrer" class="social-link">Facebook</a>
                 <a href="https://www.instagram.com/ff_rastenfeld?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                    target="_blank" rel="noopener noreferrer" class="social-link">Instagram</a>
@@ -146,13 +143,5 @@
 
 
 
-<script>
-    var checkBlazor = setInterval(function () {
-        if (document.querySelector('#app').children.length > 0) {
-            document.getElementById('site-footer').style.opacity = "1";
-            clearInterval(checkBlazor);
-        }
-    }, 200);
-</script>
 </body>
 </html>

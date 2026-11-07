@@ -6,5 +6,10 @@
     "start": "node --env-file=.env.local scripts/admin-local.mjs",
     "test": "node --test tests/admin.test.mjs tests/team.test.mjs tests/photo-gallery.test.mjs"
   },
-  "engines": { "node": ">=22" }
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "sharp": "0.35.5"
+  }
 }

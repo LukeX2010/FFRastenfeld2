@@ -334,6 +334,7 @@ element.style {
   gap: var(--gap);
   align-items: start;
 }
+.main-feed { min-width: 0; }
 
 .brand-logo-img {
     width: 38px;
@@ -352,12 +353,13 @@ element.style {
 .post-card {
   background: var(--white); border-radius: var(--r-lg); overflow: hidden;
   border: 1px solid var(--border); box-shadow: var(--sh);
-  margin-bottom: 1.5rem; display: grid; grid-template-columns: 220px 1fr;
+  margin-bottom: 1.5rem;
   transition: box-shadow var(--t), transform var(--t);
 }
 .post-card:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
 
-.post-card-img-link { display: block; }
+.post-card-link { display: grid; grid-template-columns: 220px minmax(0, 1fr); color: inherit; }
+.post-card-link:focus-visible { outline-offset: -3px; }
 .post-card-img {
   height: 100%; min-height: 160px;
   background: linear-gradient(135deg, var(--dark-2), var(--dark-3));
@@ -380,8 +382,8 @@ element.style {
 .post-card-body { padding: 1.1rem 1.25rem; display: flex; flex-direction: column; }
 .post-date  { font-size: .76rem; color: var(--text-m); margin-bottom: .35rem; display: block; }
 .post-card-body h3 { font-size: 1.05rem; margin-bottom: .4rem; line-height: 1.3; }
-.post-card-body h3 a { color: var(--text); }
-.post-card-body h3 a:hover { color: var(--red); }
+.post-card-body h3 { color: var(--text); }
+.post-card-link:hover h3, .post-card-link:focus-visible h3 { color: var(--red); }
 .post-card-body p { font-size: .9rem; color: var(--text-m); flex: 1; margin-bottom: .75rem; }
 .post-einsatz-meta {
   display: flex; flex-wrap: wrap; gap: .5rem; font-size: .75rem;
@@ -455,6 +457,7 @@ element.style {
 .img-caption { font-size: .74rem; color: #6b7280; margin-top: .5rem; font-style: italic; }
 
 .detail-body p { font-size: 1rem; line-height: 1.8; color: var(--text); }
+.post-copy { white-space: pre-wrap; overflow-wrap: anywhere; }
 
 .back-link {
   display: inline-block; margin-top: 1.5rem; font-size: .85rem;
@@ -1344,11 +1347,10 @@ textarea.form-input { resize: vertical; min-height: 110px; }
 .legal h3 { margin: 1.5rem 0 .4rem; font-size: 1rem; color: var(--red); text-transform: uppercase; letter-spacing: .06em; }
 .legal p  { font-size: .92rem; color: var(--text-m); margin-bottom: .5rem; }
 .legal a  { color: var(--red); }
+.post-detail.legal { max-width: 100%; width: auto; overflow-wrap: anywhere; }
 
 /* ─── FOOTER ─── */
-#site-footer { background: var(--dark); border-top: 3px solid var(--red); margin-top: auto;
-    opacity: 0;
-}
+#site-footer { background: var(--dark); border-top: 3px solid var(--red); margin-top: auto; }
 
 .footer-seo-text {
     padding: 1.25rem 0 .5rem;
@@ -1390,6 +1392,8 @@ details summary:hover { color: #9ca3af; }
 .footer-brand-name { font: 700 1rem/1.1 var(--font-h); color: var(--white); display: block; }
 .footer-brand small  { color: #6b7280; font-size: .7rem; }
 #site-footer .footer-col p { color: #6b7280; font-size: .83rem; margin-bottom: .3rem; line-height: 1.5; }
+#site-footer .footer-col .footer-emergency-copy { font-size: .82rem; margin-top: .75rem; color: #9ca3af; }
+.footer-social { margin-top: 1.25rem; }
 #site-footer .footer-col a { color: #9ca3af; transition: color var(--t); }
 #site-footer .footer-col a:hover { color: var(--white); }
 .footer-heading {
@@ -1439,7 +1443,7 @@ details summary:hover { color: #9ca3af; }
   .header-top-left { display: none; }
   .content-with-sidebar { grid-template-columns: 1fr; }
   .sidebar { display: none }
-  .post-card { grid-template-columns: 1fr; }
+  .post-card-link { grid-template-columns: minmax(0, 1fr); }
   .post-card-img { min-height: 180px; }
   .kontakt-cols { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }

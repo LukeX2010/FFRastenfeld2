@@ -2,7 +2,7 @@
 @inject DataService DS
 @inject NavigationManager Nav
 
-<PageTitle>@(post?.Titel ?? "Einsatz") – FF Rastenfeld, Niederösterreich</PageTitle>
+<PageTitle>@(post?.GetPageTitle() ?? "Einsatz | FF Rastenfeld")</PageTitle>
 
 @if (post is null)
 {
@@ -34,12 +34,12 @@ else
 
                     <!-- Platzhalterbild -->
                     <div class="detail-img">
-                        <img src="@DS.GetMainImageSrc(post)" class="hero-bg-img" alt="@post.Titel" />
+                        <ResponsiveImage Src="@DS.GetMainImageSrc(post)" Alt="@DS.GetMainImageAlt(post)" CssClass="hero-bg-img" Eager="true" />
                     </div>
 
                     <!-- Volltext -->
                     <div class="detail-body">
-                        <p style="white-space: pre-wrap; overflow-wrap: anywhere;">@post.Volltext</p>
+                        <p class="post-copy">@post.Volltext</p>
                     </div>
 
                     @if (post.Bilder != null && post.Bilder.Count > 0)

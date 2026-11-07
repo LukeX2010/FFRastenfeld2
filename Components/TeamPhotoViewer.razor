@@ -6,8 +6,8 @@
         <div class="team-photo-tabs" role="group" aria-label="Gruppenfoto auswählen">
             @foreach (var photo in Catalog.Photos)
             {
-                <button type="button" class="@(photo.Id == PhotoId ? "is-current" : "")" aria-pressed="@(photo.Id == PhotoId)" @onclick="() => OnPhotoChange.InvokeAsync(photo.Id)">
-                    <img src="@photo.Src" alt="" width="42" height="30" loading="lazy" /><span>@photo.Label</span>
+                <button type="button" class="@(photo.Id == PhotoId ? "is-current" : "")" aria-pressed="@(photo.Id == PhotoId)" aria-label="@photo.Label" @onclick="() => OnPhotoChange.InvokeAsync(photo.Id)">
+                    <img src="@photo.Src" alt="@($"Vorschau des Gruppenfotos {photo.Label}")" width="42" height="30" loading="lazy" /><span>@photo.Label</span>
                 </button>
             }
         </div>

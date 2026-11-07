@@ -2,7 +2,7 @@
 @page "/ausbildung/{Slug}"
 @inject DataService DS
 
-<PageTitle>@(post?.Titel ?? "Ausbildung") – Freiwillige Feuerwehr Rastenfeld, NÖ</PageTitle>
+<PageTitle>@(post?.GetPageTitle() ?? "Ausbildung | FF Rastenfeld")</PageTitle>
 
 @if (post is null)
 {
@@ -20,9 +20,9 @@ else
                         <time>@post.Datum.ToString("d. MMMM yyyy")</time>
                     </div>
                     <div class="detail-img">
-                        <img src="@DS.GetMainImageSrc(post)" class="hero-bg-img" alt="@post.Titel" />
+                        <ResponsiveImage Src="@DS.GetMainImageSrc(post)" Alt="@DS.GetMainImageAlt(post)" CssClass="hero-bg-img" Eager="true" />
                     </div>
-                    <div class="detail-body"><p style="white-space: pre-wrap; overflow-wrap: anywhere;">@post.Volltext</p></div>
+                    <div class="detail-body"><p class="post-copy">@post.Volltext</p></div>
 
                     @if (post.Bilder != null && post.Bilder.Count > 0)
                     {

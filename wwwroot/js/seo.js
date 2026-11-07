@@ -1,4 +1,16 @@
 (function () {
+    const fallback = document.getElementById('html-fallback');
+    if (fallback) {
+        const app = document.getElementById('app');
+        const observer = new MutationObserver(() => {
+            if (app.querySelector('h1')) {
+                fallback.remove();
+                observer.disconnect();
+            }
+        });
+        observer.observe(app, { childList: true, subtree: true });
+    }
+
     const pagePath = url => new URL(url).pathname.replace(/\/+$/, '') || '/';
     let appliedPath = pagePath(location.href);
     let catalog;

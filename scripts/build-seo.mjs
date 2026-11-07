@@ -88,6 +88,7 @@ const routes = Object.fromEntries(Object.entries(pages).map(([path, [title, desc
   [path, { title, description, canonical: origin + path, type: "website" }]));
 routes["/"].structuredData = structuredData;
 
+const publishedPosts = [];
 for (const post of JSON.parse(postsJson.replace(/^\uFEFF/, ""))) {
   const section = postSections.get(post.Kategorie);
   if (!section) continue;
@@ -108,9 +109,49 @@ for (const post of JSON.parse(postsJson.replace(/^\uFEFF/, ""))) {
     canonical: origin + path,
     type: "article",
   };
+  publishedPosts.push({ path, post, summary });
 }
 
-function render({ title, description, canonical, type, structuredData }) {
+publishedPosts.sort((a, b) => Date.parse(b.post.Datum) - Date.parse(a.post.Datum));
+
+function renderFallback(path) {
+  if (path !== "/" && path !== "/einsaetze") return "";
+
+  const home = path === "/";
+  const posts = home
+    ? publishedPosts.slice(0, 3)
+    : publishedPosts.filter(entry => entry.post.Kategorie === "Einsätze");
+  const heading = home ? "Freiwillige Feuerwehr Rastenfeld" : "Einsatzchronik FF Rastenfeld";
+  const intro = home
+    ? "Seit 1871 für unsere Gemeinde im Einsatz. Bezirk Krems-Land, Niederösterreich."
+    : "Aktuelle Einsätze der FF Rastenfeld im Bezirk Krems-Land, Niederösterreich.";
+  const links = home
+    ? '<a href="/einsaetze" class="btn btn-primary">Aktuelle Einsätze</a> <a href="/mannschaft" class="btn btn-ghost">Über uns</a>'
+    : '<a href="/" class="btn btn-ghost">Zur Startseite</a>';
+  const cards = posts.map(({ path, post, summary }) => `<article class="post-card">
+            <div class="post-card-body">
+                <h3><a href="${escapeHtml(path)}">${escapeHtml(post.Titel)}</a></h3>
+                <p>${escapeHtml(summary)}</p>
+            </div>
+        </article>`).join("\n        ");
+
+  return `<main id="html-fallback">
+    <section class="page-hero">
+        <div class="container">
+            <h1>${heading}</h1>
+            <p>${intro}</p>
+            <nav aria-label="Schnelleinstieg">${links}</nav>
+        </div>
+    </section>
+    <section class="site-body container">
+        <h2>${home ? "Aktuelle Beiträge" : "Einsatzberichte"}</h2>
+        ${cards}
+    </section>
+</main>
+`;
+}
+
+function render({ title, description, canonical, type, structuredData }, path) {
   const tags = [
     `<title>${escapeHtml(title)}</title>`,
     `<meta name="description" content="${escapeHtml(description)}"/>`,
@@ -130,7 +171,8 @@ function render({ title, description, canonical, type, structuredData }) {
   }
 
   return shell.replace('<html lang="de">', '<html lang="de" data-seo-generated>')
-    .replace(marker, () => tags.join("\n    "));
+    .replace(marker, () => tags.join("\n    "))
+    .replace('<div id="app">', () => renderFallback(path) + '<div id="app">');
 }
 
 const notFound = {
@@ -143,7 +185,7 @@ for (const [path, metadata] of Object.entries(routes)) {
   if (path !== "/") rewrites.push(`${path} ${target} 200`);
   const destination = join(publish, target);
   await mkdir(dirname(destination), { recursive: true });
-  await writeFile(destination, render(metadata));
+  await writeFile(destination, render(metadata, path));
 }
 
 // Keep the local SPA fallback in the source. On Netlify, only known URLs get 200.

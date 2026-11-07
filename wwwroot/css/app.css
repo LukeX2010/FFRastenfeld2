@@ -322,6 +322,10 @@ element.style {
 
 /* ─── SITE BODY (Feed + Sidebar) ─── */
 .site-body { padding: 2.5rem 0.35rem 3.5rem; }
+#html-fallback + #app .loading-skeleton,
+#html-fallback:has(+ #app h1) { display: none; }
+#html-fallback nav { margin-top: 1rem; }
+#html-fallback .site-body > h2 { margin-bottom: 1rem; }
 .content-with-sidebar {
   display: grid;
   grid-template-columns: 1fr var(--sidebar-w);
@@ -1358,12 +1362,13 @@ textarea.form-input { resize: vertical; min-height: 110px; }
 }
 .footer-seo-text p {
     font-size: .82rem;
-    color: #6b7280;
+    color: #9ca3af;
     line-height: 1.6;
     margin-bottom: .5rem;
 }
 .footer-seo-text a {
     color: var(--red-l);
+    text-decoration: underline;
 }
 details summary {
     cursor: pointer;

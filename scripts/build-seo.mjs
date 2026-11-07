@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { escapeHtml, postImage, postImageAlt, renderStartup } from "./startup-html.mjs";
-import { buildImages, localImagePath } from "./build-images.mjs";
+import { readImageDimensions, localImagePath } from "./build-images.mjs";
 
 const publish = process.argv[2] ?? ".publish/wwwroot";
 const origin = "https://ffrastenfeld.at";
@@ -114,15 +114,16 @@ for (const post of JSON.parse(postsJson.replace(/^\uFEFF/, ""))) {
 
 publishedPosts.sort((a, b) => Date.parse(b.post.Datum) - Date.parse(a.post.Datum));
 
-const images = await buildImages(publish, [
+const images = await readImageDimensions(publish, [
   "/img/cover.jpg", "/img/logo_rastenfeld.jpg",
   ...publishedPosts.map(({ post }) => postImage(post, imageBase)),
 ]);
-settings.WebsiteData.OptimizedImages = images;
+delete settings.WebsiteData.OptimizedImages;
+settings.WebsiteData.ImageDimensions = images;
 for (const { path, post } of publishedPosts) {
   const image = localImagePath(postImage(post, imageBase));
   const imageAlt = postImageAlt(post, image);
-  if (images[image] && imageAlt) Object.assign(routes[path], { image: origin + image, imageAlt });
+  if (images[image] && !image.endsWith("/keinbild.jpeg")) Object.assign(routes[path], { image: origin + image, imageAlt });
 }
 
 function render({ title, description, canonical, type, structuredData, image, imageAlt }, path) {

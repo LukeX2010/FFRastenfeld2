@@ -23,7 +23,7 @@ function renderHeader(path, images) {
             <a href="/" class="nav-brand">
                 <div class="brand-logo">
                     ${renderImage("/img/logo_rastenfeld.jpg", "Logo der Freiwilligen Feuerwehr Rastenfeld", images,
-                        { cssClass: "brand-logo-img", sizes: "38px", eager: true })}
+                        { cssClass: "brand-logo-img", eager: true })}
                 </div>
                 <div class="brand-name">
                     <strong>FF Rastenfeld</strong>
@@ -57,16 +57,16 @@ export function postImage(post, imageBase) {
 }
 
 export function postImageAlt(post, image) {
-  if (/\/keinbild\.jpeg$/i.test(image)) return "";
+  if (/\/keinbild\.jpeg$/i.test(image)) return "Kein Beitragsfoto verfügbar";
   const first = post.Bilder?.[0];
   const description = first?.Beschreibung ?? first?.Description ?? first?.beschreibung;
   return description?.trim() || `Foto zum Bericht „${post.Titel}“`;
 }
 
-function renderImage(src, alt, images, { cssClass = "hero-bg-img", sizes = "100vw", eager = false, priority = false } = {}) {
+function renderImage(src, alt, images, { cssClass = "hero-bg-img", eager = false, priority = false } = {}) {
   const image = images[src.startsWith("/") ? src : `/${src}`];
-  const responsive = image ? ` srcset="${escapeHtml(image.SrcSet)}" sizes="${escapeHtml(sizes)}" width="${image.Width}" height="${image.Height}"` : "";
-  return `<img src="${escapeHtml(image?.Src ?? src)}"${responsive} alt="${escapeHtml(alt)}" class="${cssClass}"
+  const dimensions = image ? ` width="${image.Width}" height="${image.Height}"` : "";
+  return `<img src="${escapeHtml(src)}"${dimensions} alt="${escapeHtml(alt)}" class="${cssClass}"
          loading="${eager ? "eager" : "lazy"}" decoding="async"${priority ? ' fetchpriority="high"' : ""}/>`;
 }
 
@@ -84,7 +84,7 @@ function renderCard({ path, post }, imageBase, images) {
   return `<article class="post-card">
             <a href="${href}" class="post-card-link" aria-label="${title}">
                 <div class="post-card-img">
-                    ${renderImage(image, postImageAlt(post, image), images, { sizes: "(max-width: 860px) 100vw, 260px" })}
+                    ${renderImage(image, postImageAlt(post, image), images)}
                 </div>
                 <div class="post-card-body">
                     <time class="post-date">${Number.isNaN(date.valueOf()) ? "" : postDate.format(date)}</time>

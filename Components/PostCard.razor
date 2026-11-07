@@ -6,7 +6,7 @@
     <a href="@PostHref" class="post-card-link" aria-label="@Post.Titel">
         <div class="post-card-img">
             <ResponsiveImage Src="@DS.GetMainImageSrc(Post)" Alt="@DS.GetMainImageAlt(Post)"
-                             CssClass="hero-bg-img" Sizes="(max-width: 860px) 100vw, 260px" />
+                             CssClass="hero-bg-img" />
         </div>
         <div class="post-card-body">
             <time class="post-date">@Post.Datum.ToString("d. MMMM yyyy")</time>

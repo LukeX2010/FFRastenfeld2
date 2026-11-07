@@ -55,7 +55,7 @@
 .sk-boot-nav { height:calc(var(--nav-h) - 3px); display:flex; align-items:center; justify-content:space-between; gap:24px; }
 .sk-boot-brand { display:flex; align-items:center; gap:12px; }
 .sk-boot-brand .sk { width:38px; height:38px; }
-.sk-boot-brand strong { font:700 1.1rem var(--font-h); color:var(--dark); }
+.sk-boot-brand :is(.sk-boot-name, strong) { font:700 1.1rem var(--font-h); color:var(--dark); }
 .sk-boot-links { display:flex; gap:24px; }
 .sk-boot-links .sk { width:72px; height:12px; }
 .sk-boot-menu { display:none; width:24px; height:20px; }

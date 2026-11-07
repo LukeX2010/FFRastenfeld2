@@ -108,11 +108,11 @@
         {
             var path = Navigation.ToBaseRelativePath(Navigation.Uri).Split('?', '#')[0].Trim('/').ToLowerInvariant();
             var section = path.Split('/')[0];
-            if (path.Contains('/') && section is "einsaetze" or "news" or "ausbildung" or "feuerwehrjugend" or "fahrzeuge") return "detail";
+            if (path.Contains('/') && section is "einsaetze" or "news" or "ausbildung" or "fahrzeuge") return "detail";
             return section switch
             {
                 "" => "home",
-                "einsaetze" or "news" or "ausbildung" or "feuerwehrjugend" => "feed",
+                "einsaetze" or "news" or "ausbildung" => "feed",
                 "fahrzeuge" => "vehicles",
                 "galerie" => "gallery",
                 "mannschaft" => "team",

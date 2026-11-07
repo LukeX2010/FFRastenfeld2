@@ -4,9 +4,17 @@
     <div class="container">
         <div class="breadcrumb">
             <a href="/">Startseite</a>
-            @if (!string.IsNullOrEmpty(ParentLabel) && !string.IsNullOrEmpty(ParentHref))
+            @if (!string.IsNullOrEmpty(ParentLabel))
             {
-                <span>›</span><a href="@ParentHref">@ParentLabel</a>
+                <span>›</span>
+                @if (string.IsNullOrEmpty(ParentHref))
+                {
+                    <span>@ParentLabel</span>
+                }
+                else
+                {
+                    <a href="@ParentHref">@ParentLabel</a>
+                }
             }
             <span>›</span><span>@Title</span>
         </div>

@@ -46,7 +46,8 @@ public class DataService
         return GetPosts();
     }
 
-    public Post? GetPost(string slug) => GetPosts().FirstOrDefault(p => p.Slug == slug);
+    public Post? GetPost(string slug, string? category = null) =>
+        GetPosts().FirstOrDefault(p => p.Slug == slug && (category is null || p.Kategorie == category));
 
     public async Task<Post?> GetPostAsync(string slug)
     {
@@ -75,7 +76,7 @@ public class DataService
             return GetImageSrc(firstImage);
         }
 
-        return GetImageSrc($"{post.Slug}.jpeg");
+        return GetImageSrc(post.Emoji == "keinbild" ? "keinbild.jpeg" : $"{post.Slug}.jpeg");
     }
 
     public bool HasPostImage(Post post) =>
@@ -111,7 +112,8 @@ public class DataService
             try
             {
                 var posts = await _httpClient.GetFromJsonAsync<List<Post>>(AddCacheBuster(postsUrl), PostJsonOptions);
-                _posts = posts ?? new List<Post>();
+                _posts = posts?.Where(post => post.Kategorie is "Einsätze" or "FF-News" or "Ausbildung")
+                    .ToList() ?? new List<Post>();
                 return;
             }
             catch (Exception ex)

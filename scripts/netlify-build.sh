@@ -6,3 +6,4 @@ if ! command -v dotnet >/dev/null 2>&1; then
   export PATH="/tmp/ffr-dotnet:$PATH"
 fi
 dotnet publish FFRastenfeld.csproj -c Release -o .publish
+node scripts/build-seo.mjs .publish/wwwroot

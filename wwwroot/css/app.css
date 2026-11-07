@@ -1350,11 +1350,6 @@ textarea.form-input { resize: vertical; min-height: 110px; }
     margin-top: .75rem;
 }
 .footer-seo-text h2 {
-    font-size: 1rem;
-    color: var(--white);
-    margin-bottom: .6rem;
-}
-.footer-seo-text h3 {
     font-size: .88rem;
     color: #9ca3af;
     margin: 1rem 0 .3rem;
@@ -1385,12 +1380,12 @@ details summary:hover { color: #9ca3af; }
 }
 .footer-brand { display: flex; align-items: center; gap: .7rem; margin-bottom: .85rem; }
 .footer-brand svg { width: 36px; height: 36px; }
-.footer-brand strong { font-family: var(--font-h); color: var(--white); font-size: 1rem; display: block; line-height: 1.1; }
+.footer-brand-name { font: 700 1rem/1.1 var(--font-h); color: var(--white); display: block; }
 .footer-brand small  { color: #6b7280; font-size: .7rem; }
 #site-footer .footer-col p { color: #6b7280; font-size: .83rem; margin-bottom: .3rem; line-height: 1.5; }
 #site-footer .footer-col a { color: #9ca3af; transition: color var(--t); }
 #site-footer .footer-col a:hover { color: var(--white); }
-#site-footer h4 {
+.footer-heading {
   font-size: .78rem; text-transform: uppercase; letter-spacing: .1em;
   color: #6b7280; margin-bottom: .75rem; padding-bottom: .4rem;
   border-bottom: 1px solid var(--dark-3);
@@ -1409,6 +1404,7 @@ details summary:hover { color: #9ca3af; }
   font-size: .78rem; color: #4b5563;
 }
 .footer-bottom a { color: #6b7280; }
+.footer-credit { display: block; margin-top: .35rem; color: #9ca3af; }
 .footer-bottom a:hover { color: #9ca3af; }
 
 /* ─── SCROLL TOP ─── */

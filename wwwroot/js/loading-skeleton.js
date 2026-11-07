@@ -2,7 +2,7 @@
 (() => {
     const path = window.location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase();
     const section = path.split('/')[0];
-    const feeds = ['einsaetze', 'news', 'ausbildung', 'feuerwehrjugend'];
+    const feeds = ['einsaetze', 'news', 'ausbildung'];
     const views = new Map([['', 'home'], ['fahrzeuge', 'vehicles'], ['galerie', 'gallery'],
         ['mannschaft', 'team'], ['feuerwehrhaus', 'detail'], ['kontakt', 'contact'], ['admin', 'admin']]);
     let view = views.get(section) || 'article';
@@ -37,7 +37,7 @@
             main = `<div class="sk-card sk-article">${view === 'detail' ? block('sk-article-image') : ''}${block('sk-subtitle sk-medium')}${repeat(3, paragraph)}${view === 'contact' ? block('sk-article-image') : ''}</div>`;
     }
 
-    const header = `<div class="sk-boot-header"><div class="sk-boot-top"></div><div class="container sk-boot-nav"><div class="sk-boot-brand">${block('')}<strong>FF Rastenfeld</strong></div><div class="sk-boot-links">${repeat(5, block(''))}</div>${block('sk-boot-menu')}</div></div>`;
+    const header = `<div class="sk-boot-header"><div class="sk-boot-top"></div><div class="container sk-boot-nav"><div class="sk-boot-brand">${block('')}<span class="sk-boot-name">FF Rastenfeld</span></div><div class="sk-boot-links">${repeat(5, block(''))}</div>${block('sk-boot-menu')}</div></div>`;
     const hero = `<div class="sk-hero"><div class="container sk-hero-inner">${line('sk-short')}${block('sk-title')}${view === 'home' ? block('sk-title sk-medium') : ''}${line('sk-medium')}${view === 'home' ? actions() : ''}</div></div>`;
     const sidebar = `<div class="sk-sidebar">${repeat(3, `<div class="sk-card sk-widget">${block('sk-subtitle sk-medium')}${line()}${line('sk-medium')}${line('sk-short')}</div>`)}</div>`;
     const skeleton = document.querySelector('#app > .loading-skeleton');

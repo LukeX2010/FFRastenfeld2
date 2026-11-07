@@ -1,5 +1,8 @@
 @using Microsoft.AspNetCore.Components.Routing
 @inject DataService DS
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+@implements IDisposable
 
 @if (!postsReady)
 {
@@ -30,7 +33,13 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        Navigation.LocationChanged += UpdatePageMetadata;
         await DS.EnsurePostsLoadedAsync();
         postsReady = true;
     }
+
+    private void UpdatePageMetadata(object? sender, LocationChangedEventArgs args) =>
+        _ = InvokeAsync(() => JS.InvokeVoidAsync("ffrUpdatePageMetadata", args.Location).AsTask());
+
+    public void Dispose() => Navigation.LocationChanged -= UpdatePageMetadata;
 }

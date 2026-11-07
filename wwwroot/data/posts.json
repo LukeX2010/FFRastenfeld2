@@ -79,7 +79,7 @@
   {
     "Id": 32,
     "Slug": "verkehrsunfall-mit-menschenrettung-f549fdba",
-    "Titel": "Verkehrsunfall mit Menschenrettung",
+    "Titel": "Verkehrsunfall mit Menschenrettung auf der B37",
     "Kategorie": "Einsätze",
     "Datum": "2026-09-27T22:26:00",
     "Kurztext": "Am Dienstagabend, dem 22. September 2026, wurde die FF Rastenfeld zu einem Verkehrsunfall auf der B37 bei Rastenfeld alarmiert. Eine Person musste aus einem verunfallten Pkw gerettet und das Fahrzeug anschließend geborgen werden.",
@@ -426,7 +426,7 @@
     "Id": 6,
     "Slug": "vu-menschenrettung-rastenberg",
     "Emoji": "vu-menschenrettung-rastenberg",
-    "Titel": "Verkehrsunfall mit Menschenrettung",
+    "Titel": "Verkehrsunfall mit Menschenrettung bei Rastenberg",
     "Kategorie": "Einsätze",
     "Datum": "2025-11-25T17:56:00",
     "Kurztext": "Verkehrsunfall mit eingeklemmter Person auf der L8245 bei Rastenberg.",
@@ -440,7 +440,7 @@
   },
   {
     "Id": 7,
-    "Slug": "keinbild",
+    "Slug": "pkw-bergung-nach-auffahrunfall",
     "Emoji": "keinbild",
     "Titel": "PKW-Bergung nach Auffahrunfall",
     "Kategorie": "Einsätze",
@@ -456,7 +456,7 @@
   },
   {
     "Id": 8,
-    "Slug": "keinbild",
+    "Slug": "gma-alarm-hotel-ottenstein",
     "Emoji": "keinbild",
     "Titel": "GMA-Alarm im Hotel Ottenstein",
     "Kategorie": "Einsätze",

@@ -3,7 +3,7 @@
 @inject DataService DS
 
 <PageTitle>Fahrzeuge & Ausrüstung – Freiwillige Feuerwehr Rastenfeld, NÖ</PageTitle>
-<PageHero Title="Fahrzeuge & Ausrüstung" Subtitle="Der Fuhrpark der FF Rastenfeld – TLF 4000, MTF, Abschleppachse und TSA 750 im Überblick" ParentLabel="Feuerwehr" ParentHref="/organisation" />
+<PageHero Title="Fahrzeuge & Ausrüstung" Subtitle="Der Fuhrpark der FF Rastenfeld – TLF 4000, MTF, Abschleppachse und TSA 750 im Überblick" ParentLabel="Feuerwehr" />
 
 <div class="site-body container">
     <div class="content-with-sidebar">
@@ -59,7 +59,6 @@
                     <li><a href="/einsaetze">Einsätze <span>@DS.GetByKategorie("Einsätze").Count</span></a></li>
                     <li><a href="/news">FF-News <span>@DS.GetByKategorie("FF-News").Count</span></a></li>
                     <li><a href="/ausbildung">Ausbildung <span>@DS.GetByKategorie("Ausbildung").Count</span></a></li>
-                    <li><a href="/feuerwehrjugend">Feuerwehrjugend <span>@DS.GetByKategorie("Feuerwehrjugend").Count</span></a></li>
                 </ul>
             </div>
 

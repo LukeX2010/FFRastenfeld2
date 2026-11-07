@@ -5,41 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="theme-color" content="#CC1111"/>
 
-    <!-- SEO: Titel & Beschreibung -->
+    <!-- page-metadata:start -->
     <title>Freiwillige Feuerwehr Rastenfeld – Niederösterreich</title>
-    <meta name="description"
-          content="Offizielle Website der Freiwilligen Feuerwehr Rastenfeld im Bezirk Krems-Land. Aktuelle Einsätze, News, Fahrzeuge, Mannschaft und Kontakt."/>
-    <meta name="keywords"
-          content="Feuerwehr Rastenfeld, FF Rastenfeld, Freiwillige Feuerwehr Rastenfeld, Niederösterreich, Einsätze Rastenfeld, Feuerwehr NÖ, Notruf 122, Rastenfeld 3532"/>
+    <meta name="description" content="Offizielle Website der Freiwilligen Feuerwehr Rastenfeld im Bezirk Krems-Land. Aktuelle Einsätze, News, Fahrzeuge, Mannschaft und Kontakt."/>
+    <!-- page-metadata:end -->
     <meta name="author" content="Freiwillige Feuerwehr Rastenfeld"/>
-    <meta name="robots" content="index, follow"/>
-    <link rel="canonical" href="https://ffrastenfeld.at/"/>
 
-    <!-- Open Graph (Facebook, WhatsApp, Google) -->
-    <meta property="og:title" content="Freiwillige Feuerwehr Rastenfeld – FF Rastenfeld, NÖ"/>
-    <meta property="og:description"
-          content="Offizielle Website der FF Rastenfeld – Seit 1871 für unsere Gemeinschaft im Einsatz. Bezirk Krems-Land, Niederösterreich."/>
-    <meta property="og:url" content="https://ffrastenfeld.at/"/>
-    <meta property="og:type" content="website"/>
     <meta property="og:locale" content="de_AT"/>
     <meta property="og:image" content="https://ffrastenfeld.at/img/cover.jpg"/>
     <meta property="og:image:alt" content="Freiwillige Feuerwehr Rastenfeld"/>
     <meta property="og:site_name" content="FF Rastenfeld"/>
-
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:title" content="Freiwillige Feuerwehr Rastenfeld"/>
-    <meta name="twitter:description"
-          content="Offizielle Website der FF Rastenfeld – Seit 1871 für die Gemeinschaft im Einsatz."/>
     <meta name="twitter:image" content="https://ffrastenfeld.at/img/cover.jpg"/>
 
     <!-- Google Verification -->
     <meta name="google-site-verification" content="W5ccThUyb28Wnu7QMZfmD-Ky-72PI3sw5m8-t12WBfg"/>
 
-    <meta property="og:image" content="https://ffrastenfeld.at/img/cover.jpg" />
     <base href="/"/>
-    <link rel="icon" type="image/jpg" href="/img/favicon.jpg">
-    <link rel="stylesheet" href="/css/app.css?v=header-layout-2"/>
+    <link rel="icon" type="image/jpeg" href="/img/favicon.jpg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png"/>
+    <link rel="stylesheet" href="/css/app.css?v=footer-seo-1"/>
     <link rel="stylesheet" href="/css/photo-gallery.css"/>
     <link rel="stylesheet" href="/css/skeleton.css"/>
 </head>
@@ -48,22 +33,22 @@
     <div class="loading-skeleton loading-skeleton--boot" role="status" aria-busy="true">
         <span class="sk-sr-only">Seite wird geladen …</span>
         <div aria-hidden="true">
-            <div class="sk-boot-header"><div class="sk-boot-top"></div><div class="container sk-boot-nav"><div class="sk-boot-brand"><span class="sk"></span><strong>FF Rastenfeld</strong></div></div></div>
+            <div class="sk-boot-header"><div class="sk-boot-top"></div><div class="container sk-boot-nav"><div class="sk-boot-brand"><span class="sk"></span><span class="sk-boot-name">FF Rastenfeld</span></div></div></div>
             <div class="sk-hero"><div class="container sk-hero-inner"><span class="sk sk-line sk-short"></span><span class="sk sk-title"></span><span class="sk sk-line sk-medium"></span></div></div>
             <div class="container sk-body"><div class="sk sk-article-image"></div></div>
         </div>
     </div>
 </div>
 <script src="/js/loading-skeleton.js"></script>
+<script src="/js/seo.js"></script>
 <script src="_framework/blazor.webassembly.js"></script>
 <script src="/js/app.js"></script>
 <footer id="site-footer">
     <div class="container footer-grid">
         <div class="footer-col">
             <div class="footer-brand">
-
                 <div>
-                    <h1><strong>FF Rastenfeld</strong></h1>
+                    <span class="footer-brand-name">FF Rastenfeld</span>
                     <small>Freiwillige Feuerwehr Rastenfeld</small>
                 </div>
             </div>
@@ -73,17 +58,16 @@
         </div>
 
         <div class="footer-col">
-            <h4>News</h4>
+            <h2 class="footer-heading">News</h2>
             <ul>
                 <li><a href="/einsaetze">Einsätze</a></li>
                 <li><a href="/news">FF-News</a></li>
                 <li><a href="/ausbildung">Ausbildung</a></li>
-                <li><a href="/feuerwehrjugend">Feuerwehrjugend</a></li>
             </ul>
         </div>
 
         <div class="footer-col">
-            <h4>Feuerwehr</h4>
+            <h2 class="footer-heading">Feuerwehr</h2>
             <ul>
                 <li><a href="/chronik">Chronik</a></li>
                 <li><a href="/mannschaft">Mannschaft</a></li>
@@ -97,7 +81,7 @@
         </div>
 
         <div class="footer-col">
-            <h4>Notruf</h4>
+            <h2 class="footer-heading">Notruf</h2>
             <a href="tel:122" class="footer-notruf">
                 <span>🚨</span>
                 <span class="notruf-number">122</span>
@@ -113,67 +97,34 @@
 
     <div class="footer-bottom">
         <div class="container footer-bottom-inner">
-            <span>© 2026 Freiwillige Feuerwehr Rastenfeld – Im Dienst der Gemeinde seit 1871
+            <div>
+                © 2026 Freiwillige Feuerwehr Rastenfeld – Im Dienst der Gemeinde seit 1871
                 <details>
-  <summary>Klick mich für mehr Infos ↓</summary>
-   <div class="footer-seo-text">
-
-    <h2>FF Rastenfeld</h2>
-    <p>
-      Die Freiwillige Feuerwehr Rastenfeld ist die offizielle Feuerwehr der Marktgemeinde Rastenfeld
-      im Bezirk Krems-Land, Niederösterreich. Mit über 40 aktiven Mitgliedern und modernen
-      Einsatzfahrzeugen sind wir rund um die Uhr einsatzbereit – für Brände, technische Hilfeleistungen,
-      Unwettereinsätze und alle Notfälle im Gemeindegebiet. Im Notfall: <strong>Notruf 122</strong>.
-    </p>
-
-    <h3>Brandbekämpfung & Technische Hilfeleistung in Rastenfeld</h3>
-    <p>
-      Unsere Hauptaufgaben umfassen die Brandbekämpfung bei Gebäude-, Fahrzeug- und Waldbränden
-      sowie technische Hilfeleistungen nach Verkehrsunfällen, Sturm- und Hochwasserschäden.
-      Mit unserem TLF 4000, HLF 2 und weiteren Einsatzfahrzeugen sind wir für jeden Einsatz
-      im Bezirk Krems-Land optimal ausgerüstet.
-    </p>
-
-    <h3>Ausbildung & Einsatzbereitschaft</h3>
-    <p>
-      Regelmäßige Übungen, Atemschutzlehrgänge an der NÖ Landesfeuerwehrschule Tulln und
-      gemeinsame Übungen mit Nachbarfeuerwehren sichern die hohe Einsatzqualität der
-      FF Rastenfeld. Unsere Kameraden sind in Brandbekämpfung, technischer Hilfeleistung,
-      Atemschutz und Gefahrgut ausgebildet.
-    </p>
-
-    <h3>Feuerwehrjugend Rastenfeld</h3>
-    <p>
-      Die Feuerwehrjugend Rastenfeld bietet Jugendlichen zwischen 10 und 15 Jahren die Möglichkeit,
-      Feuerwehrarbeit spielerisch kennenzulernen. Kameradschaft, Teamgeist und technische
-      Grundkenntnisse stehen im Mittelpunkt – die Feuerwehrjugend ist die Zukunft unserer
-      Einsatzorganisation.
-    </p>
-
-    <h3>Mitglied werden bei der FF Rastenfeld</h3>
-    <p>
-      Du möchtest deiner Gemeinde helfen und Teil eines starken Teams werden?
-      Die Freiwillige Feuerwehr Rastenfeld freut sich über jede Verstärkung –
-      egal ob Mann, Frau oder Jugendliche. Melde dich einfach über unser
-      <a href="/kontakt">Kontaktseite</a> oder besuche uns beim nächsten Übungsabend.
-    </p>
-
-    <h3>FF Rastenfeld – Kontakt & Standort</h3>
-    <p>
-      Freiwillige Feuerwehr Rastenfeld · Rastenfeld 178 · 3532 Rastenfeld ·
-      Bezirk Krems-Land · Niederösterreich ·
-      <a href="mailto:rastenfeld@feuerwehr.gv.at">rastenfeld@feuerwehr.gv.at</a>
-    </p>
-
-  </div>
-
-</details>
-
-            </span>
+                    <summary>Über die Feuerwehr Rastenfeld</summary>
+                    <div class="footer-seo-text">
+                        <p>
+                            Seit <a href="/chronik">1871</a> ist die Freiwillige Feuerwehr Rastenfeld
+                            für die Gemeinde im Bezirk Krems-Land in Niederösterreich im Einsatz.
+                        </p>
+                        <h2>Einsätze und Ausrüstung</h2>
+                        <p>
+                            Wir bekämpfen Brände und leisten technische Hilfe, etwa nach Unfällen und Unwettern.
+                            Auf der Website findest du <a href="/einsaetze">Einsatzberichte</a> und eine
+                            Übersicht über unsere <a href="/fahrzeuge">Fahrzeuge und Ausrüstung</a>.
+                        </p>
+                        <h2>Ausbildung und Mitmachen</h2>
+                        <p>
+                            In <a href="/ausbildung">Übungen und Lehrgängen</a> bereiten wir uns auf Einsätze vor.
+                            Wenn du dich für die Mitarbeit interessierst, <a href="/kontakt">melde dich bei uns</a>.
+                        </p>
+                    </div>
+                </details>
+            </div>
             <span>
                 <a href="/impressum">Impressum</a> ·
                 <a href="/datenschutz">Datenschutz</a> ·
                 <button type="button" class="footer-cookie-link" data-open-cookie-settings>Cookie-Einstellungen</button>
+                <small class="footer-credit">Website umgesetzt von Lukas Assfall</small>
             </span>
         </div>
     </div>
@@ -182,7 +133,6 @@
 
 
 
-<!-- Schema.org strukturierte Daten – Google Rich Results -->
 <script>
     var checkBlazor = setInterval(function () {
         if (document.querySelector('#app').children.length > 0) {
@@ -190,51 +140,6 @@
             clearInterval(checkBlazor);
         }
     }, 200);
-</script>
-
-
-<script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FireStation",
-        "name": "Freiwillige Feuerwehr Rastenfeld",
-        "alternateName": "FF Rastenfeld",
-        "url": "https://ffrastenfeld.at",
-        "logo": "https://ffrastenfeld.at/img/logo.jpg",
-        "image": "https://ffrastenfeld.at/img/cover.jpg",
-        "telephone": "+43-122",
-        "email": "rastenfeld@feuerwehr.gv.at",
-        "foundingDate": "1871",
-        "description": "Freiwillige Feuerwehr Rastenfeld – Seit 1871 im Einsatz für die Gemeinde Rastenfeld im Bezirk Krems-Land, Niederösterreich. 40+ aktive Mitglieder, 4 Einsatzfahrzeuge, rund um die Uhr einsatzbereit.",
-        "areaServed": {
-            "@type": "Place",
-            "name": "Rastenfeld, Bezirk Krems-Land, Niederösterreich"
-        },
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Rastenfeld 178",
-            "addressLocality": "Rastenfeld",
-            "postalCode": "3532",
-            "addressCountry": "AT",
-            "addressRegion": "Niederösterreich"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 48.5711,
-            "longitude": 15.3403
-        },
-        "sameAs": [
-            "https://www.instagram.com/ff_rastenfeld",
-            "https://www.noelfv.at"
-        ],
-        "memberOf": {
-            "@type": "Organization",
-            "name": "NÖ Landesfeuerwehrverband",
-            "url": "https://www.noelfv.at"
-        }
-    }
-
-
 </script>
 </body>
 </html>

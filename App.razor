@@ -13,7 +13,7 @@ else
     <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData">
             <RouteView RouteData="@routeData" DefaultLayout="@typeof(Layouts.MainLayout)" />
-            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+            <FocusOnNavigate RouteData="@routeData" Selector="#app h1" />
         </Found>
         <NotFound>
             <PageTitle>404 - Seite nicht gefunden | FF Rastenfeld</PageTitle>

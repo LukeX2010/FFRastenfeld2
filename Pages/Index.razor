@@ -3,6 +3,7 @@
 @inject IJSRuntime JS
 <PageTitle>Freiwillige Feuerwehr Rastenfeld – Niederösterreich</PageTitle>
 
+@* startup:home-intro:start *@
 <!-- HERO -->
 <section class="hero">
     <div class="hero-img-wrap">
@@ -54,6 +55,7 @@
     <span>Kostenlos · Rund um die Uhr</span>
     <a href="tel:122" class="strip-btn">Jetzt anrufen</a>
 </div>
+@* startup:home-intro:end *@
 
 <!-- MAIN CONTENT-->
 <div class="site-body container">
@@ -68,11 +70,13 @@
                 <PostCard Post="@post" />
             }
 
+            @* startup:home-pagination:start *@
             <div class="pagination">
                 <span class="pag-info">Seite 1 von 8</span>
                 <a href="/einsaetze" class="btn btn-outline-small">Alle Einsätze →</a>
                 <a href="/news" class="btn btn-outline-small">Alle News →</a>
             </div>
+            @* startup:home-pagination:end *@
             
             <!-- Externe Medien: werden erst nach Zustimmung oder Klick geladen -->
             <div class="embed-row">

@@ -83,7 +83,7 @@ ul { list-style: none; }
 @keyframes pulse   { from { transform: scale(1); } to { transform: scale(1.12); } }
 
 /* ─── LAYOUT ─── */
-#page-wrapper { min-height: 100vh; display: flex; flex-direction: column; }
+#page-wrapper, #html-fallback { min-height: 100vh; display: flex; flex-direction: column; }
 .container     { max-width: 1140px; margin: 0 auto; padding: 0 1.25rem; }
 .header-spacer { height: var(--header-h); }
 
@@ -101,7 +101,7 @@ ul { list-style: none; }
 .header-top-right { display: flex; gap: 1rem; align-items: center; }
 
 /* ─── NAVBAR ─── */
-#site-header {
+#site-header, #html-fallback > header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   box-shadow: 0 1px 4px rgba(0,0,0,.12);
 }
@@ -322,10 +322,12 @@ element.style {
 
 /* ─── SITE BODY (Feed + Sidebar) ─── */
 .site-body { padding: 2.5rem 0.35rem 3.5rem; }
-#html-fallback + #app .loading-skeleton,
-#html-fallback:has(+ #app h1) { display: none; }
-#html-fallback nav { margin-top: 1rem; }
-#html-fallback .site-body > h2 { margin-bottom: 1rem; }
+#html-fallback + #app > .loading-skeleton,
+#html-fallback[data-managed] + #app,
+#html-fallback:not([data-managed]):has(+ #app #page-wrapper) { display: none; }
+#html-fallback .filter-pill[disabled] { cursor: default; }
+#html-fallback .embed-row .sk { background: var(--border); }
+#html-fallback .embed-row .sk::after { display: none; }
 .content-with-sidebar {
   display: grid;
   grid-template-columns: 1fr var(--sidebar-w);

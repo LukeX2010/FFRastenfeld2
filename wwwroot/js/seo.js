@@ -3,11 +3,21 @@
     if (fallback) {
         const app = document.getElementById('app');
         const observer = new MutationObserver(() => {
-            if (app.querySelector('h1')) {
-                fallback.remove();
-                observer.disconnect();
+            if (!app.querySelector('#page-wrapper')) return;
+
+            const scrollTop = window.scrollY;
+            const focused = fallback.contains(document.activeElement) ? document.activeElement : null;
+            fallback.remove();
+            observer.disconnect();
+            if (window.scrollY !== scrollTop) {
+                window.scrollTo({ top: scrollTop, behavior: 'instant' });
+            }
+            if (focused?.href) {
+                const replacement = Array.from(app.querySelectorAll('a')).find(link => link.href === focused.href);
+                replacement?.focus({ preventScroll: true });
             }
         });
+        fallback.dataset.managed = '';
         observer.observe(app, { childList: true, subtree: true });
     }
 

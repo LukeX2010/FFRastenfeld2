@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
+import { escapeHtml, renderStartup } from "./startup-html.mjs";
 
 const publish = process.argv[2] ?? ".publish/wwwroot";
 const origin = "https://ffrastenfeld.at";
@@ -73,14 +74,14 @@ const structuredData = {
   ],
 };
 
-const htmlEntities = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
-const escapeHtml = value => value.replace(/[&<>"']/g, char => htmlEntities[char]);
-
-const [shell, postsJson, redirectRules] = await Promise.all([
+const [shell, postsJson, redirectRules, homePage, settingsJson] = await Promise.all([
   readFile(new URL("../wwwroot/index.html", import.meta.url), "utf8"),
   readFile(join(publish, "data/posts.json"), "utf8"),
   readFile(new URL("../wwwroot/_redirects", import.meta.url), "utf8"),
+  readFile(new URL("../Pages/Index.razor", import.meta.url), "utf8"),
+  readFile(join(publish, "appsettings.json"), "utf8"),
 ]);
+const imageBase = JSON.parse(settingsJson.replace(/^\uFEFF/, "")).WebsiteData?.ImageBaseUrl?.trim().replace(/\/+$/, "") || "img";
 const marker = /<!-- page-metadata:start -->[\s\S]*?<!-- page-metadata:end -->/;
 if (!marker.test(shell)) throw new Error("SEO markers missing in index.html.");
 
@@ -109,47 +110,10 @@ for (const post of JSON.parse(postsJson.replace(/^\uFEFF/, ""))) {
     canonical: origin + path,
     type: "article",
   };
-  publishedPosts.push({ path, post, summary });
+  publishedPosts.push({ path, post });
 }
 
 publishedPosts.sort((a, b) => Date.parse(b.post.Datum) - Date.parse(a.post.Datum));
-
-function renderFallback(path) {
-  if (path !== "/" && path !== "/einsaetze") return "";
-
-  const home = path === "/";
-  const posts = home
-    ? publishedPosts.slice(0, 3)
-    : publishedPosts.filter(entry => entry.post.Kategorie === "Einsätze");
-  const heading = home ? "Freiwillige Feuerwehr Rastenfeld" : "Einsatzchronik FF Rastenfeld";
-  const intro = home
-    ? "Seit 1871 für unsere Gemeinde im Einsatz. Bezirk Krems-Land, Niederösterreich."
-    : "Aktuelle Einsätze der FF Rastenfeld im Bezirk Krems-Land, Niederösterreich.";
-  const links = home
-    ? '<a href="/einsaetze" class="btn btn-primary">Aktuelle Einsätze</a> <a href="/mannschaft" class="btn btn-ghost">Über uns</a>'
-    : '<a href="/" class="btn btn-ghost">Zur Startseite</a>';
-  const cards = posts.map(({ path, post, summary }) => `<article class="post-card">
-            <div class="post-card-body">
-                <h3><a href="${escapeHtml(path)}">${escapeHtml(post.Titel)}</a></h3>
-                <p>${escapeHtml(summary)}</p>
-            </div>
-        </article>`).join("\n        ");
-
-  return `<main id="html-fallback">
-    <section class="page-hero">
-        <div class="container">
-            <h1>${heading}</h1>
-            <p>${intro}</p>
-            <nav aria-label="Schnelleinstieg">${links}</nav>
-        </div>
-    </section>
-    <section class="site-body container">
-        <h2>${home ? "Aktuelle Beiträge" : "Einsatzberichte"}</h2>
-        ${cards}
-    </section>
-</main>
-`;
-}
 
 function render({ title, description, canonical, type, structuredData }, path) {
   const tags = [
@@ -172,7 +136,7 @@ function render({ title, description, canonical, type, structuredData }, path) {
 
   return shell.replace('<html lang="de">', '<html lang="de" data-seo-generated>')
     .replace(marker, () => tags.join("\n    "))
-    .replace('<div id="app">', () => renderFallback(path) + '<div id="app">');
+    .replace('<div id="app">', () => renderStartup(path, homePage, publishedPosts, imageBase) + '<div id="app">');
 }
 
 const notFound = {

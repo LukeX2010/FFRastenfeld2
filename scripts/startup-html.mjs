@@ -8,7 +8,7 @@ const incidentDate = new Intl.DateTimeFormat("de-AT", {
   weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC",
 });
 
-function homeFragment(source, name) {
+function readFragment(source, name) {
   const start = `@* startup:${name}:start *@`;
   const end = `@* startup:${name}:end *@`;
   const content = source.split(start)[1]?.split(end);
@@ -47,13 +47,17 @@ function renderHeader(path, images) {
 <div class="header-spacer"></div>`;
 }
 
-export function postImage(post, imageBase) {
-  const first = post.Bilder?.[0];
-  const rawPath = typeof first === "string" ? first : first?.Pfad ?? first?.Path ?? first?.pfad;
-  const defaultName = post.Emoji === "keinbild" ? "keinbild.jpeg" : `${post.Slug}.jpeg`;
-  const path = rawPath?.replaceAll("\\", "/").trim() || defaultName;
+export function resolvePostImage(entry, imageBase) {
+  const rawPath = typeof entry === "string" ? entry : entry?.Pfad ?? entry?.Path ?? entry?.pfad;
+  const path = rawPath?.replaceAll("\\", "/").trim();
+  if (!path) return "";
   if (/^https?:\/\//i.test(path) || path.startsWith("/") || /^img\//i.test(path)) return path;
   return `${imageBase}/${path}`;
+}
+
+export function postImage(post, imageBase) {
+  const defaultName = post.Emoji === "keinbild" ? "keinbild.jpeg" : `${post.Slug}.jpeg`;
+  return resolvePostImage(post.Bilder?.[0], imageBase) || `${imageBase}/${defaultName}`;
 }
 
 export function postImageAlt(post, image) {
@@ -180,7 +184,7 @@ const sections = {
   "/ausbildung": { label: "Ausbildung", title: "Ausbildung & Übungen", subtitle: "Kurse, Lehrgänge und Übungen der FF Rastenfeld – bestens ausgebildet für jeden Einsatz", badge: "ausbildung", back: "Zurück zu Ausbildung" },
 };
 
-function renderArticle(path, post, parentPath, imageBase, images) {
+function renderArticle(path, post, parentPath, imageBase, images, posts) {
   const section = sections[parentPath];
   const image = postImage(post, imageBase);
   const date = new Date(`${(post.Datum ?? "").slice(0, 10)}T00:00:00Z`);
@@ -195,6 +199,12 @@ function renderArticle(path, post, parentPath, imageBase, images) {
   const first = post.Bilder?.[0];
   const caption = first?.Beschreibung ?? first?.Description ?? first?.beschreibung;
   const hasGallery = Boolean(typeof first === "string" ? first.trim() : first?.Pfad ?? first?.Path ?? first?.pfad);
+  const sectionPosts = posts.filter(entry => entry.post.Kategorie === post.Kategorie);
+  const index = sectionPosts.findIndex(entry => entry.path === path);
+  const neighbours = [
+    [sectionPosts[index - 1], "Neuerer Bericht"],
+    [sectionPosts[index + 1], "Älterer Bericht"],
+  ].filter(([entry]) => entry);
   return `<div id="html-fallback">
     ${renderHeader(path, images)}
     <main>
@@ -216,23 +226,42 @@ function renderArticle(path, post, parentPath, imageBase, images) {
                     ${caption ? `<p class="photo-gallery-caption">${escapeHtml(caption)}</p>` : ""}
                 </div>` : ""}
                 <a href="${parentPath}" class="back-link">← ${section.back}</a>
+                ${neighbours.length ? `<nav class="post-neighbours" aria-label="Weitere Berichte">
+                    ${neighbours.map(([entry, label]) => `<a href="${escapeHtml(entry.path)}"><small>${label}</small><strong>${escapeHtml(entry.post.Titel)}</strong></a>`).join("")}
+                </nav>` : ""}
             </article>
         </div></div></div>
     </main>
 </div>\n`;
 }
 
-export function renderStartup(path, homePage, posts, imageBase, images) {
+export function renderStartup(path, homePage, donationPage, posts, imageBase, images) {
   const home = path === "/";
   const section = sections[path];
-  if (!home && !section) {
+  const donation = path === "/spenden";
+  if (!home && !section && !donation) {
     const article = posts.find(post => post.path === path);
-    return article ? renderArticle(path, article.post, path.slice(0, path.lastIndexOf("/")), imageBase, images) : "";
+    return article ? renderArticle(path, article.post, path.slice(0, path.lastIndexOf("/")), imageBase, images, posts) : "";
   }
   const incidents = posts.filter(({ post }) => post.Kategorie === "Einsätze");
+  if (donation) {
+    const article = readFragment(donationPage, "donation")
+      .replace(/\s+data-external-embed(?=\s)/, "")
+      .replace(" data-load-external ", " disabled ");
+    return `<div id="html-fallback">
+    ${renderHeader(path, images)}
+    <main>
+        ${pageIntro("Spenden & Unterstützen", "Jeder Beitrag zählt für die Sicherheit in Rastenfeld!")}
+        <div class="site-body container"><div class="content-with-sidebar">
+            <div class="main-feed">${article}</div>
+            ${renderSidebar(posts, incidents)}
+        </div></div>
+    </main>
+</div>\n`;
+  }
   const cards = (home ? posts.slice(0, 3) : posts.filter(({ post }) => post.Kategorie === section.label))
     .map(entry => renderCard(entry, imageBase, images)).join("\n");
-  const intro = home ? homeFragment(homePage, "home-intro").replace(
+  const intro = home ? readFragment(homePage, "home-intro").replace(
     /<ResponsiveImage\s+Src="img\/cover\.jpg"[^>]*\/>/,
     () => renderImage("/img/cover.jpg", "Einsatzfahrzeug der FF Rastenfeld", images, { eager: true, priority: true }),
   ) : pageIntro(section.title, section.subtitle);
@@ -245,7 +274,7 @@ export function renderStartup(path, homePage, posts, imageBase, images) {
                 <section class="main-feed" aria-label="${home ? "Aktuelle Beiträge" : section.label}">
                     ${home ? '<h2 class="feed-title">Aktuelle Beiträge</h2>' : path === "/einsaetze" ? incidentControls(incidents) : ""}
                     ${cards || (path === "/einsaetze" ? '<p class="empty-msg">Keine Einsätze in dieser Kategorie.</p>' : "")}
-                    ${home ? `${homeFragment(homePage, "home-pagination")}\n${mediaPlaceholders}` : ""}
+                    ${home ? `${readFragment(homePage, "home-pagination")}\n${mediaPlaceholders}` : ""}
                 </section>
                 ${renderSidebar(posts, incidents)}
             </div>

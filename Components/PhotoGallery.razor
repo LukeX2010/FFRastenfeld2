@@ -8,7 +8,9 @@
         {
             <div class="photo-gallery-inline">
                 <div class="photo-stage" data-photo-stage="inline" tabindex="0" role="group" aria-label="@($"{Label}. Wischen zum Bildwechsel. Plus und Minus zum Zoomen, Pfeiltasten zur Navigation.")">
-                    <div class="photo-plane" data-photo-plane><img src="@Current.Src" alt="@Current.Alt" loading="lazy" decoding="async" draggable="false" data-gallery-image /></div>
+                    <div class="photo-plane" data-photo-plane>
+                        <ResponsiveImage Src="@Current.Src" Alt="@Current.Alt" draggable="false" data-gallery-image />
+                    </div>
                     <p class="photo-image-error" data-photo-error hidden>Das Bild konnte nicht geladen werden.</p>
                     <PhotoToolbar Index="_index" Count="Photos.Count" />
                 </div>
@@ -20,7 +22,9 @@
         }
         <dialog class="photo-modal" aria-label="@($"{Label} – Vollbild")" data-photo-modal>
             <div class="photo-stage photo-modal-stage" data-photo-stage="modal" tabindex="0" role="group" aria-label="Foto. Wischen zum Bildwechsel, zwei Finger zum Zoomen. Escape schließt.">
-                <div class="photo-plane" data-photo-plane><img src="@Current.Src" alt="@Current.Alt" decoding="async" draggable="false" data-gallery-image /></div>
+                <div class="photo-plane" data-photo-plane>
+                    <ResponsiveImage Src="@Current.Src" Alt="@Current.Alt" draggable="false" data-gallery-image />
+                </div>
                 <p class="photo-image-error" data-photo-error hidden>Das Bild konnte nicht geladen werden.</p>
             </div>
             <p class="photo-modal-caption">@(Current.Caption ?? Current.Alt)</p>

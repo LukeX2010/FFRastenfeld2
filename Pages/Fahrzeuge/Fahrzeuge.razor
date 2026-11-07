@@ -14,7 +14,7 @@
                     <div class="fahrzeug-item">
                         <a href="/fahrzeuge/@f.Id" class="fz-img-link">
                             <div class="fz-img">
-                                <img src="@($"img/{GetFahrzeugBild(f)}.jpeg")" class="hero-bg-img" alt="@f.Name" />
+                                <ResponsiveImage Src="@($"img/{GetFahrzeugBild(f)}.jpeg")" Alt="@($"Fahrzeugfoto: {f.Name}")" CssClass="hero-bg-img" />
                             </div>
                         </a>
                         <div class="fz-body">

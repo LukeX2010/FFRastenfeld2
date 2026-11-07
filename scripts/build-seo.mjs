@@ -1,6 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import { escapeHtml, postImage, postImageAlt, renderStartup } from "./startup-html.mjs";
+import { escapeHtml, postImage, postImageAlt, renderStartup, resolvePostImage } from "./startup-html.mjs";
 import { readImageDimensions, localImagePath } from "./build-images.mjs";
 
 const publish = process.argv[2] ?? ".publish/wwwroot";
@@ -71,11 +71,12 @@ const structuredData = {
   ],
 };
 
-const [shell, postsJson, redirectRules, homePage, settingsJson] = await Promise.all([
+const [shell, postsJson, redirectRules, homePage, donationPage, settingsJson] = await Promise.all([
   readFile(new URL("../wwwroot/index.html", import.meta.url), "utf8"),
   readFile(join(publish, "data/posts.json"), "utf8"),
   readFile(new URL("../wwwroot/_redirects", import.meta.url), "utf8"),
   readFile(new URL("../Pages/Index.razor", import.meta.url), "utf8"),
+  readFile(new URL("../Pages/Spenden.razor", import.meta.url), "utf8"),
   readFile(join(publish, "appsettings.json"), "utf8"),
 ]);
 const settings = JSON.parse(settingsJson.replace(/^\uFEFF/, ""));
@@ -115,8 +116,9 @@ for (const post of JSON.parse(postsJson.replace(/^\uFEFF/, ""))) {
 publishedPosts.sort((a, b) => Date.parse(b.post.Datum) - Date.parse(a.post.Datum));
 
 const images = await readImageDimensions(publish, [
-  "/img/cover.jpg", "/img/logo_rastenfeld.jpg",
+  "/img/cover.jpg", "/img/logo_rastenfeld.jpg", "/img/scaniaP340.jpeg", "/img/MTF.jpeg", "/img/FFhaus.png",
   ...publishedPosts.map(({ post }) => postImage(post, imageBase)),
+  ...publishedPosts.flatMap(({ post }) => (post.Bilder ?? []).map(entry => resolvePostImage(entry, imageBase))),
 ]);
 delete settings.WebsiteData.OptimizedImages;
 settings.WebsiteData.ImageDimensions = images;
@@ -152,7 +154,7 @@ function render({ title, description, canonical, type, structuredData, image, im
   return shell.replace('<html lang="de">', '<html lang="de" data-seo-generated>')
     .replace('<base href="/"/>', process.env.CONTEXT === "production" ? `<base href="${origin}/"/>` : '<base href="/"/>')
     .replace(marker, () => tags.join("\n    "))
-    .replace('<div id="app">', () => renderStartup(path, homePage, publishedPosts, imageBase, images) + '<div id="app">');
+    .replace('<div id="app">', () => renderStartup(path, homePage, donationPage, publishedPosts, imageBase, images) + '<div id="app">');
 }
 
 const notFound = {

@@ -1,0 +1,24 @@
+@inject DataService DS
+
+@{
+    var posts = DS.GetByKategorie(Current.Kategorie);
+    var index = posts.FindIndex(post => post.Slug == Current.Slug);
+}
+@if (index >= 0 && posts.Count > 1)
+{
+    <nav class="post-neighbours" aria-label="Weitere Berichte">
+        @if (index > 0)
+        {
+            <a href="@($"{SectionPath}/{posts[index - 1].Slug}")"><small>Neuerer Bericht</small><strong>@posts[index - 1].Titel</strong></a>
+        }
+        @if (index + 1 < posts.Count)
+        {
+            <a href="@($"{SectionPath}/{posts[index + 1].Slug}")"><small>Älterer Bericht</small><strong>@posts[index + 1].Titel</strong></a>
+        }
+    </nav>
+}
+
+@code {
+    [Parameter, EditorRequired] public Post Current { get; set; } = default!;
+    [Parameter, EditorRequired] public string SectionPath { get; set; } = "";
+}

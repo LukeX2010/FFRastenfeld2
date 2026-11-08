@@ -6,14 +6,14 @@
 
 @if (post is null)
 {
-    <div class="container" style="padding:4rem 1.5rem;text-align:center"><p>Nicht gefunden. <a href="/ausbildung">← Zurück</a></p></div>
+    <div class="container" style="padding:4rem 1.5rem;text-align:center"><p>Nicht gefunden. <a href="/ausbildung">← Zur Ausbildungsübersicht</a></p></div>
 }
 else
 {
-    <PageHero Title="@post.Titel" ParentLabel="Ausbildung" ParentHref="/ausbildung" />
+    <PageHero Title="@post.Titel" ParentLabel="Übungsberichte" ParentHref="/ausbildung" />
     <div class="site-body container">
         <div class="content-with-sidebar">
-            <main class="main-feed">
+            <div class="main-feed">
                 <article class="post-detail">
                     <div class="detail-meta">
                         <span class="post-card-kat post-card-kat--ausbildung">Ausbildung</span>
@@ -31,7 +31,7 @@ else
                     <a href="/ausbildung" class="back-link">← Zurück zu Ausbildung</a>
                     <PostNavigation Current="@post" SectionPath="/ausbildung" />
                 </article>
-            </main>
+            </div>
 
         </div>
     </div>

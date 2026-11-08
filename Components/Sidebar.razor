@@ -5,30 +5,30 @@
 
     <!-- Letzter Einsatz -->
     <div class="sidebar-widget sidebar-widget--red">
-        <h3>⚡ Letzter Einsatz</h3>
+        <h2>⚡ Letzter Einsatz</h2>
         @{ var last = DS.GetEinsaetze().FirstOrDefault(); }
         @if (last != null)
         {
             <p class="se-typ">@last.EinsatzTyp</p>
-            <p class="se-titel"><a href="/einsaetze/@last.Slug">@last.Titel</a></p>
-            <time>@last.Datum.ToString("dd.MM.yyyy – HH:mm") Uhr</time>
+            <p class="se-titel">@last.Titel</p>
+            <time datetime="@last.Datum.ToString("s")"><a href="/einsaetze/@last.Slug">Einsatzbericht vom @last.Datum.ToString("dd.MM.yyyy")</a> · @last.Datum.ToString("HH:mm") Uhr</time>
             <p class="se-ort">📍 @last.EinsatzOrt</p>
         }
     </div>
 
     <!-- Kategorien -->
     <div class="sidebar-widget">
-        <h3>Kategorien</h3>
+        <h2>Kategorien</h2>
         <ul class="sidebar-cats">
-            <li><a href="/einsaetze">Einsätze <span>@DS.GetByKategorie("Einsätze").Count</span></a></li>
-            <li><a href="/news">FF-News <span>@DS.GetByKategorie("FF-News").Count</span></a></li>
-            <li><a href="/ausbildung">Ausbildung <span>@DS.GetByKategorie("Ausbildung").Count</span></a></li>
+            <li><a href="/einsaetze">Einsatzarchiv <span>@DS.GetByKategorie("Einsätze").Count</span></a></li>
+            <li><a href="/news">Feuerwehrmeldungen <span>@DS.GetByKategorie("FF-News").Count</span></a></li>
+            <li><a href="/ausbildung">Übungen &amp; Kurse <span>@DS.GetByKategorie("Ausbildung").Count</span></a></li>
         </ul>
     </div>
 
     <!-- Links -->
     <div class="sidebar-widget">
-        <h3>Links</h3>
+        <h2>Links</h2>
         <ul class="sidebar-links">
             <li><a href="https://www.noelfv.at" target="_blank" rel="noopener noreferrer">↗ NÖ Landesfeuerwehrverband</a></li>
             <li><a href="https://www.noelfv.at/wastl" target="_blank" rel="noopener noreferrer">↗ WASTL Einsatzmonitor</a></li>
@@ -39,14 +39,14 @@
 
     <!-- Mitmachen -->
     <div class="sidebar-widget sidebar-widget--join">
-        <h3>🧑‍🚒 Mitglied werden</h3>
+        <h2>🧑‍🚒 Mitglied werden</h2>
         <p>Du möchtest deiner Gemeinde helfen? Wir freuen uns über jede Verstärkung – egal ob Jung oder Alt!</p>
         <a href="/kontakt" class="btn btn-primary btn-block">Jetzt informieren</a>
     </div>
 
     <!-- Social -->
     <div class="sidebar-widget">
-        <h3>Folg uns</h3>
+        <h2>Folg uns</h2>
         <div class="social-row">
             <a href="https://www.facebook.com/profile.php?id=100066674045868" target="_blank" rel="noopener noreferrer" class="social-btn fb">Facebook</a>
             <a href="https://www.instagram.com/ff_rastenfeld?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="social-btn ig">Instagram</a>

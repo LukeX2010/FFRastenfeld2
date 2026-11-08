@@ -7,18 +7,18 @@
 
 <div class="site-body container">
     <div class="content-with-sidebar">
-        <main class="main-feed">
+        <div class="main-feed">
             <div class="fahrzeuge-list">
                 @foreach (var f in DS.GetFahrzeuge())
                 {
                     <div class="fahrzeug-item">
-                        <a href="/fahrzeuge/@f.Id" class="fz-img-link">
+                        <div>
                             <div class="fz-img">
                                 <ResponsiveImage Src="@($"img/{GetFahrzeugBild(f)}.jpeg")" Alt="@($"Fahrzeugfoto: {f.Name}")" CssClass="hero-bg-img" />
                             </div>
-                        </a>
+                        </div>
                         <div class="fz-body">
-                            <h3><a href="/fahrzeuge/@f.Id">@f.Name</a></h3>
+                            <h2><a href="/fahrzeuge/@f.Id" class="card-link">@f.Name</a></h2>
                             <div class="fz-meta">
                                 @if (!string.IsNullOrWhiteSpace(f.Funkrufname))
                                 {
@@ -31,40 +31,40 @@
                                 <span>📅 Bj. @f.Baujahr</span>
                             </div>
                             <p>@f.Beschreibung</p>
-                            <a href="/fahrzeuge/@f.Id" class="read-more">Details ansehen →</a>
+                            <span class="read-more" aria-hidden="true">Details ansehen →</span>
                         </div>
                     </div>
                 }
             </div>
-        </main>
+        </div>
                 <aside class="sidebar">
             <!-- Suche -->
 
             <!-- Letzter Einsatz -->
             <div class="sidebar-widget sidebar-widget--red">
-                <h3>⚡ Letzter Einsatz</h3>
+                <h2>⚡ Letzter Einsatz</h2>
                 @{var last = DS.GetEinsaetze().FirstOrDefault();}
                 @if (last != null)
                 {
                     <p class="sidebar-einsatz-typ">@last.EinsatzTyp</p>
-                    <p class="sidebar-einsatz-title"><a href="/einsaetze/@last.Slug">@last.Titel</a></p>
-                    <time>@last.Datum.ToString("dd.MM.yyyy – HH:mm") Uhr</time>
+                    <p class="sidebar-einsatz-title">@last.Titel</p>
+                    <time datetime="@last.Datum.ToString("s")"><a href="/einsaetze/@last.Slug">Einsatzbericht vom @last.Datum.ToString("dd.MM.yyyy")</a> · @last.Datum.ToString("HH:mm") Uhr</time>
                 }
             </div>
 
             <!-- Kategorien -->
             <div class="sidebar-widget">
-                <h3>Kategorien</h3>
+                <h2>Kategorien</h2>
                 <ul class="sidebar-cats">
-                    <li><a href="/einsaetze">Einsätze <span>@DS.GetByKategorie("Einsätze").Count</span></a></li>
-                    <li><a href="/news">FF-News <span>@DS.GetByKategorie("FF-News").Count</span></a></li>
-                    <li><a href="/ausbildung">Ausbildung <span>@DS.GetByKategorie("Ausbildung").Count</span></a></li>
+                    <li><a href="/einsaetze">Einsatzarchiv <span>@DS.GetByKategorie("Einsätze").Count</span></a></li>
+                    <li><a href="/news">Feuerwehrmeldungen <span>@DS.GetByKategorie("FF-News").Count</span></a></li>
+                    <li><a href="/ausbildung">Übungen &amp; Kurse <span>@DS.GetByKategorie("Ausbildung").Count</span></a></li>
                 </ul>
             </div>
 
             <!-- Links -->
             <div class="sidebar-widget">
-                <h3>Links</h3>
+                <h2>Links</h2>
                 <ul class="sidebar-links">
                     <li><a href="https://www.noelfv.at" target="_blank" rel="noopener noreferrer">NÖ Landesfeuerwehrverband</a></li>
                     <li><a href="https://www.bfk-krems.at" target="_blank" rel="noopener noreferrer">BFK Krems-Land</a></li>

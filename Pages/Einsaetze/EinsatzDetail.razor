@@ -7,16 +7,16 @@
 @if (post is null)
 {
     <div class="container" style="padding:4rem 1.5rem;text-align:center">
-        <p>Einsatz nicht gefunden. <a href="/einsaetze">← Zurück</a></p>
+        <p>Einsatz nicht gefunden. <a href="/einsaetze">← Zur Einsatzübersicht</a></p>
     </div>
 }
 else
 {
-    <PageHero Title="@post.Titel" ParentLabel="Einsätze" ParentHref="/einsaetze" />
+    <PageHero Title="@post.Titel" ParentLabel="Einsatzübersicht" ParentHref="/einsaetze" />
 
     <div class="site-body container">
         <div class="content-with-sidebar">
-            <main class="main-feed">
+            <div class="main-feed">
                 <article class="post-detail">
                     <!-- Meta -->
                     <div class="detail-meta">
@@ -50,7 +50,7 @@ else
                     <a href="/einsaetze" class="back-link">← Zurück zur Einsatzübersicht</a>
                     <PostNavigation Current="@post" SectionPath="/einsaetze" />
                 </article>
-            </main>
+            </div>
 
         </div>
     </div>

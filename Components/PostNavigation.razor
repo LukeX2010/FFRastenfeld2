@@ -9,11 +9,17 @@
     <nav class="post-neighbours" aria-label="Weitere Berichte">
         @if (index > 0)
         {
-            <a href="@($"{SectionPath}/{posts[index - 1].Slug}")"><small>Neuerer Bericht</small><strong>@posts[index - 1].Titel</strong></a>
+            <div class="post-neighbour">
+                <small>Neuerer Bericht</small>
+                <a href="@($"{SectionPath}/{posts[index - 1].Slug}")" class="card-link"><strong>@posts[index - 1].GetLinkTitle()</strong></a>
+            </div>
         }
         @if (index + 1 < posts.Count)
         {
-            <a href="@($"{SectionPath}/{posts[index + 1].Slug}")"><small>Älterer Bericht</small><strong>@posts[index + 1].Titel</strong></a>
+            <div class="post-neighbour">
+                <small>Älterer Bericht</small>
+                <a href="@($"{SectionPath}/{posts[index + 1].Slug}")" class="card-link"><strong>@posts[index + 1].GetLinkTitle()</strong></a>
+            </div>
         }
     </nav>
 }

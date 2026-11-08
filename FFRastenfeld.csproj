@@ -4,6 +4,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>FFRastenfeld</RootNamespace>
+    <WasmEmitSourceMap>true</WasmEmitSourceMap>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
@@ -14,4 +15,10 @@
     <Content Remove="AdminServer\**" />
     <None Remove="AdminServer\**" />
   </ItemGroup>
+  <Target Name="PublishWasmSourceMaps" AfterTargets="Publish" Condition="'$(RunAOTCompilation)' != 'true'">
+    <ItemGroup>
+      <_WasmSourceMap Include="$(OutputPath)wwwroot/_framework/dotnet*.js.map" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_WasmSourceMap)" DestinationFolder="$(PublishDir)wwwroot/_framework" SkipUnchangedFiles="true" />
+  </Target>
 </Project>

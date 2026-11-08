@@ -16,13 +16,31 @@ function readFragment(source, name) {
   return content[0].trim();
 }
 
-function renderHeader(path, images) {
-  return `<header>
+function renderDropdown(label, id, items) {
+  return `<li class="has-dropdown">
+    <button type="button" aria-expanded="false" aria-controls="${id}">${label} <span class="caret" aria-hidden="true">▾</span></button>
+    <ul class="dropdown" id="${id}">${items.map(([href, text]) => `<li><a href="${href}">${text}</a></li>`).join("")}</ul>
+  </li>`;
+}
+
+function renderHeader(path, images, interactive = false) {
+  const hamburger = interactive
+    ? '<button type="button" class="hamburger" aria-label="Menü" aria-controls="site-navigation" aria-expanded="false"><span></span><span></span><span></span></button>'
+    : `<a class="hamburger" href="${escapeHtml(path)}#site-footer" aria-label="Navigation im Seitenfuß"><span></span><span></span><span></span></a>`;
+  const menus = interactive
+    ? renderDropdown("News", "site-navigation-news", [
+        ["/einsaetze", "Einsätze"], ["/news", "FF-News"], ["/ausbildung", "Ausbildung"],
+      ]) + renderDropdown("Feuerwehr", "site-navigation-feuerwehr", [
+        ["/chronik", "Chronik"], ["/mannschaft", "Mannschaft"], ["/feuerwehrhaus", "Feuerwehrhaus"], ["/fahrzeuge", "Fahrzeuge"],
+      ])
+    : `<li><a href="/news">News <span class="caret" aria-hidden="true">▾</span></a></li>
+       <li><a href="/mannschaft">Feuerwehr <span class="caret" aria-hidden="true">▾</span></a></li>`;
+  return `<header${interactive ? ' id="site-header" data-static-navigation' : ""}>
     <nav class="navbar" aria-label="Hauptnavigation">
         <div class="container nav-inner">
             <a href="/" class="nav-brand">
                 <div class="brand-logo">
-                    ${renderImage("/img/logo_rastenfeld.jpg", "Logo der Freiwilligen Feuerwehr Rastenfeld", images,
+                    ${renderImage("/img/logo_rastenfeld.jpg", "", images,
                         { cssClass: "brand-logo-img", eager: true })}
                 </div>
                 <div class="brand-name">
@@ -30,13 +48,10 @@ function renderHeader(path, images) {
                     <small>Freiwillige Feuerwehr · NÖ</small>
                 </div>
             </a>
-            <a class="hamburger" href="${escapeHtml(path)}#site-footer" aria-label="Navigation im Seitenfuß">
-                <span></span><span></span><span></span>
-            </a>
-            <ul class="nav-menu">
+            ${hamburger}
+            <ul class="nav-menu"${interactive ? ' id="site-navigation"' : ""}>
                 <li><a href="/"${path === "/" ? ' class="active" aria-current="page"' : ""}>Startseite</a></li>
-                <li><a href="/news">News <span class="caret" aria-hidden="true">▾</span></a></li>
-                <li><a href="/mannschaft">Feuerwehr <span class="caret" aria-hidden="true">▾</span></a></li>
+                ${menus}
                 <li><a href="/galerie">Galerie</a></li>
                 <li><a href="/kontakt">Kontakt</a></li>
                 <li><a href="/spenden">Spenden</a></li>
@@ -67,16 +82,16 @@ export function postImageAlt(post, image) {
   return description?.trim() || `Foto zum Bericht „${post.Titel}“`;
 }
 
-function renderImage(src, alt, images, { cssClass = "hero-bg-img", eager = false, priority = false } = {}) {
+function renderImage(src, alt, images, { cssClass = "hero-bg-img", eager = false, priority } = {}) {
   const image = images[src.startsWith("/") ? src : `/${src}`];
   const dimensions = image ? ` width="${image.Width}" height="${image.Height}"` : "";
   return `<img src="${escapeHtml(src)}"${dimensions} alt="${escapeHtml(alt)}" class="${cssClass}"
-         loading="${eager ? "eager" : "lazy"}" decoding="async"${priority ? ' fetchpriority="high"' : ""}/>`;
+         loading="${eager ? "eager" : "lazy"}" decoding="async"${priority ? ` fetchpriority="${priority}"` : ""}/>`;
 }
 
-function renderCard({ path, post }, imageBase, images) {
+function renderCard({ path, post }, imageBase, images, priority) {
   const href = escapeHtml(path);
-  const title = escapeHtml(post.Titel);
+  const title = postLinkTitle(post);
   const date = new Date(`${(post.Datum ?? "").slice(0, 10)}T00:00:00Z`);
   const image = postImage(post, imageBase);
   const meta = post.EinsatzTyp ? `<div class="post-einsatz-meta">
@@ -86,19 +101,21 @@ function renderCard({ path, post }, imageBase, images) {
             </div>` : "";
 
   return `<article class="post-card">
-            <a href="${href}" class="post-card-link" aria-label="${title}">
-                <div class="post-card-img">
-                    ${renderImage(image, postImageAlt(post, image), images)}
-                </div>
-                <div class="post-card-body">
-                    <time class="post-date">${Number.isNaN(date.valueOf()) ? "" : postDate.format(date)}</time>
-                    <h3>${title}</h3>
-                    ${meta}
-                    <p>${escapeHtml(post.Kurztext ?? "")}</p>
-                    <span class="read-more">Weiterlesen →</span>
-                </div>
-            </a>
+            <div class="post-card-img">
+                ${renderImage(image, postImageAlt(post, image), images, { priority })}
+            </div>
+            <div class="post-card-body">
+                <time class="post-date">${Number.isNaN(date.valueOf()) ? "" : postDate.format(date)}</time>
+                <h3><a href="${href}" class="post-card-link">${title}</a></h3>
+                ${meta}
+                <p>${escapeHtml(post.Kurztext ?? "")}</p>
+                <span class="read-more">Weiterlesen →</span>
+            </div>
         </article>`;
+}
+
+function postLinkTitle(post) {
+  return escapeHtml(post.LinkTitel?.trim() || post.Titel);
 }
 
 function pageIntro(title, subtitle, parent) {
@@ -106,7 +123,7 @@ function pageIntro(title, subtitle, parent) {
   return `<div class="page-hero">
     <div class="container">
         <div class="breadcrumb">
-            <a href="/">Startseite</a>
+            <a href="/">Start</a>
             ${parent ? `<span>›</span><a href="${parent.path}">${parent.label}</a>` : ""}
             <span>›</span><span>${heading}</span>
         </div>
@@ -138,25 +155,25 @@ function renderSidebar(posts, incidents) {
   const [year, month, day] = stamp.slice(0, 10).split("-");
   const time = stamp.slice(11, 16);
   const categoryLinks = [
-    ["Einsätze", "/einsaetze", incidents.length],
-    ["FF-News", "/news", posts.filter(({ post }) => post.Kategorie === "FF-News").length],
-    ["Ausbildung", "/ausbildung", posts.filter(({ post }) => post.Kategorie === "Ausbildung").length],
+    ["Einsatzarchiv", "/einsaetze", incidents.length],
+    ["Feuerwehrmeldungen", "/news", posts.filter(({ post }) => post.Kategorie === "FF-News").length],
+    ["Übungen & Kurse", "/ausbildung", posts.filter(({ post }) => post.Kategorie === "Ausbildung").length],
   ];
   return `<aside class="sidebar">
     <div class="sidebar-widget sidebar-widget--red">
-        <h3>⚡ Letzter Einsatz</h3>
+        <h2>⚡ Letzter Einsatz</h2>
         ${last ? `<p class="sidebar-einsatz-typ">${escapeHtml(last.post.EinsatzTyp ?? "")}</p>
-        <p class="sidebar-einsatz-title"><a href="${escapeHtml(last.path)}">${escapeHtml(last.post.Titel)}</a></p>
-        ${time ? `<time>${escapeHtml(`${day}.${month}.${year} – ${time}`)} Uhr</time>` : ""}` : ""}
+        <p class="sidebar-einsatz-title">${escapeHtml(last.post.Titel)}</p>
+        <time${stamp ? ` datetime="${escapeHtml(stamp)}"` : ""}><a href="${escapeHtml(last.path)}">${day ? escapeHtml(`Einsatzbericht vom ${day}.${month}.${year}`) : "Jüngster Einsatzbericht"}</a>${time ? ` · ${escapeHtml(time)} Uhr` : ""}</time>` : ""}
     </div>
     <div class="sidebar-widget">
-        <h3>Kategorien</h3>
+        <h2>Kategorien</h2>
         <ul class="sidebar-cats">
-            ${categoryLinks.map(([label, href, count]) => `<li><a href="${href}">${label} <span>${count}</span></a></li>`).join("\n")}
+            ${categoryLinks.map(([label, href, count]) => `<li><a href="${href}">${escapeHtml(label)} <span>${count}</span></a></li>`).join("\n")}
         </ul>
     </div>
     <div class="sidebar-widget">
-        <h3>Links</h3>
+        <h2>Links</h2>
         <ul class="sidebar-links">
             <li><a href="https://www.noelfv.at" target="_blank" rel="noopener noreferrer">NÖ Landesfeuerwehrverband</a></li>
             <li><a href="https://www.bfk-krems.at" target="_blank" rel="noopener noreferrer">BFK Krems-Land</a></li>
@@ -179,9 +196,9 @@ const mediaPlaceholders = `<div class="embed-row">
 </div>`;
 
 const sections = {
-  "/einsaetze": { label: "Einsätze", title: "Einsatzchronik FF Rastenfeld", subtitle: "Aktuelle Einsätze der FF Rastenfeld im Bezirk Krems-Land, NÖ", badge: "einsa-tze", back: "Zurück zur Einsatzübersicht" },
-  "/news": { label: "FF-News", title: "FF-News & Aktuelle Berichte", subtitle: "Neuigkeiten, Veranstaltungen und Berichte der Freiwilligen Feuerwehr Rastenfeld", badge: "ff-news", back: "Zurück zu FF-News" },
-  "/ausbildung": { label: "Ausbildung", title: "Ausbildung & Übungen", subtitle: "Kurse, Lehrgänge und Übungen der FF Rastenfeld – bestens ausgebildet für jeden Einsatz", badge: "ausbildung", back: "Zurück zu Ausbildung" },
+  "/einsaetze": { label: "Einsätze", breadcrumb: "Einsatzübersicht", feedHeading: "Einsatzberichte", title: "Einsatzchronik FF Rastenfeld", subtitle: "Aktuelle Einsätze der FF Rastenfeld im Bezirk Krems-Land, NÖ", badge: "einsa-tze", back: "Zurück zur Einsatzübersicht" },
+  "/news": { label: "FF-News", breadcrumb: "Aktuelle Meldungen", feedHeading: "Beiträge aus den FF-News", title: "FF-News & Aktuelle Berichte", subtitle: "Neuigkeiten, Veranstaltungen und Berichte der Freiwilligen Feuerwehr Rastenfeld", badge: "ff-news", back: "Zurück zu FF-News" },
+  "/ausbildung": { label: "Ausbildung", breadcrumb: "Übungsberichte", feedHeading: "Berichte zu Übungen und Lehrgängen", title: "Ausbildung & Übungen", subtitle: "Kurse, Lehrgänge und Übungen der FF Rastenfeld – bestens ausgebildet für jeden Einsatz", badge: "ausbildung", back: "Zurück zu Ausbildung" },
 };
 
 function renderArticle(path, post, parentPath, imageBase, images, posts) {
@@ -208,7 +225,7 @@ function renderArticle(path, post, parentPath, imageBase, images, posts) {
   return `<div id="html-fallback">
     ${renderHeader(path, images)}
     <main>
-        ${pageIntro(post.Titel, "", { path: parentPath, label: section.label })}
+        ${pageIntro(post.Titel, "", { path: parentPath, label: section.breadcrumb })}
         <div class="site-body container"><div class="content-with-sidebar"><div class="main-feed">
             <article class="post-detail">
                 <div class="detail-meta">
@@ -227,7 +244,9 @@ function renderArticle(path, post, parentPath, imageBase, images, posts) {
                 </div>` : ""}
                 <a href="${parentPath}" class="back-link">← ${section.back}</a>
                 ${neighbours.length ? `<nav class="post-neighbours" aria-label="Weitere Berichte">
-                    ${neighbours.map(([entry, label]) => `<a href="${escapeHtml(entry.path)}"><small>${label}</small><strong>${escapeHtml(entry.post.Titel)}</strong></a>`).join("")}
+                    ${neighbours.map(([entry, label]) => `<div class="post-neighbour"><small>${label}</small>
+                        <a href="${escapeHtml(entry.path)}" class="card-link"><strong>${postLinkTitle(entry.post)}</strong></a>
+                    </div>`).join("")}
                 </nav>` : ""}
             </article>
         </div></div></div>
@@ -235,7 +254,7 @@ function renderArticle(path, post, parentPath, imageBase, images, posts) {
 </div>\n`;
 }
 
-export function renderStartup(path, homePage, donationPage, posts, imageBase, images) {
+export function renderStartup(path, homePage, donationPage, posts, imageBase, images, staticHome) {
   const home = path === "/";
   const section = sections[path];
   const donation = path === "/spenden";
@@ -260,21 +279,22 @@ export function renderStartup(path, homePage, donationPage, posts, imageBase, im
 </div>\n`;
   }
   const cards = (home ? posts.slice(0, 3) : posts.filter(({ post }) => post.Kategorie === section.label))
-    .map(entry => renderCard(entry, imageBase, images)).join("\n");
+    .map(entry => renderCard(entry, imageBase, images, home ? "low" : undefined)).join("\n");
   const intro = home ? readFragment(homePage, "home-intro").replace(
     /<ResponsiveImage\s+Src="img\/cover\.jpg"[^>]*\/>/,
-    () => renderImage("/img/cover.jpg", "Einsatzfahrzeug der FF Rastenfeld", images, { eager: true, priority: true }),
+    () => renderImage("/img/cover.jpg", "Einsatzfahrzeug der FF Rastenfeld", images, { eager: true, priority: "high" }),
   ) : pageIntro(section.title, section.subtitle);
   return `<div id="html-fallback">
-    ${renderHeader(path, images)}
+    ${renderHeader(path, images, staticHome)}
     <main>
         ${intro}
         <div class="site-body container">
             <div class="content-with-sidebar">
                 <section class="main-feed" aria-label="${home ? "Aktuelle Beiträge" : section.label}">
-                    ${home ? '<h2 class="feed-title">Aktuelle Beiträge</h2>' : path === "/einsaetze" ? incidentControls(incidents) : ""}
+                    ${home ? '<h2 class="feed-title">Aktuelle Beiträge</h2>' : `<h2 class="visually-hidden">${section.feedHeading}</h2>`}
+                    ${path === "/einsaetze" ? incidentControls(incidents) : ""}
                     ${cards || (path === "/einsaetze" ? '<p class="empty-msg">Keine Einsätze in dieser Kategorie.</p>' : "")}
-                    ${home ? `${readFragment(homePage, "home-pagination")}\n${mediaPlaceholders}` : ""}
+                    ${home ? `${readFragment(homePage, "home-pagination")}\n${staticHome ? readFragment(homePage, "home-media") : mediaPlaceholders}` : ""}
                 </section>
                 ${renderSidebar(posts, incidents)}
             </div>

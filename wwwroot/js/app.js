@@ -8,6 +8,12 @@
         statistics: false,
         externalMedia: false
     };
+    const externalEmbedObserver = new IntersectionObserver(entries => {
+        if (!readConsent()?.externalMedia) return;
+        for (const { target, isIntersecting } of entries) {
+            if (isIntersecting) loadExternalEmbed(target);
+        }
+    });
 
     function readConsent() {
         try {
@@ -51,9 +57,7 @@
             unloadUmami();
         }
 
-        if (consent.externalMedia) {
-            loadAllExternalEmbeds();
-        }
+        watchExternalEmbeds(consent.externalMedia);
     }
 
     function createButton(text, className, onClick) {
@@ -67,7 +71,7 @@
 
     function removeConsentUi() {
         document.getElementById('ffr-consent-banner')?.remove();
-        document.getElementById('ffr-consent-modal')?.remove();
+        document.getElementById('ffr-consent-modal')?.close();
     }
 
     function showBanner() {
@@ -102,21 +106,22 @@
     }
 
     function showSettings() {
-        document.getElementById('ffr-consent-modal')?.remove();
+        if (document.getElementById('ffr-consent-modal')) return;
         const consent = readConsent() || defaultConsent;
 
-        const modal = document.createElement('div');
+        const modal = document.createElement('dialog');
         modal.id = 'ffr-consent-modal';
         modal.className = 'consent-modal';
+        modal.setAttribute('aria-labelledby', 'consent-title');
         modal.innerHTML = `
             <div class="consent-modal__backdrop" data-consent-close></div>
-            <section class="consent-modal__panel" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+            <div class="consent-modal__panel">
                 <div class="consent-modal__head">
                     <div>
                         <p class="consent-kicker">FF Rastenfeld</p>
                         <h2 id="consent-title">Cookie-Einstellungen</h2>
                     </div>
-                    <button type="button" class="consent-modal__close" data-consent-close aria-label="Schliessen">x</button>
+                    <button type="button" class="consent-modal__close" data-consent-close aria-label="Schließen" autofocus>x</button>
                 </div>
                 <p class="consent-modal__lead">Hier kannst du festlegen, welche Dienste auf dieser Website geladen werden duerfen. Deine Auswahl kannst du jederzeit im Footer aendern.</p>
 
@@ -149,10 +154,11 @@
                     <button type="button" class="btn btn-primary consent-btn" data-consent-save>Auswahl speichern</button>
                     <button type="button" class="btn btn-primary consent-btn" data-consent-all>Alle akzeptieren</button>
                 </div>
-            </section>
+            </div>
         `;
 
-        modal.querySelectorAll('[data-consent-close]').forEach(el => el.addEventListener('click', () => modal.remove()));
+        modal.addEventListener('close', () => modal.remove(), { once: true });
+        modal.querySelectorAll('[data-consent-close]').forEach(el => el.addEventListener('click', () => modal.close()));
         modal.querySelector('[data-consent-necessary]').addEventListener('click', () => {
             saveConsent({ statistics: false, externalMedia: false });
             removeConsentUi();
@@ -170,6 +176,7 @@
         });
 
         document.body.appendChild(modal);
+        modal.showModal();
     }
 
     function loadExternalEmbed(placeholder) {
@@ -192,53 +199,39 @@
         }
 
         if (!element) return;
+        externalEmbedObserver.unobserve(placeholder);
         placeholder.dataset.loaded = 'true';
         placeholder.replaceChildren(element);
         placeholder.classList.add('external-media--loaded');
+        return element;
     }
 
-    function loadAllExternalEmbeds() {
-        document.querySelectorAll('[data-external-embed]').forEach(loadExternalEmbed);
-    }
-
-    function initExternalEmbeds(root = document) {
-        const placeholders = [];
-        if (root.matches?.('[data-external-embed]')) placeholders.push(root);
-        root.querySelectorAll?.('[data-external-embed]').forEach(placeholder => placeholders.push(placeholder));
-
-        placeholders.forEach(placeholder => {
-            if (placeholder.dataset.initialized === 'true') return;
-            placeholder.dataset.initialized = 'true';
-            placeholder.querySelectorAll('[data-load-external]').forEach(button => {
-                button.addEventListener('click', () => loadExternalEmbed(placeholder));
-            });
-        });
-
-        if (readConsent()?.externalMedia) {
-            loadAllExternalEmbeds();
-        }
+    function watchExternalEmbeds(allowed) {
+        externalEmbedObserver.disconnect();
+        if (!allowed) return;
+        document.querySelectorAll('[data-external-embed]:not([data-loaded="true"])')
+            .forEach(placeholder => externalEmbedObserver.observe(placeholder));
     }
 
     document.addEventListener('click', (event) => {
         const trigger = event.target.closest('[data-open-cookie-settings]');
-        if (!trigger) return;
-        event.preventDefault();
-        showSettings();
+        if (trigger) {
+            event.preventDefault();
+            showSettings();
+        }
+        const media = event.target.closest('[data-load-external]');
+        if (media) loadExternalEmbed(media.closest('[data-external-embed]'))?.focus({ preventScroll: true });
     });
 
     document.addEventListener('DOMContentLoaded', () => {
         showBanner();
         applyConsent();
-        initExternalEmbeds();
-
-        const observer = new MutationObserver(mutations => {
-            for (const mutation of mutations) {
-                mutation.addedNodes.forEach(node => {
-                    if (node.nodeType === Node.ELEMENT_NODE) initExternalEmbeds(node);
-                });
-            }
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
+        const app = document.getElementById('app');
+        if (app) {
+            new MutationObserver(() => {
+                watchExternalEmbeds(readConsent()?.externalMedia);
+            }).observe(app, { childList: true, subtree: true });
+        }
     });
 
     window.ffrConsent = {
@@ -250,13 +243,48 @@
     };
 })();
 
-// Ladeanimation
-window.addEventListener('load', function () {
-    setTimeout(function () {
-        const l = document.getElementById('app-loader');
-        if (l) { l.style.opacity = '0'; l.style.transition = 'opacity .4s'; setTimeout(() => l.remove(), 450); }
-    }, 600);
-});
+const staticNav = document.querySelector('[data-static-navigation]');
+if (staticNav) {
+    const hamburger = staticNav.querySelector('.hamburger');
+    const menu = staticNav.querySelector('.nav-menu');
+    const dropdowns = [...menu.querySelectorAll('.has-dropdown > button')];
+    const setMobileOpen = open => {
+        hamburger.setAttribute('aria-expanded', String(open));
+        hamburger.classList.toggle('is-open', open);
+        menu.classList.toggle('is-open', open);
+    };
+    const setDropdown = active => {
+        for (const button of dropdowns) {
+            button.setAttribute('aria-expanded', String(button === active));
+            button.parentElement.classList.toggle('open', button === active);
+        }
+    };
+
+    hamburger.addEventListener('click', () => {
+        const open = hamburger.getAttribute('aria-expanded') === 'false';
+        setMobileOpen(open);
+        if (!open) setDropdown(null);
+    });
+    for (const button of dropdowns) {
+        button.addEventListener('click', () => setDropdown(button.getAttribute('aria-expanded') === 'true' ? null : button));
+    }
+    document.addEventListener('click', event => {
+        if (staticNav.contains(event.target)) return;
+        setDropdown(null);
+        setMobileOpen(false);
+    });
+    staticNav.addEventListener('keydown', event => {
+        if (event.key !== 'Escape') return;
+        const expanded = dropdowns.find(button => button.getAttribute('aria-expanded') === 'true');
+        if (expanded) {
+            setDropdown(null);
+            expanded.focus();
+        } else if (hamburger.getAttribute('aria-expanded') === 'true') {
+            setMobileOpen(false);
+            hamburger.focus();
+        }
+    });
+}
 
 document.addEventListener('click', async event => {
     if (event.target.closest('#scroll-top')) {

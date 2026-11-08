@@ -15,6 +15,7 @@ public class Post
     public string Slug { get; set; } = "";
     public string Emoji { get; set; } = "";
     public string Titel { get; set; } = "";
+    public string? LinkTitel { get; set; }
     public string Kategorie { get; set; } = "";  // "Einsätze" | "FF-News" | "Ausbildung" | "Feuerwehrjugend"
     public DateTime Datum { get; set; }
     public string Kurztext { get; set; } = "";
@@ -30,6 +31,7 @@ public class Post
     public int?   EinsatzKraefte { get; set; }
 
     public string GetPageTitle() => Titel.Length <= 47 ? $"{Titel} | FF Rastenfeld" : Titel;
+    public string GetLinkTitle() => string.IsNullOrWhiteSpace(LinkTitel) ? Titel : LinkTitel.Trim();
 }
 
 public class Fahrzeug

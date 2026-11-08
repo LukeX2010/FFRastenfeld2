@@ -5,15 +5,15 @@
 
 @if (fz is null)
 {
-    <div class="container" style="padding:4rem 1.5rem;text-align:center"><p>Fahrzeug nicht gefunden. <a href="/fahrzeuge">← Zurück</a></p></div>
+    <div class="container" style="padding:4rem 1.5rem;text-align:center"><p>Fahrzeug nicht gefunden. <a href="/fahrzeuge">← Zur Fahrzeugliste</a></p></div>
 }
 else
 {
-    <PageHero Title="@fz.Name" Subtitle="@GetSubtitle(fz)" ParentLabel="Fahrzeuge" ParentHref="/fahrzeuge" />
+    <PageHero Title="@fz.Name" Subtitle="@GetSubtitle(fz)" ParentLabel="Fuhrparkübersicht" ParentHref="/fahrzeuge" />
 
     <div class="site-body container">
         <div class="content-with-sidebar">
-            <main class="main-feed">
+            <div class="main-feed">
                 <article class="post-detail">
 
                     <PhotoGallery Photos="@(new[] { new GalleryPhoto($"img/{GetFahrzeugBild(fz)}.jpeg", fz.Name) })" Label="@fz.Name" />
@@ -32,10 +32,10 @@ else
                         <div class="fdm-item"><span>Baujahr</span><strong>@fz.Baujahr</strong></div>
                     </div>
 
-                    <h3>Beschreibung</h3>
+                    <h2 class="vehicle-detail-heading">Beschreibung</h2>
                     <p>@fz.Beschreibung</p>
 
-                    <h3>Beladung & Ausstattung</h3>
+                    <h2 class="vehicle-detail-heading">Beladung & Ausstattung</h2>
                     <ul class="ausstattung-list">
                         @foreach (var a in fz.Ausstattung)
                         {
@@ -45,14 +45,14 @@ else
 
                     <div class="fz-nav">
                         <a href="/fahrzeuge" class="btn btn-outline-small">← Alle Fahrzeuge</a>
-                        @if (fz.Id > 1)
-                        { <a href="/fahrzeuge/@(fz.Id - 1)" class="btn btn-outline-small">← Vorheriges</a> }
-                        @if (fz.Id < DS.GetFahrzeuge().Count)
-                        { <a href="/fahrzeuge/@(fz.Id + 1)" class="btn btn-outline-small">Nächstes →</a> }
+                        @if (previous is not null)
+                        { <a href="/fahrzeuge/@previous.Id" class="btn btn-outline-small">← @previous.Name</a> }
+                        @if (next is not null)
+                        { <a href="/fahrzeuge/@next.Id" class="btn btn-outline-small">@next.Name →</a> }
                     </div>
 
                 </article>
-            </main>
+            </div>
 
         </div>
     </div>
@@ -61,7 +61,17 @@ else
 @code {
     [Parameter] public int Id { get; set; }
     private Fahrzeug? fz;
-    protected override void OnParametersSet() => fz = DS.GetFahrzeuge().FirstOrDefault(f => f.Id == Id);
+    private Fahrzeug? previous;
+    private Fahrzeug? next;
+
+    protected override void OnParametersSet()
+    {
+        var vehicles = DS.GetFahrzeuge();
+        var index = vehicles.FindIndex(vehicle => vehicle.Id == Id);
+        fz = index >= 0 ? vehicles[index] : null;
+        previous = index > 0 ? vehicles[index - 1] : null;
+        next = index >= 0 && index + 1 < vehicles.Count ? vehicles[index + 1] : null;
+    }
 
     private static string GetFahrzeugBild(Fahrzeug f) =>
         string.IsNullOrWhiteSpace(f.BildDatei) ? f.Kuerzel : f.BildDatei;

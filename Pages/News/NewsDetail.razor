@@ -8,15 +8,15 @@
 @if (post is null)
 {
 <div class="container" style="padding:4rem 1.5rem;text-align:center">
-    <p>Beitrag nicht gefunden. <a href="/news">← Zurück</a></p>
+    <p>Beitrag nicht gefunden. <a href="/news">← Zur Nachrichtenübersicht</a></p>
 </div>
 }
 else
 {
-<PageHero Title="@post.Titel" ParentLabel="FF-News" ParentHref="/news"/>
+<PageHero Title="@post.Titel" ParentLabel="Aktuelle Meldungen" ParentHref="/news"/>
 <div class="site-body container">
     <div class="content-with-sidebar">
-        <main class="main-feed">
+        <div class="main-feed">
             <article class="post-detail">
                 <div class="detail-meta">
                     <span class="post-card-kat post-card-kat--ff-news">FF-News</span>
@@ -35,7 +35,7 @@ else
                 <a href="/news" class="back-link">← Zurück zu FF-News</a>
                 <PostNavigation Current="@post" SectionPath="/news" />
             </article>
-        </main>
+        </div>
     </div>
 </div>
 }

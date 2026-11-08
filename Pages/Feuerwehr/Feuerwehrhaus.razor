@@ -6,7 +6,7 @@
 
 <div class="site-body container">
     <div class="content-with-sidebar">
-        <main class="main-feed">
+        <div class="main-feed">
             <article class="post-detail">
 
                 <PhotoGallery Photos="@(new[] { new GalleryPhoto("img/FFhaus.png", "Feuerwehrhaus Rastenfeld") })" Label="Feuerwehrhaus Rastenfeld" />
@@ -33,35 +33,35 @@
                         <div class="ig-item"><span class="ig-label1">FF Sperkental</span></div>
                     </div>
             </article>
-        </main>
+        </div>
         <aside class="sidebar">
             <!-- Suche -->
 
             <!-- Letzter Einsatz -->
             <div class="sidebar-widget sidebar-widget--red">
-                <h3>⚡ Letzter Einsatz</h3>
+                <h2>⚡ Letzter Einsatz</h2>
                 @{var last = DS.GetEinsaetze().FirstOrDefault();}
                 @if (last != null)
                 {
                 <p class="sidebar-einsatz-typ">@last.EinsatzTyp</p>
-                <p class="sidebar-einsatz-title"><a href="/einsaetze/@last.Slug">@last.Titel</a></p>
-                <time>@last.Datum.ToString("dd.MM.yyyy – HH:mm") Uhr</time>
+                <p class="sidebar-einsatz-title">@last.Titel</p>
+                <time datetime="@last.Datum.ToString("s")"><a href="/einsaetze/@last.Slug">Einsatzbericht vom @last.Datum.ToString("dd.MM.yyyy")</a> · @last.Datum.ToString("HH:mm") Uhr</time>
                 }
             </div>
 
             <!-- Kategorien -->
             <div class="sidebar-widget">
-                <h3>Kategorien</h3>
+                <h2>Kategorien</h2>
                 <ul class="sidebar-cats">
-                    <li><a href="/einsaetze">Einsätze <span>@DS.GetByKategorie("Einsätze").Count</span></a></li>
-                    <li><a href="/news">FF-News <span>@DS.GetByKategorie("FF-News").Count</span></a></li>
-                    <li><a href="/ausbildung">Ausbildung <span>@DS.GetByKategorie("Ausbildung").Count</span></a></li>
+                    <li><a href="/einsaetze">Einsatzarchiv <span>@DS.GetByKategorie("Einsätze").Count</span></a></li>
+                    <li><a href="/news">Feuerwehrmeldungen <span>@DS.GetByKategorie("FF-News").Count</span></a></li>
+                    <li><a href="/ausbildung">Übungen &amp; Kurse <span>@DS.GetByKategorie("Ausbildung").Count</span></a></li>
                 </ul>
             </div>
 
             <!-- Links -->
             <div class="sidebar-widget">
-                <h3>Links</h3>
+                <h2>Links</h2>
                 <ul class="sidebar-links">
                     <li><a href="https://www.noelfv.at" target="_blank" rel="noopener noreferrer">NÖ Landesfeuerwehrverband</a></li>
                     <li><a href="https://www.bfk-krems.at" target="_blank" rel="noopener noreferrer">BFK Krems-Land</a></li>

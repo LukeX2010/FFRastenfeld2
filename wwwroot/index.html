@@ -21,11 +21,13 @@
     <base href="/"/>
     <link rel="icon" type="image/jpeg" href="/img/favicon.jpg">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png"/>
-    <link rel="stylesheet" href="/css/app.css?v=site-audit-3"/>
+    <link rel="stylesheet" href="/css/fonts.css"/>
+    <link rel="stylesheet" href="/css/app.css"/>
     <link rel="stylesheet" href="/css/photo-gallery.css"/>
     <link rel="stylesheet" href="/css/skeleton.css"/>
 </head>
 <body>
+<!-- client-app:start -->
 <div id="app">
     <div class="loading-skeleton loading-skeleton--boot" role="status" aria-busy="true">
         <span class="sk-sr-only">Seite wird geladen …</span>
@@ -36,10 +38,11 @@
         </div>
     </div>
 </div>
-<script src="/js/loading-skeleton.js"></script>
-<script src="/js/seo.js?v=site-audit-1"></script>
-<script src="/_framework/blazor.webassembly.js"></script>
-<script src="/js/app.js?v=site-audit-1"></script>
+<script src="/js/loading-skeleton.js" defer></script>
+<script src="/js/seo.js" defer></script>
+<script src="/_framework/blazor.webassembly.js" defer></script>
+<!-- client-app:end -->
+<script src="/js/app.js" defer></script>
 <footer id="site-footer">
     <div class="container footer-grid">
         <div class="footer-col">
@@ -57,22 +60,22 @@
         <div class="footer-col">
             <h2 class="footer-heading">News</h2>
             <ul>
-                <li><a href="/einsaetze">Einsätze</a></li>
-                <li><a href="/news">FF-News</a></li>
-                <li><a href="/ausbildung">Ausbildung</a></li>
+                <li><a href="/einsaetze">Einsatzberichte</a></li>
+                <li><a href="/news">Meldungen der Feuerwehr</a></li>
+                <li><a href="/ausbildung">Ausbildungsberichte</a></li>
             </ul>
         </div>
 
         <div class="footer-col">
             <h2 class="footer-heading">Feuerwehr</h2>
             <ul>
-                <li><a href="/chronik">Chronik</a></li>
-                <li><a href="/mannschaft">Mannschaft</a></li>
-                <li><a href="/feuerwehrhaus">Feuerwehrhaus</a></li>
-                <li><a href="/fahrzeuge">Fahrzeuge</a></li>
-                <li><a href="/galerie">Galerie</a></li>
-                <li><a href="/kontakt">Kontakt</a></li>
-                <li><a href="/spenden">Spenden</a></li>
+                <li><a href="/chronik">Feuerwehrgeschichte</a></li>
+                <li><a href="/mannschaft">Unser Team</a></li>
+                <li><a href="/feuerwehrhaus">Feuerwehrhaus im Überblick</a></li>
+                <li><a href="/fahrzeuge">Fahrzeugübersicht</a></li>
+                <li><a href="/galerie">Einsatz- und Übungsfotos</a></li>
+                <li><a href="/kontakt">Kontakt und Anfahrt</a></li>
+                <li><a href="/spenden">Die Feuerwehr unterstützen</a></li>
                 
             </ul>
         </div>
@@ -100,9 +103,10 @@
                     <summary>Über die Feuerwehr Rastenfeld</summary>
                     <div class="footer-seo-text">
                         <p>
-                            Seit <a href="/chronik">1871</a> ist die Freiwillige Feuerwehr Rastenfeld
+                            Seit 1871 ist die Freiwillige Feuerwehr Rastenfeld
                             für die Marktgemeinde Rastenfeld im Bezirk Krems-Land in Niederösterreich im Einsatz.
-                            Die Chronik erzählt, wie aus der damaligen Handspritzentruppe unsere heutige Feuerwehr wurde.
+                            Die <a href="/chronik">Chronik der Feuerwehr Rastenfeld</a> erzählt, wie aus der damaligen
+                            Handspritzentruppe unsere heutige Feuerwehr wurde.
                         </p>
                         <h2>Brandbekämpfung und technische Hilfe</h2>
                         <p>
@@ -120,11 +124,11 @@
                         </p>
                         <h2>Feuerwehrhaus, Mannschaft und Kontakt</h2>
                         <p>
-                            Unser <a href="/feuerwehrhaus">Feuerwehrhaus</a> steht in Rastenfeld 178.
+                            Das <a href="/feuerwehrhaus">Rastenfelder Feuerwehrhaus</a> steht in Rastenfeld 178.
                             Auf der <a href="/mannschaft">Mannschaftsseite</a> stellen wir die Menschen hinter
                             der Feuerwehr und das Kommando vor. Wenn du dich für die Mitarbeit interessierst
-                            oder eine allgemeine Frage hast, findest du Telefonnummer und E-Mail unter
-                            <a href="/kontakt">Kontakt</a>. Unter <a href="/spenden">Spenden</a> erfährst du,
+                            oder eine allgemeine Frage hast, findest du Telefonnummer und E-Mail bei unseren
+                            <a href="/kontakt">Kontaktdaten</a>. Auf der <a href="/spenden">Spendenseite</a> erfährst du,
                             wie du Ausrüstung, Fahrzeuge und Ausbildung unterstützen kannst.
                         </p>
                     </div>

@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { escapeHtml, postImage, postImageAlt, renderStartup, resolvePostImage } from "./startup-html.mjs";
@@ -82,8 +83,28 @@ const [shell, postsJson, redirectRules, homePage, donationPage, settingsJson] = 
 const settings = JSON.parse(settingsJson.replace(/^\uFEFF/, ""));
 settings.WebsiteData ??= {};
 const imageBase = settings.WebsiteData.ImageBaseUrl?.trim().replace(/\/+$/, "") || "img";
+const postsUrl = settings.WebsiteData.PostsUrl?.trim() || "data/posts.json";
+const staticHome = postsUrl === "data/posts.json" || postsUrl === "/data/posts.json";
 const marker = /<!-- page-metadata:start -->[\s\S]*?<!-- page-metadata:end -->/;
 if (!marker.test(shell)) throw new Error("SEO markers missing in index.html.");
+
+await mkdir(join(publish, "assets/site"), { recursive: true });
+async function saveAsset(name, content) {
+  const hash = createHash("sha256").update(content).digest("hex").slice(0, 16);
+  const file = name.replace(/(\.[^.]+)$/, `.${hash}$1`);
+  await writeFile(join(publish, "assets/site", file), content);
+  return `/assets/site/${file}`;
+}
+
+const styles = [...shell.matchAll(/<link rel="stylesheet" href="\/(css\/[^"]+)"\/>/g)];
+const css = await Promise.all(styles.map(([, file]) => readFile(join(publish, file), "utf8")));
+const stylesheet = await saveAsset("site.css", css.join("\n").replaceAll("url(../fonts/", "url(/fonts/"));
+const scripts = [...shell.matchAll(/<script src="\/(js\/[^"]+)" defer><\/script>/g)];
+const scriptUrls = await Promise.all(scripts.map(async ([, file]) =>
+  saveAsset(file.split("/").at(-1), await readFile(join(publish, file)))));
+const optimizedShell = scripts.reduce((html, [tag, file], index) =>
+  html.replace(tag, tag.replace(`/${file}`, scriptUrls[index])), styles.reduce((html, [tag], index) =>
+  html.replace(tag, index === 0 ? `<link rel="stylesheet" href="${stylesheet}"/>` : ""), shell));
 
 const defaultImage = { image: `${origin}/img/cover.jpg`, imageAlt: "Einsatzfahrzeug der FF Rastenfeld" };
 const routes = Object.fromEntries(Object.entries(pages).map(([path, [title, description]]) =>
@@ -130,6 +151,7 @@ for (const { path, post } of publishedPosts) {
 
 function render({ title, description, canonical, type, structuredData, image, imageAlt }, path) {
   const tags = [
+    ...(path === "/" ? ['<link rel="preload" as="image" href="/img/cover.jpg" fetchpriority="high"/>'] : []),
     `<title>${escapeHtml(title)}</title>`,
     `<meta name="description" content="${escapeHtml(description)}"/>`,
     canonical ? `<link rel="canonical" href="${escapeHtml(canonical)}"/>` : '<meta name="robots" content="noindex"/>',
@@ -151,10 +173,14 @@ function render({ title, description, canonical, type, structuredData, image, im
     tags.push(`<script id="site-structured-data" type="application/ld+json">${json}</script>`);
   }
 
-  return shell.replace('<html lang="de">', '<html lang="de" data-seo-generated>')
-    .replace('<base href="/"/>', process.env.CONTEXT === "production" ? `<base href="${origin}/"/>` : '<base href="/"/>')
+  const isStaticHome = path === "/" && staticHome;
+  const startup = renderStartup(path, homePage, donationPage, publishedPosts, imageBase, images, isStaticHome);
+  const pageShell = startup ? optimizedShell.replace(/<script src="\/assets\/site\/loading-skeleton\.[^"]+" defer><\/script>\s*/, "") : optimizedShell;
+  return pageShell.replace('<html lang="de">', '<html lang="de" data-seo-generated>')
+    .replace('<base href="/"/>', process.env.CONTEXT === "production" && !isStaticHome ? `<base href="${origin}/"/>` : '<base href="/"/>')
     .replace(marker, () => tags.join("\n    "))
-    .replace('<div id="app">', () => renderStartup(path, homePage, donationPage, publishedPosts, imageBase, images) + '<div id="app">');
+    .replace(/<!-- client-app:start -->([\s\S]*?)<!-- client-app:end -->/, (_, clientApp) =>
+      startup + (isStaticHome ? '<button id="scroll-top" type="button" title="Nach oben" aria-label="Zum Seitenanfang">↑</button>' : clientApp));
 }
 
 const notFound = {

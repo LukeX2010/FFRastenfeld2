@@ -1,5 +1,40 @@
 [
   {
+    "Id": 36,
+    "Slug": "ausbildungsstufe-at-40-im-gasbefeuerten-container-a019ed55",
+    "Titel": "Ausbildungsstufe AT-40 im Gasbefeuerten Container",
+    "Kategorie": "Ausbildung",
+    "Datum": "2026-10-31T12:00:00",
+    "Kurztext": "Am Samstag, dem 31. Oktober 2026, absolvierten Felix Dornhakl, Victoria Lenz, Stefan Schulmeister, Erwin Huber, Maximilian Artner und Lukas Assfall der FF Rastenfeld die Ausbildungsstufe „AT-40“ in einem gasbefeuerten Brandcontainer in Trandorf. Die Ausbildung umfasste Strahlrohrtraining, Türöffnungstechniken sowie die Bewältigung verschiedener Brandszenarien unter realitätsnahen Bedingungen. Alle Teilnehmer schlossen die Übung erfolgreich ab.",
+    "Volltext": "Am Samstag, dem 31.10.2026, absolvierten Felix Dornhakl, Victoria Lenz, Stefan Schulmeister, Erwin Huber, Maximilian Artner und Lukas Assfall die Ausbildungsstufe „AT-40“ im gasbefeuerten Brandcontainer in Trandorf.\n\nIn der ersten Runde am Vormittag fuhren Victoria Lenz, Felix Dornhakl und Stefan Schulmeister nach Trandorf. Nach einer Sicherheitsunterweisung standen zunächst ein Strahlrohrtraining sowie die richtige Türöffnung auf dem Programm. Anschließend rüsteten sie sich mit der Schutzausrüstung aus und absolvierten die Wärmegewöhnung. Danach konnten sie ihr Können im Container unter Beweis stellen und verschiedene Brandszenarien bewältigen. Zuerst musste ein Brand gelöscht und Gasflaschen aus dem Gefahrenbereich entfernt werden. Danach folgte ein Fettbrand, bei dem das Feuer mithilfe eines Deckels unter Kontrolle gebracht werden musste. In weiterer Folge mussten brennende Gasflaschen fachgerecht abgedreht werden. Nach dem erfolgreichen Abschluss konnten sie sich umziehen und die Heimreise antreten.\n\nDirekt nach der Rückkehr des ersten Trupps machte sich der zweite Trupp mit Lukas Assfall, Erwin Huber und Maximilian Artner auf den Weg nach Trandorf und absolvierte dieselbe Ausbildung mit den gleichen herausfordernden Szenarien.\n\nAlle Teilnehmer schlossen die Ausbildungsstufe erfolgreich ab und zeigten ihre Einsatzbereitschaft zur laufenden Weiterbildung.",
+    "Bilder": [
+      {
+        "Pfad": "posts/ausbildungsstufe-at-40-im-gasbefeuerten-container-a019ed55/8a5743a116e71bd2.jpg",
+        "Beschreibung": null
+      },
+      {
+        "Pfad": "posts/ausbildungsstufe-at-40-im-gasbefeuerten-container-a019ed55/e21db08c01880420.jpg",
+        "Beschreibung": null
+      },
+      {
+        "Pfad": "posts/ausbildungsstufe-at-40-im-gasbefeuerten-container-a019ed55/e15c2c22cc257e32.jpg",
+        "Beschreibung": null
+      },
+      {
+        "Pfad": "posts/ausbildungsstufe-at-40-im-gasbefeuerten-container-a019ed55/1534fd1abc997fcf.jpg",
+        "Beschreibung": null
+      }
+    ],
+    "Emoji": "",
+    "BildPlaceholder": "🚒",
+    "EinsatzOrt": "Trandorf",
+    "EinsatzTyp": null,
+    "EinsatzZeit": null,
+    "EinsatzKraefte": null,
+    "AdminDraftId": "bbcafe86-33e0-4c76-b3af-66f2a019ed55",
+    "AdminPublicationHash": "05d523153e058c39449d2a47f286bf9e7d09f6f5af010e3036f33088b19c9b31"
+  },
+  {
     "Id": 35,
     "Slug": "brand-in-gewerbebetrieb-in-rastenfeld-c2283255",
     "Titel": "Brand in Gewerbebetrieb in Rastenfeld",

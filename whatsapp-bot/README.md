@@ -206,10 +206,10 @@ PUBLIC_IMAGE_DIR=../../ffrastenfeld-content/img/posts
 
 Der genaue Ablauf ist in `../EXTERNAL_CONTENT.md` beschrieben.
 
-Vor jeder Aenderung erstellt der Bot ein Backup unter:
+Vor jeder Aenderung erstellt der Bot ein lokales Backup ausserhalb des Website-Ordners.
 
 ```text
-wwwroot/data/backups/
+whatsapp-bot/backups/
 ```
 
 Freigegebene neue Bilder landen unter:

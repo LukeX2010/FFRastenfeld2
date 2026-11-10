@@ -5,11 +5,187 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="07c4d50b-b3cd-4425-9a40-ffd0902cee81" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Impressum.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Impressum.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.staticwebassets.endpoints.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.staticwebassets.endpoints.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.staticwebassets.runtime.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/FFRastenfeld.staticwebassets.runtime.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/Microsoft.CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/Microsoft.CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/Microsoft.VisualBasic.Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/Microsoft.VisualBasic.Core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/Microsoft.VisualBasic.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/Microsoft.VisualBasic.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/Microsoft.Win32.Primitives.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/Microsoft.Win32.Primitives.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/Microsoft.Win32.Registry.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/Microsoft.Win32.Registry.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.AppContext.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.AppContext.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Buffers.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Buffers.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Collections.Concurrent.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Collections.Concurrent.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Collections.Immutable.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Collections.Immutable.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Collections.NonGeneric.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Collections.NonGeneric.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Collections.Specialized.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Collections.Specialized.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Collections.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Collections.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.ComponentModel.Annotations.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.ComponentModel.Annotations.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.ComponentModel.DataAnnotations.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.ComponentModel.DataAnnotations.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.ComponentModel.EventBasedAsync.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.ComponentModel.EventBasedAsync.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.ComponentModel.Primitives.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.ComponentModel.Primitives.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.ComponentModel.TypeConverter.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.ComponentModel.TypeConverter.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.ComponentModel.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.ComponentModel.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Configuration.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Configuration.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Console.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Console.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Data.Common.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Data.Common.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Data.DataSetExtensions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Data.DataSetExtensions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Data.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Data.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.Contracts.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.Contracts.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.Debug.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.Debug.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.DiagnosticSource.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.DiagnosticSource.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.FileVersionInfo.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.FileVersionInfo.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.Process.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.Process.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.StackTrace.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.StackTrace.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.TextWriterTraceListener.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.TextWriterTraceListener.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.Tools.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.Tools.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.TraceSource.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.TraceSource.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.Tracing.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Diagnostics.Tracing.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Drawing.Primitives.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Drawing.Primitives.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Drawing.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Drawing.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Dynamic.Runtime.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Dynamic.Runtime.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Formats.Asn1.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Formats.Asn1.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Formats.Tar.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Formats.Tar.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Globalization.Calendars.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Globalization.Calendars.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Globalization.Extensions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Globalization.Extensions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Globalization.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Globalization.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.Compression.Brotli.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.Compression.Brotli.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.Compression.FileSystem.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.Compression.FileSystem.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.Compression.ZipFile.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.Compression.ZipFile.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.Compression.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.Compression.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.FileSystem.AccessControl.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.FileSystem.AccessControl.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.FileSystem.DriveInfo.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.FileSystem.DriveInfo.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.FileSystem.Primitives.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.FileSystem.Primitives.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.FileSystem.Watcher.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.FileSystem.Watcher.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.FileSystem.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.FileSystem.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.IsolatedStorage.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.IsolatedStorage.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.MemoryMappedFiles.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.MemoryMappedFiles.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.Pipes.AccessControl.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.Pipes.AccessControl.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.Pipes.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.Pipes.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.UnmanagedMemoryStream.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.UnmanagedMemoryStream.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.IO.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Linq.Expressions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Linq.Expressions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Linq.Parallel.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Linq.Parallel.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Linq.Queryable.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Linq.Queryable.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Linq.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Linq.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Memory.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Memory.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Http.Json.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Http.Json.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Http.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Http.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.HttpListener.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.HttpListener.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Mail.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Mail.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.NameResolution.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.NameResolution.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.NetworkInformation.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.NetworkInformation.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Ping.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Ping.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Primitives.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Primitives.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Quic.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Quic.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Requests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Requests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Security.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Security.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.ServicePoint.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.ServicePoint.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Sockets.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.Sockets.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.WebClient.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.WebClient.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.WebHeaderCollection.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.WebHeaderCollection.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.WebProxy.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.WebProxy.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.WebSockets.Client.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.WebSockets.Client.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.WebSockets.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.WebSockets.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Net.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Numerics.Vectors.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Numerics.Vectors.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Numerics.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Numerics.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.ObjectModel.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.ObjectModel.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Private.CoreLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Private.CoreLib.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Private.DataContractSerialization.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Private.DataContractSerialization.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Private.Uri.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Private.Uri.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Private.Xml.Linq.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Private.Xml.Linq.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Private.Xml.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Private.Xml.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.DispatchProxy.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.DispatchProxy.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.Emit.ILGeneration.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.Emit.ILGeneration.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.Emit.Lightweight.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.Emit.Lightweight.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.Emit.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.Emit.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.Extensions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.Extensions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.Metadata.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.Metadata.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.Primitives.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.Primitives.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.TypeExtensions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.TypeExtensions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Reflection.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Resources.Reader.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Resources.Reader.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Resources.ResourceManager.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Resources.ResourceManager.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Resources.Writer.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Resources.Writer.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.CompilerServices.Unsafe.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.CompilerServices.Unsafe.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.CompilerServices.VisualC.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.CompilerServices.VisualC.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Extensions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Extensions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Handles.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Handles.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.InteropServices.JavaScript.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.InteropServices.JavaScript.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.InteropServices.RuntimeInformation.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.InteropServices.RuntimeInformation.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.InteropServices.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.InteropServices.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Intrinsics.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Intrinsics.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Loader.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Loader.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Numerics.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Numerics.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Serialization.Formatters.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Serialization.Formatters.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Serialization.Json.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Serialization.Json.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Serialization.Primitives.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Serialization.Primitives.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Serialization.Xml.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Serialization.Xml.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Serialization.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.Serialization.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Runtime.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.AccessControl.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.AccessControl.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Claims.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Claims.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Cryptography.Algorithms.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Cryptography.Algorithms.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Cryptography.Cng.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Cryptography.Cng.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Cryptography.Csp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Cryptography.Csp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Cryptography.Encoding.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Cryptography.Encoding.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Cryptography.OpenSsl.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Cryptography.OpenSsl.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Cryptography.Primitives.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Cryptography.Primitives.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Cryptography.X509Certificates.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Cryptography.X509Certificates.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Cryptography.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Cryptography.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Principal.Windows.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Principal.Windows.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Principal.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.Principal.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.SecureString.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.SecureString.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Security.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.ServiceModel.Web.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.ServiceModel.Web.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.ServiceProcess.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.ServiceProcess.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Text.Encoding.CodePages.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Text.Encoding.CodePages.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Text.Encoding.Extensions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Text.Encoding.Extensions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Text.Encoding.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Text.Encoding.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Text.Encodings.Web.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Text.Encodings.Web.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Text.Json.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Text.Json.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Text.RegularExpressions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Text.RegularExpressions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.Channels.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.Channels.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.Overlapped.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.Overlapped.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.Tasks.Dataflow.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.Tasks.Dataflow.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.Tasks.Extensions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.Tasks.Extensions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.Tasks.Parallel.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.Tasks.Parallel.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.Tasks.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.Tasks.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.Thread.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.Thread.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.ThreadPool.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.ThreadPool.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.Timer.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.Timer.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Threading.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Transactions.Local.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Transactions.Local.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Transactions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Transactions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.ValueTuple.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.ValueTuple.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Web.HttpUtility.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Web.HttpUtility.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Web.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Web.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Windows.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Windows.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.Linq.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.Linq.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.ReaderWriter.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.ReaderWriter.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.Serialization.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.Serialization.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.XDocument.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.XDocument.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.XPath.XDocument.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.XPath.XDocument.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.XPath.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.XPath.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.XmlDocument.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.XmlDocument.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.XmlSerializer.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.XmlSerializer.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.Xml.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/System.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/System.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/WindowsBase.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/WindowsBase.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.js" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.native.js" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.native.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.native.wasm" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.native.wasm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.runtime.js" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.runtime.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.runtime.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/dotnet.runtime.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/mscorlib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/mscorlib.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/netstandard.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/netstandard.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.pdb.gz" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.pdb.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.wasm" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/wwwroot/_framework/FFRastenfeld.wasm" afterDir="false" />
@@ -19,12 +195,216 @@
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.AssemblyInfoInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.GlobalUsings.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.GlobalUsings.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/FFRastenfeld.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/blazor.boot.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/blazor.boot.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/03aggefkgs-vxp7phfowl.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/0c4who5kyd-08knwbkos0.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/0ck4juplba-1c7ksbormu.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/0e6zekvd2p-tfbjdenkda.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/0k0z8euzub-efc2vm46q1.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/0mftmbse5f-c4tbamrc23.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/0ocpivferb-yrog283sx9.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/0vubirggcd-2rjniiy7z6.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/0ykp8dttwu-iudrcw56e1.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/0z2lyf4wa2-h8b9dr8w5n.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/15uswqdxvq-m6v68o18fv.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/1h6oa3at66-jbasu5rncb.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/1hz5tsq4fo-fjl5hbx7ly.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/1t933tei5b-ykwnqbb6vx.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/1vz21cceuh-rpvltkbyzt.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/1xbi7sva5q-rd5u6499ya.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/1zk5n2xhpb-4lwf5jhkkr.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/23nt9yzc3a-qsgqxu8al4.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/2aafo84a47-d5zezh4jtb.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/2df8ae7s6d-2kar36hudn.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/2g3xe9ftdp-y4ywjpivcs.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/2mbpbhgu4z-9x8o0dlm1k.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/2q4itir3zs-5vts7pty9f.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/2uor2bqfap-n7acbc9gop.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/343iqnpgcp-ypowrxy7wd.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/35l1zijk37-7gkyr67xtv.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/3jlwigwby4-byx4v6lkqb.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/3mciymv7q1-4uiyfh09z8.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/3uelr9293h-wdu3swnr5d.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/3z69aohdn4-9u9c4tpvof.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/42qk7dqfcx-p9le073w63.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/46kf2noq7j-zbng4nwdxx.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/4nusrqb5qh-zvfvcnkeqw.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/4u9stz4fyr-1qbclyfq0c.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/5f8d0v1ahe-7a2v0haqvf.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/5fvcij88y7-ua9xbwdl0u.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/60og0i7atn-2hj63ci8rv.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/60qe66fpnt-wph54iczvl.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/63ta8q9smx-760cxa11r6.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/64lnro7zxk-2ajdoqs76n.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/67dv0663bg-y2i1jqa8ys.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/6cacp0kftn-w25fhrkbff.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/6zn4n9wpiw-33edlitld5.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/7lusjz2eeg-hn0az7qfwc.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/7w058d1j76-n58idervis.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/7y10lswwgl-vnjdvzn9fg.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/887t50qn0g-e89ppuu7k7.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/8kp0bfms8k-ty3xl71xeh.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/8md9hnc3aj-2fgdoze07w.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/8pyrzweytk-r9jmmtv20h.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/8rayl0lbie-1z7402y91j.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/8xr5j6xlt2-ca7xvkair8.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/97kgl406zd-q34fwb6a9a.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/991h18irek-pmmcfa8h3f.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/9fhbtehep6-neb9za32h3.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/9jt9tzoq2w-5hvfye6qoi.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/9kevju7nfa-f4tji67iif.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/9ml6oxdq1f-9xj9aqpw24.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/9x4quoztbb-l2l2ltyd45.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/9ztx5iebjm-kx2ypmatz2.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ah5n89k2zx-qd8jcxuejk.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/anvnu54eoc-y9iazfp5js.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/apwr9rah84-530fv282r5.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/aygoamcj0e-xgjzaa6gw9.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/bbxjgeq6q0-f86xewhtqv.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/bfctvm22t2-mctxb61euh.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/bxr2ydx3y0-p88gm9z71j.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/c152t0smji-6mbckphete.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/c39mp9for4-7z0nwtmxth.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/c3zil3uiss-ijlq5pvv78.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/cfjv1ucg7z-dojsha5bs8.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/cjoe2ok24p-2r9lvs7ic5.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/cntxs8bmuj-unh9dcomvw.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/csql8gvayh-dr2j8q671b.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/cuu57tughj-4udnbcic2g.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/cxrox5oafb-5s7iwn8e8c.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/d3yc6z7b2o-5xyxcxd807.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/d6dwzhu8mf-mda2tkh5hy.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/d99d89py78-4504uil91m.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/dmaiovpwi3-4njtqvtvgx.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/dmow5tihx7-14sc1lmfv1.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/dvjwjikqzt-j4j0p3sezv.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/e8ss8ope8j-30ivik7ohh.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ecz2a7c690-wjb94l3mto.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ena3v8neip-phnkpfomsf.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/eo0xb1068w-lsohh1u1gk.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/euuk4cyszz-u31z1wtmsb.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/f6g6d5rtwa-ac7vww4w0f.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/fc5rjdxwwj-vowkclmnz0.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/fqj9855rjb-wfui322r6r.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/fvf8p940jd-huym6t5s4u.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/fyka27v7vr-csb6bonkde.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/g6gj74ifqj-i66eet680w.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/g6w209ehw4-vpmbyydd3g.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/g8n1594yi2-lsakbjp1fg.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/g8vvqke3t0-3ms4k0tj42.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/gk460ytyh3-ky49thkcr1.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/gzekb95w9j-ju8b6wkj4l.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/hbe1vr1u73-qmknj358bz.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/hbi9exlc5u-0fg9z069wq.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/hsgb3bzyme-jwsv0oxz0a.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/i0w11kc07i-6uhz3mq5sr.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ihm2pwb3l0-d6uni9tyu0.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/iv4ob2pwzn-ilifwagu6u.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/j2at417vri-ukwfres67f.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/j48oirbpt9-tqqeexxi5a.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/j85xbyky1b-mol04hq4hb.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/jpxepg1595-ei09e0f2fy.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/jsbkssomwl-phh89a5hqy.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/jvxe7k0732-i8gmcudjp4.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/jzu1rmvav1-w6kyelcsn0.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/k0w3dbkux9-oyz0vx2fzb.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/kawef3qjnl-5rr269ioy5.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/kkwvinej4p-98ohzu3ser.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/kptgq2cstt-ob3ufi4fqk.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/kvlg6b30q6-lszihh0zj3.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ky9xbp2w7i-pfjt66vjgj.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/l126b9rwtj-k7dpb0k852.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/l6pu8rhrfg-90zzm4wpe2.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/lg65mz3wpb-lfu7j35m59.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/littlo768c-0fiehhsniu.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/lqawlejvjd-1uhk0scgum.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/lscty1qlj2-fp6b7gpga0.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/m76kaq4o5p-vmo58qpakg.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/mf5t79a66b-fvm2ngcr48.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/mxpsjme4es-l4ybfsbrgx.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ng7qzs67xk-wevososzbf.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/novhe0nz9q-wirrgpti8v.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/npdgkn3nor-27a4vygtpy.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/nqvicu4bot-kx2wpc9cxg.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/nrfewist4x-tptq2av103.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/nsxj5gjj3k-78i0zw4gi3.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/nufd58eqtt-85petes2km.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ny5bxbu7ek-0vygl0kie7.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/o6i5kcnvnp-vhh8h6fhg8.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/o843onfmlv-j1owzrhtpm.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/o9c2qei529-fvnanxyocq.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/odjv11vdcp-71cgy4v0iu.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ohgwc42bjj-mpn732uqya.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ojch280ddo-i6e3iw7mdj.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/on8pc3d49s-vocgtpngjj.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/onz4eppzpr-ve1wrl318a.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/opn811o7q1-vna6lvaiq6.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/opyvzbakrf-amq7fan8jq.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ou9k439x9w-wkvlktgcbf.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/oywpohtzo0-97xm6k63pv.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/p2nkxa0e1x-v37m17pi1z.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/pk4rc3c06w-39k1nfngnz.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ptgkgyto49-y69hjda7vs.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/puhfwve5v0-aqyivsi4ww.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/qo4h37wgim-0mk72np563.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/qv6ivynksi-0pm555janh.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/r3srqe3rb6-z8gxd8ohkk.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/rlstbexbfh-tnb9oatilq.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/rluxh7hu75-e4nvsteufh.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/rqab8bvefg-krk0gy88zz.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/rtypma7cdm-4w8u9k5eo8.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/s2mbwsczrw-4jr4birkq0.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/shz4zq14vd-wt4cebwtn6.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/slccxboxdx-8yv5nzqr73.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/t323mfd376-ewl98tul8l.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/t85vtwshqh-7uqm2o6mrt.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ths32v3r4u-4jjz0f9l8n.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/tin8o2b0py-wimw2ns6lw.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/tqha9c1r7t-tjcz0u77k5.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/tqk1e5tenk-5h4qeqvpct.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/tw3dh8bsgu-5656vx8xqo.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/u2y4cmhu72-e166dbze3x.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/u4dmkoru0j-o9xq9gng3a.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/u5zwr1jq6a-x10p6vb5o1.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/u6mnl7qu7q-vjvzmohf3g.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ugguywllyb-tfb9n29nv5.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/umqm96rwkn-0q8t59t5qr.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/uvzylyn0g9-5yd9k763g0.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/v102v3m6a0-vo2332efn8.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/vb4dle2uap-6tvotfdupx.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/vh8c41q7xg-y77f0q2jiz.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/vyse6002y2-usfz4jiotn.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/vz1zz1zy51-llbv1bt9ia.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/w1jtnn6cm4-12dzv5ys7x.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/wgw017illx-77nlfvmku1.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/winbv39yrm-wp4oslh70k.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/wv7evaqk2x-gdlhxx7d3d.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/wvt0zg90eb-j8n5wpdcm1.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ww6xchbkmk-1qemrbr3g4.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/wwnf224q1p-8qi3a4rzi8.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/x5yuzcv87p-h48cyp9irl.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/x6dxsr0cn6-2x01piogkl.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/xc8z74rc4k-tbdtztqv1t.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/xiqocixy63-0gy5zungyn.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/xjn1x31tpo-4mvqtcug65.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/xp8kbqqkrz-gdm999tm2k.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/xufgcm43sw-8kr5d0tjmo.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/y9gcx999bq-i464dwxnbb.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ykb5439kfo-eozsju7o9n.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/z1nq1afyh9-ik41awfo8z.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/z1vi78q6iw-2opgsuyzdq.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/z5rm8zxnt3-28lhwicasa.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/z9b4mvuqvs-94oh706pyo.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/ziq42se9o4-501013jqq7.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/zm877n0m5r-tevz2rxv03.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/compressed/zormj617jg-xsusqx03ss.gz" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/rbcswa.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/rbcswa.dswa.cache.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/ref/FFRastenfeld.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/ref/FFRastenfeld.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/refint/FFRastenfeld.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/refint/FFRastenfeld.dll" afterDir="false" />
@@ -36,10 +416,35 @@
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.build.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.build.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.build.json.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.build.json.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.development.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/staticwebassets.development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/tmp-webcil/FFRastenfeld.wasm" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/tmp-webcil/FFRastenfeld.wasm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/webcil/FFRastenfeld.wasm" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/webcil/FFRastenfeld.wasm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatsapp-bot/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/whatsapp-bot/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatsapp-bot/src/website/publisher.js" beforeDir="false" afterPath="$PROJECT_DIR$/whatsapp-bot/src/website/publisher.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/FFRastenfeld.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/FFRastenfeld.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/FFRastenfeld.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/obj/FFRastenfeld.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/FFRastenfeld.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/obj/FFRastenfeld.csproj.nuget.g.targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Release/net8.0/FFRastenfeld.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Release/net8.0/FFRastenfeld.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Release/net8.0/FFRastenfeld.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Release/net8.0/FFRastenfeld.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Release/net8.0/FFRastenfeld.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Release/net8.0/FFRastenfeld.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Release/net8.0/FFRastenfeld.GlobalUsings.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Release/net8.0/FFRastenfeld.GlobalUsings.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Release/net8.0/FFRastenfeld.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Release/net8.0/FFRastenfeld.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Release/net8.0/FFRastenfeld.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Release/net8.0/FFRastenfeld.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Release/net8.0/FFRastenfeld.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Release/net8.0/FFRastenfeld.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Release/net8.0/FFRastenfeld.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Release/net8.0/FFRastenfeld.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Release/net8.0/rpswa.dswa.cache.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Release/net8.0/rpswa.dswa.cache.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatsapp-bot/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/whatsapp-bot/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatsapp-bot/scripts/migrate-posts-from-dataservice.js" beforeDir="false" afterPath="$PROJECT_DIR$/whatsapp-bot/scripts/migrate-posts-from-dataservice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatsapp-bot/src/ai/postGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/whatsapp-bot/src/ai/postGenerator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatsapp-bot/src/git/gitActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/whatsapp-bot/src/git/gitActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatsapp-bot/src/website/postStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/whatsapp-bot/src/website/postStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wwwroot/data/backups/posts-2026-06-16-08-14-11.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wwwroot/data/backups/posts-2026-06-16-23-45-19.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wwwroot/data/backups/posts-2026-06-19-18-17-47.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wwwroot/data/backups/posts-2026-06-20-12-34-01.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wwwroot/data/backups/posts-2026-06-20-16-09-52.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wwwroot/data/backups/posts-2026-06-30-17-29-48.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wwwroot/data/backups/posts-2026-06-30-18-05-08.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wwwroot/data/backups/posts-2026-07-21-18-29-19.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wwwroot/data/mannschaft.json" beforeDir="false" afterPath="$PROJECT_DIR$/wwwroot/data/mannschaft.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,34 +454,45 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;LukeX2010&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://LukeX2010@github.com/LukeX2010/FFRastenfeld2.git&quot;,
+    &quot;accountId&quot;: &quot;4c3ed3f6-ba4b-4990-b581-65f863a6651f&quot;
+  }
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/App.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Components/NavMenu.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Components/NavMenu.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Components/PostCard.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Components/PostImageCarousel.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Components/PostImageCarousel.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Components/Sidebar.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Components/SiteFooter.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Models/Models.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/Datenschutz.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Models/PostBildJsonConverter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Datenschutz.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/Einsaetze/Einsaetze.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/Einsaetze/EinsatzDetail.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/Fahrzeuge/FahrzeugDetail.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/Fahrzeuge/Fahrzeuge.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Fahrzeuge/Fahrzeuge.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/Feuerwehr/Chronik.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/Feuerwehr/Feuerwehrhaus.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/Feuerwehr/Mannschaft.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Feuerwehr/Mannschaft.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/Galerie.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/Impressum.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/Index.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/Kontakt.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/News/Ausbildung.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/News/AusbildungDetail.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/News/Feuerwehrjugend.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/News/FeuerwehrjugendDetail.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Pages/News/News.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Pages/News/NewsDetail.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/News/NewsDetail.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Services/DataService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Services/DataService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/_Imports.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/wwwroot/data/posts.json" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -120,6 +536,8 @@
       <workItem from="1781646029764" duration="1007000" />
       <workItem from="1782134865944" duration="1231000" />
       <workItem from="1782832861475" duration="3087000" />
+      <workItem from="1794041160527" duration="2999000" />
+      <workItem from="1794251485638" duration="3111000" />
     </task>
     <servers />
   </component>
@@ -128,6 +546,17 @@
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

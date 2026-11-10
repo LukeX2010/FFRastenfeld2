@@ -5,7 +5,6 @@ const execFileAsync = promisify(execFile);
 
 const ALLOWED_STAGE_PATTERNS = [
   "wwwroot/data/posts.json",
-  "wwwroot/data/backups/",
   "wwwroot/img/posts/",
   "wwwroot/img/Bearbeiten/Entwurf/",
   "Services/DataService.cs",

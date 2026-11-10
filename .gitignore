@@ -5,6 +5,7 @@ node_modules/
 whatsapp-bot/.env
 whatsapp-bot/auth_info_baileys/
 whatsapp-bot/bot.pid
+whatsapp-bot/backups/
 wwwroot/img/Bearbeiten/
 AdminServer/data/
 AdminServer/appsettings.Development.json

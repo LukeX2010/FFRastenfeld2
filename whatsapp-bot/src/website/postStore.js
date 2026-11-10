@@ -1,5 +1,9 @@
+import { randomUUID } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const backupDir = fileURLToPath(new URL("../../backups", import.meta.url));
 
 export async function readPosts(postsJsonPath) {
   const content = await fs.readFile(postsJsonPath, "utf8");
@@ -26,10 +30,9 @@ export async function backupPosts(postsJsonPath) {
     return null;
   }
 
-  const backupDir = path.join(path.dirname(postsJsonPath), "backups");
   await fs.mkdir(backupDir, { recursive: true });
 
-  const backupPath = path.join(backupDir, `posts-${formatStamp(new Date())}.json`);
+  const backupPath = path.join(backupDir, `posts-${formatStamp(new Date())}-${randomUUID()}.json`);
   await fs.copyFile(postsJsonPath, backupPath);
   return backupPath;
 }

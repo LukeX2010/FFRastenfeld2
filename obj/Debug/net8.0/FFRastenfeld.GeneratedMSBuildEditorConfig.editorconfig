@@ -4,12 +4,15 @@ build_property.EnableSingleFileAnalyzer =
 build_property.EnableTrimAnalyzer = false
 build_property.IncludeAllContentForSelfExtract = 
 build_property.TargetFramework = net8.0
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v8.0
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = 
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = false
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
+build_property.EntryPointFilePath = 
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = FFRastenfeld
 build_property.RootNamespace = FFRastenfeld
@@ -28,12 +31,24 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Components/LoadingSkeleton.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMb2FkaW5nU2tlbGV0b24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Components/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xOYXZNZW51LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Components/PageHero.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlSGVyby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Components/PhotoGallery.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQaG90b0dhbGxlcnkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Components/PhotoToolbar.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQaG90b1Rvb2xiYXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Components/PostCard.razor]
@@ -44,6 +59,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQb3N0SW1hZ2VDYXJvdXNlbC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Components/PostNavigation.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQb3N0TmF2aWdhdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Components/ResponsiveImage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSZXNwb25zaXZlSW1hZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Components/Sidebar.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaWRlYmFyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -52,8 +75,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaXRlRm9vdGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Components/TeamMemberInfo.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xUZWFtTWVtYmVySW5mby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Components/TeamPhotoViewer.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xUZWFtUGhvdG9WaWV3ZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Components/TeamPortrait.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xUZWFtUG9ydHJhaXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Layouts/AdminLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0c1xBZG1pbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Layouts/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0c1xNYWluTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Pages/Admin.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Pages/Datenschutz.razor]
@@ -110,14 +153,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Pages/News/AusbildungDetail.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmV3c1xBdXNiaWxkdW5nRGV0YWlsLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Pages/News/Feuerwehrjugend.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmV3c1xGZXVlcndlaHJqdWdlbmQucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Pages/News/FeuerwehrjugendDetail.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTmV3c1xGZXVlcndlaHJqdWdlbmREZXRhaWwucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/lukas/RiderProjects/Feuerwehr/FFRastenfeld_clean/Pages/News/News.razor]

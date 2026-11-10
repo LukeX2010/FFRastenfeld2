@@ -1,13 +1,13 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { backupPosts } from "../src/website/postStore.js";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const botRoot = path.resolve(scriptDir, "..");
 const projectRoot = path.resolve(botRoot, "..");
 const dataServicePath = path.join(projectRoot, "Services", "DataService.cs");
 const postsJsonPath = path.join(projectRoot, "wwwroot", "data", "posts.json");
-const backupsDir = path.join(projectRoot, "wwwroot", "data", "backups");
 
 const force = process.argv.includes("--force");
 
@@ -15,11 +15,10 @@ await main();
 
 async function main() {
   await fs.mkdir(path.dirname(postsJsonPath), { recursive: true });
-  await fs.mkdir(backupsDir, { recursive: true });
 
   const existing = await readText(postsJsonPath);
   if (existing.trim()) {
-    await backupFile(postsJsonPath);
+    await backupPosts(postsJsonPath);
 
     if (!force) {
       const count = countJsonPosts(existing);
@@ -250,19 +249,6 @@ async function readText(filePath) {
   }
 }
 
-async function backupFile(filePath) {
-  try {
-    await fs.access(filePath);
-  } catch {
-    return null;
-  }
-
-  const stamp = formatStamp(new Date());
-  const backupPath = path.join(backupsDir, `posts-${stamp}.json`);
-  await fs.copyFile(filePath, backupPath);
-  return backupPath;
-}
-
 async function writeJsonAtomic(filePath, data) {
   const tempPath = `${filePath}.${process.pid}.tmp`;
   await fs.writeFile(tempPath, `${JSON.stringify(data, null, 2)}\n`, "utf8");
@@ -276,13 +262,4 @@ function countJsonPosts(content) {
   } catch {
     return 0;
   }
-}
-
-function formatStamp(date) {
-  const pad = (value) => String(value).padStart(2, "0");
-  return [
-    date.getFullYear(),
-    pad(date.getMonth() + 1),
-    pad(date.getDate())
-  ].join("-") + `-${pad(date.getHours())}-${pad(date.getMinutes())}-${pad(date.getSeconds())}`;
 }

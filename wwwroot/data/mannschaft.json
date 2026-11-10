@@ -201,7 +201,7 @@
     },
     {
       "id": "m02",
-      "name": "Herbert Weitl",
+      "name": "Bernhard Riegler",
       "rank": "Oberfeuerwehrmann",
       "role": "",
       "since": 1990,
@@ -293,7 +293,7 @@
     },
     {
       "id": "m19",
-      "name": "Mitglied · Bildplatz 10",
+      "name": "Herbert Lemp",
       "rank": "",
       "role": "",
       "since": null,
@@ -303,7 +303,7 @@
     },
     {
       "id": "m34",
-      "name": "Mitglied · Bildplatz 14",
+      "name": "Walter Schildorfer",
       "rank": "",
       "role": "",
       "since": null,
@@ -313,12 +313,21 @@
     },
     {
       "id": "m13",
-      "name": "Mitglied · Bildplatz 15",
+      "name": "Karl Auer",
       "rank": "",
       "role": "",
       "since": null,
       "order": 35,
       "placeholder": true,
+      "portraitPhotoId": "gesamt"
+    },
+    {
+      "id": "m36",
+      "name": "Herbert Weitl",
+      "rank": "Oberfeuerwehrmann",
+      "role": "",
+      "since": 1990,
+      "order": 36,
       "portraitPhotoId": "gesamt"
     }
   ],

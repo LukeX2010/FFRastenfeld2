@@ -104,7 +104,7 @@ async function callAiProvider({ folderPath, prompt, data, config }) {
 
 function shouldUseGoogleSearch(data) {
   const category = normalizeCategory(data?.category || data?.fields?.kategorie || "FF-News");
-  if (category === "EinsÃ¤tze") return false;
+  if (category === "Einsätze") return false;
   return ["FF-News", "Ausbildung", "Feuerwehrjugend"].includes(category);
 }
 
